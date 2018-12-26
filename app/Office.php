@@ -61,7 +61,7 @@ class Office extends Model
         $office->save();
 
 
-        // update address of newly updated dealer's office address
+        // update address of newly updated dealer's office
         $address = $office->address()->where('entity_type', '=', 'Dealer' )->first();
         $address->updateOfficeAddressOfDealer($address, request());
     }

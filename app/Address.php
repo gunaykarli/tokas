@@ -86,9 +86,23 @@ class Address extends Model
     public function updateOfficeAddressOfDealer ($address, $request){
 
 
+        //** Before updating the address we should check if post code of the office is changed. If so, region setting must be done in "DealerRegionVBs" table
+        if($address->postal_code != $request->postalCode){
+            $newPostcode = $request->postalCode;
+            $dealerID = $address->entity_id; // "entity_id" in addresses table stands for dealer or provider ids. In this case it shows dealer id.
+
+            $dealerRegionVB = new DealerRegionVb();
+            $dealerRegionVB->updateSpecificDealerRegionVB($newPostcode, $dealerID);
+        }
+
+        //$dealerID = $address->entity_id;
+        //$newPostcode = $request->postalCode;
+
         $address->address_type = $address->office->office_type;
         $address->street_address = $request->streetAddress;
-        $address->PO_box = $request->POBox;
+        //$address->PO_box = $request->POBox;
+        $address->PO_box = $dealerID . '000'. $newPostcode;
+
         $address->postal_code = $request->postalCode;
         $address->city = $request->city;
         $address->state = $request->state;

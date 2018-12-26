@@ -45,7 +45,7 @@ class DealerRegionVb extends Model
         }
     }
 
-    //**This function is called from PostcodeRegionVbController.php-store() when a chance occur in excel file concerning any provider's postcode-primary/secondary VB
+    //**  This function is called from PostcodeRegionVbController.php-store() when a chance occur in excel file concerning any provider's postcode-primary/secondary VB
     public function updateDealerRegionVB(){
 
         //** Take all records from the dealer_region_VBs table and update the records according to the postcode_region_VBs which has been just updated. */
@@ -64,10 +64,28 @@ class DealerRegionVb extends Model
                 $dealerRegionVB->save();
             }
         }
-
-
-
-
     }
 
+    //** This function is invoked "Address.php->updateOfficeAddressOfDealer()" when address of any dealer's main office is chanced... */
+    public function updateSpecificDealerRegionVB($newPostcode, $dealerID){
+
+        //** retrieve specific rows from the DealerRegionVB table according to $dealerID. More than one rows will come due to the providerS*/
+        $dealerRegionVBs = DealerRegionVb::where('dealer_id', $dealerID)->get();
+        foreach($dealerRegionVBs as $dealerRegionVB){
+            //** Take all 'PostcodeRegionVBs' table's rows whose 'postcode' is equal to "new postcode ($newPostcode)" of the dealer.
+            //  Since PostcodeRegionVBs table includes data for all providers, more than one rows would be retrieved. */
+            $postcodeRegionVBs = PostcodeRegionVb::where('postcode', $newPostcode)->get();
+
+            //** Save the retrieved row(s) to the 'dealer_region_Vbs table' */
+            foreach($postcodeRegionVBs as $postcodeRegionVB){
+
+                $dealerRegionVB->dealer_postcode = $newPostcode;
+                $dealerRegionVB->region_id = $postcodeRegionVB->region_id;
+                $dealerRegionVB->primary_VB_id = $postcodeRegionVB->primary_VB_id;
+                $dealerRegionVB->secondary_VB_id = $postcodeRegionVB->secondary_VB_id;
+
+                $dealerRegionVB->save();
+            }
+        }
+    }
 }
