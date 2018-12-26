@@ -89,7 +89,7 @@ Route::post('/region/postcodeRegionVB/store', 'PostcodeRegionVbController@store'
 Route::get('/region/create', 'RegionController@create')->middleware('auth');
 Route::post('/region/store', 'RegionController@store')->middleware('auth');
 Route::get('/region/index', 'RegionController@index')->middleware('auth');
-//Route::get('/region/edit/{region}', 'RegionController@edit');
+//Route::get('/region/edit/{region}', 'RegionController@edit')->middleware('auth');
 Route::get('/region/edit/{regionID}', 'RegionController@edit')->name('region-edit')->middleware('auth');
 
 Route::post('/region/update/{region}', 'RegionController@update')->middleware('auth');
