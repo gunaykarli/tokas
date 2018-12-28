@@ -24,7 +24,7 @@ Auth::routes();
  //LoginController uses AuthenticatesUsers.php --includes login()
  //vendor\laravel\framework\src\Illuminate\Foundation\Auth\AuthenticatesUsers.php
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');;
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::get('/provider/create', 'ProviderController@create')->name('createProvider')->middleware('auth');
 Route::post('/provider/store', 'ProviderController@store')->middleware('auth');
@@ -33,12 +33,12 @@ Route::get('/provider/edit/{provider}', 'ProviderController@edit')->middleware('
 Route::post('/provider/update/{provider}', 'ProviderController@update')->middleware('auth');
 Route::get('/provider/delete/{provider}', 'ProviderController@destroy')->middleware('auth');
 
-Route::get('/dealer/create', 'DealerController@create')->middleware('auth');
-Route::post('/dealer/store', 'DealerController@store')->middleware('auth');
-Route::get('/dealer/list', 'DealerController@list')->name('indexDealer')->middleware('auth');
-Route::get('/dealer/edit/{dealer}', 'DealerController@edit')->middleware('auth');
-Route::post('/dealer/update/{dealer}', 'DealerController@update')->middleware('auth');
-Route::get('/dealer/view/{dealer}', 'DealerController@view')->middleware('auth');
+Route::get('/dealer/create', 'DealerController@create');
+Route::post('/dealer/store', 'DealerController@store');
+Route::get('/dealer/list', 'DealerController@list')->name('indexDealer');
+Route::get('/dealer/edit/{dealer}', 'DealerController@edit');
+Route::post('/dealer/update/{dealer}', 'DealerController@update');
+Route::get('/dealer/view/{dealer}', 'DealerController@view');
 
  //Route::post('/dealer/employee/create', 'Auth\RegisterController@createEmployee')->name('createEmployee');
  //Route::get('register-employee', 'Auth\RegisterController@sendOfficeList')->name('registerEmployeeOfDealer');
