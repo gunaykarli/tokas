@@ -16,7 +16,8 @@ class CreateDealerRegionVbsTable extends Migration
         Schema::create('dealer_region_vbs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('dealer_id');
-            $table->string('dealer_postcode', 5);
+            $table->integer('office_id');
+            $table->string('office_postcode', 5);
             $table->string('provider_id');
             $table->string('region_id');
             $table->string('primary_VB_id');

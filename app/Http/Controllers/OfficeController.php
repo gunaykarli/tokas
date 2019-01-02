@@ -50,12 +50,12 @@ class OfficeController extends Controller
         $office->phone = $request->phone;
         $office->save();
 
-
-        $name = $request->officeName;
-        $office->where('name', $name)->first();
         // add address of newly created dealer's office address
+        $name = $request->officeName;
+        $newOffice = Office::where('name', $name)->first();
+
         $address = new Address();
-        $address->addOfficeAddressOfDealer($office->id, $office->office_type, $request->dealerID, request());
+        $address->addOfficeAddressOfDealer($newOffice, $request);
     }
 
     /**

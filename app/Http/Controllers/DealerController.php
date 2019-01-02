@@ -99,8 +99,10 @@ class DealerController extends Controller
        $user = new User();
        $user->addAdminOfDealer($dealer->id, request());
 
+       /** This step is transferred to Address@addOfficeAddressOfDealer function.
        $dealerRegionVB = new DealerRegionVb();
        $dealerRegionVB->addDealerRegionVB($dealer->id);
+       */
 
 
        return back();

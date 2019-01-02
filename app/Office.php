@@ -41,11 +41,11 @@ class Office extends Model
         $office->save();
 
 
-        $name = $request->name;
-        $office->where('name', $name)->get();
         // add address of newly created dealer's office address
+        $name = $request->name;
+        $newOffice = Office::where('name', $name)->first();
         $address = new Address();
-        $address->addOfficeAddressOfDealer($office->id, $office->office_type, $dealerID, request());
+        $address->addOfficeAddressOfDealer($newOffice, request());
     }
 
     public function updateMainOfficeOfDealer($office, $request){

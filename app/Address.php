@@ -41,7 +41,7 @@ class Address extends Model
         return redirect()->home();
     }
 
-    //add address of the Dealer with $dealerID sent from DealerCpntroller@store
+    //add address of the Dealer with $dealerID sent from DealerController@store
     public function addAddressOfDealer ($dealerID, $request){
 
         $address = new Address();
@@ -61,23 +61,25 @@ class Address extends Model
         //return redirect()->home();
     }
 
-    public function addOfficeAddressOfDealer ($officeID, $officeType, $dealerID, $request){
+    //** This function is called from OfficeController@store() OR office.php-addMainOfficeOfDealer() */
+    public function addOfficeAddressOfDealer ($newOffice, $request){
 
         $address = new Address();
-
         $address->entity_type = 'Dealer';
-        $address->entity_id = $dealerID;
-        $address->office_id = $officeID;
-        $address->address_type = $officeType;
+        $address->entity_id = $newOffice->dealer_id;
+        $address->office_id = $newOffice->id;
+        $address->address_type = $newOffice->office_type;
         $address->street_address = $request->streetAddress;
         $address->PO_box = $request->POBox;
         $address->postal_code = $request->postalCode;
         $address->city = $request->city;
         $address->state = $request->state;
         $address->country = $request->country;
-
         $address->save();
 
+        //** In DealerRegionVB table, Region and VBs must be setup for the office which has been just added to the DB,    */
+        $dealerRegionVb = new DealerRegionVb();
+        $dealerRegionVb->addDealerRegionVB($newOffice);
 
         //ÇALIŞMIYOR...
         //return redirect()->home();
@@ -100,9 +102,7 @@ class Address extends Model
 
         $address->address_type = $address->office->office_type;
         $address->street_address = $request->streetAddress;
-        //$address->PO_box = $request->POBox;
-        $address->PO_box = $dealerID . '000'. $newPostcode;
-
+        $address->PO_box = $request->POBox;
         $address->postal_code = $request->postalCode;
         $address->city = $request->city;
         $address->state = $request->state;
