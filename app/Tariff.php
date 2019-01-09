@@ -1,0 +1,14 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Tariff extends Model
+{
+    protected $guarded = [];
+
+    public function properties(){
+        return $this->belongsToMany(Property::class);
+    }
+}
