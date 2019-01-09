@@ -17,7 +17,6 @@ class CreateTariffGroupsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('provider_id');
-            $table->integer('group_type');
             $table->timestamps();
         });
     }
