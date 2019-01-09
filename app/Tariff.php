@@ -11,4 +11,16 @@ class Tariff extends Model
     public function properties(){
         return $this->belongsToMany(Property::class);
     }
+
+    public function regions(){
+        return$this->belongsToMany(Region::class);
+    }
+
+    public function tariffGroup(){
+        return $this->belongsTo(TariffGroup::class);
+    }
+
+    public function provider(){
+        return $this->belongsTo(Provider::class);
+    }
 }

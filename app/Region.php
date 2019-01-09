@@ -19,4 +19,8 @@ class Region extends Model
     public function postcodeRegionVBs(){
         return $this->hasMany(PostcodeRegionVb::class);
     }
+
+    public function tariffs(){
+        return $this->belongsToMany(Tariff::class);
+    }
 }
