@@ -18,7 +18,7 @@ class CreateTariffsTable extends Migration
             $table->string('name');
             $table->string('code');
             $table->integer('provider_id');
-            $table->integer('group_id');
+            $table->integer('tariff_group_id');
             $table->boolean('made_by_toker');
             $table->float('base_price');
             $table->float('provision');
