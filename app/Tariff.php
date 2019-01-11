@@ -23,4 +23,8 @@ class Tariff extends Model
     public function provider(){
         return $this->belongsTo(Provider::class);
     }
+
+    public function dealers(){
+        return $this->belongsToMany(Dealer::class, 'ontop');
+    }
 }

@@ -24,6 +24,8 @@ class CreateTariffsTable extends Migration
             $table->float('provision');
             $table->date('valid_from');
             $table->date('valid_to');
+            $table->integer('monthly_limit');
+
             $table->timestamps();
         });
     }

@@ -32,4 +32,7 @@ class Dealer extends Model
         return  $this->hasOne(DealerRegionVb::class);
     }
 
+    public function tariffs(){
+        return $this->belongsToMany(Tariff::class, 'ontop');
+    }
 }
