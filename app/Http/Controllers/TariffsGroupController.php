@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\TariffGroup;
+use App\TariffsGroup;
 use Illuminate\Http\Request;
 
-class TariffGroupController extends Controller
+class TariffsGroupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class TariffGroupController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\TariffGroup  $tariffGroup
+     * @param  \App\TariffsGroup  $tariffsGroup
      * @return \Illuminate\Http\Response
      */
-    public function show(TariffGroup $tariffGroup)
+    public function show(TariffsGroup $tariffsGroup)
     {
         //
     }
@@ -52,10 +52,10 @@ class TariffGroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\TariffGroup  $tariffGroup
+     * @param  \App\TariffsGroup  $tariffsGroup
      * @return \Illuminate\Http\Response
      */
-    public function edit(TariffGroup $tariffGroup)
+    public function edit(TariffsGroup $tariffsGroup)
     {
         //
     }
@@ -64,10 +64,10 @@ class TariffGroupController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TariffGroup  $tariffGroup
+     * @param  \App\TariffsGroup  $tariffsGroup
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TariffGroup $tariffGroup)
+    public function update(Request $request, TariffsGroup $tariffsGroup)
     {
         //
     }
@@ -75,10 +75,10 @@ class TariffGroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\TariffGroup  $tariffGroup
+     * @param  \App\TariffsGroup  $tariffsGroup
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TariffGroup $tariffGroup)
+    public function destroy(TariffsGroup $tariffsGroup)
     {
         //
     }

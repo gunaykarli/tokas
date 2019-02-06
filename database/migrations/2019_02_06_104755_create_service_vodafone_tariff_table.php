@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTariffPropertyTable extends Migration
+class CreateServiceVodafoneTariffTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateTariffPropertyTable extends Migration
      */
     public function up()
     {
-        Schema::create('tariff_property', function (Blueprint $table) {
+        Schema::create('service_vodafone_tariff', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tariff_id');
-            $table->integer('property_id');
-            $table->string('value');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class CreateTariffPropertyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tariff_property');
+        Schema::dropIfExists('service_vodafone_tariff');
     }
 }

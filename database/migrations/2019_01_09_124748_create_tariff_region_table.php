@@ -17,6 +17,8 @@ class CreateTariffRegionTable extends Migration
             $table->increments('id');
             $table->integer('tariff_id');
             $table->integer('region_id');
+            $table->integer('provider_id');
+
             $table->timestamps();
         });
     }

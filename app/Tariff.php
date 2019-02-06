@@ -16,10 +16,6 @@ class Tariff extends Model
         return$this->belongsToMany(Region::class);
     }
 
-    public function tariffGroup(){
-        return $this->belongsTo(TariffGroup::class);
-    }
-
     public function provider(){
         return $this->belongsTo(Provider::class);
     }
@@ -34,4 +30,19 @@ class Tariff extends Model
         return $this->hasOne(VodafoneTariff::class);
     }
 
+    public function tariffsHighlights(){
+        return $this->hasMany(TariffsHighlight::class);
+    }
+
+    public function tariffsProvisions(){
+        return $this->hasMany(TariffsProvision::class);
+    }
+
+    public function tariffsLimitInfos(){
+        return $this->hasMany(TariffsLimitInfo::class);
+    }
+
+    public function tariffsGroup(){
+        return $this->belongsTo(TariffsGroup::class);
+    }
 }

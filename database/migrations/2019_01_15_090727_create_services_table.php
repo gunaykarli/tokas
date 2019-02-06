@@ -16,9 +16,9 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
-            $table->smallInteger('type');
             $table->string('name');
-            $table->smallInteger('importance_degree');
+            $table->smallInteger('type');
+            $table->smallInteger('is_favorite');
             $table->timestamps();
         });
     }

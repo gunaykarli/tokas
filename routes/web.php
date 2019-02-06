@@ -82,7 +82,7 @@ Route::post('/representative/update/{representative}', 'RepresentativeController
 Route::get('/region/postcodeRegionVB/import', 'PostcodeRegionVbController@import')->middleware('auth');
 Route::post('/region/postcodeRegionVB/store', 'PostcodeRegionVbController@store')->middleware('auth');
 
-
+ //DELETE FROM `VF_Tarife` WHERE `VF_Tarife`.`ID` = 213
 
 
 

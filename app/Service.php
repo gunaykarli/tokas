@@ -9,6 +9,6 @@ class Service extends Model
     protected $guarded = [];
 
     public function vodafoneTariffs(){
-        return $this->belongsToMany(VodafoneTariff::class, 'mandotary_exclusion');
+        return $this->belongsToMany(VodafoneTariff::class);
     }
 }

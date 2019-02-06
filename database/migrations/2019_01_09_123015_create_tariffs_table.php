@@ -16,15 +16,17 @@ class CreateTariffsTable extends Migration
         Schema::create('tariffs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('code');
+            $table->string('tariff_code');
+            $table->boolean('status');
+            $table->integer('main_group_id');
+            $table->integer('sub_group_id');
             $table->integer('provider_id');
-            $table->integer('tariff_group_id');
             $table->boolean('made_by_toker');
             $table->float('base_price');
             $table->float('provision');
             $table->date('valid_from');
             $table->date('valid_to');
-            $table->integer('monthly_limit');
+            $table->integer('is_limited');
 
             $table->timestamps();
         });

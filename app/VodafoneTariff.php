@@ -13,7 +13,7 @@ class VodafoneTariff extends Model
     }
 
     public function services(){
-        return  $this->belongsToMany(Service::class, 'mandotary_exclusion');
+        return  $this->belongsToMany(Service::class);
     }
 
     public function lawTexts(){

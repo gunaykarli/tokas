@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTariffPropertyTable extends Migration
+class CreateTariffsLimitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateTariffPropertyTable extends Migration
      */
     public function up()
     {
-        Schema::create('tariff_property', function (Blueprint $table) {
+        Schema::create('tariffs_limits', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tariff_id');
-            $table->integer('property_id');
-            $table->string('value');
+            $table->dateTime('valid_from');
+            $table->dateTime('valid_to');
+            $table->integer('limit');
+            $table->integer('remaining_amount');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateTariffPropertyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tariff_property');
+        Schema::dropIfExists('tariffs_limits');
     }
 }

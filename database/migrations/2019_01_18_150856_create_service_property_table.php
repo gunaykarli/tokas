@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMandotaryExclusionTable extends Migration
+class CreateServicePropertyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateMandotaryExclusionTable extends Migration
      */
     public function up()
     {
-        Schema::create('mandotary_exclusion', function (Blueprint $table) {
+        Schema::create('service_property', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('vodafone_tariff_id');
             $table->integer('service_id');
-            $table->smallInteger('mandotary_exclusion');
+            $table->smallInteger('property');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateMandotaryExclusionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mandotary_exclusion');
+        Schema::dropIfExists('service_property');
     }
 }

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TariffGroup extends Model
+class TariffsGroup extends Model
 {
     protected $guarded = [];
 
@@ -15,5 +15,4 @@ class TariffGroup extends Model
     public function tariffs(){
         return $this->hasMany(Tariff::class);
     }
-
 }
