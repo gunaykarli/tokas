@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Crypt;
 class RegionController extends Controller
 {
     /**
+     *
+     * To redirect to login page when session timeout
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

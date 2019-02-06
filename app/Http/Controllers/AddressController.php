@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
+
+    /**
+     *
+     * To redirect to login page when session timeout
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *

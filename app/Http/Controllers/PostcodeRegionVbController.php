@@ -13,6 +13,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class PostcodeRegionVbController extends Controller
 {
+    /**
+     *
+     * To redirect to login page when session timeout
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /** Display a page for importing "PostcodeRegionVb" of a specific provider, from excel file */
     public function import(){
 
