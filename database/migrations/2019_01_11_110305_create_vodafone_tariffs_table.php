@@ -25,7 +25,7 @@ class CreateVodafoneTariffsTable extends Migration
             $table->smallInteger('general_agreement');
             $table->smallInteger('VF_home_address');
             $table->smallInteger('ultra_card');
-            $table->smallInteger('FN_porting ');
+            $table->smallInteger('FN_porting');
             $table->smallInteger('AO_bundle');
             $table->smallInteger('member_type');
             $table->smallInteger('group_must');

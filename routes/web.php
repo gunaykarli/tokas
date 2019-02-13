@@ -82,8 +82,6 @@ Route::post('/representative/update/{representative}', 'RepresentativeController
 Route::get('/region/postcodeRegionVB/import', 'PostcodeRegionVbController@import');
 Route::post('/region/postcodeRegionVB/store', 'PostcodeRegionVbController@store');
 
- //DELETE FROM `VF_Tarife` WHERE `VF_Tarife`.`ID` = 213
-
 
 
 Route::get('/region/create', 'RegionController@create');
@@ -91,9 +89,11 @@ Route::post('/region/store', 'RegionController@store');
 Route::get('/region/index', 'RegionController@index');
 //Route::get('/region/edit/{region}', 'RegionController@edit');
 Route::get('/region/edit/{regionID}', 'RegionController@edit')->name('region-edit');
-
 Route::post('/region/update/{region}', 'RegionController@update');
 
+//** Tariffs */
+Route::get('/tariff/vodafone/create', 'TariffController@create');
+Route::post('/tariff/vodafone/store', 'TariffController@store');
 
 
 

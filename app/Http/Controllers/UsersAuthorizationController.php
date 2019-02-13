@@ -136,7 +136,7 @@ class UsersAuthorizationController extends Controller
             //$employee->id is assigned as a key in authorizeUser.blade.php. In this function $employee->id is used as a key in the following array_key_exists()  */
                 if(array_key_exists($employee->id, $request->action[$systemFeatureID])){
                     if ($request->action[$systemFeatureID][$employee->id]== 'on')
-                        //** if the current switch "$request->action[$systemFeatureID][$employee->id]" on then it must be controlled that if its status has ben changed from off to on,
+                        //** if the current switch "$request->action[$systemFeatureID][$employee->id]" is on then it must be controlled that if its status has ben changed from off to on,
                         // or it is already exist in the user_authorization table in the DB */
                         $exist = 0;
                         foreach ($usersAuthorizations as $userAuthorization){

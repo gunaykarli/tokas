@@ -24,8 +24,8 @@ class Provider extends Model
         return $this->hasMany(PostcodeRegionVb::class);
     }
 
-    public function tariffGroups(){
-        return $this->hasMany(TariffGroup::class);
+    public function tariffsGroups(){
+        return $this->hasMany(TariffsGroup::class);
     }
 
     public function tariffs(){

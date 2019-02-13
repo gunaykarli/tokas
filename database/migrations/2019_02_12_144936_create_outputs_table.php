@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTariffRegionTable extends Migration
+class CreateOutputsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateTariffRegionTable extends Migration
      */
     public function up()
     {
-        Schema::create('tariff_region', function (Blueprint $table) {
+        Schema::create('outputs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tariff_id');
-            $table->integer('region_id');
-            $table->integer('provider_id');// provider_id is extra attribute of this pivot table.
-
+            $table->string('output');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateTariffRegionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tariff_region');
+        Schema::dropIfExists('outputs');
     }
 }

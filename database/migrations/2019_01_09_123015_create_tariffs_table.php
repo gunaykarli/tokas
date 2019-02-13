@@ -24,8 +24,8 @@ class CreateTariffsTable extends Migration
             $table->boolean('made_by_toker');
             $table->float('base_price');
             $table->float('provision');
-            $table->date('valid_from');
-            $table->date('valid_to');
+            $table->dateTime('valid_from');
+            $table->dateTime('valid_to');
             $table->integer('is_limited');
 
             $table->timestamps();

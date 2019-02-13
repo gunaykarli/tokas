@@ -6,14 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tariff extends Model
 {
-    protected $guarded = [];
+    //protected $guarded = [];
+    protected $fillable = ['name', 'tariff_code', 'status', 'main_group_id', 'sub_group_id', 'provider_id', 'made_by_toker', 'base_price', 'provision', 'valid_from', 'valid_to', 'is_limited'];
 
     public function properties(){
         return $this->belongsToMany(Property::class);
     }
 
     public function regions(){
-        return$this->belongsToMany(Region::class);
+        return $this->belongsToMany(Region::class, 'tariff_region')->withPivot('provider_id');
+        //** Eloquent will join the two related model names in alphabetical order. However, you are free to override this convention.
+        // Normally the name of the pivot table is 'region_tariff'. We have overrided this convention
+        // additionally provider_id is extra attribute of the pivot table.*/
     }
 
     public function provider(){

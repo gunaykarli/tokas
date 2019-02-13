@@ -28,8 +28,8 @@ class Dealer extends Model
         return $this->hasOne(BankAccount::class,'entity_id');
     }
 
-    public function dealerRegionVB(){
-        return  $this->hasOne(DealerRegionVb::class);
+    public function dealerRegionVBs(){
+        return  $this->hasMany(DealerRegionVb::class);
     }
 
     public function tariffs(){
