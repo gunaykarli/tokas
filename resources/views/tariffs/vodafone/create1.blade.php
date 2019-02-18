@@ -96,8 +96,8 @@
                     <div class="m-portlet__head-caption">
                         <div class="m-portlet__head-title">
                             <h3 class="m-portlet__head-text">
-                                {{__('tariffs\vodafone\create.createTariff')}}
-                                <small> {{__('tariffs\vodafone\create.createTariff')}}</small>
+                                Dealer Registration
+                                <small>Dealer Registration</small>
                             </h3>
                         </div>
                     </div>
@@ -207,44 +207,29 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_6">
                                     <a href="#" class="m-wizard__step-number">
                                         <span><i class="fa  flaticon-layers"></i></span>
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.highlight')}}
+                                            {{__('tariffs\vodafone\create.properties')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_7">
                                     <a href="#" class="m-wizard__step-number">
                                         <span><i class="fa  flaticon-layers"></i></span>
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.highlight')}}
+                                            7. Confirmation
                                         </div>
                                         <div class="m-wizard__step-desc">
 
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_8">
-                                    <a href="#" class="m-wizard__step-number">
-                                        <span><i class="fa  flaticon-layers"></i></span>
-                                    </a>
-                                    <div class="m-wizard__step-info">
-                                        <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.confirmation')}}
-                                        </div>
-                                        <div class="m-wizard__step-desc">
                                         </div>
                                     </div>
                                 </div>
@@ -264,9 +249,9 @@
                         -->
 
                         <!--begin: Form -->
-                        <form method="POST" action="/tariff/vodafone/store" class="m-form m-form--label-align-left- m-form--state-" id="m_form">
-                        @csrf
-                        <!--begin: Form Body -->
+                        <form method="POST" action="/dealer/store" class="m-form m-form--label-align-left- m-form--state-" id="m_form">
+                            @csrf
+                            <!--begin: Form Body -->
                             <div class="m-portlet__body">
 
                                 <!--begin: Form Wizard Step 1-->
@@ -294,7 +279,17 @@
                                                     </div>
                                                 </div>
 
-
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.madeByToker')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox" checked="checked" name="madeByToker">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
 
                                                 <div class="form-group m-form__group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validFrom')}}:</label>
@@ -310,7 +305,17 @@
                                                     </div>
                                                 </div>
 
-
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.isLimited')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox" checked="checked" name="isLimited">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
 
                                                 <div class="form-group m-form__group row">
                                                     <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.mainGroup')}}:</label>
@@ -334,30 +339,6 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.madeByToker')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <span class="m-switch m-switch--sm m-switch--icon">
-                                                            <label>
-                                                                <input type="checkbox" checked="checked" name="madeByToker">
-                                                                <span></span>
-                                                            </label>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.isLimited')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <span class="m-switch m-switch--sm m-switch--icon">
-                                                            <label>
-                                                                <input type="checkbox" checked="checked" name="isLimited">
-                                                                <span></span>
-                                                            </label>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
 
                                             </div>
                                         </div>
@@ -377,6 +358,7 @@
                                                     </div>
 
                                                     <div class="m-form__group form-group">
+                                                        <label>{{__('tariffs\vodafone\create.regions')}}</label>
                                                         <div class="m-checkbox-list">
                                                             @foreach($provider->regions as $region)
                                                                 <label class="m-checkbox m-checkbox--solid m-checkbox--success">
@@ -501,7 +483,6 @@
 
                                                 <div class="form-group m-form__group">
                                                     @foreach($properties->unique('category') as $category)
-                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                                         <label>{{$category->category}}</label>
                                                         @foreach($properties as $property)
                                                             @if($category->category == $property->category)
@@ -548,105 +529,9 @@
                                 </div>
                                 <!--end: Form Wizard Step 6-->
 
-                                <!--begin: Form Wizard Step 7-->
-                                <div class="m-wizard__form-step m-wizard__form-step--current" id="m_wizard_form_step_7">
-                                    <div class="row">
-                                        <div class="col-xl-8 offset-xl-2">
-                                            <div class="m-form__section m-form__section--first">
-                                                <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.tariffDetails')}}</h3>
-                                                </div>
 
-                                                <input  name="providerID" type="hidden" value={{$provider->id}}>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.tariffName')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input type="text" name="tariffName" class="form-control m-input" placeholder="" value="">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.tariffCode')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input type="text" name="tariffCode" class="form-control m-input" placeholder="" value="">
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validFrom')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input name="tariffValidFrom" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validTo')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input name="tariffValidTo" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="form-group m-form__group row">
-                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.mainGroup')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="mainGroupID" class="form-control m-input" id="exampleSelect1">
-                                                            @foreach($provider->tariffsGroups->unique('main_group') as $tariffsGroup)
-                                                                <option value={{$tariffsGroup->main_group_id}} >{{$tariffsGroup->main_group}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.subGroup')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="subGroupID" class="form-control m-input" id="exampleSelect1">
-                                                            @foreach($provider->tariffsGroups as $tariffsGroup)
-                                                                <option value={{$tariffsGroup->sub_group_id}} >{{$tariffsGroup->sub_group}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.madeByToker')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <span class="m-switch m-switch--sm m-switch--icon">
-                                                            <label>
-                                                                <input type="checkbox" checked="checked" name="madeByToker">
-                                                                <span></span>
-                                                            </label>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.isLimited')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <span class="m-switch m-switch--sm m-switch--icon">
-                                                            <label>
-                                                                <input type="checkbox" checked="checked" name="isLimited">
-                                                                <span></span>
-                                                            </label>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end: Form Wizard Step 7-->
-
-
-                                <!--begin: Form Wizard Step X Confirmation-->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_8">
+                                <!--begin: Form Wizard Step 6 Confirmation-->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_7">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
 
@@ -862,7 +747,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--end: Form Wizard Step X-->
+                                <!--end: Form Wizard Step 6-->
 
                             </div>
                             <!--end: Form Body -->
@@ -902,6 +787,7 @@
 
                         </form>
                         <!--end: Form -->
+
                     </div>
                     <!--end: Form Wizard Form-->
 

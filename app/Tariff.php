@@ -10,7 +10,7 @@ class Tariff extends Model
     protected $fillable = ['name', 'tariff_code', 'status', 'main_group_id', 'sub_group_id', 'provider_id', 'made_by_toker', 'base_price', 'provision', 'valid_from', 'valid_to', 'is_limited'];
 
     public function properties(){
-        return $this->belongsToMany(Property::class);
+        return $this->belongsToMany(Property::class)->withPivot('value');
     }
 
     public function regions(){
@@ -42,8 +42,8 @@ class Tariff extends Model
         return $this->hasMany(TariffsProvision::class);
     }
 
-    public function tariffsLimitInfos(){
-        return $this->hasMany(TariffsLimitInfo::class);
+    public function tariffsLimit(){
+        return $this->hasMany(TariffsLimit::class);
     }
 
     public function tariffsGroup(){

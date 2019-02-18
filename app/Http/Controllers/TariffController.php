@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Output;
+use App\Property;
 use App\Provider;
 use App\Region;
 use App\Tariff;
+use App\TariffsHighlight;
+use App\TariffsLimit;
 use App\TariffsProvision;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Null_;
 
 class TariffController extends Controller
 {
@@ -37,7 +42,8 @@ class TariffController extends Controller
     public function create()
     {
         $provider = Provider::where('id', 1)->first();
-        return view('tariffs.vodafone.create', compact('provider'));
+        $properties = Property::all();
+        return view('tariffs.vodafone.create', compact('provider', 'properties'));
     }
 
     /**
@@ -75,7 +81,8 @@ class TariffController extends Controller
 
 
 
-        //** Set the region(s) of the newly created tariff */
+        //** Set the REGION(s) of the newly created tariff */
+
         // According to checkboxOfRegion in resources/views/tariffs/vodafone/create.blade.php,  the pivot table (tariff_region) of Region and Tariff is set.
         // Since checkboxOfRegions takes its names' values from the Region table according to the active provider,
         // we need to check if the key exist in the array, if so, control, if it has been checked. */
@@ -87,9 +94,21 @@ class TariffController extends Controller
             }
         }
 
-        //** Set the provision of the newly created tariff */
+        //** Set the PROVISION of the newly created tariff */
         $tariffsProvisions = new TariffsProvision();
         $tariffsProvisions->setProvision($tariff->id, $request);
+
+        //** Set the LIMIT of the newly created tariff */
+        $tariffsLimit = new TariffsLimit();
+        $tariffsLimit->setLimit($tariff->id, $request);
+
+        //** Set the PROPERTIES of the newly created tariff */
+        $tariffsProperties = new Property();
+        $tariffsProperties->setProperties($tariff, $request);
+
+        //** Set the HIGHLIGHTS of the newly created tariff */
+        $tariffsHighlights = new TariffsHighlight();
+        $tariffsHighlights->setHighlight($tariff->id, $request);
 
         return back();
     }

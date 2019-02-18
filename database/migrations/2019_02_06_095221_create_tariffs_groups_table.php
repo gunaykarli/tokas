@@ -15,11 +15,9 @@ class CreateTariffsGroupsTable extends Migration
     {
         Schema::create('tariffs_groups', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->integer('provider_id');
-            $table->string('main_group');
-            $table->integer('main_group_id');
-            $table->string('sub_group');
-            $table->integer('sub_group_id');
+
             $table->timestamps();
         });
     }
