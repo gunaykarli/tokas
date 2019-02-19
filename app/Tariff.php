@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tariff extends Model
 {
     //protected $guarded = [];
-    protected $fillable = ['name', 'tariff_code', 'status', 'main_group_id', 'sub_group_id', 'provider_id', 'made_by_toker', 'base_price', 'provision', 'valid_from', 'valid_to', 'is_limited'];
+    protected $fillable = ['name', 'tariff_code', 'status', 'group_id', 'size', 'provider_id', 'made_by_toker', 'base_price', 'provision', 'valid_from', 'valid_to', 'is_limited'];
 
     public function properties(){
         return $this->belongsToMany(Property::class)->withPivot('value');

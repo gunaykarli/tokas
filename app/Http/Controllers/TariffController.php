@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Output;
+use App\Plausibility;
 use App\Property;
 use App\Provider;
 use App\Region;
@@ -10,6 +11,7 @@ use App\Tariff;
 use App\TariffsHighlight;
 use App\TariffsLimit;
 use App\TariffsProvision;
+use App\VodafoneTariff;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Null_;
 
@@ -60,8 +62,8 @@ class TariffController extends Controller
         $tariff->name = $request->tariffName;
         $tariff->tariff_code = $request->tariffCode;
         $tariff->status = 1;
-        $tariff->main_group_id = $request->mainGroupID;
-        $tariff->sub_group_id = $request->subGroupID;
+        $tariff->group_id = $request->groupID;
+        $tariff->size = $request->size;
         $tariff->provider_id = $request->providerID;
         $tariff->base_price = 0; // base_price and provision will be entered in next step...
         $tariff->provision = 0;
@@ -109,6 +111,21 @@ class TariffController extends Controller
         //** Set the HIGHLIGHTS of the newly created tariff */
         $tariffsHighlights = new TariffsHighlight();
         $tariffsHighlights->setHighlight($tariff->id, $request);
+
+        //** if the tariff to be created belongs to VODAFONE then process vodafone related activities... */
+
+            // Create Vodafone Tariff recored in VodafoneTariff table
+            $vodafoneTariff = new VodafoneTariff();
+            $vodafoneTariff->createVodafoneTariff($tariff->id);
+
+            //** Set the Vodafone Tariff PLAUSIBILITY  of the newly created tariff */
+            $VFPlausibility = new Plausibility();
+            $VFPlausibility->setPlausibility($tariff->id, $request);
+
+        //** if the tariff to be created belongs to AY YILDIZ then process ay yıldız related activities... */
+
+
+        //** if the tariff to be created belongs to O2 then process O2 related activities... */
 
         return back();
     }

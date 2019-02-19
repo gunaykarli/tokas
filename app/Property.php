@@ -13,9 +13,6 @@ class Property extends Model
     }
 
     public function setProperties($tariff, $request){
-
-
-
         // According to inputOfProperties in resources/views/tariffs/vodafone/create.blade.php,  the pivot table (tariff_property) of Property and Tariff is set.
         // Since inputOfProperties takes its names' values from the Property table.,
         // we need to check if the key exist in the array inputOfProperty, if so, use the value sent from the form. */

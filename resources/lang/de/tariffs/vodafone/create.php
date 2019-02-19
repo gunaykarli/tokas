@@ -8,6 +8,7 @@ return [
     'tariffLimit' => 'Limit',
     'properties' => 'Eigenschaften',
     'highlight' => 'Highlight',
+    'plausibility' => 'Plausibilität',
     'confirmation' => 'Bestätigung',
 
     //** General Info */
@@ -18,8 +19,8 @@ return [
     'validFrom' => 'Gültig ab',
     'validTo' => 'Gültig bis',
     'isLimited' => 'Ist begrenzt',
-    'mainGroup' => 'Hauptgruppe',
-    'subGroup' => 'Untergruppe',
+    'Group' => 'Gruppe',
+    'size' => 'Größe',
 
     //** Regions */
 

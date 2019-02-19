@@ -228,7 +228,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.highlight')}}
+                                            {{__('tariffs\vodafone\create.plausibility')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -313,23 +313,25 @@
 
 
                                                 <div class="form-group m-form__group row">
-                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.mainGroup')}}:</label>
+                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.Group')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
-                                                        <select name="mainGroupID" class="form-control m-input" id="exampleSelect1">
-                                                            @foreach($provider->tariffsGroups->unique('main_group') as $tariffsGroup)
-                                                                <option value={{$tariffsGroup->main_group_id}} >{{$tariffsGroup->main_group}}</option>
+                                                        <select name="groupID" class="form-control m-input" id="exampleSelect1">
+                                                            @foreach($provider->tariffsGroups as $tariffsGroup)
+                                                                <option value={{$tariffsGroup->id}} >{{$tariffsGroup->name}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.subGroup')}}:</label>
+                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.size')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
-                                                        <select name="subGroupID" class="form-control m-input" id="exampleSelect1">
-                                                            @foreach($provider->tariffsGroups as $tariffsGroup)
-                                                                <option value={{$tariffsGroup->sub_group_id}} >{{$tariffsGroup->sub_group}}</option>
-                                                            @endforeach
+                                                        <select name="size" class="form-control m-input">
+                                                            <option value="S">S</option>
+                                                            <option value="M">M</option>
+                                                            <option value="L">L</option>
+                                                            <option value="XL">XL</option>
+                                                            <option value="XXL">XXL</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -549,94 +551,269 @@
                                 <!--end: Form Wizard Step 6-->
 
                                 <!--begin: Form Wizard Step 7-->
-                                <div class="m-wizard__form-step m-wizard__form-step--current" id="m_wizard_form_step_7">
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_7">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
                                                 <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.tariffDetails')}}</h3>
-                                                </div>
-
-                                                <input  name="providerID" type="hidden" value={{$provider->id}}>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.tariffName')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input type="text" name="tariffName" class="form-control m-input" placeholder="" value="">
-                                                    </div>
+                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.plausibility')}}</h3>
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.tariffCode')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.minPeriodOfValidity')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
-                                                        <input type="text" name="tariffCode" class="form-control m-input" placeholder="" value="">
+                                                        <input type="text" name="minPeriodOfValidity" class="form-control m-input" placeholder="">
                                                     </div>
                                                 </div>
 
 
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validFrom')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.debitAuthorization')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
-                                                        <input name="tariffValidFrom" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validTo')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input name="tariffValidTo" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="form-group m-form__group row">
-                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.mainGroup')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="mainGroupID" class="form-control m-input" id="exampleSelect1">
-                                                            @foreach($provider->tariffsGroups->unique('main_group') as $tariffsGroup)
-                                                                <option value={{$tariffsGroup->main_group_id}} >{{$tariffsGroup->main_group}}</option>
-                                                            @endforeach
+                                                        <select name="debitAuthorization" class="form-control m-input">
+                                                            <option value="1">OK => Zulässig</option>
+                                                            <option value="2">X = Unzulässig</option>
+                                                            <option value="3">! => Pflichtfeld</option>
+                                                            <option value="4">H => Wie Hauptkarte</option>
+                                                            <option value="5">O => Gruppenbesitzer</option>
+                                                            <option value="6">M => Gruppenmitglied</option>
+                                                            <option value="7">Y => Ja</option>
+                                                            <option value="8">N => Nein</option>
+                                                            <option value="9">V => Sprachtarif</option>
+                                                            <option value="10">D => Datentarif</option>
+                                                            <option value="11">n.a. => nicht verfügbar</option>
                                                         </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.subGroup')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.subsidyAuthorization')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
-                                                        <select name="subGroupID" class="form-control m-input" id="exampleSelect1">
-                                                            @foreach($provider->tariffsGroups as $tariffsGroup)
-                                                                <option value={{$tariffsGroup->sub_group_id}} >{{$tariffsGroup->sub_group}}</option>
-                                                            @endforeach
+                                                        <select name="subsidyAuthorization" class="form-control m-input">
+                                                            <option value=1>OK => Zulässig</option>
+                                                            <option value=2>X = Unzulässig</option>
+                                                            <option value=3>! => Pflichtfeld</option>
+                                                            <option value=4>H => Wie Hauptkarte</option>
+                                                            <option value=5>O => Gruppenbesitzer</option>
+                                                            <option value=6>M => Gruppenmitglied</option>
+                                                            <option value=7>Y => Ja</option>
+                                                            <option value=8>N => Nein</option>
+                                                            <option value=9>V => Sprachtarif</option>
+                                                            <option value=10>D => Datentarif</option>
+                                                            <option value=11>n.a. => nicht verfügbar</option>
                                                         </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.madeByToker')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.IMEIAcquisition')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
-                                                        <span class="m-switch m-switch--sm m-switch--icon">
-                                                            <label>
-                                                                <input type="checkbox" checked="checked" name="madeByToker">
-                                                                <span></span>
-                                                            </label>
-                                                        </span>
+                                                        <select name="IMEIAcquisition" class="form-control m-input">
+                                                            <option value=1>OK => Zulässig</option>
+                                                            <option value=2>X = Unzulässig</option>
+                                                            <option value=3>! => Pflichtfeld</option>
+                                                            <option value=4>H => Wie Hauptkarte</option>
+                                                            <option value=5>O => Gruppenbesitzer</option>
+                                                            <option value=6>M => Gruppenmitglied</option>
+                                                            <option value=7>Y => Ja</option>
+                                                            <option value=8>N => Nein</option>
+                                                            <option value=9>V => Sprachtarif</option>
+                                                            <option value=10>D => Datentarif</option>
+                                                            <option value=11>n.a. => nicht verfügbar</option>
+                                                        </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.isLimited')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.telephoneBookEntry')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
-                                                        <span class="m-switch m-switch--sm m-switch--icon">
-                                                            <label>
-                                                                <input type="checkbox" checked="checked" name="isLimited">
-                                                                <span></span>
-                                                            </label>
-                                                        </span>
+                                                        <select name="telephoneBookEntry" class="form-control m-input">
+                                                            <option value=1>OK => Zulässig</option>
+                                                            <option value=2>X = Unzulässig</option>
+                                                            <option value=3>! => Pflichtfeld</option>
+                                                            <option value=4>H => Wie Hauptkarte</option>
+                                                            <option value=5>O => Gruppenbesitzer</option>
+                                                            <option value=6>M => Gruppenmitglied</option>
+                                                            <option value=7>Y => Ja</option>
+                                                            <option value=8>N => Nein</option>
+                                                            <option value=9>V => Sprachtarif</option>
+                                                            <option value=10>D => Datentarif</option>
+                                                            <option value=11>n.a. => nicht verfügbar</option>
+                                                        </select>
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.faxBookEntry')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <select name="faxBookEntry" class="form-control m-input">
+                                                            <option value=1>OK => Zulässig</option>
+                                                            <option value=2>X = Unzulässig</option>
+                                                            <option value=3>! => Pflichtfeld</option>
+                                                            <option value=4>H => Wie Hauptkarte</option>
+                                                            <option value=5>O => Gruppenbesitzer</option>
+                                                            <option value=6>M => Gruppenmitglied</option>
+                                                            <option value=7>Y => Ja</option>
+                                                            <option value=8>N => Nein</option>
+                                                            <option value=9>V => Sprachtarif</option>
+                                                            <option value=10>D => Datentarif</option>
+                                                            <option value=11>n.a. => nicht verfügbar</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.generalAgreement')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <select name="generalAgreement" class="form-control m-input">
+                                                            <option value=1>OK => Zulässig</option>
+                                                            <option value=2>X = Unzulässig</option>
+                                                            <option value=3>! => Pflichtfeld</option>
+                                                            <option value=4>H => Wie Hauptkarte</option>
+                                                            <option value=5>O => Gruppenbesitzer</option>
+                                                            <option value=6>M => Gruppenmitglied</option>
+                                                            <option value=7>Y => Ja</option>
+                                                            <option value=8>N => Nein</option>
+                                                            <option value=9>V => Sprachtarif</option>
+                                                            <option value=10>D => Datentarif</option>
+                                                            <option value=11>n.a. => nicht verfügbar</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.VFHomeAddress')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <select name="VFHomeAddress" class="form-control m-input">
+                                                            <option value=1>OK => Zulässig</option>
+                                                            <option value=2>X = Unzulässig</option>
+                                                            <option value=3>! => Pflichtfeld</option>
+                                                            <option value=4>H => Wie Hauptkarte</option>
+                                                            <option value=5>O => Gruppenbesitzer</option>
+                                                            <option value=6>M => Gruppenmitglied</option>
+                                                            <option value=7>Y => Ja</option>
+                                                            <option value=8>N => Nein</option>
+                                                            <option value=9>V => Sprachtarif</option>
+                                                            <option value=10>D => Datentarif</option>
+                                                            <option value=11>n.a. => nicht verfügbar</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.ultraCard')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <select name="ultraCard" class="form-control m-input">
+                                                            <option value=1>OK => Zulässig</option>
+                                                            <option value=2>X = Unzulässig</option>
+                                                            <option value=3>! => Pflichtfeld</option>
+                                                            <option value=4>H => Wie Hauptkarte</option>
+                                                            <option value=5>O => Gruppenbesitzer</option>
+                                                            <option value=6>M => Gruppenmitglied</option>
+                                                            <option value=7>Y => Ja</option>
+                                                            <option value=8>N => Nein</option>
+                                                            <option value=9>V => Sprachtarif</option>
+                                                            <option value=10>D => Datentarif</option>
+                                                            <option value=11>n.a. => nicht verfügbar</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.FNPorting ')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <select name="FNPorting" class="form-control m-input">
+                                                            <option value=1>OK => Zulässig</option>
+                                                            <option value=2>X = Unzulässig</option>
+                                                            <option value=3>! => Pflichtfeld</option>
+                                                            <option value=4>H => Wie Hauptkarte</option>
+                                                            <option value=5>O => Gruppenbesitzer</option>
+                                                            <option value=6>M => Gruppenmitglied</option>
+                                                            <option value=7>Y => Ja</option>
+                                                            <option value=8>N => Nein</option>
+                                                            <option value=9>V => Sprachtarif</option>
+                                                            <option value=10>D => Datentarif</option>
+                                                            <option value=11>n.a. => nicht verfügbar</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.AOBundle ')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <select name="AOBundle" class="form-control m-input">
+                                                            <option value=1>OK => Zulässig</option>
+                                                            <option value=2>X = Unzulässig</option>
+                                                            <option value=3>! => Pflichtfeld</option>
+                                                            <option value=4>H => Wie Hauptkarte</option>
+                                                            <option value=5>O => Gruppenbesitzer</option>
+                                                            <option value=6>M => Gruppenmitglied</option>
+                                                            <option value=7>Y => Ja</option>
+                                                            <option value=8>N => Nein</option>
+                                                            <option value=9>V => Sprachtarif</option>
+                                                            <option value=10>D => Datentarif</option>
+                                                            <option value=11>n.a. => nicht verfügbar</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.memberType ')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <select name="memberType" class="form-control m-input">
+                                                            <option value=1>OK => Zulässig</option>
+                                                            <option value=2>X = Unzulässig</option>
+                                                            <option value=3>! => Pflichtfeld</option>
+                                                            <option value=4>H => Wie Hauptkarte</option>
+                                                            <option value=5>O => Gruppenbesitzer</option>
+                                                            <option value=6>M => Gruppenmitglied</option>
+                                                            <option value=7>Y => Ja</option>
+                                                            <option value=8>N => Nein</option>
+                                                            <option value=9>V => Sprachtarif</option>
+                                                            <option value=10>D => Datentarif</option>
+                                                            <option value=11>n.a. => nicht verfügbar</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.groupMust ')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <select name="groupMust" class="form-control m-input">
+                                                            <option value=1>OK => Zulässig</option>
+                                                            <option value=2>X = Unzulässig</option>
+                                                            <option value=3>! => Pflichtfeld</option>
+                                                            <option value=4>H => Wie Hauptkarte</option>
+                                                            <option value=5>O => Gruppenbesitzer</option>
+                                                            <option value=6>M => Gruppenmitglied</option>
+                                                            <option value=7>Y => Ja</option>
+                                                            <option value=8>N => Nein</option>
+                                                            <option value=9>V => Sprachtarif</option>
+                                                            <option value=10>D => Datentarif</option>
+                                                            <option value=11>n.a. => nicht verfügbar</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.tariffType ')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <select name="tariffType" class="form-control m-input">
+                                                            <option value=1>OK => Zulässig</option>
+                                                            <option value=2>X = Unzulässig</option>
+                                                            <option value=3>! => Pflichtfeld</option>
+                                                            <option value=4>H => Wie Hauptkarte</option>
+                                                            <option value=5>O => Gruppenbesitzer</option>
+                                                            <option value=6>M => Gruppenmitglied</option>
+                                                            <option value=7>Y => Ja</option>
+                                                            <option value=8>N => Nein</option>
+                                                            <option value=9>V => Sprachtarif</option>
+                                                            <option value=10>D => Datentarif</option>
+                                                            <option value=11>n.a. => nicht verfügbar</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
 
                                             </div>
                                         </div>

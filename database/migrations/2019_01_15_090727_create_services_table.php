@@ -17,8 +17,8 @@ class CreateServicesTable extends Migration
             $table->increments('id');
             $table->string('code');
             $table->string('name');
-            $table->smallInteger('type');
             $table->smallInteger('is_favorite');
+            $table->integer('provider_id');
             $table->timestamps();
         });
     }

@@ -15,12 +15,7 @@ class TariffsHighlight extends Model
 
     public function setHighlight($tariffID, $request){
 
-        $out = new Output();
-        $out->output1 = $request->inputOfShortHighlight[0];
-        $out->output2 = $request->inputOfShortHighlightX[0];
-        $out->output3 = $tariffID;
-        $out->save();
-
+        //** Save tariff highlight. Loop control variable is 5 since in create.blade.php 5 place for the highlight has been established dynamically using for loop   */
         for($i = 0; $i<5; $i++){
             $tariffHighlight = new TariffsHighlight();
             if($request->inputOfShortHighlight[$i] != Null){
