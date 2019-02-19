@@ -1,0 +1,39 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Plausibility extends Model
+{
+    protected $fillable = ['tariff_id', 'min_period_of_validity', 'debit_authorization', 'subsidy_authorization',
+        'IMEI_acquisition', 'telephone_book_entry', 'fax_book_entry', 'general_agreement', 'VF_home_address',
+        'ultra_card', 'FN_porting', 'AO_bundle', 'member_type', 'group_must', 'tariff_type'];
+
+    public function vodafoneTariff(){
+        return $this->belongsTo(VodafoneTariff::class);
+    }
+
+
+    //* User defined methods of the model (class)
+    public function setPlausibility($tariffID, $request){
+
+        $VFPlausibility = new Plausibility();
+        $VFPlausibility->tariff_id = $tariffID ;
+        $VFPlausibility->min_period_of_validity = $request->minPeriodOfValidity ;
+        $VFPlausibility->debit_authorization = $request->debitAuthorization ;
+        $VFPlausibility->subsidy_authorization = $request->subsidyAuthorization ;
+        $VFPlausibility->IMEI_acquisition = $request->IMEIAcquisition ;
+        $VFPlausibility->telephone_book_entry = $request->telephoneBookEntry ;
+        $VFPlausibility->fax_book_entry = $request->faxBookEntry ;
+        $VFPlausibility->general_agreement = $request->generalAgreement ;
+        $VFPlausibility->VF_home_address = $request->VFHomeAddress ;
+        $VFPlausibility->ultra_card = $request->ultraCard ;
+        $VFPlausibility->FN_porting = $request->FNPorting ;
+        $VFPlausibility->AO_bundle = $request->AOBundle ;
+        $VFPlausibility->member_type = $request->memberType ;
+        $VFPlausibility->group_must = $request->groupMust ;
+        $VFPlausibility->tariff_type = $request->tariffType ;
+        $VFPlausibility->save();
+    }
+}
