@@ -242,6 +242,20 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
+                                            {{__('tariffs\vodafone\create.service')}}
+                                        </div>
+                                        <div class="m-wizard__step-desc">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_9">
+                                    <a href="#" class="m-wizard__step-number">
+                                        <span><i class="fa  flaticon-layers"></i></span>
+                                    </a>
+                                    <div class="m-wizard__step-info">
+                                        <div class="m-wizard__step-title">
                                             {{__('tariffs\vodafone\create.confirmation')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
@@ -572,17 +586,17 @@
                                                     <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.debitAuthorization')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
                                                         <select name="debitAuthorization" class="form-control m-input">
-                                                            <option value="1">OK => Zulässig</option>
-                                                            <option value="2">X = Unzulässig</option>
-                                                            <option value="3">! => Pflichtfeld</option>
-                                                            <option value="4">H => Wie Hauptkarte</option>
-                                                            <option value="5">O => Gruppenbesitzer</option>
-                                                            <option value="6">M => Gruppenmitglied</option>
-                                                            <option value="7">Y => Ja</option>
-                                                            <option value="8">N => Nein</option>
-                                                            <option value="9">V => Sprachtarif</option>
-                                                            <option value="10">D => Datentarif</option>
-                                                            <option value="11">n.a. => nicht verfügbar</option>
+                                                            <option value=1>OK => Zulässig</option>
+                                                            <option value=2>X = Unzulässig</option>
+                                                            <option value=3>! => Pflichtfeld</option>
+                                                            <option value=4>H => Wie Hauptkarte</option>
+                                                            <option value=5>O => Gruppenbesitzer</option>
+                                                            <option value=6>M => Gruppenmitglied</option>
+                                                            <option value=7>Y => Ja</option>
+                                                            <option value=8>N => Nein</option>
+                                                            <option value=9>V => Sprachtarif</option>
+                                                            <option value=10>D => Datentarif</option>
+                                                            <option value=11>n.a. => nicht verfügbar</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -721,7 +735,7 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.FNPorting ')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.FNPorting')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
                                                         <select name="FNPorting" class="form-control m-input">
                                                             <option value=1>OK => Zulässig</option>
@@ -740,7 +754,7 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.AOBundle ')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.AOBundle')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
                                                         <select name="AOBundle" class="form-control m-input">
                                                             <option value=1>OK => Zulässig</option>
@@ -821,9 +835,29 @@
                                 </div>
                                 <!--end: Form Wizard Step 7-->
 
+                                <!--begin: Form Wizard Step 8-->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_8">
+                                    <div class="row">
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+                                                <div class="m-form__heading">
+                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.service')}}</h3>
+                                                </div>
+
+                                                <div class="form-group m-form__group">
+                                                    <input type="file" name="vodafoneTariffServiceProperty" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end: Form Wizard Step 8-->
+
+
 
                                 <!--begin: Form Wizard Step X Confirmation-->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_8">
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_9">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
 

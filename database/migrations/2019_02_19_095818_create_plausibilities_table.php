@@ -16,7 +16,7 @@ class CreatePlausibilitiesTable extends Migration
         Schema::create('plausibilities', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->smallInteger('tariff_id');
+            $table->smallInteger('vodafone_tariff_id');
             $table->smallInteger('min_period_of_validity');
             $table->smallInteger('debit_authorization');
             $table->smallInteger('subsidy_authorization');

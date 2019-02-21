@@ -112,15 +112,12 @@ class TariffController extends Controller
         $tariffsHighlights = new TariffsHighlight();
         $tariffsHighlights->setHighlight($tariff->id, $request);
 
-        //** if the tariff to be created belongs to VODAFONE then process vodafone related activities... */
+        //** if the tariff to be created belongs to VODAFONE then perform vodafone-related activities...
+        //  manageCreationProcess() manages all the activities related to creation of new Vodafone Tariff*/
+        $vodafoneTariff = new VodafoneTariff();
+        $vodafoneTariff->manageCreationProcess($tariff, $request);
 
-            // Create Vodafone Tariff recored in VodafoneTariff table
-            $vodafoneTariff = new VodafoneTariff();
-            $vodafoneTariff->createVodafoneTariff($tariff->id);
 
-            //** Set the Vodafone Tariff PLAUSIBILITY  of the newly created tariff */
-            $VFPlausibility = new Plausibility();
-            $VFPlausibility->setPlausibility($tariff->id, $request);
 
         //** if the tariff to be created belongs to AY YILDIZ then process ay yıldız related activities... */
 

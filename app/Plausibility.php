@@ -16,10 +16,10 @@ class Plausibility extends Model
 
 
     //* User defined methods of the model (class)
-    public function setPlausibility($tariffID, $request){
+    public function setPlausibility($vodafoneTariffID, $request){
 
         $VFPlausibility = new Plausibility();
-        $VFPlausibility->tariff_id = $tariffID ;
+        $VFPlausibility->vodafone_tariff_id = $vodafoneTariffID ;
         $VFPlausibility->min_period_of_validity = $request->minPeriodOfValidity ;
         $VFPlausibility->debit_authorization = $request->debitAuthorization ;
         $VFPlausibility->subsidy_authorization = $request->subsidyAuthorization ;

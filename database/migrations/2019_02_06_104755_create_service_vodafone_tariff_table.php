@@ -15,6 +15,10 @@ class CreateServiceVodafoneTariffTable extends Migration
     {
         Schema::create('service_vodafone_tariff', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('vodafonetariff_id');
+            $table->integer('service_id');
+            $table->smallInteger('property');
+            $table->boolean('is_favorite');
             $table->timestamps();
         });
     }

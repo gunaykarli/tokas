@@ -95,7 +95,8 @@ Route::post('/region/update/{region}', 'RegionController@update');
 Route::get('/tariff/vodafone/create', 'TariffController@create');
 Route::post('/tariff/vodafone/store', 'TariffController@store');
 
-
+ Route::get('/service/create', 'ServiceController@create');
+Route::post('/service/store', 'ServiceController@store');
 
 
 

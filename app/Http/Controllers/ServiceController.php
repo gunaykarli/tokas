@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Output;
 use App\Service;
+use App\Tariff;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ServiceController extends Controller
 {
@@ -33,7 +36,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        $tariff = Tariff::where('id', 2)->first();
+        return view('tariffs.vodafone.serviceTariff', compact('tariff'));
     }
 
     /**
@@ -44,7 +48,50 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //** Take all representative of selected provider from excel to array */
+        if($request->hasFile('vodafoneTariffServiceProperty')) {
+            $tariffServicePropertiesInExcel = Excel::load($request->file('vodafoneTariffServiceProperty')->getRealPath());
+            $tariffServicePropertiesInArray = $tariffServicePropertiesInExcel->toArray();
+
+
+            foreach ($tariffServicePropertiesInArray as $key => $row) {
+
+               /*
+                $out = new Output();
+                $out->output1 = array_key_exists('code', $row). ' * ' . $row['code'];
+                $out->output2 = array_key_exists('property', $row). ' * ' . $row['property'];
+                //$out->output3 = array_key_exists('isFavorite', $row). '*' . $row['isFavorite'];
+                $out->save();
+                */
+
+                //** if current service is not inadmissible (x-unzulässig-ausschulüsse )(ok or !) then save it to the ServiceVodafoneTariff table. */
+                if($row['property'] != 'X'){
+                    $service = Service::where('code', $row['code'])->first();
+
+                    $out1 = new Output();
+                    $out1->output1 = $service->id . ' * ' . $service->code;
+                    $out1->output2 = array_key_exists('property', $row). ' *in if* ' . $row['property'];
+                    $out1->output3 = $request->tariffID . ': vft id';
+                    $out1->save();
+
+                    if($row['property'] =='ok'){
+                        $propertyValue = 1;
+                    }
+                    else
+                        $propertyValue = 0;
+
+                    if($row['cc'] == 1)
+                        $isFavoriteValue = true;
+                    else
+                        $isFavoriteValue = false;
+
+                    //$vodafoneTariff->services()->attach($service->id, ['property' => $row['property']]);
+                    $service->vodafoneTariffs()->attach(2, ['property' => $propertyValue , 'is_favorite' => $isFavoriteValue]);
+                }
+            }
+            return back()->with('success', 'ok');
+        }
     }
 
     /**

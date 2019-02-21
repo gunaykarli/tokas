@@ -9,6 +9,7 @@ return [
     'properties' => 'Eigenschaften',
     'highlight' => 'Highlight',
     'plausibility' => 'Plausibilität',
+    'service' => 'Dienst',
     'confirmation' => 'Bestätigung',
 
     //** General Info */
@@ -26,14 +27,30 @@ return [
 
     //** Provision */
     'basePrice' => 'Grundpreis',
-    'provision' => 'Provision',
     'limit' => 'Limit',
+
     //** Tariff Limit */
 
     //** Properties */
 
     //** Highlight */
 
+    //** Plausibility minPeriodOfValidity */
+    'minPeriodOfValidity' => 'Mindestlaufzeit',
+    'debitAuthorization' => 'Einzugsermächtigung',
+    'subsidyAuthorization' => 'Subventionsberechtigung',
+    'IMEIAcquisition' => 'IMEI-Erfassung',
+    'telephoneBookEntry' => 'Telefonbucheintrag Möglich',
+    'faxBookEntry' => 'Faxbucheintrag Möglich',
+    'generalAgreement' => 'Rahmenvertrag',
+    'VFHomeAddress' => 'VF-Zuhause-Adresse',
+    'ultraCard' => 'Ultracard',
+    'FNPorting' => 'FN Porting',
+    'AOBundle' => 'AO Bundle',
+    'memberType' => 'Member Typ',
+    'groupMust' => 'Group Must',
+    'tariffType' => 'Tarife Typ',
 
-
+    //** Service */
+    'selectFile' => 'Datei Aussuchen'
 ];
