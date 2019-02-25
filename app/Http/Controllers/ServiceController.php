@@ -46,6 +46,8 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //** Bu fonksiyon deneme için kullanıldı. Şuan silinebilir.. */
     public function store(Request $request)
     {
 
@@ -81,7 +83,7 @@ class ServiceController extends Controller
                     else
                         $propertyValue = 0;
 
-                    if($row['cc'] == 1)
+                    if($row['favorite'] == 1)
                         $isFavoriteValue = true;
                     else
                         $isFavoriteValue = false;

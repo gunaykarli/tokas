@@ -20,7 +20,7 @@ class CreateTariffsProvisionsTable extends Migration
             $table->float('base_price');
             $table->float('provision');
             $table->dateTime('valid_from');
-            $table->dateTime('valid_to');
+            $table->dateTime('valid_to')->nullable();
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Network;
 use App\Output;
 use App\Plausibility;
 use App\Property;
@@ -45,7 +46,8 @@ class TariffController extends Controller
     {
         $provider = Provider::where('id', 1)->first();
         $properties = Property::all();
-        return view('tariffs.vodafone.create', compact('provider', 'properties'));
+        $networks = Network::all();
+        return view('tariffs.vodafone.create', compact('provider', 'properties', 'networks'));
     }
 
     /**
@@ -56,45 +58,14 @@ class TariffController extends Controller
      */
     public function store(Request $request)
     {
+
         //** Save basic info of the new tariff */
         $tariff = new Tariff();
+        $tariff->setBasicInfo($request);
 
-        $tariff->name = $request->tariffName;
-        $tariff->tariff_code = $request->tariffCode;
-        $tariff->status = 1;
-        $tariff->group_id = $request->groupID;
-        $tariff->size = $request->size;
-        $tariff->provider_id = $request->providerID;
-        $tariff->base_price = 0; // base_price and provision will be entered in next step...
-        $tariff->provision = 0;
-        $tariff->valid_from = $request->tariffValidFrom;
-        $tariff->valid_to = $request->tariffValidTo;
-        if ($request->madeByToker == 'on')
-            $tariff->made_by_toker = 1;
-        else
-            $tariff->made_by_toker = 0;
-
-        if ($request->isLimited == 'on')
-            $tariff->is_limited = 1;
-        else
-            $tariff->is_limited = 0;
-
-        $tariff->save();
-
-
-
-        //** Set the REGION(s) of the newly created tariff */
-
-        // According to checkboxOfRegion in resources/views/tariffs/vodafone/create.blade.php,  the pivot table (tariff_region) of Region and Tariff is set.
-        // Since checkboxOfRegions takes its names' values from the Region table according to the active provider,
-        // we need to check if the key exist in the array, if so, control, if it has been checked. */
-        $regions = Region::where('provider_id', $request->providerID)->get();
-        foreach($regions as $region){
-            if(array_key_exists($region->id, $request->checkboxOfRegions)) {
-                if($request->checkboxOfRegions[$region->id] == 'on')
-                    $tariff->regions()->attach($region->id, ['provider_id' => $request->providerID]);
-            }
-        }
+        //** Set the REGION(s) of the newly created Vodafone tariff */
+        $regions = new Region();
+        $regions->setVodafoneRegions($tariff, $request);
 
         //** Set the PROVISION of the newly created tariff */
         $tariffsProvisions = new TariffsProvision();

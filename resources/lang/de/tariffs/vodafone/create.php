@@ -19,12 +19,13 @@ return [
     'madeByToker' => 'Gemacht von Toker',
     'validFrom' => 'Gültig ab',
     'validTo' => 'Gültig bis',
+    'inDefinite' => 'Unbegrenzt',
     'isLimited' => 'Ist begrenzt',
-    'Group' => 'Gruppe',
-    'size' => 'Größe',
+    'group' => 'Gruppe',
+    'network' => 'Netz',
 
     //** Regions */
-
+    'allRegions' => 'Alle Regionen',
     //** Provision */
     'basePrice' => 'Grundpreis',
     'limit' => 'Limit',

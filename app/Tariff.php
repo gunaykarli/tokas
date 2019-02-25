@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tariff extends Model
 {
     //protected $guarded = [];
-    protected $fillable = ['name', 'tariff_code', 'status', 'group_id', 'size', 'provider_id', 'made_by_toker', 'base_price', 'provision', 'valid_from', 'valid_to', 'is_limited'];
+    protected $fillable = ['name', 'tariff_code', 'status', 'group_id', 'provider_id', 'network_id', 'made_by_toker', 'base_price', 'provision', 'valid_from', 'valid_to', 'is_limited'];
 
     public function properties(){
         return $this->belongsToMany(Property::class)->withPivot('value');
@@ -48,5 +48,43 @@ class Tariff extends Model
 
     public function tariffsGroup(){
         return $this->belongsTo(TariffsGroup::class);
+    }
+
+    public function network(){
+        return $this->belongsTo(Network::class);
+    }
+
+    //** User Defined Functions */
+
+    public function setBasicInfo($request){
+        $this->name = $request->tariffName;
+        $this->tariff_code = $request->tariffCode;
+        $this->status = 1;
+        $this->group_id = $request->groupID;
+        $this->provider_id = $request->providerID;
+        $this->network_id = $request->networkID;
+        $this->base_price = 0; // base_price and provision will be entered in next step...
+        $this->provision = 0;
+        $this->valid_from = $request->tariffValidFrom;
+
+        if($request->tariffValidToIndefinite == 'on')
+            $this->valid_to = null;
+        else
+            $this->valid_to = $request->tariffValidTo;
+
+        if ($request->madeByToker == 'on')
+            $this->made_by_toker = 1;
+        else
+            $this->made_by_toker = 0;
+
+        if ($request->isLimited == 'on')
+            $this->is_limited = 1;
+        else
+            $this->is_limited = 0;
+
+        $this->save();
+
+        return $this;
+
     }
 }

@@ -308,8 +308,6 @@
                                                     </div>
                                                 </div>
 
-
-
                                                 <div class="form-group m-form__group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validFrom')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
@@ -319,15 +317,22 @@
 
                                                 <div class="form-group m-form__group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validTo')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input name="tariffValidTo" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <input name="tariffValidTo" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="tariffValidTo">
+                                                    </div>
+                                                    <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.inDefinite')}}</label>
+                                                    <div class="col-xl-1 col-lg-1">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox"  name="tariffValidToIndefinite" id="tariffValidToIndefinite">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
                                                     </div>
                                                 </div>
 
-
-
                                                 <div class="form-group m-form__group row">
-                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.Group')}}:</label>
+                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.group')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
                                                         <select name="groupID" class="form-control m-input" id="exampleSelect1">
                                                             @foreach($provider->tariffsGroups as $tariffsGroup)
@@ -338,14 +343,12 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.size')}}:</label>
+                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.network')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
-                                                        <select name="size" class="form-control m-input">
-                                                            <option value="S">S</option>
-                                                            <option value="M">M</option>
-                                                            <option value="L">L</option>
-                                                            <option value="XL">XL</option>
-                                                            <option value="XXL">XXL</option>
+                                                        <select name="networkID" class="form-control m-input" id="exampleSelect1">
+                                                            @foreach($networks as $network)
+                                                                <option value={{$network->id}} >{{$network->name}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -356,18 +359,6 @@
                                                         <span class="m-switch m-switch--sm m-switch--icon">
                                                             <label>
                                                                 <input type="checkbox" checked="checked" name="madeByToker">
-                                                                <span></span>
-                                                            </label>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.isLimited')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <span class="m-switch m-switch--sm m-switch--icon">
-                                                            <label>
-                                                                <input type="checkbox" checked="checked" name="isLimited">
                                                                 <span></span>
                                                             </label>
                                                         </span>
@@ -392,17 +383,27 @@
                                                         <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.regions')}}</h3>
                                                     </div>
 
-                                                    <div class="m-form__group form-group">
-                                                        <div class="m-checkbox-list">
-                                                            @foreach($provider->regions as $region)
-                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                    <input type="checkbox" name="checkboxOfRegions[{{$region->id}}]"> {{$region->abbreviation}}
-                                                                    <span></span>
-                                                                </label>
-                                                            @endforeach
-                                                        </div>
+                                                    <div class="form-group m-form__group row">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox"  name="allRegions" id="allRegions">{{' <-'. __('tariffs\vodafone\create.allRegions')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
                                                     </div>
 
+                                                    <div class="all-regions">
+                                                        <div class="m-form__group form-group">
+                                                            <div class="m-checkbox-list">
+                                                                @foreach($provider->regions as $region)
+                                                                    <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                        <input type="checkbox" name="checkboxOfRegions[{{$region->id}}]"> {{$region->abbreviation}}
+                                                                        <span></span>
+                                                                    </label>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -419,8 +420,6 @@
                                                 <div class="m-form__heading">
                                                     <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.provision')}}</h3>
                                                 </div>
-
-
 
                                                 <div class="form-group m-form__group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.basePrice')}}:</label>
@@ -457,8 +456,17 @@
 
                                                 <div class="form-group m-form__group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validTo')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input name="provisionValidTo" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <input name="provisionValidTo" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="provisionValidTo">
+                                                    </div>
+                                                    <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.inDefinite')}}</label>
+                                                    <div class="col-xl-1 col-lg-1">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox"  name="provisionValidToIndefinite" id="provisionValidToIndefinite">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
                                                     </div>
                                                 </div>
 
@@ -477,25 +485,38 @@
                                                     <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.tariffLimit')}}</h3>
                                                 </div>
 
-
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.limit')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.isLimited')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
-                                                        <input type="text" name="limit" class="form-control m-input" placeholder="" value="">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox"  name="isLimited" id="isLimited">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validFrom')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input name="limitValidFrom" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                                                <div class="is-limited">
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.limit')}}:</label>
+                                                        <div class="col-xl-9 col-lg-9">
+                                                            <input type="text" name="limit" class="form-control m-input" placeholder="" value="">
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validTo')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input name="limitValidTo" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validFrom')}}:</label>
+                                                        <div class="col-xl-9 col-lg-9">
+                                                            <input name="limitValidFrom" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validTo')}}:</label>
+                                                        <div class="col-xl-9 col-lg-9">
+                                                            <input name="limitValidTo" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1136,6 +1157,7 @@
     <!--end::Page Vendors -->
 
     <!--begin::Page Scripts -->
+    <script src="{{ asset('js/isLimited.js')}}" type="text/javascript"></script>
     <script src="{{ asset('metronic/assets/app/js/dashboard.js')}}" type="text/javascript"></script>
     <script src="{{ asset('metronic/assets/demo/default/custom/crud/wizard/createDealerFormWizard.js')}}" type="text/javascript"></script>
     <script src="{{ asset('metronic/assets/demo/default/custom/crud/forms/widgets/bootstrap-datepicker.js')}}" type="text/javascript"></script>

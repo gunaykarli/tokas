@@ -19,13 +19,13 @@ class CreateTariffsTable extends Migration
             $table->string('tariff_code');
             $table->boolean('status');
             $table->integer('group_id');
-            $table->char('size', 5);
             $table->integer('provider_id');
+            $table->integer('network_id');
             $table->boolean('made_by_toker');
             $table->float('base_price');
             $table->float('provision');
             $table->dateTime('valid_from');
-            $table->dateTime('valid_to');
+            $table->dateTime('valid_to')->nullable();
             $table->integer('is_limited');
 
             $table->timestamps();

@@ -24,7 +24,7 @@ class Service extends Model
 
     public function setVodafoneTariffServices($vodafoneTariff, Request $request){
 
-        //** Take all representative of selected provider from excel to array */
+        //** Take all service info of newly created tariff from the excel to an array */
         if($request->hasFile('vodafoneTariffServiceProperty')) {
             $tariffServicePropertiesInExcel = Excel::load($request->file('vodafoneTariffServiceProperty')->getRealPath());
             $tariffServicePropertiesInArray = $tariffServicePropertiesInExcel->toArray();
@@ -35,25 +35,23 @@ class Service extends Model
                     $service = Service::where('code', $row['code'])->first();
 
 
-                    //** Set value of property and favorite according to the related tables. */
+                    //** Set value of property and favorite according to the value type in related tables. */
                     if($row['property'] =='ok'){
                         $propertyValue = 1;
                     }
                     else
                         $propertyValue = 0;
 
-
-                   //Excel de isFavorite kolon ismini tanımıyor....
+                   //** Excel de isFavorite kolon ismini tanımıyor....
                     if($row['favorite'] == 1)
                         $isFavoriteValue = true;
                     else
                         $isFavoriteValue = false;
 
-                    //** save values to the 'service_vodafonetariff pivot table' */
+                    //** save the values to the 'service_vodafonetariff pivot table' */
                     $service->vodafoneTariffs()->attach($vodafoneTariff->id, ['property' => $propertyValue, 'is_favorite' => $isFavoriteValue]);
                 }
             }
         }
-
     }
 }

@@ -26,4 +26,29 @@ class Region extends Model
         // Normally the name of the pivot table is 'region_tariff'. We have overrided this convention
         // additionally provider_id is extra attribute of the pivot table.*/
     }
+
+    //** User Defined Functions */
+
+    public function setVodafoneRegions($tariff, $request){
+        // According to checkboxOfRegion in resources/views/tariffs/vodafone/create.blade.php,  the pivot table (tariff_region) of Region and Tariff is set.
+        // Since checkboxOfRegions takes its names' values from the Region table according to the active provider,
+        // we need to check if the key exist in the array, if so, control, if it has been checked. */
+        $regions = Region::where('provider_id', $request->providerID)->get();
+
+        //** If 'All Regions' checkbox is checked then all regions is save to the tariff_region pivot table  */
+        if($request->allRegions == 'on'){
+            foreach($regions as $region){
+                $tariff->regions()->attach($region->id, ['provider_id' => $request->providerID]);
+            }
+        }
+        else{
+            foreach($regions as $region){
+                if(array_key_exists($region->id, $request->checkboxOfRegions)) {
+                    if($request->checkboxOfRegions[$region->id] == 'on')
+                        $tariff->regions()->attach($region->id, ['provider_id' => $request->providerID]);
+                }
+            }
+        }
+
+    }
 }

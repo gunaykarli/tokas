@@ -23,7 +23,12 @@ class TariffsProvision extends Model
         $tariffProvision->base_price = $request->basePrice;
         $tariffProvision->provision = $request->provision;
         $tariffProvision->valid_from = $request->provisionValidFrom;
-        $tariffProvision->valid_to = $request->provisionValidTo;
+
+        if($request->provisionValidToIndefinite == 'on')
+            $tariffProvision->valid_to = null;
+        else
+            $tariffProvision->valid_to = $request->provisionValidTo;
+
         $tariffProvision->save();
     }
 }
