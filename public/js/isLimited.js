@@ -39,5 +39,15 @@ $(document).ready(function()
 
     });
 
+    /* In property section, network and provider will take their value from the element of the form in the previous section
+    $('#Netz').val($("#networkID option:selected" ).text());
+    $('#networkID').change(function () {
+        //$('#tariffName').val($("#networkID option:selected" ).text());
+        $('#Netz').val($("#networkID option:selected" ).text());
+    });
+    $("#Netz").attr("disabled", "disabled");
+    $("#Provider").attr("disabled", "disabled");
+    */
+
 
 });

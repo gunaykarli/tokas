@@ -15,9 +15,10 @@ class CreateOntopTable extends Migration
     {
         Schema::create('ontop', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tariff_id');
             $table->integer('dealer_id');
-            $table->float('amount');
+            $table->integer('office_id');
+            $table->integer('tariff_id');
+            $table->float('ontop');
             $table->timestamps();
         });
     }

@@ -19,13 +19,14 @@ class Property extends Model
 
         $properties = Property::all();
         foreach($properties as $property){
-            if($request->inputOfProperties[$property->id] != Null)
-                $tariff->properties()->attach($property->id, ['value' => $request->inputOfProperties[$property->id]]);
-            /*
-            if(array_key_exists($property->id, $request->inputOfProperties)){
-                $tariff->properties()->attach($property->id, ['value' => $request->inputOfProperties[$property->id]]);
-            }
-            */
+            if($property->data_type == 'boolean')
+                if($request->booleanInputOfProperties[$property->id] != Null)//****
+                    $tariff->properties()->attach($property->id, ['value' => 1]);
+                else
+                    $tariff->properties()->attach($property->id, ['value' => 0]);
+            else
+                if($request->textInputOfProperties[$property->id] != Null)
+                    $tariff->properties()->attach($property->id, ['value' => $request->textInputOfProperties[$property->id]]);
         }
     }
 }

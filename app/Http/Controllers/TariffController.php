@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Dealer;
 use App\Network;
 use App\Output;
 use App\Plausibility;
@@ -45,9 +46,10 @@ class TariffController extends Controller
     public function create()
     {
         $provider = Provider::where('id', 1)->first();
+        $dealers = Dealer::all();
         $properties = Property::all();
         $networks = Network::all();
-        return view('tariffs.vodafone.create', compact('provider', 'properties', 'networks'));
+        return view('tariffs.vodafone.create', compact('provider', 'dealers', 'properties', 'networks'));
     }
 
     /**
@@ -71,6 +73,9 @@ class TariffController extends Controller
         $tariffsProvisions = new TariffsProvision();
         $tariffsProvisions->setProvision($tariff->id, $request);
 
+        //** Set the ON-TOP of the newly created tariff */
+        $tariff->setOnTop($request);
+
         //** Set the LIMIT of the newly created tariff */
         $tariffsLimit = new TariffsLimit();
         $tariffsLimit->setLimit($tariff->id, $request);
@@ -81,7 +86,8 @@ class TariffController extends Controller
 
         //** Set the HIGHLIGHTS of the newly created tariff */
         $tariffsHighlights = new TariffsHighlight();
-        $tariffsHighlights->setHighlight($tariff->id, $request);
+        //$tariffsHighlights->setHighlight($tariff->id, $request);
+
 
         //** if the tariff to be created belongs to VODAFONE then perform vodafone-related activities...
         //  manageCreationProcess() manages all the activities related to creation of new Vodafone Tariff*/

@@ -9,6 +9,8 @@ class Tariff extends Model
     //protected $guarded = [];
     protected $fillable = ['name', 'tariff_code', 'status', 'group_id', 'provider_id', 'network_id', 'made_by_toker', 'base_price', 'provision', 'valid_from', 'valid_to', 'is_limited'];
 
+    //** Relationship setups according to the ER diagram */
+
     public function properties(){
         return $this->belongsToMany(Property::class)->withPivot('value');
     }
@@ -26,8 +28,10 @@ class Tariff extends Model
 
     public function dealers(){
         //** "ontop" is pivot table for many to many relationship between dealer and tariff
-        // Generally it is defined as dealer_tariff but in this case we have special name "ontop" */
-        return $this->belongsToMany(Dealer::class, 'ontop');
+        //** In naming pivot table, Eloquent will join the two related model names  in alphabetical order . However, you are free to override this convention.
+        // Normally the name of the pivot table is 'dealer_tariff'. We have overrided this convention by giving 'ontop'
+        // additionally 'office_id', 'amount' are extra attributes of the pivot table.*/
+        return $this->belongsToMany(Dealer::class, 'ontop')->withPivot('office_id', 'amount');
     }
 
     public function vodafoneTariff(){
@@ -86,5 +90,38 @@ class Tariff extends Model
 
         return $this;
 
+    }
+
+    public function setOnTop($request){
+
+        //** Check if there is an on-top for the tariff to be created */
+        if($request->ontop == 'on'){
+            //** According to the selected dealer dependencies in the GUI, the on-top is assigned to specific dealers.
+            // Since some dealers have more than one office, on-top must be assigned to the office(s) of the dealers*/
+            if($request->ontopDealerDependency == 1){ // give the on-top to all dealers and their offices
+                $dealers = Dealer::all();
+                foreach($dealers as $dealer)
+                    foreach($dealer->offices as $office)
+                        $this->dealers()->attach($dealer->id, ['office_id' => $office->id, 'ontop' => $request->ontopAmount]);
+            }
+            else if($request->ontopDealerDependency == 2){ // to selected dealers and their offices
+                $dealers = Dealer::all();
+                foreach($dealers as $dealer)
+                    foreach($dealer->offices as $office)
+                        $this->dealers()->attach($dealer->id, ['office_id' => $office->id, 'ontop' => $request->ontopAmount]);
+            }
+            else if($request->ontopDealerDependency == 3){ // to dealers with certain categories and their offices
+                $dealers = Dealer::all();
+                foreach($dealers as $dealer)
+                    foreach($dealer->offices as $office)
+                        $this->dealers()->attach($dealer->id, ['office_id' => $office->id, 'ontop' => $request->ontopAmount]);
+            }
+            else if($request->ontopDealerDependency == 4){ // to dealers in certain regions and their offices
+                $dealers = Dealer::all();
+                foreach($dealers as $dealer)
+                    foreach($dealer->offices as $office)
+                        $this->dealers()->attach($dealer->id, ['office_id' => $office->id, 'ontop' => $request->ontopAmount]);
+            }
+        }
     }
 }

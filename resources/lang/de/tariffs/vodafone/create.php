@@ -2,9 +2,10 @@
 
 return [
     //** Nav */
-    'generalInfo' => 'Allgemeine Info',
+    'tariff' => 'Tarife',
     'regions' => 'Regionen',
     'provision' => 'Provision',
+    'ontop' => 'On-Top',
     'tariffLimit' => 'Limit',
     'properties' => 'Eigenschaften',
     'highlight' => 'Highlight',
@@ -30,13 +31,25 @@ return [
     'basePrice' => 'Grundpreis',
     'limit' => 'Limit',
 
+    //** On Top */
+
+    'dealerDependency' => 'Händler-Abhängigkeit',
+    'forAllDealer' => 'Für alle Händler',
+    'forCertainDealer' => 'Für bestimmte Händler',
+    'forCertainCategory' => 'Für bestimmte Kategorie',
+    'forCertainRegions' => 'Für bestimmte Regionen',
+    'categories' => 'Kategorien',
+    'category' => 'Kategorie',
+    'dealers' => 'Händler',
+
+
     //** Tariff Limit */
 
     //** Properties */
 
     //** Highlight */
 
-    //** Plausibility minPeriodOfValidity */
+    //** Plausibility  */
     'minPeriodOfValidity' => 'Mindestlaufzeit',
     'debitAuthorization' => 'Einzugsermächtigung',
     'subsidyAuthorization' => 'Subventionsberechtigung',

@@ -144,7 +144,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.generalInfo')}}
+                                            {{__('tariffs\vodafone\create.tariff')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -186,7 +186,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.tariffLimit')}}
+                                            {{__('tariffs\vodafone\create.ontop')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -200,7 +200,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.properties')}}
+                                            {{__('tariffs\vodafone\create.tariffLimit')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -214,7 +214,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.highlight')}}
+                                            {{__('tariffs\vodafone\create.properties')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -228,7 +228,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.plausibility')}}
+                                            {{__('tariffs\vodafone\create.highlight')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -242,7 +242,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.service')}}
+                                            {{__('tariffs\vodafone\create.plausibility')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -251,6 +251,20 @@
                                 </div>
 
                                 <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_9">
+                                    <a href="#" class="m-wizard__step-number">
+                                        <span><i class="fa  flaticon-layers"></i></span>
+                                    </a>
+                                    <div class="m-wizard__step-info">
+                                        <div class="m-wizard__step-title">
+                                            {{__('tariffs\vodafone\create.service')}}
+                                        </div>
+                                        <div class="m-wizard__step-desc">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_10">
                                     <a href="#" class="m-wizard__step-number">
                                         <span><i class="fa  flaticon-layers"></i></span>
                                     </a>
@@ -283,7 +297,7 @@
                         <!--begin: Form Body -->
                             <div class="m-portlet__body">
 
-                                <!--begin: Form Wizard Step 1-->
+                                <!--begin: Form Wizard Step 1 tariffDetails-->
                                 <div class="m-wizard__form-step m-wizard__form-step--current" id="m_wizard_form_step_1">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
@@ -297,7 +311,7 @@
                                                 <div class="form-group m-form__group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.tariffName')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
-                                                        <input type="text" name="tariffName" class="form-control m-input" placeholder="" value="">
+                                                        <input type="text" name="tariffName" id="tariffName" class="form-control m-input" placeholder="" value="">
                                                     </div>
                                                 </div>
 
@@ -345,7 +359,7 @@
                                                 <div class="form-group m-form__group row">
                                                     <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.network')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
-                                                        <select name="networkID" class="form-control m-input" id="exampleSelect1">
+                                                        <select name="networkID" class="form-control m-input" id="networkID">
                                                             @foreach($networks as $network)
                                                                 <option value={{$network->id}} >{{$network->name}}</option>
                                                             @endforeach
@@ -384,13 +398,17 @@
                                                     </div>
 
                                                     <div class="form-group m-form__group row">
-                                                        <span class="m-switch m-switch--sm m-switch--icon">
-                                                            <label>
-                                                                <input type="checkbox"  name="allRegions" id="allRegions">{{' <-'. __('tariffs\vodafone\create.allRegions')}}
-                                                                <span></span>
-                                                            </label>
-                                                        </span>
+                                                        <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.allRegions')}}?</label>
+                                                        <div class="col-xl-1 col-lg-1">
+                                                            <span class="m-switch m-switch--sm m-switch--icon">
+                                                                <label>
+                                                                    <input type="checkbox"  name="allRegions" id="allRegions">
+                                                                    <span></span>
+                                                                </label>
+                                                            </span>
+                                                        </div>
                                                     </div>
+                                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
 
                                                     <div class="all-regions">
                                                         <div class="m-form__group form-group">
@@ -476,8 +494,135 @@
                                 </div>
                                 <!--end: Form Wizard Step 3-->
 
-                                <!--begin: Form Wizard Step 4-->
+                                <!--begin: Form Wizard Step 4 on-top -->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_4">
+                                    <div class="row">
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+                                                <div class="m-form__section m-form__section--first">
+                                                    <div class="m-form__heading">
+                                                        <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.ontop')}}</h3>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.ontop')}}?</label>
+                                                        <div class="col-xl-1 col-lg-1">
+                                                            <span class="m-switch m-switch--sm m-switch--icon">
+                                                                <label>
+                                                                    <input type="checkbox"  name="ontop" id="ontop">
+                                                                    <span></span>
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                    </div>
+
+                                                    <div class="on-top-dealer-dependency">
+                                                        <label>{{__('tariffs\vodafone\create.dealerDependency')}}</label>
+                                                        <div class="m-radio-list">
+                                                            <label class="m-radio m-radio--success">
+                                                                <input type="radio" name="ontopDealerDependency"  value="1"> {{__('tariffs\vodafone\create.forAllDealer')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-radio-list">
+                                                            <label class="m-radio m-radio--success">
+                                                                <input type="radio" name="ontopDealerDependency" value="2"> {{__('tariffs\vodafone\create.forCertainDealer')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-radio-list">
+                                                            <label class="m-radio m-radio--success">
+                                                                <input type="radio" name="ontopDealerDependency" value="3"> {{__('tariffs\vodafone\create.forCertainCategory')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-radio-list">
+                                                            <label class="m-radio m-radio--success">
+                                                                <input type="radio" name="ontopDealerDependency" value="4"> {{__('tariffs\vodafone\create.forCertainRegions')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                    </div>
+
+                                                    <div class="on-top-dealers">
+                                                        <label>{{__('tariffs\vodafone\create.dealers')}}</label>
+                                                        <div class="m-form__group form-group">
+                                                            <div class="m-checkbox-list">
+                                                                @foreach($dealers as $dealer)
+                                                                    <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                        <input type="checkbox" name="checkboxOfDealers[{{$dealer->id}}]"> {{$dealer->name}}
+                                                                        <span></span>
+                                                                    </label>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                    </div>
+
+                                                    <div class="on-top-categories">
+                                                        <label>{{__('tariffs\vodafone\create.categories')}}</label>
+                                                        <div class="m-form__group form-group">
+                                                            <div class="m-checkbox-list">
+                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                    <input type="checkbox" name="checkboxOfCategories[1]"> {{__('tariffs\vodafone\create.category')}}-1
+                                                                    <span></span>
+                                                                </label>
+                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                    <input type="checkbox" name="checkboxOfCategories[2]"> {{__('tariffs\vodafone\create.category')}}-2
+                                                                    <span></span>
+                                                                </label>
+                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                    <input type="checkbox" name="checkboxOfCategories[3]"> {{__('tariffs\vodafone\create.category')}}-3
+                                                                    <span></span>
+                                                                </label>
+                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                    <input type="checkbox" name="checkboxOfCategories[4]"> {{__('tariffs\vodafone\create.category')}}-4
+                                                                    <span></span>
+                                                                </label>
+                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                    <input type="checkbox" name="checkboxOfCategories[5]"> {{__('tariffs\vodafone\create.category')}}-5
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                    </div>
+
+                                                    <div class="on-top-regions">
+                                                        <label>{{__('tariffs\vodafone\create.regions')}}</label>
+                                                        <div class="m-form__group form-group">
+                                                            <div class="m-checkbox-list">
+                                                                @foreach($provider->regions as $region)
+                                                                    <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                        <input type="checkbox" name="checkboxOfRegions[{{$region->id}}]"> {{$region->abbreviation}}
+                                                                        <span></span>
+                                                                    </label>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                    </div>
+
+                                                    <div class="on-top-amount">
+                                                        <div class="form-group m-form__group row">
+                                                            <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.ontop')}}:</label>
+                                                            <div class="col-xl-3 col-lg-3">
+                                                                <input type="text" name="ontopAmount" id="ontopAmount" class="form-control m-input" placeholder="" value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end: Form Wizard Step 4-->
+
+                                <!--begin: Form Wizard Step 5 Limit -->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_5">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
@@ -523,10 +668,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--end: Form Wizard Step 4-->
+                                <!--end: Form Wizard Step 5-->
 
-                                <!--begin: Form Wizard Step 5-->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_5">
+                                <!--begin: Form Wizard Step 6 properties -->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_6">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
@@ -538,47 +683,33 @@
 
                                                 <div class="form-group m-form__group">
                                                     @foreach($properties->unique('category') as $category)
-                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                                         <label>{{$category->category}}</label>
                                                         @foreach($properties as $property)
                                                             @if($category->category == $property->category)
-                                                                <div class="input-group m-input-group">
-                                                                    <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">{{$property->name}}</span></div>
-                                                                    <input type="text" name="inputOfProperties[{{$property->id}}]" class="form-control m-input" placeholder="" aria-describedby="basic-addon1">
-                                                                    <div class="input-group-append"><span class="input-group-text" id="basic-addon1">{{$property->unit}}</span></div>
+                                                                <div class="form-group m-form__group row">
+                                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{$property->name}}</label>
+                                                                    <div class="col-xl-3 col-lg-3">
+                                                                        @if($property->data_type == 'boolean')
+                                                                            <span class="m-switch m-switch--sm m-switch--icon">
+                                                                            <label>
+                                                                                <input type="checkbox"  name="booleanInputOfProperties[{{$property->id}}]" id="">
+                                                                                <span></span>
+                                                                            </label>
+                                                                        </span>
+                                                                        @else
+                                                                            @if($property->name == 'Provider')<!-- Provider name is written automaticly -->
+                                                                                <input type="text" name="textInputOfProperties[{{$property->id}}]" id="{{$property->name}}" class="form-control m-input" value="{{$provider->name}}"  aria-describedby="basic-addon1">
+                                                                            @else
+                                                                                <input type="text" name="textInputOfProperties[{{$property->id}}]" id="{{$property->name}}" class="form-control m-input"  aria-describedby="basic-addon1">
+                                                                            @endif
+                                                                        @endif
+                                                                    </div>
                                                                 </div>
                                                             @endif
                                                         @endforeach
+                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                                     @endforeach
                                                 </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end: Form Wizard Step 5-->
-
-                                <!--begin: Form Wizard Step 6-->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_6">
-                                    <div class="row">
-                                        <div class="col-xl-8 offset-xl-2">
-                                            <div class="m-form__section m-form__section--first">
-                                                <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.highlight')}}</h3>
-                                                </div>
-
-                                                @for($i = 0; $i<5; $i++)
-                                                    <div class="form-group m-form__group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.highlight')}} {{$i+1}}:</label>
-                                                        <div class="col-xl-3 col-lg-3">
-                                                            <input type="text" name="inputOfShortHighlight[{{$i}}]" class="form-control m-input" placeholder="" value="">
-                                                        </div>
-                                                        <div class="col-xl-6 col-lg-6">
-                                                            <input type="text" name="inputOfShortHighlightX[{{$i}}]" class="form-control m-input" placeholder="" value="">
-                                                        </div>
-                                                    </div>
-                                                @endfor
-
                                             </div>
                                         </div>
                                     </div>
@@ -587,6 +718,191 @@
 
                                 <!--begin: Form Wizard Step 7-->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_7">
+                                    <div class="row">
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+
+                                                <div class="m-form__heading">
+                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.highlight')}}</h3>
+                                                </div>
+
+                                                <!-- 3 Property 2 Text Highlight Template -->
+                                                @for($i = 0; $i<1; $i++)
+                                                    <div class="form-group m-form__group row">
+
+                                                        <div class="col-sm-3 col-sm-3">
+                                                            <select name="propertyIDs3P2T1[{{$i}}]" class="form-control m-input" id="exampleSelect1">
+                                                                @foreach($properties as $property)
+                                                                    <option value={{$property->id}} >{{$property->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-sm-2 col-sm-2">
+                                                            <input type="text" name="texts3P2T1[{{$i}}]" class="form-control m-input" placeholder="" value="">
+                                                        </div>
+
+                                                        <div class="col-sm-3 col-sm-3">
+                                                            <select name="propertyIDs3P2T2[{{$i}}]" class="form-control m-input" id="exampleSelect1">
+                                                                @foreach($properties as $property)
+                                                                    <option value={{$property->id}} >{{$property->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-sm-2 col-sm-2">
+                                                            <input type="text" name="texts3P2T2[{{$i}}]" class="form-control m-input" placeholder="" value="">
+                                                        </div>
+
+                                                        <div class="col-sm-2 col-sm-2">
+                                                            <select name="propertyIDs3P2T3[{{$i}}]" class="form-control m-input" id="exampleSelect1">
+                                                                @foreach($properties as $property)
+                                                                    <option value={{$property->id}} >{{$property->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                @endfor
+
+                                                <!-- 3 Property 2 Text (with combo) Highlight Template -->
+                                                @for($i = 0; $i<1; $i++)
+                                                    <div class="form-group m-form__group row">
+
+                                                        <div class="col-sm-3 col-sm-3">
+                                                            <select name="propertyIDs3P2T1WC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
+                                                                @foreach($properties as $property)
+                                                                    <option value={{$property->id}} >{{$property->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-sm-2 col-sm-2">
+                                                            <select name="texts3P2T1WC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
+                                                                <option value=1 >-</option>
+                                                                <option value=2 >bis zu</option>
+                                                                <option value=3 >in alle dt. Netze</option>
+                                                                <option value=4 >in alle dt. Mobilfunknetze</option>
+                                                                <option value=5 >ins dt. Vodafone (O2) Netz</option>
+                                                                <option value=6 >ins dt. Festnetz</option>
+                                                                <option value=7 >türkische Festnetz</option>
+                                                                <option value=8 >türkische Vodafone Netz</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-sm-3 col-sm-3">
+                                                            <select name="propertyIDs3P2T2WC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
+                                                                @foreach($properties as $property)
+                                                                    <option value={{$property->id}} >{{$property->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                            <div class="col-sm-2 col-sm-2">
+                                                                <select name="texts3P2T1WC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
+                                                                    <option value=1 >-</option>
+                                                                    <option value=2 >bis zu</option>
+                                                                    <option value=3 >in alle dt. Netze</option>
+                                                                    <option value=4 >in alle dt. Mobilfunknetze</option>
+                                                                    <option value=5 >ins dt. Vodafone (O2) Netz</option>
+                                                                    <option value=6 >ins dt. Festnetz</option>
+                                                                    <option value=7 >türkische Festnetz</option>
+                                                                    <option value=8 >türkische Vodafone Netz</option>
+                                                                </select>
+                                                            </div>
+                                                        <div class="col-sm-2 col-sm-2">
+                                                            <select name="propertyIDs3P2T3WC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
+                                                                @foreach($properties as $property)
+                                                                    <option value={{$property->id}} >{{$property->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                @endfor
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                                                <!-- 1 Property 1 Text Highlight Template -->
+                                                @for($i = 0; $i<1; $i++)
+                                                    <div class="form-group m-form__group row">
+
+                                                        <div class="col-sm-4 col-sm-4">
+                                                            <select name="propertyIDs1P1T[{{$i}}]" class="form-control m-input" id="exampleSelect1">
+                                                                @foreach($properties as $property)
+                                                                    <option value={{$property->id}} >{{$property->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-sm-4 col-sm-4">
+                                                            <input type="text" name="texts1P1T[{{$i}}]" class="form-control m-input" placeholder="" value="">
+                                                        </div>
+
+                                                    </div>
+                                                @endfor
+
+                                                <!-- 1 Property 1 Text (with combo) Highlight Template -->
+                                                @for($i = 0; $i<1; $i++)
+                                                    <div class="form-group m-form__group row">
+
+                                                        <div class="col-sm-4 col-sm-4">
+                                                            <select name="propertyIDs1P1TWC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
+                                                                @foreach($properties as $property)
+                                                                    <option value={{$property->id}} >{{$property->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-sm-4 col-sm-4">
+                                                            <select name="text1P1TWC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
+                                                                <option value=1 >-</option>
+                                                                <option value=2 >bis zu</option>
+                                                                <option value=3 >in alle dt. Netze</option>
+                                                                <option value=4 >in alle dt. Mobilfunknetze</option>
+                                                                <option value=5 >ins dt. Vodafone (O2) Netz</option>
+                                                                <option value=6 >ins dt. Festnetz</option>
+                                                                <option value=7 >türkische Festnetz</option>
+                                                                <option value=8 >türkische Vodafone Netz</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                @endfor
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                                                <!-- 1 Property  Highlight Template -->
+                                                @for($i = 0; $i<1; $i++)
+                                                    <div class="form-group m-form__group row">
+
+                                                        <div class="col-sm-4 col-sm-4">
+                                                            <select name="propertyIDs1P[{{$i}}]" class="form-control m-input" id="exampleSelect1">
+                                                                @foreach($properties as $property)
+                                                                    <option value={{$property->id}} >{{$property->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                @endfor
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                                                <!-- 1 Text Highlight Template -->
+                                                @for($i = 0; $i<1; $i++)
+                                                    <div class="form-group m-form__group row">
+
+                                                        <div class="col-sm-4 col-sm-4">
+                                                            <input type="text" name="texts1T[{{$i}}]" class="form-control m-input" placeholder="" value="">
+                                                        </div>
+
+                                                    </div>
+                                                @endfor
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end: Form Wizard Step 7-->
+
+                                <!--begin: Form Wizard Step 8-->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_8">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
@@ -794,7 +1110,7 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.memberType ')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.memberType')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
                                                         <select name="memberType" class="form-control m-input">
                                                             <option value=1>OK => Zulässig</option>
@@ -813,7 +1129,7 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.groupMust ')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.groupMust')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
                                                         <select name="groupMust" class="form-control m-input">
                                                             <option value=1>OK => Zulässig</option>
@@ -832,7 +1148,7 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.tariffType ')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.tariffType')}}:</label>
                                                     <div class="col-xl-9 col-lg-9">
                                                         <select name="tariffType" class="form-control m-input">
                                                             <option value=1>OK => Zulässig</option>
@@ -854,10 +1170,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--end: Form Wizard Step 7-->
+                                <!--end: Form Wizard Step 8-->
 
-                                <!--begin: Form Wizard Step 8-->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_8">
+                                <!--begin: Form Wizard Step 9-->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_9">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
@@ -873,12 +1189,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--end: Form Wizard Step 8-->
+                                <!--end: Form Wizard Step 9-->
 
 
 
                                 <!--begin: Form Wizard Step X Confirmation-->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_9">
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_10">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
 
@@ -1158,6 +1474,8 @@
 
     <!--begin::Page Scripts -->
     <script src="{{ asset('js/isLimited.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/ontop.js')}}" type="text/javascript"></script>
+
     <script src="{{ asset('metronic/assets/app/js/dashboard.js')}}" type="text/javascript"></script>
     <script src="{{ asset('metronic/assets/demo/default/custom/crud/wizard/createDealerFormWizard.js')}}" type="text/javascript"></script>
     <script src="{{ asset('metronic/assets/demo/default/custom/crud/forms/widgets/bootstrap-datepicker.js')}}" type="text/javascript"></script>

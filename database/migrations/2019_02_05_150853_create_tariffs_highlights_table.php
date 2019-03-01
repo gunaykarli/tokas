@@ -16,8 +16,8 @@ class CreateTariffsHighlightsTable extends Migration
         Schema::create('tariffs_highlights', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tariff_id');
-            $table->string('highlight_short');
-            $table->string('highlight');
+            $table->tinyInteger('highlight_type');
+            $table->text('content');
             $table->timestamps();
         });
     }
