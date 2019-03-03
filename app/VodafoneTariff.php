@@ -8,14 +8,16 @@ class VodafoneTariff extends Model
 {
     protected $fillable = ['tariff_id'];
 
-    //* Relationships with the other Models (Classes)
+    /** Relationships with the other Models (Classes) */
+
     public function tariff(){
         return $this->belongsTo(Tariff::class);
     }
 
     public function services(){
         return $this->belongsToMany(Service::class, 'service_vodafonetariff', 'vodafone_tariff_id', 'service_id')
-            ->withPivot('property', 'is_favorite');
+            ->withPivot('property', 'is_favorite')
+            ->withTimestamps();
         //** property and is_favorite are extra attributes of the pivot table.*/ */
     }
 
@@ -26,6 +28,8 @@ class VodafoneTariff extends Model
     public function plausibility(){
         return $this->hasOne(Plausibility::class);
     }
+
+    /** User Defined Functions */
 
     //** manageCreationProcess() manages all the activities related to creation of new Vodafone Tariff
     // called from TariffController@store() */

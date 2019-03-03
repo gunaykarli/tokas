@@ -552,7 +552,7 @@
                                                             <div class="m-checkbox-list">
                                                                 @foreach($dealers as $dealer)
                                                                     <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                        <input type="checkbox" name="checkboxOfDealers[{{$dealer->id}}]"> {{$dealer->name}}
+                                                                        <input type="checkbox" name="ontopCheckboxOfDealers[{{$dealer->id}}]"> {{$dealer->name}}
                                                                         <span></span>
                                                                     </label>
                                                                 @endforeach
@@ -566,23 +566,23 @@
                                                         <div class="m-form__group form-group">
                                                             <div class="m-checkbox-list">
                                                                 <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                    <input type="checkbox" name="checkboxOfCategories[1]"> {{__('tariffs\vodafone\create.category')}}-1
+                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[1]"> {{__('tariffs\vodafone\create.category')}}-1
                                                                     <span></span>
                                                                 </label>
                                                                 <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                    <input type="checkbox" name="checkboxOfCategories[2]"> {{__('tariffs\vodafone\create.category')}}-2
+                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[2]"> {{__('tariffs\vodafone\create.category')}}-2
                                                                     <span></span>
                                                                 </label>
                                                                 <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                    <input type="checkbox" name="checkboxOfCategories[3]"> {{__('tariffs\vodafone\create.category')}}-3
+                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[3]"> {{__('tariffs\vodafone\create.category')}}-3
                                                                     <span></span>
                                                                 </label>
                                                                 <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                    <input type="checkbox" name="checkboxOfCategories[4]"> {{__('tariffs\vodafone\create.category')}}-4
+                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[4]"> {{__('tariffs\vodafone\create.category')}}-4
                                                                     <span></span>
                                                                 </label>
                                                                 <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                    <input type="checkbox" name="checkboxOfCategories[5]"> {{__('tariffs\vodafone\create.category')}}-5
+                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[5]"> {{__('tariffs\vodafone\create.category')}}-5
                                                                     <span></span>
                                                                 </label>
                                                             </div>
@@ -596,7 +596,7 @@
                                                             <div class="m-checkbox-list">
                                                                 @foreach($provider->regions as $region)
                                                                     <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                        <input type="checkbox" name="checkboxOfRegions[{{$region->id}}]"> {{$region->abbreviation}}
+                                                                        <input type="checkbox" name="ontopCheckboxOfRegions[{{$region->id}}]"> {{$region->abbreviation}}
                                                                         <span></span>
                                                                     </label>
                                                                 @endforeach
@@ -670,7 +670,7 @@
                                 </div>
                                 <!--end: Form Wizard Step 5-->
 
-                                <!--begin: Form Wizard Step 6 properties -->
+                                <!--begin: Form Wizard Step 6 Properties -->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_6">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
@@ -901,7 +901,7 @@
                                 </div>
                                 <!--end: Form Wizard Step 7-->
 
-                                <!--begin: Form Wizard Step 8-->
+                                <!--begin: Form Wizard Step 8 Plausibility-->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_8">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">

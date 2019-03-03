@@ -21,7 +21,7 @@ class Region extends Model
     }
 
     public function tariffs(){
-        return $this->belongsToMany(Tariff::class, 'tariff_region')->withPivot('provider_id');
+        return $this->belongsToMany(Tariff::class, 'tariff_region')->withPivot('provider_id')->withTimestamps();
         //** Eloquent will join the two related model names in alphabetical order. However, you are free to override this convention.
         // Normally the name of the pivot table is 'region_tariff'. We have overrided this convention
         // additionally provider_id is extra attribute of the pivot table.*/

@@ -9,14 +9,14 @@ class Tariff extends Model
     //protected $guarded = [];
     protected $fillable = ['name', 'tariff_code', 'status', 'group_id', 'provider_id', 'network_id', 'made_by_toker', 'base_price', 'provision', 'valid_from', 'valid_to', 'is_limited'];
 
-    //** Relationship setups according to the ER diagram */
+    /** Relationship setups according to the ER diagram */
 
     public function properties(){
         return $this->belongsToMany(Property::class)->withPivot('value');
     }
 
     public function regions(){
-        return $this->belongsToMany(Region::class, 'tariff_region')->withPivot('provider_id');
+        return $this->belongsToMany(Region::class, 'tariff_region')->withPivot('provider_id')->withTimestamps();
         //** Eloquent will join the two related model names in alphabetical order. However, you are free to override this convention.
         // Normally the name of the pivot table is 'region_tariff'. We have overrided this convention
         // additionally provider_id is extra attribute of the pivot table.*/
@@ -31,7 +31,7 @@ class Tariff extends Model
         //** In naming pivot table, Eloquent will join the two related model names  in alphabetical order . However, you are free to override this convention.
         // Normally the name of the pivot table is 'dealer_tariff'. We have overrided this convention by giving 'ontop'
         // additionally 'office_id', 'amount' are extra attributes of the pivot table.*/
-        return $this->belongsToMany(Dealer::class, 'ontop')->withPivot('office_id', 'amount');
+        return $this->belongsToMany(Dealer::class, 'ontop')->withPivot('office_id', 'amount')->withTimestamps();
     }
 
     public function vodafoneTariff(){
@@ -58,7 +58,7 @@ class Tariff extends Model
         return $this->belongsTo(Network::class);
     }
 
-    //** User Defined Functions */
+    /** User Defined Functions */
 
     public function setBasicInfo($request){
         $this->name = $request->tariffName;
@@ -107,20 +107,35 @@ class Tariff extends Model
             else if($request->ontopDealerDependency == 2){ // to selected dealers and their offices
                 $dealers = Dealer::all();
                 foreach($dealers as $dealer)
-                    foreach($dealer->offices as $office)
-                        $this->dealers()->attach($dealer->id, ['office_id' => $office->id, 'ontop' => $request->ontopAmount]);
+                    if(array_key_exists($dealer->id, $request->ontopCheckboxOfDealers))
+                        foreach($dealer->offices as $office)
+                            $this->dealers()->attach($dealer->id, ['office_id' => $office->id, 'ontop' => $request->ontopAmount]);
             }
             else if($request->ontopDealerDependency == 3){ // to dealers with certain categories and their offices
                 $dealers = Dealer::all();
                 foreach($dealers as $dealer)
-                    foreach($dealer->offices as $office)
-                        $this->dealers()->attach($dealer->id, ['office_id' => $office->id, 'ontop' => $request->ontopAmount]);
+                    // if category_id of the current dealer is equal to the category checked in the GUI, give the on-top to the dealer and its offices
+                    if(array_key_exists($dealer->category_id, $request->ontopCheckboxOfCategories))// if the left condition is true the next one is also true. "if($request->checkboxOfCategories[$dealer->category_id] == 'on')"
+                            foreach($dealer->offices as $office)
+                                $this->dealers()->attach($dealer->id, ['office_id' => $office->id, 'ontop' => $request->ontopAmount]);
+                /*
+                 * the above is the shorter version
+                foreach($dealers as $dealer)
+                    for($i = 1; $i <= 5; $i++)// there are 5 categories
+                        if(array_key_exists($i, $request->ontopCheckboxOfCategories))// if the current category is checked in GUI
+                            if($request->ontopCheckboxOfCategories[$i] == 'on')
+                                if($dealer->category_id == $i ) // if category_id of the current dealer in the foreach iteration is equal to the category checked in the GUI, give the on-top to the dealer and its offices
+                                    foreach($dealer->offices as $office)
+                                        $this->dealers()->attach($dealer->id, ['office_id' => $office->id, 'ontop' => $request->ontopAmount]);
+                */
             }
             else if($request->ontopDealerDependency == 4){ // to dealers in certain regions and their offices
-                $dealers = Dealer::all();
-                foreach($dealers as $dealer)
-                    foreach($dealer->offices as $office)
-                        $this->dealers()->attach($dealer->id, ['office_id' => $office->id, 'ontop' => $request->ontopAmount]);
+                // Since DealerRegionVB model consist of dealers, their offices and region_id info, we use this model.
+                // Get the dealerRegionVB instance whose provider_id is equal to the current/selected provider.
+                $dealerRegionVbs = DealerRegionVb::where('provider_id', $request->providerID)->get();
+                foreach($dealerRegionVbs as $dealerRegionVb)
+                    if(array_key_exists($dealerRegionVb->region_id, $request->ontopCheckboxOfRegions))
+                        $this->dealers()->attach($dealerRegionVb->dealer_id, ['office_id' => $dealerRegionVb->office_id, 'ontop' => $request->ontopAmount]);
             }
         }
     }

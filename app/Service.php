@@ -15,7 +15,8 @@ class Service extends Model
 
     public function vodafoneTariffs(){
         return $this->belongsToMany(VodafoneTariff::class, 'service_vodafonetariff',  'service_id', 'vodafone_tariff_id')
-            ->withPivot('property', 'is_favorite');
+            ->withPivot('property', 'is_favorite')
+            ->withTimestamps();
         //** property and is_favorite are extra attributes of the pivot table.*/ */
     }
 
