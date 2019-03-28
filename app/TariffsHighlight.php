@@ -8,6 +8,7 @@ class TariffsHighlight extends Model
 {
     //protected $guarded = [];
     protected $fillable = ['tariff_id', 'highlight_type', 'content'];
+
     protected $casts = [
         'content' => 'array',
     ];
