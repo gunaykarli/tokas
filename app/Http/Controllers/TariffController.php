@@ -35,7 +35,9 @@ class TariffController extends Controller
      */
     public function index()
     {
-        //
+        //take all tariff from the DB.
+        $tariff = Tariff::all();
+        return view('tariffs.index', compact('tariff'));
     }
 
     /**
