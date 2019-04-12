@@ -99,6 +99,10 @@ Route::get('/service/create', 'ServiceController@create');
 Route::post('/service/store', 'ServiceController@store');
 
 Route::get('/tariff/index', 'TariffController@index');
+Route::post('/tariff/index/tariff-groups', 'TariffController@fetchTariffGroups')->name('fetchTariffGroups');
+Route::post('/tariff/index/groups-tariff-list', 'TariffController@indexWithFilter')->name('indexWithFilter');
+
+Route::post('/tariff/index/tariffs-with-filter', 'TariffController@fetchTariffsWithFilter')->name('fetchTariffsWithFilter');
 
 
 

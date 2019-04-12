@@ -33,7 +33,7 @@ class Dealer extends Model
     }
 
     public function tariffs(){
-        return $this->belongsToMany(Tariff::class, 'ontop')->withPivot('office_id', 'amount')->withTimestamps();
+        return $this->belongsToMany(Tariff::class, 'ontop')->withPivot('office_id', 'ontop')->withTimestamps();
         //** In naming pivot table, Eloquent will join the two related model names  in alphabetical order . However, you are free to override this convention.
         // Normally the name of the pivot table is 'dealer_tariff'. We have overrided this convention by giving 'ontop'
         // additionally 'office_id', 'amount' are extra attributes of the pivot table.*/
