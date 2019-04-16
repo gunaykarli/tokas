@@ -101,10 +101,14 @@ Route::post('/service/store', 'ServiceController@store');
 Route::get('/tariff/index', 'TariffController@index');
 Route::post('/tariff/index/tariffs-with-filter', 'TariffController@fetchTariffsWithFilter')->name('fetchTariffsWithFilter');
 
-
+//** IMEIs */
+Route::get('/IMEIs/IMEI-pool-status', 'ImeiController@IMEIPoolStatus');
+Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiController@IMEIPoolStatusChange');
 
 //** Contracts */
-
+ Route::get('/contract/shopping-cart', 'ShoppingCartController@index');
+ Route::get('/contract/shopping-cart/add-tariff/{tariff}', 'ShoppingCartController@addTariff');
+ Route::get('/contract/shopping-cart/delete-tariff/{tariff}', 'ShoppingCartController@deleteTariff');
 
 
 

@@ -167,13 +167,13 @@
                             <div class="m-separator m-separator--dashed m-separator--lg"></div>
                             <!--END:List of the tariffs groups of the selected providers -->
 
-                            <!--begin::Portlet-->
+                            <!--begin::Filter Portlet-->
                             <div class="m-portlet m-portlet--head-sm" m-portlet="true" id="filterPortlet" >
                                     <div class="m-portlet__head">
                                         <div class="m-portlet__head-caption">
                                             <div class="m-portlet__head-title">
 												<span class="m-portlet__head-icon">
-													<i class="flaticon-placeholder-2"></i>
+													<i class="fa fa-filter"></i>
 												</span>
                                                 <h3 class="m-portlet__head-text">
                                                     {{__('tariffs/index.filterParameters')}}
@@ -193,10 +193,9 @@
                                     <form class="m-form m-form--fit m-form--label-align-right">
                                         <div class="m-portlet__body">
                                             <div class="m-form__group form-group" id="filterPortlet">
-
                                                 <div class="form-group m-form__group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.maxBasePrice')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
+                                                    <div class="col-xl-3 col-lg-3">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">€</span>
@@ -206,10 +205,9 @@
                                                     </div>
                                                 </div>
 
-
                                                 <div class="form-group m-form__group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.maxSpeed')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
+                                                    <div class="col-xl-3 col-lg-3">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Mbit/s</span>
@@ -219,10 +217,9 @@
                                                     </div>
                                                 </div>
 
-
                                                 <div class="form-group m-form__group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.maxBandWidth')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
+                                                    <div class="col-xl-3 col-lg-3">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">GB</span>
@@ -248,9 +245,9 @@
                                     </form>
 
 
-                                    <!--end::Form parameters-->
+                                    <!--end::Filter parameters-->
                                 </div>
-                            <!--end::Portlet-->
+                            <!--end::Filter Portlet-->
 
                             <div class="m-separator m-separator--dashed m-separator--lg"></div>
 
@@ -283,7 +280,7 @@
                                         @endif
                                     @endforeach
                                     </td>
-                                    <td><a href="#" class="btn btn-primary" ><span>{{__('tariffs/index.order')}}</span>&nbsp;&nbsp;</a></td>
+                                    <td><a href="/contract/shopping-cart/add-tariff/{{$tariff->id}}" class="btn btn-primary" ><span>{{__('tariffs/index.order')}}</span>&nbsp;&nbsp;</a></td>
                                 </tr>
                             @endforeach
 

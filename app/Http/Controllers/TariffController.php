@@ -9,6 +9,7 @@ use App\Plausibility;
 use App\Property;
 use App\Provider;
 use App\Region;
+use App\SystemVariable;
 use App\Tariff;
 use App\TariffsGroup;
 use App\TariffsHighlight;
@@ -55,6 +56,7 @@ class TariffController extends Controller
 
         return view('tariffs.index', compact('tariffs', 'tariffsWithOnTopForTheDealer', 'providers'));
     }
+
     public function fetchTariffsWithFilter(Request $request)
     {
         // Take "providerID" sent by "tariffList-Provider.js"
@@ -119,7 +121,7 @@ class TariffController extends Controller
                     $out .= $tariffWithOnTopForTheDealer->pivot->ontop;
 
             $out .= "</td>";
-            $out .= "<td><a href='#' class=\"btn btn-primary\" ><span>" . __('tariffs/index.order'). "</span>&nbsp;&nbsp;</a></td>";
+            $out .= "<td><a href=\"/contract/shopping-cart/add-tariff/" .$tariff->id. "\" class=\"btn btn-primary\" ><span>" . __('tariffs/index.order'). "</span>&nbsp;&nbsp;</a></td>";
             $out .= "</tr>";
         }
 
