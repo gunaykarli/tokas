@@ -81,7 +81,7 @@
 
                                         <div class="form-group m-form__group row">
                                             <label class="col-xl-3 col-lg-3 col-form-label">{{__('IMEIs/IMEIPoolActivations.validFrom')}}</label>
-                                            <div class="col-xl-9 col-lg-9">
+                                            <div class="col-xl-4 col-lg-4">
                                                 <input name="validFrom" class="form-control m-input" type="date"
                                                        value="{{$systemVariablesIMEI->where('name', 'IMEIPoolActiveFrom')->first()->value}}"
                                                        id="example-date-input"
@@ -91,7 +91,7 @@
 
                                         <div class="form-group m-form__group row">
                                             <label class="col-xl-3 col-lg-3 col-form-label">{{__('IMEIs/IMEIPoolActivations.validTo')}}</label>
-                                            <div class="col-xl-9 col-lg-9">
+                                            <div class="col-xl-4 col-lg-4">
                                                 <input name="validTo" class="form-control m-input" type="date"
                                                        value="{{$systemVariablesIMEI->where('name', 'IMEIPoolActiveTo')->first()->value}}"
                                                        id="example-date-input"
@@ -113,6 +113,18 @@
                                                         <span></span>
                                                     </label>
                                                 </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-xl-12 col-lg-12">
+                                                    <label>
+                                                        <span>
+                                                            <small><b>{{__('IMEIs/IMEIPoolActivations.note')}}</b>: {{__('IMEIs/IMEIPoolActivations.contentOfNote')}}</small>
+                                                        </span>
+                                                    </label>
+
                                             </div>
                                         </div>
 

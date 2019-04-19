@@ -9,7 +9,7 @@
         <div class="m-subheader ">
             <div class="d-flex align-items-center">
                 <div class="mr-auto">
-                    <h3 class="m-subheader__title m-subheader__title--separator">Tariff Management</h3>
+                    <h3 class="m-subheader__title m-subheader__title--separator">{{__('contracts\vodafone\create.contractManagement')}}</h3>
                     <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                         <li class="m-nav__item m-nav__item--home">
                             <a href="/home" class="m-nav__link m-nav__link--icon">
@@ -90,14 +90,13 @@
 
             <!--Begin::Main Portlet-->
             <div class="m-portlet m-portlet--full-height">
-
                 <!--begin: Portlet Head-->
                 <div class="m-portlet__head">
                     <div class="m-portlet__head-caption">
                         <div class="m-portlet__head-title">
                             <h3 class="m-portlet__head-text">
-                                {{__('tariffs\vodafone\create.createTariff')}}
-                                <small> {{__('tariffs\vodafone\create.createTariff')}}</small>
+                                {{__('contracts\vodafone\create.contract')}}
+                                <small> </small>
                             </h3>
                         </div>
                     </div>
@@ -118,10 +117,8 @@
 
                     <!--begin: Message container -->
                     <div class="m-portlet__padding-x">
-
                         <!-- Here you can put a message or alert -->
                     </div>
-
                     <!--end: Message container -->
 
                     <!--begin: Form Wizard Head -->
@@ -144,7 +141,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.tariff')}}
+                                            {{__('contracts\vodafone\create.main')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -158,7 +155,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.regions')}}
+                                            {{__('contracts\vodafone\create.address')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -172,7 +169,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.provision')}}
+                                            {{__('contracts\vodafone\create.paymentMethod')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -186,7 +183,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.ontop')}}
+                                            {{__('contracts\vodafone\create.bankInfo')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -200,7 +197,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.tariffLimit')}}
+                                            {{__('contracts\vodafone\create.creditCardInfo')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -214,7 +211,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.properties')}}
+                                            {{__('contracts\vodafone\create.contractOptions')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -228,7 +225,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.highlight')}}
+                                            {{__('contracts\vodafone\create.tariffOptions')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -237,34 +234,6 @@
                                 </div>
 
                                 <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_8">
-                                    <a href="#" class="m-wizard__step-number">
-                                        <span><i class="fa  flaticon-layers"></i></span>
-                                    </a>
-                                    <div class="m-wizard__step-info">
-                                        <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.plausibility')}}
-                                        </div>
-                                        <div class="m-wizard__step-desc">
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_9">
-                                    <a href="#" class="m-wizard__step-number">
-                                        <span><i class="fa  flaticon-layers"></i></span>
-                                    </a>
-                                    <div class="m-wizard__step-info">
-                                        <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.service')}}
-                                        </div>
-                                        <div class="m-wizard__step-desc">
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_10">
                                     <a href="#" class="m-wizard__step-number">
                                         <span><i class="fa  flaticon-layers"></i></span>
                                     </a>
@@ -283,99 +252,159 @@
                     </div>
                     <!--end: Form Wizard Head -->
 
-                    <!--begin: Form Wizard Form-->
+                    <!--begin: Form Wizard -FORM- -->
                     <div class="m-wizard__form">
-
                         <!--
                             1) Use m-form--label-align-left class to alight the form input labels to the right
                             2) Use m-form--state class to highlight input control borders on form validation
                         -->
 
                         <!--begin: Form -->
-                        <form method="POST" action="/tariff/vodafone/store" class="m-form m-form--label-align-left- m-form--state-" id="m_form">
+                        <form method="POST" action="/contract/vodafone/store" class="m-form m-form--label-align-left- m-form--state-" id="m_form">
                         @csrf
                         <!--begin: Form Body -->
                             <div class="m-portlet__body">
 
-                                <!--begin: Form Wizard Step 1 tariffDetails-->
+                                <!--begin: Form Wizard Step 1 - Personal - -->
                                 <div class="m-wizard__form-step m-wizard__form-step--current" id="m_wizard_form_step_1">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
+
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                                 <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.tariffDetails')}}</h3>
-                                                </div>
-
-                                                <input  name="providerID" type="hidden" value={{$provider->id}}>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.tariffName')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input type="text" name="tariffName" id="tariffName" class="form-control m-input" placeholder="" value="">
-                                                    </div>
+                                                    <h3 class="m-form__heading-title">{{__('contracts\vodafone\create.main')}}</h3>
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.tariffCode')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input type="text" name="tariffCode" class="form-control m-input" placeholder="" value="">
+                                                    <label class="col-sm-3 col-sm-3 col-form-label">{{__('contracts\vodafone\create.contractType')}}</label>
+                                                    <div class="m-radio-inline" id="contractTypes" class="col-sm-9 col-lg-9">
+                                                        <label class="m-radio">
+                                                            <input type="radio" name="contractType" id="contractType" value=1 checked> {{__('contracts\vodafone\create.newContract')}}
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="m-radio">
+                                                            <input type="radio" name="contractType" id="contractType" value=2> {{__('contracts\vodafone\create.porting')}}
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="m-radio">
+                                                            <input type="radio" name="contractType" id="contractType" value=2> {{__('contracts\vodafone\create.DCChange')}}
+                                                            <span></span>
+                                                        </label>
                                                     </div>
                                                 </div>
-
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validFrom')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input name="tariffValidFrom" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                                                    <label class="col-sm-3 col-sm-3 col-form-label">{{__('contracts\vodafone\create.customerType')}}</label>
+                                                    <div class="m-radio-inline" id="customerTypes" class="col-sm-9 col-lg-9">
+                                                        <label class="m-radio">
+                                                            <input type="radio" name="customerType" id="customerType" value=1 checked> {{__('contracts\vodafone\create.privateCustomer')}} / {{__('contracts\vodafone\create.SOHoCustomer')}}
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="m-radio">
+                                                            <input type="radio" name="customerType" id="customerType" value=2> {{__('contracts\vodafone\create.businessCustomer')}}
+                                                            <span></span>
+                                                        </label>
                                                     </div>
                                                 </div>
+                                                <!-- Section For Private Customer -->
+                                                <div class="sectionForPrivateCustomer">
 
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validTo')}}:</label>
-                                                    <div class="col-xl-6 col-lg-6">
-                                                        <input name="tariffValidTo" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="tariffValidTo">
+                                                    <div class="form-group m-form__group row">
+                                                        <label for="exampleSelect1" class="col-sm-3 col-sm-3 col-form-label">{{__('contracts\vodafone\create.salutation')}}* </label>
+                                                        <div class="col-sm-6 col-lg-6">
+                                                            <select name="mainCustomerSalutation" class="form-control m-input form-control-sm" id="mainCustomerSalutation">
+                                                                <option value=0></option>
+                                                                <option value=1>{{__('contracts\vodafone\create.sir')}}</option>
+                                                                <option value=2>{{__('contracts\vodafone\create.madam')}}</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                    <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.inDefinite')}}</label>
-                                                    <div class="col-xl-1 col-lg-1">
-                                                        <span class="m-switch m-switch--sm m-switch--icon">
-                                                            <label>
-                                                                <input type="checkbox"  name="tariffValidToIndefinite" id="tariffValidToIndefinite">
-                                                                <span></span>
-                                                            </label>
-                                                        </span>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.customerSurname')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="mainCustomerSurname" id="mainCustomerSurname" class="form-control m-input form-control-sm">
+                                                        </div>
                                                     </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.customerName')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="mainCustomerName" id="mainCustomerName" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.customerContactPerson')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="customerContactPerson" id="customerContactPerson" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label for="exampleSelect1" class="col-sm-3 col-sm-3 col-form-label">{{__('contracts\vodafone\create.customerIDType')}}* </label>
+                                                        <div class="col-sm-6 col-lg-6">
+                                                            <select name="customerIDType" class="form-control m-input form-control-sm" id="customerIDType">
+                                                                <option value=0></option>
+                                                                <option value=1>{{__('contracts\vodafone\create.sir')}}</option>
+                                                                <option value=2>{{__('contracts\vodafone\create.madam')}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.customerIDNumber')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="customerIDNumber" id="customerIDNumber" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
-                                                <div class="form-group m-form__group row">
-                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.group')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="groupID" class="form-control m-input" id="exampleSelect1">
-                                                            @foreach($provider->tariffsGroups as $tariffsGroup)
-                                                                <option value={{$tariffsGroup->id}} >{{$tariffsGroup->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                <!-- Section For Business Customer -->
+                                                <div class="sectionForBusinessCustomer">
 
-                                                <div class="form-group m-form__group row">
-                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.network')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="networkID" class="form-control m-input" id="networkID">
-                                                            @foreach($networks as $network)
-                                                                <option value={{$network->id}} >{{$network->name}}</option>
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.companyName')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="companyName" id="companyName" class="form-control m-input form-control-sm">
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.madeByToker')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <span class="m-switch m-switch--sm m-switch--icon">
-                                                            <label>
-                                                                <input type="checkbox" checked="checked" name="madeByToker">
-                                                                <span></span>
-                                                            </label>
-                                                        </span>
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.companyContactPerson')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="companyContactPerson" id="companyContactPerson" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.companyRegistrationNumber')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="companyRegistrationNumber" id="companyRegistrationNumber" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.districtCourt')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="districtCourt" id="districtCourt" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.executiveDirector')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="executiveDirector" id="executiveDirector" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.foundingYear')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="foundingYear" id="foundingYear" class="form-control m-input form-control-sm">
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -386,7 +415,7 @@
                                 </div>
                                 <!--end: Form Wizard Step 1-->
 
-                                <!--begin: Form Wizard Step 2-->
+                                <!--begin: Form Wizard Step 2 - Main Contact - -->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_2">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
@@ -394,34 +423,58 @@
 
                                                 <div class="m-form__section m-form__section--first">
                                                     <div class="m-form__heading">
-                                                        <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.regions')}}</h3>
+                                                        <h3 class="m-form__heading-title">{{__('contracts\vodafone\create.address')}}</h3>
                                                     </div>
+                                                    <div class="form-group m-form__group row m--margin-top-10">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.streetAndNumber')}}*</label>
+                                                        <div class="col-xl-4 col-lg-4">
+                                                            <input type="text" name="mainCustomerStreet" id="mainCustomerStreet" class="form-control m-input form-control-sm">
+                                                        </div>
 
-                                                    <div class="form-group m-form__group row">
-                                                        <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.allRegions')}}?</label>
-                                                        <div class="col-xl-1 col-lg-1">
-                                                            <span class="m-switch m-switch--sm m-switch--icon">
-                                                                <label>
-                                                                    <input type="checkbox"  name="allRegions" id="allRegions">
-                                                                    <span></span>
-                                                                </label>
-                                                            </span>
+                                                        <div class="col-xl-2 col-lg-2">
+                                                            <input type="text" name="mainCustomerHauseNumber" id="mainCustomerHauseNumber" class="form-control m-input form-control-sm">
                                                         </div>
                                                     </div>
-                                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
 
-                                                    <div class="all-regions">
-                                                        <div class="m-form__group form-group">
-                                                            <div class="m-checkbox-list">
-                                                                @foreach($provider->regions as $region)
-                                                                    <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                        <input type="checkbox" name="checkboxOfRegions[{{$region->id}}]"> {{$region->abbreviation}}
-                                                                        <span></span>
-                                                                    </label>
-                                                                @endforeach
-                                                            </div>
+                                                    <div class="form-group m-form__group row ">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.cityAndPostalCode')}}*</label>
+                                                        <div class="col-xl-4 col-lg-4">
+                                                            <input type="text" name="mainCustomerCity" id="mainCustomerCity" class="form-control m-input form-control-sm">
+                                                        </div>
+
+                                                        <div class="col-xl-2 col-lg-2">
+                                                            <input type="text" name="mainCustomerPostalCode" id="mainCustomerPostalCode" class="form-control m-input form-control-sm">
                                                         </div>
                                                     </div>
+
+                                                    <div class="form-group m-form__group row ">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.email')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="mainCustomerEmail" id="mainCustomerEmail" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row m--margin-top-5">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.emailConfirmation')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="mainCustomerEmailConfirmation" id="mainCustomerEmailConfirmation" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row m--margin-top-5">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.telephone')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="mainCustomerTelephone" id="mainCustomerTelephone" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row m--margin-top-5 ">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.fax')}}</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="mainCustomerFax" id="mainCustomerFax" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                             </div>
@@ -430,62 +483,96 @@
                                 </div>
                                 <!--end: Form Wizard Step 2-->
 
-                                <!--begin: Form Wizard Step 3-->
+                                <!--begin: Form Wizard Step 3 - Payment Method - -->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_3">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
-                                                <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.provision')}}</h3>
-                                                </div>
 
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.basePrice')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">€</span>
-                                                                <span class="input-group-text">0.00</span>
-                                                            </div>
-                                                            <input type="text" class="form-control m-input" name="basePrice">
+                                                <div class="m-form__section m-form__section--first">
+                                                    <div class="m-form__heading">
+                                                        <h3 class="m-form__heading-title">{{__('contracts\vodafone\create.bankDetails')}}</h3>
+                                                    </div>
+                                                    <div class="form-group m-form__group row m--margin-top-10">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.accountNumber')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="accountNumber" id="accountNumber" class="form-control m-input form-control-sm">
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row ">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.bankCode')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="bankCode" id="bankCode" class="form-control m-input form-control-sm">
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row ">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.creditInstitution')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="bankCreditInstitution" id="bankCreditInstitution" class="form-control m-input form-control-sm">
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.provision')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">€</span>
-                                                                <span class="input-group-text">0.00</span>
-                                                            </div>
-                                                            <input type="text" class="form-control m-input" name="provision">
+                                                    <div class="form-group m-form__group row m--margin-top-5">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.accountOwner')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="accountOwner" id="accountOwner" class="form-control m-input form-control-sm">
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validFrom')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input name="provisionValidFrom" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                                                    <div class="form-group m-form__group row m--margin-top-5">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.IBAN')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="IBAN" id="IBAN" class="form-control m-input form-control-sm">
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validTo')}}:</label>
-                                                    <div class="col-xl-6 col-lg-6">
-                                                        <input name="provisionValidTo" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="provisionValidTo">
+                                                    <div class="form-group m-form__group row m--margin-top-5 ">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.BIC')}}</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="BIC" id="BIC" class="form-control m-input form-control-sm">
+                                                        </div>
                                                     </div>
-                                                    <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.inDefinite')}}</label>
-                                                    <div class="col-xl-1 col-lg-1">
-                                                        <span class="m-switch m-switch--sm m-switch--icon">
-                                                            <label>
-                                                                <input type="checkbox"  name="provisionValidToIndefinite" id="provisionValidToIndefinite">
-                                                                <span></span>
-                                                            </label>
-                                                        </span>
+
+                                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                                                    <div class="m-form__heading">
+                                                        <h3 class="m-form__heading-title">{{__('contracts\vodafone\create.bankCard')}}</h3>
                                                     </div>
+                                                    <div class="form-group m-form__group row m--margin-top-10">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.cardNumber')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="cardNumber" id="cardNumber" class="form-control m-input form-control-sm">
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row ">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.validToMonth')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="cardNumberValidToMonth" id="cardNumberValidToMonth" class="form-control m-input form-control-sm">
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row ">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.validToYear')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="cardNumberValidToYear" id="cardNumberValidToYear" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row m--margin-top-5">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.creditInstitution')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="cardInstitution" id="cardInstitution" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+
                                                 </div>
 
                                             </div>
@@ -496,705 +583,31 @@
 
                                 <!--begin: Form Wizard Step 4 on-top -->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_4">
-                                    <div class="row">
-                                        <div class="col-xl-8 offset-xl-2">
-                                            <div class="m-form__section m-form__section--first">
-                                                <div class="m-form__section m-form__section--first">
-                                                    <div class="m-form__heading">
-                                                        <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.ontop')}}</h3>
-                                                    </div>
 
-                                                    <div class="form-group m-form__group row">
-                                                        <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.ontop')}}?</label>
-                                                        <div class="col-xl-1 col-lg-1">
-                                                            <span class="m-switch m-switch--sm m-switch--icon">
-                                                                <label>
-                                                                    <input type="checkbox"  name="ontop" id="ontop">
-                                                                    <span></span>
-                                                                </label>
-                                                            </span>
-                                                        </div>
-                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                                    </div>
-
-                                                    <div class="on-top-dealer-dependency">
-                                                        <label>{{__('tariffs\vodafone\create.dealerDependency')}}</label>
-                                                        <div class="m-radio-list">
-                                                            <label class="m-radio m-radio--success">
-                                                                <input type="radio" name="ontopDealerDependency"  value="1"> {{__('tariffs\vodafone\create.forAllDealer')}}
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="m-radio-list">
-                                                            <label class="m-radio m-radio--success">
-                                                                <input type="radio" name="ontopDealerDependency" value="2"> {{__('tariffs\vodafone\create.forCertainDealer')}}
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="m-radio-list">
-                                                            <label class="m-radio m-radio--success">
-                                                                <input type="radio" name="ontopDealerDependency" value="3"> {{__('tariffs\vodafone\create.forCertainCategory')}}
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="m-radio-list">
-                                                            <label class="m-radio m-radio--success">
-                                                                <input type="radio" name="ontopDealerDependency" value="4"> {{__('tariffs\vodafone\create.forCertainRegions')}}
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                                    </div>
-
-                                                    <div class="on-top-dealers">
-                                                        <label>{{__('tariffs\vodafone\create.dealers')}}</label>
-                                                        <div class="m-form__group form-group">
-                                                            <div class="m-checkbox-list">
-                                                                @foreach($dealers as $dealer)
-                                                                    <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                        <input type="checkbox" name="ontopCheckboxOfDealers[{{$dealer->id}}]"> {{$dealer->name}}
-                                                                        <span></span>
-                                                                    </label>
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                                    </div>
-
-                                                    <div class="on-top-categories">
-                                                        <label>{{__('tariffs\vodafone\create.categories')}}</label>
-                                                        <div class="m-form__group form-group">
-                                                            <div class="m-checkbox-list">
-                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[1]"> {{__('tariffs\vodafone\create.category')}}-1
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[2]"> {{__('tariffs\vodafone\create.category')}}-2
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[3]"> {{__('tariffs\vodafone\create.category')}}-3
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[4]"> {{__('tariffs\vodafone\create.category')}}-4
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[5]"> {{__('tariffs\vodafone\create.category')}}-5
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                                    </div>
-
-                                                    <div class="on-top-regions">
-                                                        <label>{{__('tariffs\vodafone\create.regions')}}</label>
-                                                        <div class="m-form__group form-group">
-                                                            <div class="m-checkbox-list">
-                                                                @foreach($provider->regions as $region)
-                                                                    <label class="m-checkbox m-checkbox--solid m-checkbox--success">
-                                                                        <input type="checkbox" name="ontopCheckboxOfRegions[{{$region->id}}]"> {{$region->abbreviation}}
-                                                                        <span></span>
-                                                                    </label>
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
-                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                                    </div>
-
-                                                    <div class="on-top-amount">
-                                                        <div class="form-group m-form__group row">
-                                                            <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.ontop')}}:</label>
-                                                            <div class="col-xl-3 col-lg-3">
-                                                                <input type="text" name="ontopAmount" id="ontopAmount" class="form-control m-input" placeholder="" value="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <!--end: Form Wizard Step 4-->
 
                                 <!--begin: Form Wizard Step 5 Limit -->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_5">
-                                    <div class="row">
-                                        <div class="col-xl-8 offset-xl-2">
-                                            <div class="m-form__section m-form__section--first">
-                                                <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.tariffLimit')}}</h3>
-                                                </div>
 
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.isLimited')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <span class="m-switch m-switch--sm m-switch--icon">
-                                                            <label>
-                                                                <input type="checkbox"  name="isLimited" id="isLimited">
-                                                                <span></span>
-                                                            </label>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="is-limited">
-                                                    <div class="form-group m-form__group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.limit')}}:</label>
-                                                        <div class="col-xl-9 col-lg-9">
-                                                            <input type="text" name="limit" class="form-control m-input" placeholder="" value="">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group m-form__group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validFrom')}}:</label>
-                                                        <div class="col-xl-9 col-lg-9">
-                                                            <input name="limitValidFrom" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group m-form__group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validTo')}}:</label>
-                                                        <div class="col-xl-9 col-lg-9">
-                                                            <input name="limitValidTo" class="form-control m-input" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <!--end: Form Wizard Step 5-->
 
                                 <!--begin: Form Wizard Step 6 Properties -->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_6">
-                                    <div class="row">
-                                        <div class="col-xl-8 offset-xl-2">
-                                            <div class="m-form__section m-form__section--first">
 
-                                                <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.properties')}}</h3>
-                                                </div>
-
-
-                                                <div class="form-group m-form__group">
-                                                    @foreach($properties->unique('category') as $category)
-                                                        <label>{{$category->category}}</label>
-                                                        @foreach($properties as $property)
-                                                            @if($category->category == $property->category)
-                                                                <div class="form-group m-form__group row">
-                                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{$property->name}}</label>
-                                                                    <div class="col-xl-3 col-lg-3">
-                                                                        @if($property->data_type == 'boolean')
-                                                                            <span class="m-switch m-switch--sm m-switch--icon">
-                                                                            <label>
-                                                                                <input type="checkbox"  name="booleanInputOfProperties[{{$property->id}}]" id="">
-                                                                                <span></span>
-                                                                            </label>
-                                                                        </span>
-                                                                        @else
-                                                                            @if($property->name == 'Provider')<!-- Provider name is written automaticly -->
-                                                                                <input type="text" name="textInputOfProperties[{{$property->id}}]" id="{{$property->name}}" class="form-control m-input" value="{{$provider->name}}"  aria-describedby="basic-addon1">
-                                                                            @else
-                                                                                <input type="text" name="textInputOfProperties[{{$property->id}}]" id="{{$property->name}}" class="form-control m-input"  aria-describedby="basic-addon1">
-                                                                            @endif
-                                                                        @endif
-                                                                    </div>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <!--end: Form Wizard Step 6-->
 
                                 <!--begin: Form Wizard Step 7-->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_7">
-                                    <div class="row">
-                                        <div class="col-xl-8 offset-xl-2">
-                                            <div class="m-form__section m-form__section--first">
 
-                                                <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.highlight')}}</h3>
-                                                </div>
-
-                                                <!-- 3 Property 2 Text Highlight Template -->
-                                                @for($i = 0; $i<1; $i++)
-                                                    <div class="form-group m-form__group row">
-
-                                                        <div class="col-sm-3 col-sm-3">
-                                                            <select name="propertyIDs3P2T1[{{$i}}]" class="form-control m-input" id="exampleSelect1">
-                                                                @foreach($properties as $property)
-                                                                    <option value={{$property->id}} >{{$property->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-sm-2 col-sm-2">
-                                                            <input type="text" name="texts3P2T1[{{$i}}]" class="form-control m-input" placeholder="" value="">
-                                                        </div>
-
-                                                        <div class="col-sm-3 col-sm-3">
-                                                            <select name="propertyIDs3P2T2[{{$i}}]" class="form-control m-input" id="exampleSelect1">
-                                                                @foreach($properties as $property)
-                                                                    <option value={{$property->id}} >{{$property->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-sm-2 col-sm-2">
-                                                            <input type="text" name="texts3P2T2[{{$i}}]" class="form-control m-input" placeholder="" value="">
-                                                        </div>
-
-                                                        <div class="col-sm-2 col-sm-2">
-                                                            <select name="propertyIDs3P2T3[{{$i}}]" class="form-control m-input" id="exampleSelect1">
-                                                                @foreach($properties as $property)
-                                                                    <option value={{$property->id}} >{{$property->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                @endfor
-
-                                                <!-- 3 Property 2 Text (with combo) Highlight Template -->
-                                                @for($i = 0; $i<1; $i++)
-                                                    <div class="form-group m-form__group row">
-
-                                                        <div class="col-sm-3 col-sm-3">
-                                                            <select name="propertyIDs3P2T1WC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
-                                                                @foreach($properties as $property)
-                                                                    <option value={{$property->id}} >{{$property->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-sm-2 col-sm-2">
-                                                            <select name="texts3P2T1WC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
-                                                                <option value=1 >-</option>
-                                                                <option value=2 >bis zu</option>
-                                                                <option value=3 >in alle dt. Netze</option>
-                                                                <option value=4 >in alle dt. Mobilfunknetze</option>
-                                                                <option value=5 >ins dt. Vodafone (O2) Netz</option>
-                                                                <option value=6 >ins dt. Festnetz</option>
-                                                                <option value=7 >türkische Festnetz</option>
-                                                                <option value=8 >türkische Vodafone Netz</option>
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-sm-3 col-sm-3">
-                                                            <select name="propertyIDs3P2T2WC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
-                                                                @foreach($properties as $property)
-                                                                    <option value={{$property->id}} >{{$property->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-
-                                                            <div class="col-sm-2 col-sm-2">
-                                                                <select name="texts3P2T1WC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
-                                                                    <option value=1 >-</option>
-                                                                    <option value=2 >bis zu</option>
-                                                                    <option value=3 >in alle dt. Netze</option>
-                                                                    <option value=4 >in alle dt. Mobilfunknetze</option>
-                                                                    <option value=5 >ins dt. Vodafone (O2) Netz</option>
-                                                                    <option value=6 >ins dt. Festnetz</option>
-                                                                    <option value=7 >türkische Festnetz</option>
-                                                                    <option value=8 >türkische Vodafone Netz</option>
-                                                                </select>
-                                                            </div>
-                                                        <div class="col-sm-2 col-sm-2">
-                                                            <select name="propertyIDs3P2T3WC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
-                                                                @foreach($properties as $property)
-                                                                    <option value={{$property->id}} >{{$property->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                @endfor
-                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
-
-                                                <!-- 1 Property 1 Text Highlight Template -->
-                                                @for($i = 0; $i<1; $i++)
-                                                    <div class="form-group m-form__group row">
-
-                                                        <div class="col-sm-4 col-sm-4">
-                                                            <select name="propertyIDs1P1T[{{$i}}]" class="form-control m-input" id="exampleSelect1">
-                                                                @foreach($properties as $property)
-                                                                    <option value={{$property->id}} >{{$property->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-sm-4 col-sm-4">
-                                                            <input type="text" name="texts1P1T[{{$i}}]" class="form-control m-input" placeholder="" value="">
-                                                        </div>
-
-                                                    </div>
-                                                @endfor
-
-                                                <!-- 1 Property 1 Text (with combo) Highlight Template -->
-                                                @for($i = 0; $i<1; $i++)
-                                                    <div class="form-group m-form__group row">
-
-                                                        <div class="col-sm-4 col-sm-4">
-                                                            <select name="propertyIDs1P1TWC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
-                                                                @foreach($properties as $property)
-                                                                    <option value={{$property->id}} >{{$property->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-sm-4 col-sm-4">
-                                                            <select name="text1P1TWC[{{$i}}]" class="form-control m-input" id="exampleSelect1">
-                                                                <option value=1 >-</option>
-                                                                <option value=2 >bis zu</option>
-                                                                <option value=3 >in alle dt. Netze</option>
-                                                                <option value=4 >in alle dt. Mobilfunknetze</option>
-                                                                <option value=5 >ins dt. Vodafone (O2) Netz</option>
-                                                                <option value=6 >ins dt. Festnetz</option>
-                                                                <option value=7 >türkische Festnetz</option>
-                                                                <option value=8 >türkische Vodafone Netz</option>
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-                                                @endfor
-                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
-
-                                                <!-- 1 Property  Highlight Template -->
-                                                @for($i = 0; $i<1; $i++)
-                                                    <div class="form-group m-form__group row">
-
-                                                        <div class="col-sm-4 col-sm-4">
-                                                            <select name="propertyIDs1P[{{$i}}]" class="form-control m-input" id="exampleSelect1">
-                                                                @foreach($properties as $property)
-                                                                    <option value={{$property->id}} >{{$property->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-                                                @endfor
-                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
-
-                                                <!-- 1 Text Highlight Template -->
-                                                @for($i = 0; $i<1; $i++)
-                                                    <div class="form-group m-form__group row">
-
-                                                        <div class="col-sm-4 col-sm-4">
-                                                            <input type="text" name="texts1T[{{$i}}]" class="form-control m-input" placeholder="" value="">
-                                                        </div>
-
-                                                    </div>
-                                                @endfor
-
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <!--end: Form Wizard Step 7-->
 
-                                <!--begin: Form Wizard Step 8 Plausibility-->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_8">
-                                    <div class="row">
-                                        <div class="col-xl-8 offset-xl-2">
-                                            <div class="m-form__section m-form__section--first">
-                                                <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.plausibility')}}</h3>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.minPeriodOfValidity')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <input type="text" name="minPeriodOfValidity" class="form-control m-input" placeholder="">
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.debitAuthorization')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="debitAuthorization" class="form-control m-input">
-                                                            <option value=1>OK => Zulässig</option>
-                                                            <option value=2>X = Unzulässig</option>
-                                                            <option value=3>! => Pflichtfeld</option>
-                                                            <option value=4>H => Wie Hauptkarte</option>
-                                                            <option value=5>O => Gruppenbesitzer</option>
-                                                            <option value=6>M => Gruppenmitglied</option>
-                                                            <option value=7>Y => Ja</option>
-                                                            <option value=8>N => Nein</option>
-                                                            <option value=9>V => Sprachtarif</option>
-                                                            <option value=10>D => Datentarif</option>
-                                                            <option value=11>n.a. => nicht verfügbar</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.subsidyAuthorization')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="subsidyAuthorization" class="form-control m-input">
-                                                            <option value=1>OK => Zulässig</option>
-                                                            <option value=2>X = Unzulässig</option>
-                                                            <option value=3>! => Pflichtfeld</option>
-                                                            <option value=4>H => Wie Hauptkarte</option>
-                                                            <option value=5>O => Gruppenbesitzer</option>
-                                                            <option value=6>M => Gruppenmitglied</option>
-                                                            <option value=7>Y => Ja</option>
-                                                            <option value=8>N => Nein</option>
-                                                            <option value=9>V => Sprachtarif</option>
-                                                            <option value=10>D => Datentarif</option>
-                                                            <option value=11>n.a. => nicht verfügbar</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.IMEIAcquisition')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="IMEIAcquisition" class="form-control m-input">
-                                                            <option value=1>OK => Zulässig</option>
-                                                            <option value=2>X = Unzulässig</option>
-                                                            <option value=3>! => Pflichtfeld</option>
-                                                            <option value=4>H => Wie Hauptkarte</option>
-                                                            <option value=5>O => Gruppenbesitzer</option>
-                                                            <option value=6>M => Gruppenmitglied</option>
-                                                            <option value=7>Y => Ja</option>
-                                                            <option value=8>N => Nein</option>
-                                                            <option value=9>V => Sprachtarif</option>
-                                                            <option value=10>D => Datentarif</option>
-                                                            <option value=11>n.a. => nicht verfügbar</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.telephoneBookEntry')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="telephoneBookEntry" class="form-control m-input">
-                                                            <option value=1>OK => Zulässig</option>
-                                                            <option value=2>X = Unzulässig</option>
-                                                            <option value=3>! => Pflichtfeld</option>
-                                                            <option value=4>H => Wie Hauptkarte</option>
-                                                            <option value=5>O => Gruppenbesitzer</option>
-                                                            <option value=6>M => Gruppenmitglied</option>
-                                                            <option value=7>Y => Ja</option>
-                                                            <option value=8>N => Nein</option>
-                                                            <option value=9>V => Sprachtarif</option>
-                                                            <option value=10>D => Datentarif</option>
-                                                            <option value=11>n.a. => nicht verfügbar</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.faxBookEntry')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="faxBookEntry" class="form-control m-input">
-                                                            <option value=1>OK => Zulässig</option>
-                                                            <option value=2>X = Unzulässig</option>
-                                                            <option value=3>! => Pflichtfeld</option>
-                                                            <option value=4>H => Wie Hauptkarte</option>
-                                                            <option value=5>O => Gruppenbesitzer</option>
-                                                            <option value=6>M => Gruppenmitglied</option>
-                                                            <option value=7>Y => Ja</option>
-                                                            <option value=8>N => Nein</option>
-                                                            <option value=9>V => Sprachtarif</option>
-                                                            <option value=10>D => Datentarif</option>
-                                                            <option value=11>n.a. => nicht verfügbar</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.generalAgreement')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="generalAgreement" class="form-control m-input">
-                                                            <option value=1>OK => Zulässig</option>
-                                                            <option value=2>X = Unzulässig</option>
-                                                            <option value=3>! => Pflichtfeld</option>
-                                                            <option value=4>H => Wie Hauptkarte</option>
-                                                            <option value=5>O => Gruppenbesitzer</option>
-                                                            <option value=6>M => Gruppenmitglied</option>
-                                                            <option value=7>Y => Ja</option>
-                                                            <option value=8>N => Nein</option>
-                                                            <option value=9>V => Sprachtarif</option>
-                                                            <option value=10>D => Datentarif</option>
-                                                            <option value=11>n.a. => nicht verfügbar</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.VFHomeAddress')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="VFHomeAddress" class="form-control m-input">
-                                                            <option value=1>OK => Zulässig</option>
-                                                            <option value=2>X = Unzulässig</option>
-                                                            <option value=3>! => Pflichtfeld</option>
-                                                            <option value=4>H => Wie Hauptkarte</option>
-                                                            <option value=5>O => Gruppenbesitzer</option>
-                                                            <option value=6>M => Gruppenmitglied</option>
-                                                            <option value=7>Y => Ja</option>
-                                                            <option value=8>N => Nein</option>
-                                                            <option value=9>V => Sprachtarif</option>
-                                                            <option value=10>D => Datentarif</option>
-                                                            <option value=11>n.a. => nicht verfügbar</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.ultraCard')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="ultraCard" class="form-control m-input">
-                                                            <option value=1>OK => Zulässig</option>
-                                                            <option value=2>X = Unzulässig</option>
-                                                            <option value=3>! => Pflichtfeld</option>
-                                                            <option value=4>H => Wie Hauptkarte</option>
-                                                            <option value=5>O => Gruppenbesitzer</option>
-                                                            <option value=6>M => Gruppenmitglied</option>
-                                                            <option value=7>Y => Ja</option>
-                                                            <option value=8>N => Nein</option>
-                                                            <option value=9>V => Sprachtarif</option>
-                                                            <option value=10>D => Datentarif</option>
-                                                            <option value=11>n.a. => nicht verfügbar</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.FNPorting')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="FNPorting" class="form-control m-input">
-                                                            <option value=1>OK => Zulässig</option>
-                                                            <option value=2>X = Unzulässig</option>
-                                                            <option value=3>! => Pflichtfeld</option>
-                                                            <option value=4>H => Wie Hauptkarte</option>
-                                                            <option value=5>O => Gruppenbesitzer</option>
-                                                            <option value=6>M => Gruppenmitglied</option>
-                                                            <option value=7>Y => Ja</option>
-                                                            <option value=8>N => Nein</option>
-                                                            <option value=9>V => Sprachtarif</option>
-                                                            <option value=10>D => Datentarif</option>
-                                                            <option value=11>n.a. => nicht verfügbar</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.AOBundle')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="AOBundle" class="form-control m-input">
-                                                            <option value=1>OK => Zulässig</option>
-                                                            <option value=2>X = Unzulässig</option>
-                                                            <option value=3>! => Pflichtfeld</option>
-                                                            <option value=4>H => Wie Hauptkarte</option>
-                                                            <option value=5>O => Gruppenbesitzer</option>
-                                                            <option value=6>M => Gruppenmitglied</option>
-                                                            <option value=7>Y => Ja</option>
-                                                            <option value=8>N => Nein</option>
-                                                            <option value=9>V => Sprachtarif</option>
-                                                            <option value=10>D => Datentarif</option>
-                                                            <option value=11>n.a. => nicht verfügbar</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.memberType')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="memberType" class="form-control m-input">
-                                                            <option value=1>OK => Zulässig</option>
-                                                            <option value=2>X = Unzulässig</option>
-                                                            <option value=3>! => Pflichtfeld</option>
-                                                            <option value=4>H => Wie Hauptkarte</option>
-                                                            <option value=5>O => Gruppenbesitzer</option>
-                                                            <option value=6>M => Gruppenmitglied</option>
-                                                            <option value=7>Y => Ja</option>
-                                                            <option value=8>N => Nein</option>
-                                                            <option value=9>V => Sprachtarif</option>
-                                                            <option value=10>D => Datentarif</option>
-                                                            <option value=11>n.a. => nicht verfügbar</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.groupMust')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="groupMust" class="form-control m-input">
-                                                            <option value=1>OK => Zulässig</option>
-                                                            <option value=2>X = Unzulässig</option>
-                                                            <option value=3>! => Pflichtfeld</option>
-                                                            <option value=4>H => Wie Hauptkarte</option>
-                                                            <option value=5>O => Gruppenbesitzer</option>
-                                                            <option value=6>M => Gruppenmitglied</option>
-                                                            <option value=7>Y => Ja</option>
-                                                            <option value=8>N => Nein</option>
-                                                            <option value=9>V => Sprachtarif</option>
-                                                            <option value=10>D => Datentarif</option>
-                                                            <option value=11>n.a. => nicht verfügbar</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.tariffType')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <select name="tariffType" class="form-control m-input">
-                                                            <option value=1>OK => Zulässig</option>
-                                                            <option value=2>X = Unzulässig</option>
-                                                            <option value=3>! => Pflichtfeld</option>
-                                                            <option value=4>H => Wie Hauptkarte</option>
-                                                            <option value=5>O => Gruppenbesitzer</option>
-                                                            <option value=6>M => Gruppenmitglied</option>
-                                                            <option value=7>Y => Ja</option>
-                                                            <option value=8>N => Nein</option>
-                                                            <option value=9>V => Sprachtarif</option>
-                                                            <option value=10>D => Datentarif</option>
-                                                            <option value=11>n.a. => nicht verfügbar</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end: Form Wizard Step 8-->
-
-                                <!--begin: Form Wizard Step 9-->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_9">
-                                    <div class="row">
-                                        <div class="col-xl-8 offset-xl-2">
-                                            <div class="m-form__section m-form__section--first">
-                                                <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.service')}}</h3>
-                                                </div>
-
-                                                <div class="form-group m-form__group">
-                                                    <input type="file" name="vodafoneTariffServiceProperty" />
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end: Form Wizard Step 9-->
-
-
 
                                 <!--begin: Form Wizard Step X Confirmation-->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_10">
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_8">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
 
@@ -1451,11 +864,9 @@
                         </form>
                         <!--end: Form -->
                     </div>
-                    <!--end: Form Wizard Form-->
-
+                    <!--end: Form Wizard -FORM- -->
                 </div>
                 <!--end: Form Wizard-->
-
             </div>
             <!--End::Main Portlet-->
 
@@ -1473,8 +884,7 @@
     <!--end::Page Vendors -->
 
     <!--begin::Page Scripts -->
-    <script src="{{ asset('js/isLimited.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('js/ontop.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/contractsVodafoneCreate.js')}}" type="text/javascript"></script>
 
     <script src="{{ asset('metronic/assets/app/js/dashboard.js')}}" type="text/javascript"></script>
     <script src="{{ asset('metronic/assets/demo/default/custom/crud/wizard/createDealerFormWizard.js')}}" type="text/javascript"></script>

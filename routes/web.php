@@ -110,6 +110,10 @@ Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiController@IMEIPoolStatusChan
  Route::get('/contract/shopping-cart/add-tariff/{tariff}', 'ShoppingCartController@addTariff');
  Route::get('/contract/shopping-cart/delete-tariff/{tariff}', 'ShoppingCartController@deleteTariff');
 
+ Route::get('/contracts/vodafone/create/{shoppingCart}', 'ContractController@create');
+ Route::post('/contracts/vodafone/store', 'ContractController@store');
+
+
 
 
  Route::get('/re', 'ImportController@getImport')->name('import');

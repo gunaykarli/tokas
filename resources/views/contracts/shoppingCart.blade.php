@@ -89,7 +89,7 @@
                             <th> {{__('contracts/shoppingCart.tariff')}}</th>
                             <th> {{__('contracts/shoppingCart.SIMNumber')}}</th>
                             <th> {{__('contracts/shoppingCart.captureIMEI')}}</th>
-                            <th> {{__('contracts/shoppingCart.CartType')}}</th>
+
                             <th> {{__('contracts/shoppingCart.Customer')}}</th>
 
                         </tr>
@@ -106,41 +106,50 @@
                                     <td>
                                         <!-- If IMEI Pool is active -->
                                         @if(\App\SystemVariable::where('name', 'isIMEIPoolActive')->first()->value == 1)
+                                            <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
+                                            @if($content->product_type == 1 and $content->producer_id == 1)
+                                                <div class="m-form__group form-group">
+                                                    <div class="m-radio-list">
+                                                        <label class="m-radio m-radio--bold">
+                                                            <input type="radio" name="EMEIOption" value="1"> {{__('contracts/shoppingCart.withoutDevice')}}
+                                                            <span></span>
+                                                        </label>
+
+                                                        <label class="m-radio m-radio--bold">
+                                                            <input type="radio" name="EMEIOption" value="2"> {{__('contracts/shoppingCart.IMEIOnDemand')}}
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="m-radio m-radio--bold">
+                                                            <input type="radio" name="EMEIOption" value="3">
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control m-input" name="EMEINumber" placeholder="{{__('contracts/shoppingCart.enterIMEINumber')}}">
+                                                            </div>
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endif
+
+                                    </td>
+
+                                    <td>
+                                        <!-- Set up the link according to the provider of the tariff.
+                                        With the link, instead of "$content->producer_id", "$content->id" is sent since it will be more useful in the "/contracts/.../create". -->
+
                                         <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
                                         @if($content->product_type == 1 and $content->producer_id == 1)
-                                            <div class="m-form__group form-group">
-                                                <div class="m-radio-list">
-                                                    <label class="m-radio m-radio--bold">
-                                                        <input type="radio" name="EMEIOption" value="1"> {{__('contracts/shoppingCart.withoutDevice')}}
-                                                        <span></span>
-                                                    </label>
-
-                                                    <label class="m-radio m-radio--bold">
-                                                        <input type="radio" name="EMEIOption" value="2"> {{__('contracts/shoppingCart.IMEIOnDemand')}}
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="m-radio m-radio--bold">
-                                                        <input type="radio" name="EMEIOption" value="3">
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control m-input" name="EMEINumber" placeholder="{{__('contracts/shoppingCart.enterIMEINumber')}}">
-                                                        </div>
-                                                        <span></span>
-                                                    </label>
-                                                </div>
-                                            </div>
+                                                    <a href="/contracts/vodafone/create/{{$content->id}}" class="btn btn-primary" >
+                                        <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 2) belongs to Ay Yıldız -->
+                                        @elseif($content->product_type == 1 and $content->producer_id == 2)
+                                                    <a href="/contracts/ayYildiz/create/{{$content->id}}" class="btn btn-primary" >
+                                        <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 3) belongs to O2 -->
+                                        @elseif($content->product_type == 1 and $content->producer_id == 3)
+                                                    <a href="/contracts/O2/create/{{$content->id}}" class="btn btn-primary" >
                                         @endif
-                                        @endif
-
+                                                    <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>&nbsp;&nbsp;
+                                                    </a>
                                     </td>
-                                    <td>
-                                        <select name="CartType" class="form-control m-input" id="">
-                                            <option value=0>{{__('contracts/shoppingCart.pleaseSelect')}}</option>
-                                            <option value=1>{{__('contracts/shoppingCart.mini')}}</option>
-                                            <option value=2>{{__('contracts/shoppingCart.micro')}}</option>
-                                            <option value=2>{{__('contracts/shoppingCart.nano')}}</option>
-                                        </select>
-                                    </td>
-                                    <td><a href="#" class="btn btn-primary" ><span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>&nbsp;&nbsp;</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -59,7 +59,7 @@ class ShoppingCartController extends Controller
         }
         */
 
-
+        // Fetch the content of the shopping cart for the current authorized user.
         $contents = ShoppingCart
             ::where('employee_id', auth()->user()->id)
             ->get();
@@ -103,7 +103,6 @@ class ShoppingCartController extends Controller
             ->get();
 
         return view('contracts.shoppingCart', compact('contents'));
-
     }
 
     /**

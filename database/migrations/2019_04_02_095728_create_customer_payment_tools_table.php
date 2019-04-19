@@ -24,7 +24,7 @@ class CreateCustomerPaymentToolsTable extends Migration
             $table->string('BIC');
             $table->string('account_number');
             $table->string('bank_code');
-            $table->string('credit_Institution');
+            $table->string('credit_institution');
             $table->string('account_owner');
             $table->string('usage');
             $table->timestamps();
