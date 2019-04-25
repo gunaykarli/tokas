@@ -15,12 +15,12 @@ class CreateShoppingCartsTable extends Migration
     {
         Schema::create('shopping_carts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('employee_id');
+            $table->integer('salesperson_id');
             $table->integer('office_id');
             $table->integer('dealer_id');
-            $table->integer('producer_id');
             $table->integer('product_type');
             $table->integer('product_id');
+            $table->integer('producer_id');
             $table->timestamps();
         });
     }

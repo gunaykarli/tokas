@@ -15,7 +15,15 @@ class CreateVfGsmsTable extends Migration
     {
         Schema::create('vf_gsms', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('VF_credit_activation_id');
+
+            $table->integer('contract_id');
+            $table->string('AO_bundle_offering_code');
+            $table->integer('group_change_group_id');
+            $table->boolean('objection');
+            $table->boolean('additional_contract');
+            $table->integer('customer_number');
+            $table->boolean('activation_with_hardware');
+
             $table->integer('subscriber_id');
             $table->string('SIM_serial_number');
             $table->smallInteger('SIM_IMEI_type');

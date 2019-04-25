@@ -15,8 +15,15 @@ class CreateVfDslsTable extends Migration
     {
         Schema::create('vf_dsls', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('VF_credit_activation_id');
+
             $table->integer('contract_id');
+            $table->string('AO_bundle_offering_code');
+            $table->integer('group_change_group_id');
+            $table->boolean('objection');
+            $table->boolean('additional_contract');
+            $table->integer('customer_number');
+            $table->string('password');
+
             $table->integer('subscriber_id');
             $table->integer('tariff_id');
             $table->string('tariff_and _services');

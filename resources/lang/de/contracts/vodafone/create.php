@@ -22,12 +22,14 @@ return [
     'businessCustomer' => 'Geschaeftskunden',
 
     'main' => 'Haupt Info',
+    'password' => 'Kennwort',
     'salutation' => 'Anrede',
     'sir' => 'Herr',
     'madam' => 'Frau',
     'customerName' => 'Vorname',
     'customerSurname' => 'Name',
     'customerContactPerson' => 'Ansprechpartner',
+    'birthData' => 'Geburtstag',
     'customerIDType' => 'Ausweistyp',
     'customerIDNumber' => 'Ausweisnummer',
 
@@ -58,6 +60,31 @@ return [
     'cardNumber' => 'Kartennummer',
     'validToYear' => 'Gültig bis (Jahr)',
     'validToMonth' => 'Gültig bis (Monat)',
+
+    'prefix' => 'Vorwahl',
+    'telephoneNumber' => 'Rufnummer',
+    'differentCustomerName' => 'Abweichender Kundenname',
+    'differentCustomerBirthDate' => 'Abweichender Geburtsdatum',
+
+    'oldProvider' => 'Alter Anbieter',
+    'provider' => 'Anbiter',
+    'oldProviderTelephoneNumber' => 'Kundennummer Altanbieter',
+    'portingType' => 'Portirung Typ',
+    'endOfTheContract' => 'Datum des Vertragsendes',
+    'cancellationDateOfOldContract' => 'Kündigunsdatun beim Altanbieter',
+
+    'Key' => 'Value',
+    'Key' => 'Value',
+    'Key' => 'Value',
+    'Key' => 'Value',
+    'Key' => 'Value',
+    'Key' => 'Value',
+    'Key' => 'Value',
+    'Key' => 'Value',
+    'Key' => 'Value',
+    'Key' => 'Value',
+    'Key' => 'Value',
+    'Key' => 'Value'
 
 
 

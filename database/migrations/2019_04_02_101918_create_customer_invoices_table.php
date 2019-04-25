@@ -23,6 +23,7 @@ class CreateCustomerInvoicesTable extends Migration
             $table->string('company_name_2');
             $table->string('street');
             $table->smallInteger('house_number');
+            $table->integer('PO_box');
             $table->string('country');
             $table->integer('postal_code');
             $table->string('city');

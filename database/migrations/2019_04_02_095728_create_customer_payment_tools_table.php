@@ -19,12 +19,12 @@ class CreateCustomerPaymentToolsTable extends Migration
             $table->string('card_number');
             $table->smallInteger('valid_to_month');
             $table->smallInteger('valid_to_year');
-            $table->string('credit_institution');
+            $table->string('card_credit_institution');
             $table->string('IBAN');
             $table->string('BIC');
             $table->string('account_number');
             $table->string('bank_code');
-            $table->string('credit_institution');
+            $table->string('bank_credit_institution');
             $table->string('account_owner');
             $table->string('usage');
             $table->timestamps();

@@ -183,34 +183,6 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('contracts\vodafone\create.bankInfo')}}
-                                        </div>
-                                        <div class="m-wizard__step-desc">
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_5">
-                                    <a href="#" class="m-wizard__step-number">
-                                        <span><i class="fa  flaticon-layers"></i></span>
-                                    </a>
-                                    <div class="m-wizard__step-info">
-                                        <div class="m-wizard__step-title">
-                                            {{__('contracts\vodafone\create.creditCardInfo')}}
-                                        </div>
-                                        <div class="m-wizard__step-desc">
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_6">
-                                    <a href="#" class="m-wizard__step-number">
-                                        <span><i class="fa  flaticon-layers"></i></span>
-                                    </a>
-                                    <div class="m-wizard__step-info">
-                                        <div class="m-wizard__step-title">
                                             {{__('contracts\vodafone\create.contractOptions')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
@@ -218,6 +190,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+
 
                                 <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_7">
                                     <a href="#" class="m-wizard__step-number">
@@ -260,12 +234,22 @@
                         -->
 
                         <!--begin: Form -->
-                        <form method="POST" action="/contract/vodafone/store" class="m-form m-form--label-align-left- m-form--state-" id="m_form">
+                        <form method="POST" action="/contract/forward-to-store" class="m-form m-form--label-align-left- m-form--state-" id="m_form">
                         @csrf
                         <!--begin: Form Body -->
+                            <!--
+                                a hidden input is defined here. It will be sent to the "ContractController@forward"
+                                to forward the program execution to the related provider's contract model.
+                            -->
+                            <input type="hidden" name="provider_id" value={{$shoppingCart->producer_id}}>
+                            <!--
+                                contract_type is also needed in "ContractController@forward". In this file it is directly chosen by the user at the beginning.
+                                No need to define as a hidden variable. But for other operation it may be needed as we operate on DSL.
+                            -->
+
                             <div class="m-portlet__body">
 
-                                <!--begin: Form Wizard Step 1 - Personal - -->
+                                <!--begin: Form Wizard Step 1 - Main - -->
                                 <div class="m-wizard__form-step m-wizard__form-step--current" id="m_wizard_form_step_1">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
@@ -288,7 +272,7 @@
                                                             <span></span>
                                                         </label>
                                                         <label class="m-radio">
-                                                            <input type="radio" name="contractType" id="contractType" value=2> {{__('contracts\vodafone\create.DCChange')}}
+                                                            <input type="radio" name="contractType" id="contractType" value=3> {{__('contracts\vodafone\create.DCChange')}}
                                                             <span></span>
                                                         </label>
                                                     </div>
@@ -298,17 +282,29 @@
                                                     <label class="col-sm-3 col-sm-3 col-form-label">{{__('contracts\vodafone\create.customerType')}}</label>
                                                     <div class="m-radio-inline" id="customerTypes" class="col-sm-9 col-lg-9">
                                                         <label class="m-radio">
-                                                            <input type="radio" name="customerType" id="customerType" value=1 checked> {{__('contracts\vodafone\create.privateCustomer')}} / {{__('contracts\vodafone\create.SOHoCustomer')}}
+                                                            <input type="radio" name="customerType" id="customerType" value=1 checked>{{__('contracts\vodafone\create.privateCustomer')}}
                                                             <span></span>
                                                         </label>
                                                         <label class="m-radio">
-                                                            <input type="radio" name="customerType" id="customerType" value=2> {{__('contracts\vodafone\create.businessCustomer')}}
+                                                            <input type="radio" name="customerType" id="customerType" value=2 checked>{{__('contracts\vodafone\create.SOHoCustomer')}}
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="m-radio">
+                                                            <input type="radio" name="customerType" id="customerType" value=3>{{__('contracts\vodafone\create.businessCustomer')}}
                                                             <span></span>
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <!-- Section For Private Customer -->
+
+                                                <!--begin- Section For Private Customer -->
                                                 <div class="sectionForPrivateCustomer">
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.password')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="mainCustomerPassword" id="mainCustomerPassword" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
 
                                                     <div class="form-group m-form__group row">
                                                         <label for="exampleSelect1" class="col-sm-3 col-sm-3 col-form-label">{{__('contracts\vodafone\create.salutation')}}* </label>
@@ -338,17 +334,24 @@
                                                     <div class="form-group m-form__group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.customerContactPerson')}}*</label>
                                                         <div class="col-xl-6 col-lg-6">
-                                                            <input type="text" name="customerContactPerson" id="customerContactPerson" class="form-control m-input form-control-sm">
+                                                            <input type="text" name="mainCustomerContactPerson" id="mainCustomerContactPerson" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.birthData')}}</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input name="mainCustomerBirthDate" class="form-control m-input" type="date" value="" id="example-date-input">
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group m-form__group row">
                                                         <label for="exampleSelect1" class="col-sm-3 col-sm-3 col-form-label">{{__('contracts\vodafone\create.customerIDType')}}* </label>
                                                         <div class="col-sm-6 col-lg-6">
-                                                            <select name="customerIDType" class="form-control m-input form-control-sm" id="customerIDType">
+                                                            <select name="mainCustomerIDCardType" class="form-control m-input form-control-sm" id="mainCustomerIDCardType">
                                                                 <option value=0></option>
-                                                                <option value=1>{{__('contracts\vodafone\create.sir')}}</option>
-                                                                <option value=2>{{__('contracts\vodafone\create.madam')}}</option>
+                                                                <option value=1>{{__('contracts\vodafone\create.personal')}}</option>
+                                                                <option value=2>{{__('contracts\vodafone\create.foreign')}}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -356,13 +359,14 @@
                                                     <div class="form-group m-form__group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.customerIDNumber')}}*</label>
                                                         <div class="col-xl-6 col-lg-6">
-                                                            <input type="text" name="customerIDNumber" id="customerIDNumber" class="form-control m-input form-control-sm">
+                                                            <input type="text" name="mainCustomerIDNumber" id="mainCustomerIDNumber" class="form-control m-input form-control-sm">
                                                         </div>
                                                     </div>
 
                                                 </div>
+                                                <!--end- Section For Private Customer -->
 
-                                                <!-- Section For Business Customer -->
+                                                <!--begin- Section For Business Customer -->
                                                 <div class="sectionForBusinessCustomer">
 
                                                     <div class="form-group m-form__group row">
@@ -389,7 +393,7 @@
                                                     <div class="form-group m-form__group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.districtCourt')}}*</label>
                                                         <div class="col-xl-6 col-lg-6">
-                                                            <input type="text" name="districtCourt" id="districtCourt" class="form-control m-input form-control-sm">
+                                                            <input type="text" name="companyDistrictCourt" id="companyDistrictCourt" class="form-control m-input form-control-sm">
                                                         </div>
                                                     </div>
 
@@ -407,6 +411,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--end- Section For Business Customer -->
 
 
                                             </div>
@@ -415,13 +420,15 @@
                                 </div>
                                 <!--end: Form Wizard Step 1-->
 
-                                <!--begin: Form Wizard Step 2 - Main Contact - -->
+                                <!--begin: Form Wizard Step 2 - Address - -->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_2">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
 
                                                 <div class="m-form__section m-form__section--first">
+                                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
                                                     <div class="m-form__heading">
                                                         <h3 class="m-form__heading-title">{{__('contracts\vodafone\create.address')}}</h3>
                                                     </div>
@@ -483,7 +490,7 @@
                                 </div>
                                 <!--end: Form Wizard Step 2-->
 
-                                <!--begin: Form Wizard Step 3 - Payment Method - -->
+                                <!--begin: Form Wizard Step 3 - Payment Methods - -->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_3">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
@@ -581,23 +588,132 @@
                                 </div>
                                 <!--end: Form Wizard Step 3-->
 
-                                <!--begin: Form Wizard Step 4 on-top -->
+                                <!--begin: Form Wizard Step 4 - Contract Options - -->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_4">
+                                    <div class="row">
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
 
+                                                <!--begin- Section For DC Change -->
+                                                <div class="sectionForDCChange">
+                                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                    <div class="m-form__heading">
+                                                        <h3 class="m-form__heading-title">{{__('contracts\vodafone\create.DCChange')}}</h3>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label for="exampleSelect1" class="col-sm-3 col-sm-3 col-form-label">{{__('contracts\vodafone\create.prefix')}}* </label>
+                                                        <div class="col-sm-6 col-lg-6">
+                                                            <select name="DCWPrefix" class="form-control m-input form-control-sm" id="DCWPrefix">
+                                                                <option value=0></option>
+                                                                <option value=1>{{__('contracts\vodafone\create.sir')}}</option>
+                                                                <option value=2>{{__('contracts\vodafone\create.madam')}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.telephoneNumber')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="DCWTelephoneNumber" id="DCWTelephoneNumber" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.differentCustomerName')}}*</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="DCWDifferentCustomerName" id="DCWDifferentCustomerName" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.differentCustomerBirthDate')}}:</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input name="DCWDifferentCustomerBirthDate" class="form-control m-input" type="date" value="2019-04-19" id="example-date-input">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end- Section For DC Change -->
+
+                                                <!--begin- Section For Porting -->
+                                                <div class="sectionForPorting">
+                                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                    <div class="m-form__heading">
+                                                        <h3 class="m-form__heading-title">{{__('contracts\vodafone\create.porting')}}</h3>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label for="exampleSelect1" class="col-sm-3 col-sm-3 col-form-label">{{__('contracts\vodafone\create.prefix')}}* </label>
+                                                        <div class="col-sm-6 col-lg-6">
+                                                            <select name="portingPrefix" class="form-control m-input form-control-sm" id="portingPrefix">
+                                                                <option value=0></option>
+                                                                <option value=1>0151</option>
+                                                                <option value=2>0152</option>
+                                                                <option value=2>0153</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.telephoneNumber')}}</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="portingTelephoneNumber" id="portingTelephoneNumber" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label for="exampleSelect1" class="col-sm-3 col-sm-3 col-form-label">{{__('contracts\vodafone\create.oldProvider')}}</label>
+                                                        <div class="col-sm-6 col-lg-6">
+                                                            <select name="portingOldProvider" class="form-control m-input form-control-sm" id="portingOldProvider">
+                                                                <option value=0>{{__('contracts\vodafone\create.provider')}}</option>
+                                                                @foreach(\App\Provider::all() as $provider)
+                                                                    <option value={{$provider->id}}>{{$provider->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.oldProviderTelephoneNumber')}}</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input type="text" name="oldProviderTelephoneNumber" id="oldProviderTelephoneNumber" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label for="exampleSelect1" class="col-sm-3 col-sm-3 col-form-label">{{__('contracts\vodafone\create.portingType')}}</label>
+                                                        <div class="col-sm-6 col-lg-6">
+                                                            <select name="portingType" class="form-control m-input form-control-sm" id="portingType">
+                                                                <option value=0></option>
+                                                                <option value=1>0151</option>
+                                                                <option value=2>0152</option>
+                                                                <option value=2>0153</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.endOfTheContract')}}</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input name="portingEndOfTheContract" class="form-control m-input" type="date" value="2019-04-19" id="example-date-input">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.cancellationDateOfOldContract')}}</label>
+                                                        <div class="col-xl-6 col-lg-6">
+                                                            <input name="portingCancellationDateOfOldContract" class="form-control m-input" type="date" value="2019-04-19" id="example-date-input">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end- Section For Porting -->
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--end: Form Wizard Step 4-->
 
-                                <!--begin: Form Wizard Step 5 Limit -->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_5">
 
-                                </div>
-                                <!--end: Form Wizard Step 5-->
-
-                                <!--begin: Form Wizard Step 6 Properties -->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_6">
-
-                                </div>
-                                <!--end: Form Wizard Step 6-->
 
                                 <!--begin: Form Wizard Step 7-->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_7">
@@ -884,7 +1000,7 @@
     <!--end::Page Vendors -->
 
     <!--begin::Page Scripts -->
-    <script src="{{ asset('js/contractsVodafoneCreate.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/contractsVodafoneCreate-1.js')}}" type="text/javascript"></script>
 
     <script src="{{ asset('metronic/assets/app/js/dashboard.js')}}" type="text/javascript"></script>
     <script src="{{ asset('metronic/assets/demo/default/custom/crud/wizard/createDealerFormWizard.js')}}" type="text/javascript"></script>
