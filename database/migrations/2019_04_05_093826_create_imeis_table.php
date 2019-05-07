@@ -16,6 +16,7 @@ class CreateImeisTable extends Migration
         Schema::create('imeis', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('provider_id');
+            $table->integer('vf_gsm_id');
             $table->integer('IMEI');
             $table->string('device');
             $table->integer('package');

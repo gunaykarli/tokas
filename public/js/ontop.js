@@ -9,7 +9,7 @@ $(document).ready(function()
     $('.on-top-amount').hide();
 
 
-    // if there is an ontop with the tariff to be created, 'ontop' check box is activated.
+    // if there is an 'ontop' with the tariff to be created, 'ontop' check box is activated.
     $('#ontop').change(function ()
     {
         if(this.checked === true)

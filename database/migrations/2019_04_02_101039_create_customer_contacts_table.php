@@ -22,7 +22,7 @@ class CreateCustomerContactsTable extends Migration
             $table->string('country');
             $table->integer('postal_code');
             $table->smallInteger('country_code');
-            $table->smallInteger('area_code');
+            $table->smallInteger('area_code')->nullable();
             $table->string('phone_number');
             $table->string('contact_person');
             $table->string('email');

@@ -13,10 +13,22 @@ class VfGsm extends Model
         'mailbox', 'call_barring', 'show_phone_numbers', 'disabled_card_id', 'disability_degree'
     ];
 
-    public static function store($request){
-        // Execution forwarded from Contractcontroller@forward
+    /**
+     * Define the relations
+     */
+    public function contract(){
+        return $this->belongsTo(Contract::class);
+    }
 
-        // Store the contact info of the customer which is about to buy the tariff.
-        Customer::store($request);
+    public function relatedAddress(){
+        return $this->hasOne(ContractRelatedAddress::class, 'related_id');
+    }
+
+    /**
+     * User defined functions
+     */
+    public static function store($request){ // Execution forwarded from ContractController@forward
+
+
     }
 }

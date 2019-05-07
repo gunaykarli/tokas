@@ -51,7 +51,7 @@ class ImeiController extends Controller
         // To change the status for the 'isIMEIFieldActive'
         $systemVariable = SystemVariable
             ::where('subject', 'IMEI')
-            ->where('name', 'isIMEIFieldActive')
+            ->where('name', 'isIMEIOnDemandFieldActive')
             ->first();
         // Since the switch tool returns "on" if it is checked, returns nothing if it is unchecked.
         if($request->isIMEIFieldActive == 'on')

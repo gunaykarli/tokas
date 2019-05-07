@@ -88,8 +88,9 @@
                             <th> {{__('contracts/shoppingCart.provider')}}</th>
                             <th> {{__('contracts/shoppingCart.tariff')}}</th>
                             <th> {{__('contracts/shoppingCart.SIMNumber')}}</th>
-                            <th> {{__('contracts/shoppingCart.captureIMEI')}}</th>
-
+                            @if(\App\SystemVariable::where('name', 'isIMEIOnDemandFieldActive')->first()->value == 1)
+                                <th> {{__('contracts/shoppingCart.captureIMEI')}}</th>
+                            @endif
                             <th> {{__('contracts/shoppingCart.Customer')}}</th>
 
                         </tr>
@@ -103,9 +104,10 @@
                                         <td>{{(\App\Tariff::find($content->product_id))->name}}</td>
                                     @endif
                                         <td><input type="text" name="SIMNumber" class="form-control m-input" placeholder="" value=""></td>
-                                    <td>
-                                        <!-- If IMEI Pool is active -->
-                                        @if(\App\SystemVariable::where('name', 'isIMEIPoolActive')->first()->value == 1)
+
+                                    <!-- If "IMEI On-Demand Pool Fields" is active -->
+                                    @if(\App\SystemVariable::where('name', 'isIMEIOnDemandFieldActive')->first()->value == 1)
+                                        <td>
                                             <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
                                             @if($content->product_type == 1 and $content->producer_id == 1)
                                                 <div class="m-form__group form-group">
@@ -129,9 +131,8 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                        @endif
-
-                                    </td>
+                                        </td>
+                                    @endif
 
                                     <td>
                                         <!-- Set up the link according to the provider of the tariff.

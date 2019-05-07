@@ -100,6 +100,18 @@
                                         </div>
 
                                         <div class="form-group m-form__group row">
+                                            <div class="col-xl-12 col-lg-12">
+                                                <label>
+                                                        <span>
+                                                            <small><b>{{__('IMEIs/IMEIPoolActivations.note')}}</b>: {{__('IMEIs/IMEIPoolActivations.contentOfNote')}}</small>
+                                                        </span>
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                                        <div class="form-group m-form__group row">
                                             <label class="col-xl-3 col-lg-3 col-form-label">{{__('IMEIs/IMEIPoolActivations.fieldsActivationInGUI')}}</label>
                                             <div class="col-xl-9 col-lg-9">
                                                 <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
@@ -113,18 +125,6 @@
                                                         <span></span>
                                                     </label>
                                                 </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-xl-12 col-lg-12">
-                                                    <label>
-                                                        <span>
-                                                            <small><b>{{__('IMEIs/IMEIPoolActivations.note')}}</b>: {{__('IMEIs/IMEIPoolActivations.contentOfNote')}}</small>
-                                                        </span>
-                                                    </label>
-
                                             </div>
                                         </div>
 

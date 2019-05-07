@@ -12,12 +12,36 @@ class Customer extends Model
         'company_name', 'company_registration_number', 'district_court'
     ];
 
-    public static function store($request){
+    /**
+     * Define the relations
+     */
+    public function customerContact(){
+        return $this->hasOne(CustomerContact::class);
+    }
 
-        $customer = new Customer();
+    public function customerPaymentTool(){
+        return $this->hasOne(CustomerPaymentTool::class);
+    }
+
+    public function customerInvoice(){
+        return$this->hasOne(CustomerInvoice::class);
+    }
+
+    public function contracts(){
+        $this->hasMany(Contract::class);
+    }
+
+
+    /**
+     * User defined functions
+     */
+
+    public static function store($request){ // Execution forwarded from ContractController@forward
 
         // Depending on the customerType, store the Private/SOHo or Business customer's data in the Customers table
-        if($request->customerType == 1 or $request->customerType == 2){ // Private/SOHo
+        $customer = new Customer();
+
+        if($request->customerType == 1 or $request->customerType == 3){ // Private/SOHo
             $customer->customer_type = $request->customerType;
             $customer->password = $request->mainCustomerPassword;
             $customer->salutation = $request->mainCustomerSalutation;
@@ -28,7 +52,7 @@ class Customer extends Model
             $customer->identity_type = $request->mainCustomerIDCardType;
             $customer->identity_card_number = $request->mainCustomerIDNumber;
         }
-        else if($request->customerType == 3){ // Business
+        else if($request->customerType == 2){ // Business
             $customer->customer_type = $request->customerType;
             $customer->company_name = $request->companyName;
             $customer->contact_person = $request->companyContactPerson;
@@ -37,7 +61,5 @@ class Customer extends Model
         }
 
         $customer->save();
-
-
-}
+    }
 }
