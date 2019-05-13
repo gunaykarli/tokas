@@ -69,7 +69,7 @@
                                                     <label>
                                                         <input type="checkbox"
                                                                @if($systemVariablesIMEI->where('name', 'isIMEIPoolActive')->where('value', 1)->first())
-                                                                    checked="checked"
+                                                                    checked
                                                                @endif
                                                                name="isIMEIPoolActive"
                                                         >
@@ -117,10 +117,10 @@
                                                 <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
                                                     <label>
                                                         <input type="checkbox"
-                                                               @if($systemVariablesIMEI->where('name', 'isIMEIFieldActive')->where('value', 1)->first())
-                                                                    checked="checked"
+                                                               @if($systemVariablesIMEI->where('name', 'isIMEIOnDemandFieldActive')->where('value', 1)->first())
+                                                                    checked
                                                                @endif
-                                                               name="isIMEIFieldActive"
+                                                               name="isIMEIOnDemandFieldActive"
                                                         >
                                                         <span></span>
                                                     </label>

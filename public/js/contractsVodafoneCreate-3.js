@@ -22,12 +22,18 @@ $(document).ready(function()
     $('.onlineInvoiceDiv').hide();
     $('.differentInvoiceAddress').hide();
 
+    // Home Address
+    $('.homeAddressDiv').hide();
+
+    // Disabled Discount
+    $('.disabledDiscount').hide();
+
+
     //--end: Default set up
 
     // According to the selected CUSTOMER type respective form is indicated.
     $('#customerTypes').change(function ()
     {
-        alert('customerTypes has been changed');
         selectedValue = $("input[name='customerType']:checked").val();
         if(selectedValue == 1 || selectedValue == 3){ // private/SOHo customer
             $('.sectionForPrivateCustomer').show();
@@ -111,6 +117,41 @@ $(document).ready(function()
         }
         else{
             $('.differentInvoiceAddress').hide();
+        }
+    });
+
+    // Invoice Type - Different Invoice address - Salutation
+    $('#differentInvoiceAddressSalutation').change(function ()
+    {
+        selectedValueDifInvoiceAddSalutation = $("select[name='differentInvoiceAddressSalutation']").val();
+        if(selectedValueDifInvoiceAddSalutation == 1 || selectedValueDifInvoiceAddSalutation == 2){ //Frau or Herr
+            $('#differentInvoiceAddressSurnameDiv').show();
+            $('#differentInvoiceAddressNameDiv').show();
+            $('#differentInvoiceAddressCompanyDiv').hide();
+        }
+        else if(selectedValueDifInvoiceAddSalutation == 3){ //Firma
+            $('#differentInvoiceAddressSurnameDiv').hide();
+            $('#differentInvoiceAddressNameDiv').hide();
+            $('#differentInvoiceAddressCompanyDiv').show();
+        }
+    });
+
+    // Home Address
+    $('#homeAddress').change(function () {
+        if(this.checked === true)
+            $('.homeAddressDiv').show();
+        else
+            $('.homeAddressDiv').hide();
+    });
+
+    // Disabled Discount
+    $('#isDisabledDiscount').change(function ()
+    {
+        if(this.checked === true){
+            $('.disabledDiscount').show();
+        }
+        else{
+            $('.disabledDiscount').hide();
         }
     });
 

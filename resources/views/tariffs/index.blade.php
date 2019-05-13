@@ -243,8 +243,6 @@
                                             </div>
                                         </div>
                                     </form>
-
-
                                     <!--end::Filter parameters-->
                                 </div>
                             <!--end::Filter Portlet-->
@@ -286,7 +284,6 @@
 
                         </tbody>
                     </table>
-
                     <!--END: Datatable -->
                 </div>
             </div>

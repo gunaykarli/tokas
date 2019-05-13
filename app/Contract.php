@@ -42,7 +42,7 @@ class Contract extends Model
         $contract->dealer_id = auth()->user()->dealer_id;
         $contract->VO_id = DealersMemberCode::where('dealer_id', auth()->user()->dealer_id)->first()->vodafone_UVP;
         //$contract->tariff_id has been excluded from the Contracts table...since there might be more than one tariff in the shopping cart.
-        $contract->contract_start = "2019-04-30";
+        $contract->contract_start = $request->contractStartDate;
         $contract->status = 1;
 
         $contract->save();

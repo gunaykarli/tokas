@@ -28,13 +28,13 @@ class CustomerPaymentTool extends Model
 
         // Bank info
         if($request->isAccountOwnerDifferent == 'on'){
-            $customerPaymentTool->is_account_owner_different = 1;
+            $customerPaymentTool->different_account_owner = 1;
             $customerPaymentTool->account_owner = $request->accountOwner;
         }
         else{
-            // depending on the "customerType" account_owner is set.
+            // depending on the "customerType", account_owner is set.
             if($request->customerType == 1 or $request->customerType == 3){// Private or SoHo
-                $customerPaymentTool->is_account_owner_different = 0;
+                $customerPaymentTool->different_account_owner = 0;
                 $customerPaymentTool->account_owner = $request->mainCustomerName .' '. $request->mainCustomerSurname;
             }
             else{// Business
@@ -47,13 +47,10 @@ class CustomerPaymentTool extends Model
         $customerPaymentTool->BIC = $request->BIC;
 
         // Credit Card info
-
         $customerPaymentTool->card_number = $request->cardNumber;
         $customerPaymentTool->valid_to_month = $request->cardNumberValidToMonth;
         $customerPaymentTool->valid_to_year = $request->cardNumberValidToYear;
         $customerPaymentTool->card_credit_institution = $request->creditInstitution;
-
-
 
         $customerPaymentTool->save();
 

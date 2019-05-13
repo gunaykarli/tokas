@@ -96,65 +96,61 @@
                         </thead>
                         <tbody id="">
                             @foreach($contents as $content)
+                                <tr>
+                                    <td><a href="/contract/shopping-cart/delete-tariff/{{$content->product_id}}" class="btn btn-danger" ><span>{{__('contracts/shoppingCart.delete')}}</span>&nbsp;&nbsp;</a></td>
+                                    <td></td>
+                                    @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                        <td>{{(\App\Tariff::find($content->product_id))->name}}</td>
+                                    @endif
+                                        <td><input type="text" name="SIMNumber" class="form-control m-input" placeholder="" value=""></td>
 
-                                    <!-- Set up the link according to the provider of the tariff.
-                                    With the link, instead of "$content->producer_id", "$content->id" is sent since it will be more useful in the "/contracts/.../create". -->
+                                    <!-- If "IMEI On-Demand Pool Fields" is active -->
+                                    @if(\App\SystemVariable::where('name', 'isIMEIOnDemandFieldActive')->first()->value == 1)
+                                        <td>
+                                            <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
+                                            @if($content->product_type == 1 and $content->producer_id == 1)
+                                                <div class="m-form__group form-group">
+                                                    <div class="m-radio-list">
+                                                        <label class="m-radio m-radio--bold">
+                                                            <input type="radio" name="EMEIOption" value="1"> {{__('contracts/shoppingCart.withoutDevice')}}
+                                                            <span></span>
+                                                        </label>
 
-                                    <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
-                                    @if($content->product_type == 1 and $content->producer_id == 1)
-                                        <form method="POST" action="/contracts/vodafone/create/{{$content->id}}"  class="m-form m-form--label-align-left- m-form--state-" id="m_form">
-                                        <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 2) belongs to Ay Yıldız -->
-                                    @elseif($content->product_type == 1 and $content->producer_id == 2)
-                                        <form method="POST" action="/contracts/ayYildiz/create/{{$content->id}}"  class="m-form m-form--label-align-left- m-form--state-" id="m_form">
-                                        <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 3) belongs to O2 -->
-                                    @elseif($content->product_type == 1 and $content->producer_id == 3)
-                                        <form method="POST" action="/contracts/O2/create/{{$content->id}}"  class="m-form m-form--label-align-left- m-form--state-" id="m_form">
+                                                        <label class="m-radio m-radio--bold">
+                                                            <input type="radio" name="EMEIOption" value="2"> {{__('contracts/shoppingCart.IMEIOnDemand')}}
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="m-radio m-radio--bold">
+                                                            <input type="radio" name="EMEIOption" value="3">
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control m-input" name="EMEINumber" placeholder="{{__('contracts/shoppingCart.enterIMEINumber')}}">
+                                                            </div>
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </td>
                                     @endif
 
-                                        @csrf
+                                    <td>
+                                        <!-- Set up the link according to the provider of the tariff.
+                                        With the link, instead of "$content->producer_id", "$content->id" is sent since it will be more useful in the "/contracts/.../create". -->
 
-                                    <tr>
-                                        <td><a href="/contract/shopping-cart/delete-tariff/{{$content->product_id}}" class="btn btn-danger" ><span>{{__('contracts/shoppingCart.delete')}}</span>&nbsp;&nbsp;</a></td>
-                                        <td></td>
-                                        @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
-                                            <td>{{(\App\Tariff::find($content->product_id))->name}}</td>
+                                        <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
+                                        @if($content->product_type == 1 and $content->producer_id == 1)
+                                                    <a href="/contracts/vodafone/create/{{$content->id}}" class="btn btn-primary">
+                                        <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 2) belongs to Ay Yıldız -->
+                                        @elseif($content->product_type == 1 and $content->producer_id == 2)
+                                                    <a href="/contracts/ayYildiz/create/{{$content->id}}" class="btn btn-primary">
+                                        <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 3) belongs to O2 -->
+                                        @elseif($content->product_type == 1 and $content->producer_id == 3)
+                                                    <a href="/contracts/O2/create/{{$content->id}}" class="btn btn-primary">
                                         @endif
-                                            <td><input type="text" name="SIMNumber[{{$content->id}}]" class="form-control m-input" placeholder="" value=""></td>
-
-                                        <!-- If "IMEI On-Demand Pool Fields" is active -->
-                                        @if(\App\SystemVariable::where('name', 'isIMEIOnDemandFieldActive')->first()->value == 1)
-                                            <td>
-                                                <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
-                                                @if($content->product_type == 1 and $content->producer_id == 1)
-                                                    <div class="m-form__group form-group">
-                                                        <div class="m-radio-list">
-                                                            <label class="m-radio m-radio--bold">
-                                                                <input type="radio" name="IMEIOption[{{$content->id}}]" value="1"> {{__('contracts/shoppingCart.withoutDevice')}}
-                                                                <span></span>
-                                                            </label>
-
-                                                            <label class="m-radio m-radio--bold">
-                                                                <input type="radio" name="IMEIOption[{{$content->id}}]" value="2"> {{__('contracts/shoppingCart.IMEIOnDemand')}}
-                                                                <span></span>
-                                                            </label>
-                                                            <label class="m-radio m-radio--bold">
-                                                                <input type="radio" name="IMEIOption[{{$content->id}}]" value="3">
-                                                                <div class="input-group">
-                                                                    <input type="text" class="form-control m-input" name="IMEINumber[{{$content->id}}]" placeholder="{{__('contracts/shoppingCart.enterIMEINumber')}}">
-                                                                </div>
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                            </td>
-                                        @endif
-
-                                        <td>
-                                            <button type="submit" class="btn btn-primary">{{__('contracts/shoppingCart.enterTariffRequest')}}</button>
-                                        </td>
-                                    </tr>
-                                </form>
+                                                    <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>&nbsp;&nbsp;
+                                                    </a>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

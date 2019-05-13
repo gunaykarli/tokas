@@ -102,8 +102,8 @@ Route::get('/tariff/index', 'TariffController@index');
 Route::post('/tariff/index/tariffs-with-filter', 'TariffController@fetchTariffsWithFilter')->name('fetchTariffsWithFilter');
 
 //** IMEIs */
-Route::get('/IMEIs/IMEI-pool-status', 'ImeiController@IMEIPoolStatus');
-Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiController@IMEIPoolStatusChange');
+Route::get('/IMEIs/IMEI-pool-status', 'ImeiPoolController@IMEIPoolStatus');
+Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiPoolController@forwardToChangeIMEIPoolStatus');
 
 //** Contracts */
  Route::get('/contract/shopping-cart', 'ShoppingCartController@index');
@@ -112,7 +112,7 @@ Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiController@IMEIPoolStatusChan
  Route::post('/contract/forward-to-store', 'ContractController@forward');
 
  //** Contracts Vodafone*/
- Route::get('/contracts/vodafone/create/{shoppingCart}', 'ContractController@create');
+ Route::post('/contracts/vodafone/create/{shoppingCartID}', 'ContractController@create');
  //Route::post('/contracts/vodafone/store', 'ContractController@store');
 
 

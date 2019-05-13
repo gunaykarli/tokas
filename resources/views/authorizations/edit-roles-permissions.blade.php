@@ -114,7 +114,7 @@
                             <tr>
                                 <td>{{__('authorizations\edit-roles-permissions.'.$rolesAuthorization->systemFeature->lang_key_for_feature)}}</td>
                                 <td>
-                                            <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
+                                    <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
                                                 <label>
                                                     <input type="checkbox"  @if($rolesAuthorization->permission_of_role1 == 1) checked="checked" @endif name="action[{{$rolesAuthorization->systemFeature->id}}][1]">
                                                     <span></span>
@@ -123,7 +123,7 @@
                                 </td>
 
                                 <td>
-                                            <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
+                                    <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
                                                 <label>
                                                     <input type="checkbox"  @if($rolesAuthorization->permission_of_role2 == 1) checked="checked" @endif name="action[{{$rolesAuthorization->systemFeature->id}}][2]">
                                                     <span></span>
@@ -132,7 +132,7 @@
                                 </td>
 
                                 <td>
-                                            <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
+                                    <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
                                                 <label>
                                                     <input type="checkbox"  @if($rolesAuthorization->permission_of_role3 == 1) checked="checked" @endif name="action[{{$rolesAuthorization->systemFeature->id}}][3]">
                                                     <span></span>
@@ -141,7 +141,7 @@
                                 </td>
 
                                 <td>
-                                            <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
+                                    <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
                                                 <label>
                                                     <input type="checkbox"  @if($rolesAuthorization->permission_of_role4 == 1) checked="checked" @endif name="action[{{$rolesAuthorization->systemFeature->id}}][4]">
                                                     <span></span>
@@ -150,7 +150,7 @@
                                 </td>
 
                                 <td>
-                                            <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
+                                    <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
                                                 <label>
                                                     <input type="checkbox"  @if($rolesAuthorization->permission_of_role5 == 1) checked="checked" @endif name="action[{{$rolesAuthorization->systemFeature->id}}][5]">
                                                     <span></span>
@@ -159,7 +159,7 @@
                                 </td>
 
                                 <td>
-                                            <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
+                                    <span class="m-switch m-switch--outline m-switch--icon m-switch--warning">
                                                 <label>
                                                     <input type="checkbox"  @if($rolesAuthorization->permission_of_role6 == 1) checked="checked" @endif name="action[{{$rolesAuthorization->systemFeature->id}}][6]">
                                                     <span></span>

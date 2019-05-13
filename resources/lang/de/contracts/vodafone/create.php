@@ -68,6 +68,32 @@ return [
 
     'contractOptions' => 'Vertragsoptionen',
 
+    'contractStartDate' => 'Vertragsbeginn',
+    'destinationNumberRepresentation' => 'Zielrufnummerdarstellung',
+    'completed' => 'Vollständig',
+    'shortened' => 'Verkürzt',
+    'connectionFee' => 'Anschlusspreis',
+    'connectionFee1' => 'AP-Befreiung (23 Euro PV, Kunde muss über APP bestätigen)',
+    'connectionFee2' => 'Anschlusspreisberechnung (39,99 Euro)',
+    'callBarring' => 'Anrufsperre',
+    'callBarring1' => 'Keine',
+    'callBarring2' => 'Anrufe zum Service 190',
+    'mailbox' => 'Mailbox',
+    'mailbox1' => 'Standard-Mailbox',
+    'mailbox2' => 'Standard-Mailbox (VF Zuhause)',
+    'mailbox3' => 'Profi-Mailbox',
+    'mailbox4' => 'Keine Mailbox',
+    'telephoneNumberTransmission' => 'Rufnummer Übertragung',
+    'telephoneNumberTransmission1' => 'ein, fallweise aus',
+    'telephoneNumberTransmission2' => 'aus, fallweise ein',
+    'connectionOverview' => 'Verbindungsübersicht',
+    'connectionOverview1' => 'Übersicht Mini',
+    'connectionOverview2' => 'Übersicht (kostenpflichtig)',
+    'connectionOverview3' => 'Keine',
+
+    'objection' => 'Werbeverweigerung ',
+    'objectionContent' => 'Keine Nutzung von Bestands- und Verbindungsdaten',
+
     'invoiceType' =>'Rechnungstyp',
     'paperInvoice' => 'Papierrechnung',
     'note' => 'Hinweis',
@@ -81,8 +107,13 @@ return [
         darf ausnahmsweise der Platzhalter 0@d2.de hinterlegt werden.
         Auf diese Weise wird zumindest erreicht, dass Kundendaten nicht an Dritte gelangen.',
 
-    'objection' => 'Werbeverweigerung ',
-    'objectionContent' => 'Keine Nutzung von Bestands- und Verbindungsdaten',
+    'homeAddress' => 'Zuhause-Address',
+
+    'disabledDiscount' => 'Behindertenrabatt',
+    'disabledPersonCardNumber' => 'Nummer des Behindertenausweises',
+    'disabilityDegree' => 'Grad der Behinderung',
+
+
 
     'prefix' => 'Vorwahl',
     'telephoneNumber' => 'Rufnummer',
