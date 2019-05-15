@@ -6,7 +6,7 @@ return [
     'bankInfo' => 'bankInfo',
     'creditCardInfo' => 'Kreditkarte',
 
-    'tariffOptions' => 'Tarifoptionen',
+
 
     'contractType' => 'Auftrag Typ',
     'newContract' => 'Neues Auftrag',
@@ -108,11 +108,22 @@ return [
         Auf diese Weise wird zumindest erreicht, dass Kundendaten nicht an Dritte gelangen.',
 
     'homeAddress' => 'Zuhause-Address',
-
     'disabledDiscount' => 'Behindertenrabatt',
     'disabledPersonCardNumber' => 'Nummer des Behindertenausweises',
     'disabilityDegree' => 'Grad der Behinderung',
 
+
+    'tariffOptions' => 'Tarifoptionen',
+    'serviceOptions' => 'Dienstoptionen',
+    'generalServices' => 'Allgemeine Dienste',
+    'dataServices' => 'Datendienste',
+    'additionalServices' => 'Weitere Dienste',
+    'promotionServices' => 'Promotion Dienste',
+    'Key' => 'Value',
+    'Key' => 'Value',
+    'Key' => 'Value',
+    'Key' => 'Value',
+    'Key' => 'Value',
 
 
     'prefix' => 'Vorwahl',

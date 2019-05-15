@@ -109,7 +109,7 @@ Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiPoolController@forwardToChang
  Route::get('/contract/shopping-cart', 'ShoppingCartController@index');
  Route::get('/contract/shopping-cart/add-tariff/{tariff}', 'ShoppingCartController@addTariff');
  Route::get('/contract/shopping-cart/delete-tariff/{tariff}', 'ShoppingCartController@deleteTariff');
- Route::post('/contract/forward-to-store', 'ContractController@forward');
+ Route::post('/contract/forward-to-store', 'ContractController@forwardToStore');
 
  //** Contracts Vodafone*/
  Route::post('/contracts/vodafone/create/{shoppingCartID}', 'ContractController@create');

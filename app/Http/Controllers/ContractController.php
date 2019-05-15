@@ -7,7 +7,9 @@ use App\Customer;
 use App\CustomerContact;
 use App\CustomerPaymentTool;
 use App\Output;
+use App\Service;
 use App\ShoppingCart;
+use App\Tariff;
 use App\VfCreditActivation;
 use App\VfGsm;
 use Illuminate\Http\Request;
@@ -36,6 +38,12 @@ class ContractController extends Controller
         $IMEIOption = $request->IMEIOption[$shoppingCartID];
         $IMEINumber = $request->IMEINumber[$shoppingCartID];
 
+        // anbiete ya göre hangi tarif alınacak tespit et. ona göre dienstler çekilebilir pivottan. Data mı Weiter mı? pivota eklese...
+        if($shoppingCart->product_type == 1 and $shoppingCart->producer_id == 1){
+
+
+        }
+
         // Depending on the provider id of the selected item in the shopping cart,
         // the program will be forwarded to the respective page to fill out the contract.
 
@@ -55,7 +63,7 @@ class ContractController extends Controller
      * Forward the program execution to the related provider's controller's store function
      * according to the provider_id which is defined as hidden in the related create page (resources/views/contracts/vodafone/create.blade.php).
      */
-    public function forward(Request $request)
+    public function forwardToStore(Request $request)
     {
 
         // FIRST, store main info of the customer who is about to buy the tariff.

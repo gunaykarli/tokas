@@ -9,7 +9,7 @@ use App\VodafoneTariff;
 
 class Service extends Model
 {
-    protected $fillable = ['code', 'name', 'provider_id'];
+    protected $fillable = ['code', 'name', 'type', 'provider_id'];
 
     //**  */ Relationships with the other Models (Classes)
 
@@ -21,7 +21,7 @@ class Service extends Model
     }
 
 
-    //** User defined functions */
+    /** User defined functions */
 
     public function setVodafoneTariffServices($vodafoneTariff, Request $request){
 
@@ -32,18 +32,19 @@ class Service extends Model
 
             foreach ($tariffServicePropertiesInArray as $key => $row) {
                 //** if current service is not inadmissible (x-unzulässig-ausschulüsse )(ok or !) then save it to the ServiceVodafoneTariff table. */
-                if($row['property'] != 'X'){
+                if($row['property'] != 'X' and $row['property'] != 'x'){ // X - unzulässig-ausschulüsse
                     $service = Service::where('code', $row['code'])->first();
-
-
+                    /** IF THE CURRENT SERVIS in the "ServiceForNewVFTariff" excel table, IS NOT IN THE SERVICE TABLE in the DB, IT MUST BE ADDED TO THE SERVICE TABLE in the DB FIRST. */
                     //** Set value of property and favorite according to the value type in related tables. */
-                    if($row['property'] =='ok'){
+                    if($row['property'] =='!'){ // ! - Pflichtfeld
                         $propertyValue = 1;
                     }
+                    else if($row['property'] =='ok' and $row['property'] =='OK') // ok - zulässig
+                        $propertyValue = 2;
                     else
-                        $propertyValue = 0;
+                        $propertyValue = 3;
 
-                   //** Excel de isFavorite kolon ismini tanımıyor....
+                   //** Excel de isFavorite kolon ismini tanımıyor....camel case tanınmıyor...
                     if($row['favorite'] == 1)
                         $isFavoriteValue = true;
                     else
