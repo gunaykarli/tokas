@@ -30,13 +30,13 @@ class CreateVfGsmsTable extends Migration
             $table->string('tariff_and_services')->nullable();
             $table->boolean('different_invoice_address')->nullable();
             $table->boolean('different_home_address')->nullable();
-            $table->smallInteger('connection_overview')->nullable();
-            $table->smallInteger('represent_destination_number')->nullable();
+            $table->string('connection_overview')->nullable();
+            $table->string('represent_destination_number')->nullable();
             $table->string('supplementary_services')->nullable();
             $table->string('data_services')->nullable();
-            $table->smallInteger('mailbox')->nullable();
-            $table->smallInteger('call_barring')->nullable();
-            $table->smallInteger('show_phone_numbers')->nullable();
+            $table->string('mailbox')->nullable();
+            $table->string('call_barring')->nullable();
+            $table->string('show_phone_numbers')->nullable();
             $table->string('disabled_card_id')->nullable();
             $table->smallInteger('disability_degree')->nullable();
 

@@ -457,9 +457,9 @@
                                                         <label for="exampleSelect1" class="col-sm-3 col-sm-3 col-form-label">{{__('contracts\vodafone\create.salutation')}}* </label>
                                                         <div class="col-sm-6 col-lg-6">
                                                             <select name="mainCustomerSalutation" class="form-control m-input form-control-sm" id="mainCustomerSalutation">
-                                                                <option value=0></option>
-                                                                <option value=1>{{__('contracts\vodafone\create.sir')}}</option>
-                                                                <option value=2>{{__('contracts\vodafone\create.madam')}}</option>
+                                                                <option value=0>{{__('contracts\vodafone\create.pleaseSelect')}}</option>
+                                                                <option value=1>{{__('contracts\vodafone\create.madam')}}</option>
+                                                                <option value=2>{{__('contracts\vodafone\create.sir')}}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -644,116 +644,116 @@
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
 
-                                                    <div class="m-form__heading">
-                                                        <h3 class="m-form__heading-title">{{__('contracts\vodafone\create.bankDetails')}}</h3>
-                                                    </div>
+                                                <div class="m-form__heading">
+                                                    <h3 class="m-form__heading-title">{{__('contracts\vodafone\create.bankDetails')}}</h3>
+                                                </div>
 
-                                                    <div class="form-group m-form__group row m--margin-top-5">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.differentAccountOwner')}}*</label>
-                                                        <div class="col-xl-1 col-lg-1">
+                                                <div class="form-group m-form__group row m--margin-top-5">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.differentAccountOwner')}}*</label>
+                                                    <div class="col-xl-1 col-lg-1">
                                                         <span class="m-switch m-switch--sm m-switch--icon">
                                                             <label>
                                                                 <input type="checkbox"  name="isAccountOwnerDifferent" id="isAccountOwnerDifferent">
                                                                 <span></span>
                                                             </label>
                                                         </span>
-                                                        </div>
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group m-form__group row m--margin-top-5" id="accountOwnerDiv">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.accountOwner')}}*</label>
-                                                        <div class="col-xl-6 col-lg-6">
-                                                            <input type="text" name="accountOwner" id="accountOwner" class="form-control m-input form-control-sm">
-                                                        </div>
+                                                <div class="form-group m-form__group row m--margin-top-5" id="accountOwnerDiv">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.accountOwner')}}*</label>
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <input type="text" name="accountOwner" id="accountOwner" class="form-control m-input form-control-sm">
                                                     </div>
+                                                </div>
 
+                                                <div class="form-group m-form__group row m--margin-top-5">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.IBAN')}}*</label>
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <input type="text" name="IBAN" id="IBAN" class="form-control m-input form-control-sm">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row m--margin-top-5 ">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.BIC')}}</label>
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <input type="text" name="BIC" id="BIC" class="form-control m-input form-control-sm">
+                                                    </div>
+                                                </div>
+
+                                                <div class="differentAccountOwnerAddressDiv">
                                                     <div class="form-group m-form__group row m--margin-top-5">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.IBAN')}}*</label>
-                                                        <div class="col-xl-6 col-lg-6">
-                                                            <input type="text" name="IBAN" id="IBAN" class="form-control m-input form-control-sm">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group m-form__group row m--margin-top-5 ">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.BIC')}}</label>
-                                                        <div class="col-xl-6 col-lg-6">
-                                                            <input type="text" name="BIC" id="BIC" class="form-control m-input form-control-sm">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="differentAccountOwnerAddressDiv">
-                                                        <div class="form-group m-form__group row m--margin-top-5">
-                                                            <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.differentAccountOwnerAddress')}}*</label>
-                                                            <div class="col-xl-1 col-lg-1">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.differentAccountOwnerAddress')}}*</label>
+                                                        <div class="col-xl-1 col-lg-1">
                                                         <span class="m-switch m-switch--sm m-switch--icon">
                                                             <label>
                                                                 <input type="checkbox"  name="isAccountOwnerAddressDifferent" id="isAccountOwnerAddressDifferent" checked>
                                                                 <span></span>
                                                             </label>
                                                         </span>
-                                                            </div>
                                                         </div>
-                                                        <div class="differentAccountOwnerAddress">
-                                                            <div class="form-group m-form__group row m--margin-top-10">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.streetAndNumber')}}*</label>
-                                                                <div class="col-xl-4 col-lg-4">
-                                                                    <input type="text" name="differentAccountOwnerStreet" id="differentAccountOwnerStreet" class="form-control m-input form-control-sm">
-                                                                </div>
-
-                                                                <div class="col-xl-2 col-lg-2">
-                                                                    <input type="text" name="differentAccountOwnerHouseNumber" id="differentAccountOwnerHouseNumber" class="form-control m-input form-control-sm">
-                                                                </div>
+                                                    </div>
+                                                    <div class="differentAccountOwnerAddress">
+                                                        <div class="form-group m-form__group row m--margin-top-10">
+                                                            <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.streetAndNumber')}}*</label>
+                                                            <div class="col-xl-4 col-lg-4">
+                                                                <input type="text" name="differentAccountOwnerStreet" id="differentAccountOwnerStreet" class="form-control m-input form-control-sm">
                                                             </div>
 
-                                                            <div class="form-group m-form__group row ">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.cityAndPostalCode')}}*</label>
-                                                                <div class="col-xl-4 col-lg-4">
-                                                                    <input type="text" name="differentAccountOwnerCity" id="differentAccountOwnerCity" class="form-control m-input form-control-sm">
-                                                                </div>
+                                                            <div class="col-xl-2 col-lg-2">
+                                                                <input type="text" name="differentAccountOwnerHouseNumber" id="differentAccountOwnerHouseNumber" class="form-control m-input form-control-sm">
+                                                            </div>
+                                                        </div>
 
-                                                                <div class="col-xl-2 col-lg-2">
-                                                                    <input type="text" name="differentAccountOwnerPostalCode" id="differentAccountOwnerPostalCode" class="form-control m-input form-control-sm">
-                                                                </div>
+                                                        <div class="form-group m-form__group row ">
+                                                            <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.cityAndPostalCode')}}*</label>
+                                                            <div class="col-xl-4 col-lg-4">
+                                                                <input type="text" name="differentAccountOwnerCity" id="differentAccountOwnerCity" class="form-control m-input form-control-sm">
+                                                            </div>
+
+                                                            <div class="col-xl-2 col-lg-2">
+                                                                <input type="text" name="differentAccountOwnerPostalCode" id="differentAccountOwnerPostalCode" class="form-control m-input form-control-sm">
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
 
 
 
-                                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
 
-                                                    <div class="m-form__heading">
-                                                        <h3 class="m-form__heading-title">{{__('contracts\vodafone\create.bankCard')}}</h3>
-                                                    </div>
-                                                    <div class="form-group m-form__group row m--margin-top-10">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.cardNumber')}}*</label>
-                                                        <div class="col-xl-6 col-lg-6">
-                                                            <input type="text" name="cardNumber" id="cardNumber" class="form-control m-input form-control-sm">
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="form-group m-form__group row ">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.validToMonth')}}*</label>
-                                                        <div class="col-xl-6 col-lg-6">
-                                                            <input type="text" name="cardNumberValidToMonth" id="cardNumberValidToMonth" class="form-control m-input form-control-sm">
-                                                        </div>
-
+                                                <div class="m-form__heading">
+                                                    <h3 class="m-form__heading-title">{{__('contracts\vodafone\create.bankCard')}}</h3>
+                                                </div>
+                                                <div class="form-group m-form__group row m--margin-top-10">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.cardNumber')}}*</label>
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <input type="text" name="cardNumber" id="cardNumber" class="form-control m-input form-control-sm">
                                                     </div>
 
-                                                    <div class="form-group m-form__group row ">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.validToYear')}}*</label>
-                                                        <div class="col-xl-6 col-lg-6">
-                                                            <input type="text" name="cardNumberValidToYear" id="cardNumberValidToYear" class="form-control m-input form-control-sm">
-                                                        </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row ">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.validToMonth')}}*</label>
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <input type="text" name="cardNumberValidToMonth" id="cardNumberValidToMonth" class="form-control m-input form-control-sm">
                                                     </div>
 
-                                                    <div class="form-group m-form__group row ">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.creditInstitution')}}*</label>
-                                                        <div class="col-xl-6 col-lg-6">
-                                                            <input type="text" name="creditInstitution" id="creditInstitution" class="form-control m-input form-control-sm">
-                                                        </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row ">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.validToYear')}}*</label>
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <input type="text" name="cardNumberValidToYear" id="cardNumberValidToYear" class="form-control m-input form-control-sm">
                                                     </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row ">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.creditInstitution')}}*</label>
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <input type="text" name="creditInstitution" id="creditInstitution" class="form-control m-input form-control-sm">
+                                                    </div>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -774,82 +774,94 @@
                                                 <!--begin: Contract Start Date -->
                                                 <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label"><b>{{__('contracts\vodafone\create.contractStartDate')}}</b></label>
-                                                    <div class="col-xl-6 col-lg-6">
+                                                    <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.contractStartDate')}}</b></label>
+                                                    <div class="col-sm-4 col-sm-4">
                                                         <input name="contractStartDate" class="form-control m-input" type="date" value="" id="example-date-input">
                                                     </div>
                                                 </div>
                                                 <!--begin: Contract Start Date -->
 
+                                                <!--begin: Connection fee -->
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.connectionFee')}}</b></label>
+                                                    <div class="col-sm-8 col-sm-8">
+                                                        <div class="m-radio-list" id="connectionFees">
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="connectionFee" id="connectionFee" value=1>{{__('contracts\vodafone\create.connectionFee1')}}
+                                                                <span></span>
+                                                            </label>
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="connectionFee" id="connectionFee" value=2>{{__('contracts\vodafone\create.connectionFee2')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!--end: Connection fee -->
+
                                                 <!--begin: Connection Overview -->
                                                 <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-sm-3 col-sm-3 col-form-label"><b>{{__('contracts\vodafone\create.connectionOverview')}}</b></label>
-                                                    <div class="m-radio-inline" id="connectionOverviews" class="col-sm-9 col-lg-9">
-                                                        <label class="m-radio">
-                                                            <input type="radio" name="connectionOverview" id="connectionOverview" value=1 checked>{{__('contracts\vodafone\create.connectionOverview1')}}
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="m-radio">
-                                                            <input type="radio" name="connectionOverview" id="connectionOverview" value=2>{{__('contracts\vodafone\create.connectionOverview2')}}
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="m-radio">
-                                                            <input type="radio" name="connectionOverview" id="connectionOverview" value=3>{{__('contracts\vodafone\create.connectionOverview3')}}
-                                                            <span></span>
-                                                        </label>
+                                                    <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.connectionOverview')}}</b></label>
+                                                    <div class="col-sm-8 col-sm-8">
+                                                        <div class="m-radio-list" id="connectionOverviews">
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="connectionOverview" id="connectionOverview" value=1 checked>{{__('contracts\vodafone\create.connectionOverview1')}}
+                                                                <span></span>
+                                                            </label>
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="connectionOverview" id="connectionOverview" value=2>{{__('contracts\vodafone\create.connectionOverview2')}}
+                                                                <span></span>
+                                                            </label>
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="connectionOverview" id="connectionOverview" value=3>{{__('contracts\vodafone\create.connectionOverview3')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
                                                     </div>
+
                                                 </div>
                                                 <!--end: Connection Overview -->
 
                                                 <!--begin: Destination number representation -->
                                                 <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-sm-3 col-sm-3 col-form-label"><b>{{__('contracts\vodafone\create.destinationNumberRepresentation')}}</b></label>
-                                                    <div class="m-radio-inline" id="destinationNumberRepresentations" class="col-sm-9 col-lg-9">
-                                                        <label class="m-radio">
-                                                            <input type="radio" name="destinationNumberRepresentation" id="destinationNumberRepresentation" value=1 checked>{{__('contracts\vodafone\create.completed')}}
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="m-radio">
-                                                            <input type="radio" name="destinationNumberRepresentation" id="destinationNumberRepresentation" value=2>{{__('contracts\vodafone\create.shortened')}}
-                                                            <span></span>
-                                                        </label>
+                                                    <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.destinationNumberRepresentation')}}</b></label>
+                                                    <div class="col-sm-8 col-sm-8">
+                                                        <div class="m-radio-list" id="destinationNumberRepresentations">
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="destinationNumberRepresentation" id="destinationNumberRepresentation" value=1 checked>{{__('contracts\vodafone\create.completed')}}
+                                                                <span></span>
+                                                            </label>
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="destinationNumberRepresentation" id="destinationNumberRepresentation" value=2>{{__('contracts\vodafone\create.shortened')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <!--end: Destination number representation -->
 
-                                                <!--begin: Connection fee -->
-                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-sm-3 col-sm-3 col-form-label"><b>{{__('contracts\vodafone\create.connectionFee')}}</b></label>
-                                                    <div class="m-radio-inline" id="connectionFees" class="col-sm-9 col-lg-9">
-                                                        <label class="m-radio">
-                                                            <input type="radio" name="connectionFee" id="connectionFee" value=1>{{__('contracts\vodafone\create.connectionFee1')}}
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="m-radio">
-                                                            <input type="radio" name="connectionFee" id="connectionFee" value=2>{{__('contracts\vodafone\create.connectionFee2')}}
-                                                            <span></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <!--end: Connection fee -->
+
 
                                                 <!--begin: invoiceType -->
                                                 <div>
                                                     <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                                     <div class="form-group m-form__group row">
-                                                        <label class="col-sm-3 col-sm-3 col-form-label"><b>{{__('contracts\vodafone\create.invoiceType')}}</b></label>
-                                                        <div class="m-radio-inline" id="invoiceTypes" class="col-sm-9 col-lg-9">
-                                                            <label class="m-radio">
-                                                                <input type="radio" name="invoiceType" id="invoiceType" value=1 checked> {{__('contracts\vodafone\create.paperInvoice')}}
-                                                                <span></span>
-                                                            </label>
-                                                            <label class="m-radio">
-                                                                <input type="radio" name="invoiceType" id="invoiceType" value=2> {{__('contracts\vodafone\create.onlineInvoice')}}
-                                                                <span></span>
-                                                            </label>
+                                                        <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.invoiceType')}}</b></label>
+                                                        <div class="col-sm-8 col-sm-8">
+                                                            <div class="m-radio-list" id="invoiceTypes">
+                                                                <label class="m-radio">
+                                                                    <input type="radio" name="invoiceType" id="invoiceType" value=1 checked> {{__('contracts\vodafone\create.paperInvoice')}}
+                                                                    <span></span>
+                                                                </label>
+                                                                <label class="m-radio">
+                                                                    <input type="radio" name="invoiceType" id="invoiceType" value=2> {{__('contracts\vodafone\create.onlineInvoice')}}
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -924,28 +936,28 @@
                                                                     <span></span>
                                                                 </label>
                                                             </span>
-                                                        </div>
+                                                    </div>
                                                     <label class="col-xl-6 col-lg-6 col-form-label">{{__('contracts\vodafone\create.homeAddress')}}</label>
                                                 </div>
                                                 <div class="homeAddressDiv">
                                                     <div class="form-group m-form__group row">
-                                                            <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.streetAndNumber')}}*</label>
-                                                            <div class="col-xl-4 col-lg-4">
-                                                                <input type="text" name="homeAddressStreet" id="homeAddressStreet" class="form-control m-input form-control-sm">
-                                                            </div>
-                                                            <div class="col-xl-2 col-lg-2">
-                                                                <input type="text" name="homeAddressHouseNumber" id="homeAddressHouseNumber" class="form-control m-input form-control-sm">
-                                                            </div>
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.streetAndNumber')}}*</label>
+                                                        <div class="col-xl-4 col-lg-4">
+                                                            <input type="text" name="homeAddressStreet" id="homeAddressStreet" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                        <div class="col-xl-2 col-lg-2">
+                                                            <input type="text" name="homeAddressHouseNumber" id="homeAddressHouseNumber" class="form-control m-input form-control-sm">
+                                                        </div>
                                                     </div>
 
                                                     <div class="form-group m-form__group row">
-                                                            <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.cityAndPostalCode')}}*</label>
-                                                            <div class="col-xl-4 col-lg-4">
-                                                                <input type="text" name="homeAddressCity" id="homeAddressCity" class="form-control m-input form-control-sm">
-                                                            </div>
-                                                            <div class="col-xl-2 col-lg-2">
-                                                                <input type="text" name="homeAddressPostalCode" id="homeAddressPostalCode" class="form-control m-input form-control-sm">
-                                                            </div>
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.cityAndPostalCode')}}*</label>
+                                                        <div class="col-xl-4 col-lg-4">
+                                                            <input type="text" name="homeAddressCity" id="homeAddressCity" class="form-control m-input form-control-sm">
+                                                        </div>
+                                                        <div class="col-xl-2 col-lg-2">
+                                                            <input type="text" name="homeAddressPostalCode" id="homeAddressPostalCode" class="form-control m-input form-control-sm">
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <!--end: home address -->
@@ -968,7 +980,7 @@
                                                         <label for="exampleSelect1" class="col-sm-3 col-sm-3 col-form-label">{{__('contracts\vodafone\create.salutation')}}* </label>
                                                         <div class="col-sm-6 col-lg-6">
                                                             <select name="differentInvoiceAddressSalutation" class="form-control m-input form-control-sm" id="differentInvoiceAddressSalutation">
-                                                                <option value=0></option>
+                                                                <option value=0>{{__('contracts\vodafone\create.pleaseSelect')}}</option>
                                                                 <option value=1>{{__('contracts\vodafone\create.madam')}}</option>
                                                                 <option value=2>{{__('contracts\vodafone\create.sir')}}</option>
                                                                 <option value=3>{{__('contracts\vodafone\create.company')}}</option>
@@ -990,10 +1002,10 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group m-form__group row" id="differentInvoiceAddressCompanyDiv">
+                                                    <div class="form-group m-form__group row" id="differentInvoiceAddressCompanyNameDiv">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts\vodafone\create.company')}}*</label>
                                                         <div class="col-xl-6 col-lg-6">
-                                                            <input type="text" name="differentInvoiceAddressCompany" id="differentInvoiceAddressCompany" class="form-control m-input form-control-sm">
+                                                            <input type="text" name="differentInvoiceAddressCompanyName" id="differentInvoiceAddressCompanyName" class="form-control m-input form-control-sm">
                                                         </div>
                                                     </div>
 
@@ -1100,18 +1112,19 @@
                                                                     <div class="m-accordion__item-content">
 
                                                                         <!--begin: Call barring -->
-                                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                                                         <div class="form-group m-form__group row">
-                                                                            <label class="col-sm-3 col-sm-3 col-form-label"><b>{{__('contracts\vodafone\create.callBarring')}}</b></label>
-                                                                            <div class="m-radio-inline" id="callBarrings" class="col-sm-9 col-lg-9">
-                                                                                <label class="m-radio">
-                                                                                    <input type="radio" name="callBarring" id="callBarring" value=1 checked>{{__('contracts\vodafone\create.callBarring1')}}
-                                                                                    <span></span>
-                                                                                </label>
-                                                                                <label class="m-radio">
-                                                                                    <input type="radio" name="callBarring" id="callBarring" value=2>{{__('contracts\vodafone\create.callBarring2')}}
-                                                                                    <span></span>
-                                                                                </label>
+                                                                            <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.callBarring')}}</b></label>
+                                                                            <div class="col-sm-7 col-sm-7">
+                                                                                <div class="m-radio-list" id="callBarrings">
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="callBarring" id="callBarring" value=1 checked>{{__('contracts\vodafone\create.callBarring1')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="callBarring" id="callBarring" value=2>{{__('contracts\vodafone\create.callBarring2')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                         <!--end: Call barring -->
@@ -1119,24 +1132,26 @@
                                                                         <!--begin: Mailbox -->
                                                                         <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                                                         <div class="form-group m-form__group row">
-                                                                            <label class="col-sm-3 col-sm-3 col-form-label"><b>{{__('contracts\vodafone\create.mailbox')}}</b></label>
-                                                                            <div class="m-radio-inline" id="mailboxes" class="col-sm-9 col-lg-9">
-                                                                                <label class="m-radio">
-                                                                                    <input type="radio" name="mailbox" id="mailbox" value=1 checked>{{__('contracts\vodafone\create.mailbox1')}}
-                                                                                    <span></span>
-                                                                                </label>
-                                                                                <label class="m-radio">
-                                                                                    <input type="radio" name="mailbox" id="mailbox" value=2>{{__('contracts\vodafone\create.mailbox2')}}
-                                                                                    <span></span>
-                                                                                </label>
-                                                                                <label class="m-radio">
-                                                                                    <input type="radio" name="mailbox" id="mailbox" value=3>{{__('contracts\vodafone\create.mailbox3')}}
-                                                                                    <span></span>
-                                                                                </label>
-                                                                                <label class="m-radio">
-                                                                                    <input type="radio" name="mailbox" id="mailbox" value=4>{{__('contracts\vodafone\create.mailbox4')}}
-                                                                                    <span></span>
-                                                                                </label>
+                                                                            <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.mailbox')}}</b></label>
+                                                                            <div class="col-sm-7 col-sm-7">
+                                                                                <div class="m-radio-list" id="mailboxes">
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="mailbox" id="mailbox" value=1 checked>{{__('contracts\vodafone\create.mailbox1')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="mailbox" id="mailbox" value=2>{{__('contracts\vodafone\create.mailbox2')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="mailbox" id="mailbox" value=3>{{__('contracts\vodafone\create.mailbox3')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="mailbox" id="mailbox" value=4>{{__('contracts\vodafone\create.mailbox4')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                         <!--end: Mailbox -->
@@ -1144,16 +1159,18 @@
                                                                         <!--begin: Telephone number transmission -->
                                                                         <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                                                         <div class="form-group m-form__group row">
-                                                                            <label class="col-sm-3 col-sm-3 col-form-label"><b>{{__('contracts\vodafone\create.telephoneNumberTransmission')}}</b></label>
-                                                                            <div class="m-radio-inline" id="telephoneNumberTransmissions" class="col-sm-9 col-lg-9">
-                                                                                <label class="m-radio">
-                                                                                    <input type="radio" name="telephoneNumberTransmission" id="telephoneNumberTransmission" value=1 checked>{{__('contracts\vodafone\create.telephoneNumberTransmission1')}}
-                                                                                    <span></span>
-                                                                                </label>
-                                                                                <label class="m-radio">
-                                                                                    <input type="radio" name="telephoneNumberTransmission" id="telephoneNumberTransmission" value=2>{{__('contracts\vodafone\create.telephoneNumberTransmission2')}}
-                                                                                    <span></span>
-                                                                                </label>
+                                                                            <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.telephoneNumberTransmission')}}</b></label>
+                                                                            <div class="col-sm-7 col-sm-7">
+                                                                                <div class="m-radio-list" id="telephoneNumberTransmissions" class="col-sm-9 col-lg-9">
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="telephoneNumberTransmission" id="telephoneNumberTransmission" value=1 checked>{{__('contracts\vodafone\create.telephoneNumberTransmission1')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="telephoneNumberTransmission" id="telephoneNumberTransmission" value=2>{{__('contracts\vodafone\create.telephoneNumberTransmission2')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                         <!--end: Telephone number transmission -->
@@ -1248,11 +1265,9 @@
                                                                 </div>
                                                             </div>
                                                             <!--end::Ite Promotion Services-->
-
-
                                                         </div>
-
                                                         <!--end::Section-->
+
                                                     </div>
                                                 </div>
                                                 <!--end::Portlet-->
@@ -1466,7 +1481,7 @@
 
                                             <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                             <div class="form-group m-form__group m-form__group--sm row">
-                                                <div class="col-xl-12">
+                                                <div class="col-xl-8">
                                                     <div class="m-checkbox-inline">
                                                         <label class="m-checkbox m-checkbox--solid m-checkbox--brand">
                                                             <input type="checkbox" name="accept" value="1">
@@ -1474,6 +1489,9 @@
                                                             <span></span>
                                                         </label>
                                                     </div>
+                                                </div>
+                                                <div class="col-lg-4 m--align-right">
+                                                    <button type="submit" class="btn btn-brand">Submit</button>
                                                 </div>
                                             </div>
 
@@ -1499,12 +1517,7 @@
                                             </a>
                                         </div>
                                         <div class="col-lg-4 m--align-right">
-                                            <a href="#" class="btn btn-primary m-btn m-btn--custom m-btn--icon" data-wizard-action="submit">
-															<span>
-																<i class="la la-check"></i>&nbsp;&nbsp;
-																<span>Submit</span>
-															</span>
-                                            </a>
+
                                             <a href="#" class="btn btn-warning m-btn m-btn--custom m-btn--icon" data-wizard-action="next">
 															<span>
 																<span>Save & Continue</span>&nbsp;&nbsp;

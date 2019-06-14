@@ -107,6 +107,7 @@ return [
         darf ausnahmsweise der Platzhalter 0@d2.de hinterlegt werden.
         Auf diese Weise wird zumindest erreicht, dass Kundendaten nicht an Dritte gelangen.',
 
+    'pleaseSelect' => 'Bitte auswählen',
     'homeAddress' => 'Zuhause-Address',
     'disabledDiscount' => 'Behindertenrabatt',
     'disabledPersonCardNumber' => 'Nummer des Behindertenausweises',
@@ -134,7 +135,7 @@ return [
     'oldProvider' => 'Alter Anbieter',
     'provider' => 'Anbiter',
     'oldProviderTelephoneNumber' => 'Kundennummer Altanbieter',
-    'portingType' => 'Portirung Typ',
+    'portingType' => 'Portierung Typ',
     'endOfTheContract' => 'Datum des Vertragsendes',
     'cancellationDateOfOldContract' => 'Kündigunsdatun beim Altanbieter',
 

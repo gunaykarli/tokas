@@ -14,7 +14,7 @@
                 <div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark ">
                     <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
                         <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link"><i
-                                        class="m-menu__link-icon flaticon-apps"></i><span class="m-menu__link-text">{{__('partials\header.phones')}}</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                        class="m-menu__link-icon flaticon-apps"></i><span class="m-menu__link-text">{{__('partials/header.phones')}}</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
                             <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span class="m-menu__arrow m-menu__arrow--adjust"></span>
                                 <ul class="m-menu__subnav">
                                     <li class="m-menu__item " aria-haspopup="true"><a href="header/actions.html" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">Apples</span></a></li>
@@ -28,7 +28,7 @@
                             </div>
                         </li>
                         <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link"><i
-                                        class="m-menu__link-icon flaticon-interface-3"></i><span class="m-menu__link-text">{{__('partials\header.tariffs')}}</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                        class="m-menu__link-icon flaticon-interface-3"></i><span class="m-menu__link-text">{{__('partials/header.tariffs')}}</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
                             <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span class="m-menu__arrow m-menu__arrow--adjust"></span>
                                 <ul class="m-menu__subnav">
                                     <li class="m-menu__item " aria-haspopup="true"><a href="header/actions.html" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">Vodafone</span></a></li>
@@ -43,7 +43,7 @@
                         </li>
 
                         <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link"><i
-                                        class="m-menu__link-icon flaticon-network"></i><span class="m-menu__link-text">{{__('partials\header.infoCenter')}}</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                        class="m-menu__link-icon flaticon-network"></i><span class="m-menu__link-text">{{__('partials/header.infoCenter')}}</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
                             <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span class="m-menu__arrow m-menu__arrow--adjust"></span>
                                 <ul class="m-menu__subnav">
                                     <li class="m-menu__item " aria-haspopup="true"><a href="header/actions.html" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">Mobile Internet</span></a></li>
@@ -57,7 +57,7 @@
                             </div>
                         </li>
                         <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link"><i
-                                        class="m-menu__link-icon flaticon-line-graph"></i><span class="m-menu__link-text">{{__('partials\header.mobileInternet')}}</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                        class="m-menu__link-icon flaticon-line-graph"></i><span class="m-menu__link-text">{{__('partials/header.mobileInternet')}}</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
                             <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span class="m-menu__arrow m-menu__arrow--adjust"></span>
                                 <ul class="m-menu__subnav">
                                     <li class="m-menu__item " aria-haspopup="true"><a href="header/actions.html" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">Downloads</span></a></li>
@@ -70,7 +70,7 @@
                             </div>
                         </li>
                         <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link"><i
-                                        class="m-menu__link-icon flaticon-user"></i><span class="m-menu__link-text">{{__('partials\header.account')}}</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                        class="m-menu__link-icon flaticon-user"></i><span class="m-menu__link-text">{{__('partials/header.account')}}</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
                             <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span class="m-menu__arrow m-menu__arrow--adjust"></span>
                                 <ul class="m-menu__subnav">
                                     <li class="m-menu__item " aria-haspopup="true"><a href="header/actions.html" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">Meine Bestellungen</span></a></li>
@@ -84,18 +84,18 @@
                         </li>
 
                         <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link"><i
-                                        class="m-menu__link-icon flaticon-user"></i><span class="m-menu__link-text">{{__('partials\header.admin')}}</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                        class="m-menu__link-icon flaticon-user"></i><span class="m-menu__link-text">{{__('partials/header.admin')}}</span><i class="m-menu__hor-arrow la la-angle-down"></i><i class="m-menu__ver-arrow la la-angle-right"></i></a>
                             <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span class="m-menu__arrow m-menu__arrow--adjust"></span>
                                 <ul class="m-menu__subnav">
-                                    <li class="m-menu__item " aria-haspopup="true"><a href="/provider/index" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials\header.providers')}}</span></a></li>
-                                    <li class="m-menu__item " aria-haspopup="true"><a href="/dealer/list" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials\header.dealers')}}</span></a></li>
-                                    <li class="m-menu__item " aria-haspopup="true"><a href="/systemfeatureandauthorization/create" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials\header.authorization')}}</span></a></li>
-                                    <li class="m-menu__item " aria-haspopup="true"><a href="/authorizeUser/index" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials\header.authorizeUser')}}</span></a></li>
-                                    <li class="m-menu__item " aria-haspopup="true"><a href="/edit-roles-permissions/index" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials\header.editRolesPermissions')}}</span></a></li>
-                                    <li class="m-menu__item " aria-haspopup="true"><a href="/representative/import" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials\header.importRepresentative')}}</span></a></li>
-                                    <li class="m-menu__item " aria-haspopup="true"><a href="/region/index" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials\header.regions')}}</span></a></li>
-                                    <li class="m-menu__item " aria-haspopup="true"><a href="/region/create" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials\header.addRegion')}}</span></a></li>
-                                    <li class="m-menu__item " aria-haspopup="true"><a href="/region/postcodeRegionVB/import" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials\header.import-postcodeRegionVB')}}</span></a></li>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="/provider/index" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials/header.providers')}}</span></a></li>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="/dealer/list" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials/header.dealers')}}</span></a></li>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="/systemfeatureandauthorization/create" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials/header.authorization')}}</span></a></li>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="/authorizeUser/index" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials/header.authorizeUser')}}</span></a></li>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="/edit-roles-permissions/index" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials/header.editRolesPermissions')}}</span></a></li>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="/representative/import" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials/header.importRepresentative')}}</span></a></li>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="/region/index" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials/header.regions')}}</span></a></li>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="/region/create" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials/header.addRegion')}}</span></a></li>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="/region/postcodeRegionVB/import" class="m-menu__link "><i class="m-menu__link-icon flaticon-file"></i><span class="m-menu__link-text">{{__('partials/header.import-postcodeRegionVB')}}</span></a></li>
 
 
 

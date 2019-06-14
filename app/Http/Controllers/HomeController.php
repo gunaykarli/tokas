@@ -25,4 +25,15 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function dene()
+    {
+        return view('Mis.raleway.index-raleway');
+
+    }
+    public function welcome1()
+    {
+        return view('welcome1');
+
+    }
 }

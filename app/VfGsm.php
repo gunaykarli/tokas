@@ -38,6 +38,49 @@ class VfGsm extends Model
         $VfGsmContract->contract_id = $contractID;
         $VfGsmContract->AO_bundle_offering_code = 'Deneme';//*** min occurs = 0
         $VfGsmContract->group_change_group_id = 0;//*** min occurs = 0
+        $VfGsmContract->activation_with_hardware = 0;/*** USE for activation with hardware...*/
+        $VfGsmContract->SIM_serial_number = $request->SIMNumber;
+        $VfGsmContract->tariff_id = ShoppingCart::where('id', $request->shoppingCartID)->first()->product_id; /** ek kart olduğunda bu sorgu değişebilir... */
+
+        // connection_overview codes come from the ".xsd" file.
+        if($request->connectionOverview == 1)
+            $VfGsmContract->connection_overview = 'Uebersicht Mini';
+        else if($request->connectionOverview == 2)
+            $VfGsmContract->connection_overview = 'Uebersicht';
+        else if($request->connectionOverview == 3)
+            $VfGsmContract->connection_overview = 'keine';
+
+        // represent_destination_number codes come from the ".xsd" file.
+        if($request->destinationNumberRepresentation == 1)
+            $VfGsmContract->represent_destination_number = 'vollstaendig';
+        else if($request->destinationNumberRepresentation == 2)
+            $VfGsmContract->represent_destination_number = 'verkuerzt';
+
+        $VfGsmContract->tariff_and_services = 'Deneme'; /** Burası sadece tag ismi, değer yok...Silinebilir...  */
+        $VfGsmContract->supplementary_services = $request->additionalServices; // "additionalService" checkbox list (in resources/views/contracts/vodafone/create.blade.php) saved as an array to "supplementary_services" field.
+        $VfGsmContract->data_services = $request->dataServices; // "dataServices" checkbox list saved as an array to "data_services" field.
+
+        // mailbox codes come from the "Plausi. für buchbare Dienste" sheet.
+        if($request->mailbox == 1)
+            $VfGsmContract->mailbox = 'MAILBOX';
+        else if($request->mailbox == 2)
+            $VfGsmContract->mailbox = 'MAILBOXZH';
+        else if($request->mailbox == 3)
+            $VfGsmContract->mailbox = 'MAILBOXP';
+        else if($request->mailbox == 4)
+            $VfGsmContract->mailbox = 'KEINE';
+
+        // call_barring codes come from the "Plausi. für buchbare Dienste" sheet.
+        if($request->callBarring == 1)
+            $VfGsmContract->call_barring = 'KEINE';
+        else if($request->callBarring == 2)
+            $VfGsmContract->call_barring = 'SO_SO';
+
+        // show_phone_numbers codes come from the "Plausi. für buchbare Dienste" sheet.
+        if($request->telephoneNumberTransmission == 1)/*** Rufnummereinzeige???*/
+            $VfGsmContract->show_phone_numbers = 'NRDEFJA';
+        else  if($request->telephoneNumberTransmission == 2)
+            $VfGsmContract->show_phone_numbers = 'NRDEFNEIN';
 
         if($request->objection == 'on'){
             $VfGsmContract->objection = 1;
@@ -54,8 +97,6 @@ class VfGsm extends Model
            $VfGsmContract->additional_contract = 0;
        }
 
-       $VfGsmContract->activation_with_hardware = 0;/*** USE...*/
-       $VfGsmContract->SIM_serial_number = $request->SIMNumber;
 
        /**begin: IMEI set up */
 
@@ -72,7 +113,7 @@ class VfGsm extends Model
                     // change the 'status' field of the current (row)IMEIOnDemand instance from 0 to 2 which means 'reserved'
                     $IMEIOnDemand->status = 2;
                     $IMEIOnDemand->contract_id = $contractID;
-                    /** CHECK if it necessray to save vf_gsm_id */ // $IMEIOnDemand->vf_gsm_id
+                    /** CHECK if it is necessary to save vf_gsm_id */ // $IMEIOnDemand->vf_gsm_id
                     $IMEIOnDemand->salesperson_id = auth()->user()->id;
                     $IMEIOnDemand->save();
                 }
@@ -129,34 +170,23 @@ class VfGsm extends Model
 
        /**end: IMEI set up */
 
+
        if($request->isInvoiceAddressDifferent == 'on'){
             $VfGsmContract->different_invoice_address = 1;
             /** store the invoice address from GUI (in $request) to the 'Customer Invoices' table */
+            CustomerInvoiceAddress::store(1, Contract::where('id', $contractID)->first()->customer_id, $request);
        }
        else{
             $VfGsmContract->different_invoice_address = 0;
             /** store the invoice address from 'Customer Contact' table to the 'Customer Invoices table' */
+           CustomerInvoiceAddress::store(0, Contract::where('id', $contractID)->first()->customer_id, $request);
        }
 
-        $VfGsmContract->tariff_id = ShoppingCart::where('id', $request->shoppingCartID)->first()->product_id; /** ek kart olduğunda bu sorgu değişebilir... */
-        $VfGsmContract->connection_overview = $request->connectionOverview;
-        $VfGsmContract->represent_destination_number = $request->destinationNumberRepresentation;
-
-        $VfGsmContract->tariff_and_services = 'Deneme'; /** Burası sadece tag ismi, değer yok...Silinebilir...  */
-
-
-        $VfGsmContract->supplementary_services = $request->additionalServices; /**  */
-        $VfGsmContract->data_services = $request->dataServices; /**  */
-
-        $VfGsmContract->mailbox = $request->mailbox;
-        $VfGsmContract->call_barring = $request->callBarring;
-        $VfGsmContract->show_phone_numbers = $request->telephoneNumberTransmission;//*** Rufnummereinzeige???
-
-        if($request->isDisabledDiscount == 'on'){
+       if($request->isDisabledDiscount == 'on'){
             $VfGsmContract->disabled_card_id = $request->disabledPersonCardNumber;
             $VfGsmContract->disability_degree = $request->disabilityDegree ;
-        }
+       }
 
-        $VfGsmContract->save();
+       $VfGsmContract->save();
     }
 }

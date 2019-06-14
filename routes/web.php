@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+\Illuminate\Support\Facades\Auth::routes();
 //Auth::routes() is just a helper class that helps you generate all the routes required for user authentication.
 //src/Illuminate/Routing/Router.php, Line Number:1144
 //and in Router.php look at RegistersUsers.php. Most of the functionality is there like show "showRegistrationForm"
@@ -109,6 +109,11 @@ Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiPoolController@forwardToChang
  Route::get('/contract/shopping-cart', 'ShoppingCartController@index');
  Route::get('/contract/shopping-cart/add-tariff/{tariff}', 'ShoppingCartController@addTariff');
  Route::get('/contract/shopping-cart/delete-tariff/{tariff}', 'ShoppingCartController@deleteTariff');
+
+ Route::get('/contract/generate-XML', 'ContractController@callToGenerateXMLGUI');
+ Route::post('/contract/forward-to-generateXML', 'ContractController@forwardToGenerateXML');
+
+ Route::post('/contract/forward-to-finalize', 'ContractController@forwardToFinalize');
  Route::post('/contract/forward-to-store', 'ContractController@forwardToStore');
 
  //** Contracts Vodafone*/
@@ -117,6 +122,8 @@ Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiPoolController@forwardToChang
 
 
 
+ Route::get('/gui/index-raleway', 'HomeController@dene');
+ Route::get('/gui/welcome1', 'HomeController@welcome1');
 
 
  Route::get('/re', 'ImportController@getImport')->name('import');

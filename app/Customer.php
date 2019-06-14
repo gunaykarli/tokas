@@ -23,8 +23,8 @@ class Customer extends Model
         return $this->hasOne(CustomerPaymentTool::class);
     }
 
-    public function customerInvoice(){
-        return$this->hasOne(CustomerInvoice::class);
+    public function customerInvoiceAddress(){
+        return$this->hasOne(CustomerInvoiceAddress::class);
     }
 
     public function contracts(){
@@ -36,7 +36,8 @@ class Customer extends Model
      * User defined functions
      */
 
-    public static function store($request){ // Execution forwarded from ContractController@forward
+    /** Execution forwarded from ContractController@forwardToStore */
+    public static function store($request){
 
         // Depending on the customerType, store the Private/SOHo or Business customer's data in the Customers table
         $customer = new Customer();

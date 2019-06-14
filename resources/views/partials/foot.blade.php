@@ -478,8 +478,8 @@
 <!--begin::Global Theme Bundle -->
 <script src="{{ asset('metronic/assets/vendors/base/vendors.bundle.js')}}" type="text/javascript"></script>
 <script src="{{ asset('metronic/assets/demo/default/base/scripts.bundle.js')}}" type="text/javascript"></script>
-<!--end::Global Theme Bundle
+<!--end::Global Theme Bundle-->
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
--->
+
 <!-- END::Foot -->
