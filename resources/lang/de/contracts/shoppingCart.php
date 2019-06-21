@@ -14,9 +14,12 @@ return [
     'delete' => 'Löschen',
     'pleaseSelect' => 'bitte wahlen',
     'captureIMEI' => 'IMEI erfassen',
-    'addNewOrder' => 'Neue Bestellung hinzufügen',
+    'additionalTariffOrder' => 'Mehrkarte hinzufügen',
+    'additionalCard' => 'Mehrkarte',
     'withoutDevice' => 'Ohne Gerät',
     'IMEIOnDemand' => 'Vodafone Gerät auswählen (IMEI on demand)',
-    'enterIMEINumber' => 'IMEI Nummer Eingabe'
+    'enterIMEINumber' => 'IMEI Nummer Eingabe',
+    'services' => 'Dienste',
+    'save' => 'Speichern'
 
 ];

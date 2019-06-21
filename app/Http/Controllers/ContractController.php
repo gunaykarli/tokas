@@ -46,6 +46,7 @@ class ContractController extends Controller
 
         // Depending on the provider id of the selected item in the shopping cart,
         // the program will be forwarded to the respective page to fill out the contract.
+        // session('providerID') canbe used. It is created in tariffs.providers.
 
         // if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone.
         if($shoppingCart->product_type == 1 and $shoppingCart->producer_id == 1)
@@ -57,6 +58,8 @@ class ContractController extends Controller
             return view('contracts.O2.create', compact('shoppingCart'));
     }
 
+
+
     /**
      * Initialized when entering http://tokasdraft.com/contract/generate-XML
      *
@@ -64,6 +67,7 @@ class ContractController extends Controller
     public function callToGenerateXMLGUI(){
         return view('contracts.vodafone.generateXMLTRY');
     }
+
     /**
      * Execution forwarded from "resources/views/contracts/vodafone/generateXMLTRY.blade.php"
      *

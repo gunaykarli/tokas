@@ -13,7 +13,9 @@
                     <div class="m-portlet__head-caption">
                         <div class="m-portlet__head-title">
                             <h3 class="m-portlet__head-text">
-                                {{__('tariffs/index.tariffs')}}
+                                <!-- define hidden field for provider id which is used in js/tariffListWithFilter.js -->
+
+                                <input type="radio" name="providerID" id="providerID" value={{$provider->id}} checked>{{$provider->name}} {{__('tariffs/index.tariffs')}}
                             </h3>
                         </div>
                     </div>
@@ -37,26 +39,8 @@
 
                 <div class="m-portlet__body" id="general">
 
-                @csrf
-                <!--BEGIN:List of the providers -->
-                    <div class="m-form__group form-group">
-                        <label>{{__('tariffs/index.providers')}}</label>
+                    @csrf
 
-                        <div class="m-radio-inline" id="radioInLineProviders">
-                            <label class="m-radio">
-                                <input type="radio" name="provider" id="provider" value=0 checked> {{__('tariffs/index.all')}}
-                                <span></span>
-                            </label>
-                            @foreach($providers as $provider)
-                                <label class="m-radio">
-                                    <input type="radio" name="provider" id="provider" value={{$provider->id}}> {{$provider->name}}
-                                    <span></span>
-                                </label>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                    <!--END:List of the providers -->
 
                     <!--BEGIN:List of the tariffs groups of the selected providers -->
                     <div class="m-form__group form-group">
@@ -67,8 +51,13 @@
                                 <input type="radio" name="tariffGroup" id="tariffGroup" value=0 checked> {{__('tariffs/index.all')}}
                                 <span></span>
                             </label>
-                            <!-- Radio buttons will be added HERE by the "tariffList-Provider.js"
-                            once any radio button change in the div radio group with id named "radioInLineProviders"  -->
+                            @foreach($tariffGroups as $tariffGroup)
+                                <label class="m-radio">
+                                    <input type="radio" name="tariffGroup" id="tariffGroup" value={{$tariffGroup->id}}> {{$tariffGroup->name}}
+                                    <span></span>
+                                </label>
+                            @endforeach
+
                         </div>
                     </div>
                     <div class="m-separator m-separator--dashed m-separator--lg"></div>
@@ -154,21 +143,6 @@
                     </div>
                     <!--end::Filter Portlet-->
 
-                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                    <p>
-                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            Link with href
-                        </a>
-                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Button with data-target
-                        </button>
-                    </p>
-                    <div class="collapse" id="collapseExample">
-                        <div class="card card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                        </div>
-                    </div>
-
                     <!--BEGIN: Datatable -->
                     <table class="table table-striped- table-bordered table-hover table-checkable" >
                         <thead>
@@ -198,7 +172,7 @@
                                         @endif
                                     @endforeach
                                 </td>
-                                <td><a href="/contract/shopping-cart/add-tariff/{{$tariff->id}}" class="btn btn-primary" ><span>{{__('tariffs/index.order')}}</span>&nbsp;&nbsp;</a></td>
+                                <td><a href="/contract/shopping-cart/add-tariff/{{$tariff->id}}/{{$isAdditionalTariff}}" class="btn btn-primary" ><span>{{__('tariffs/index.order')}}</span>&nbsp;&nbsp;</a></td>
                             </tr>
                         @endforeach
 
@@ -222,6 +196,6 @@
     <!--end::Page Vendors -->
 
     <!--begin::Page Scripts-->
-    <script src="{{ asset('js/tariffListWithFilter.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/tariffListWithFilter1.js')}}" type="text/javascript"></script>
     <!--end::Page Scripts-->
 @endsection

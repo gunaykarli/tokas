@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Provider;
 use App\ShoppingCart;
 use App\Tariff;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ShoppingCartController extends Controller
 {
@@ -64,14 +66,14 @@ class ShoppingCartController extends Controller
             ::where('employee_id', auth()->user()->id)
             ->get();
 
-        return view('contracts.shoppingCart', compact('contents'));
+        return view('contracts.shoppingCartORJ', compact('contents'));
     }
 
     /**
      * Add a new tariff to shopping cart.
      *
      */
-    public function addTariff(Tariff $tariff)
+    public function addTariff(Tariff $tariff, $isAdditionalTariff)
     {
         $item = new ShoppingCart();
         $item->producer_id = $tariff->provider_id;
@@ -80,13 +82,16 @@ class ShoppingCartController extends Controller
         $item->employee_id = auth()->user()->id;
         $item->office_id = auth()->user()->office_id;
         $item->dealer_id = auth()->user()->dealer_id;
+        $item->additional_tariff = $isAdditionalTariff;
         $item->save();
 
         $contents = ShoppingCart
             ::where('employee_id', auth()->user()->id)
             ->get();
 
-        return view('contracts.shoppingCart', compact('contents'));
+        $provider = Provider::find($tariff->provider_id);
+
+        return view('contracts.shoppingCartORJ', compact('contents', 'provider'));
 
     }
     public function deleteTariff(Tariff $tariff)
@@ -102,7 +107,44 @@ class ShoppingCartController extends Controller
             ::where('employee_id', auth()->user()->id)
             ->get();
 
-        return view('contracts.shoppingCart', compact('contents'));
+        $provider = Provider::find($tariff->provider_id);
+
+        return view('contracts.shoppingCartORJ', compact('contents', 'provider'));
+    }
+
+    /**
+     * called from resources/views/contracts/shoppingCart.blade.php
+     *
+     */
+    public function saveServicesToSession(Request $request, Tariff $tariff){
+        // Save services of the tariff to a Session as an associative array
+        $servicesOfTheTariff = [
+            'contractStartDate' => $request->contractStartDate,
+            'connectionFee'=> $request->connectionFee
+        ];
+
+        session([$tariff->name => $servicesOfTheTariff]);
+
+        $servicesFromSession = session($tariff->name);
+        //dd($servicesFromSession['contractStartDate']);
+
+
+        // return to the shopping cart
+        $contents = ShoppingCart
+            ::where('employee_id', auth()->user()->id)
+            ->get();
+
+        $provider = Provider::find($tariff->provider_id);
+
+        return view('contracts.shoppingCartORJ', compact('contents', 'provider'));
+    }
+
+    /**
+     * called from  resources/views/contracts/vodafone/enterSIMandServices.blade.php
+     *
+     */
+    public function callToSIMandServicesGUI(Tariff $tariff){
+        return view('contracts.vodafone.enterSIMandServices', compact('tariff'));
     }
 
     /**

@@ -36,7 +36,7 @@ $(document).ready(function(){
 
     $('#radioInLineGroups').change(function(){
 
-        var providerID = $("input[name='provider']:checked").val();
+        var providerID = $("input[name='providerID']:checked").val();
         var tariffGroupID = $("input[name='tariffGroup']:checked").val();
         var maxBasePrice = $("#maxBasePrice").val();
         var _token = $('input[name="_token"]').val();
@@ -55,7 +55,7 @@ $(document).ready(function(){
     });
 
     $('#filterPortlet').change(function(){
-        var providerID = $("input[name='provider']:checked").val();
+        var providerID = $("input[name='providerID']:checked").val();
         var tariffGroupID = $("input[name='tariffGroup']:checked").val();
         var maxBasePrice = $("#maxBasePrice").val();
         var _token = $('input[name="_token"]').val();
@@ -77,7 +77,7 @@ $(document).ready(function(){
 
     $('#reset').click(function(){
 
-        var providerID = $("input[name='provider']:checked").val();
+        var providerID = $("input[name='providerID']:checked").val();
         var tariffGroupID = $("input[name='tariffGroup']:checked").val();
         var _token = $('input[name="_token"]').val();
 

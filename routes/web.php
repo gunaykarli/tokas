@@ -92,14 +92,19 @@ Route::get('/region/edit/{regionID}', 'RegionController@edit')->name('region-edi
 Route::post('/region/update/{region}', 'RegionController@update');
 
 //** Tariffs */
+Route::get('/tariff/providers-list', 'TariffController@providers');
+Route::get('/tariff/index/{provider}', 'TariffController@index');
+Route::get('/tariff/index/{provider}/{isAdditionalTariff}', 'TariffController@index');
+Route::post('/tariff/index/tariffs-with-filter', 'TariffController@fetchTariffsWithFilter')->name('fetchTariffsWithFilter');
+
 Route::get('/tariff/vodafone/create', 'TariffController@create');
 Route::post('/tariff/vodafone/store', 'TariffController@store');
+Route::get('/tariff/vodafone/index', 'TariffController@create');
 
 Route::get('/service/create', 'ServiceController@create');
 Route::post('/service/store', 'ServiceController@store');
 
-Route::get('/tariff/index', 'TariffController@index');
-Route::post('/tariff/index/tariffs-with-filter', 'TariffController@fetchTariffsWithFilter')->name('fetchTariffsWithFilter');
+
 
 //** IMEIs */
 Route::get('/IMEIs/IMEI-pool-status', 'ImeiPoolController@IMEIPoolStatus');
@@ -107,8 +112,12 @@ Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiPoolController@forwardToChang
 
 //** Contracts */
  Route::get('/contract/shopping-cart', 'ShoppingCartController@index');
- Route::get('/contract/shopping-cart/add-tariff/{tariff}', 'ShoppingCartController@addTariff');
+ Route::get('/contract/shopping-cart/add-tariff/{tariff}/{isAdditionalTariff}', 'ShoppingCartController@addTariff');
  Route::get('/contract/shopping-cart/delete-tariff/{tariff}', 'ShoppingCartController@deleteTariff');
+ Route::get('/contracts/vodafone/shopping-cart/enter-SIM-services/{tariff}', 'ShoppingCartController@callToSIMandServicesGUI');
+ Route::post('/contract/vodafone/shopping-cart/services/{tariff}', 'ShoppingCartController@saveServicesToSession');
+
+
 
  Route::get('/contract/generate-XML', 'ContractController@callToGenerateXMLGUI');
  Route::post('/contract/forward-to-generateXML', 'ContractController@forwardToGenerateXML');
@@ -118,6 +127,7 @@ Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiPoolController@forwardToChang
 
  //** Contracts Vodafone*/
  Route::post('/contracts/vodafone/create/{shoppingCartID}', 'ContractController@create');
+
  //Route::post('/contracts/vodafone/store', 'ContractController@store');
 
 

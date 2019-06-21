@@ -17,6 +17,7 @@ use App\TariffsLimit;
 use App\TariffsProvision;
 use App\VodafoneTariff;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use phpDocumentor\Reflection\Types\Null_;
 
 class TariffController extends Controller
@@ -32,11 +33,54 @@ class TariffController extends Controller
 
 
     /**
+     * Display a listing of the providers.
+     *
+     */
+
+    public function providers()
+    {
+        return view('tariffs.providers');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Provider $provider, $isAdditionalTariff)
+    {
+        Session::put('providerID',$provider->id);
+
+        // Take tariffs of the provider.
+        $tariffs = Tariff
+            ::where('provider_id', $provider->id)
+            ->get();
+        $tariffGroups = TariffsGroup
+            ::where('provider_id', $provider->id)
+            ->get();
+
+        // Determine all tariffs with on-tops for authenticated user's office (dealer) in "on_top" pivot table.
+        $dealer = Dealer::find(auth()
+            ->user()
+            ->dealer_id);
+
+        $tariffsWithOnTopForTheDealer = $dealer->tariffs()
+            ->wherePivot('office_id', auth()
+                ->user()->office_id)
+            ->get();
+
+        if($provider->id == 1)
+            return view('tariffs.vodafone.index', compact('tariffs','tariffGroups', 'tariffsWithOnTopForTheDealer', 'provider', 'isAdditionalTariff'));
+        else if($provider->id == 2)
+            return view('tariffs.ayYildiz.index', compact('tariffs', 'tariffGroups', 'tariffsWithOnTopForTheDealer', 'provider'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexORJ()
     {
         // Take all tariff from the DB.
         $tariffs = Tariff::all();
@@ -55,7 +99,7 @@ class TariffController extends Controller
         $providers = Provider::all();
 
 
-        return view('tariffs.index', compact('tariffs', 'tariffsWithOnTopForTheDealer', 'providers'));
+        return view('tariffs.indexORJ', compact('tariffs', 'tariffsWithOnTopForTheDealer', 'providers'));
     }
 
     public function fetchTariffsWithFilter(Request $request)

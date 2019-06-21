@@ -21,6 +21,7 @@ class CreateShoppingCartsTable extends Migration
             $table->integer('product_type');
             $table->integer('product_id');
             $table->integer('producer_id');
+            $table->boolean('additional_tariff');
             $table->timestamps();
         });
     }
