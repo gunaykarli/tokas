@@ -17,7 +17,4 @@ return [
     'maxBandWidth' => 'max Datenvolumen',
     'filterParameters' => 'Filter Parameter',
     'resetFilter' => 'Filter Zurücksetzen'
-
-
-
 ];

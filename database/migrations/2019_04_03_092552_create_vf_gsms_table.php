@@ -24,10 +24,11 @@ class CreateVfGsmsTable extends Migration
             $table->integer('customer_number')->nullable();
             $table->boolean('activation_with_hardware')->nullable();
 
+            $table->boolean('additional_tariff')->nullable();
             $table->string('SIM_serial_number')->nullable();
             $table->integer('SIM_IMEI_type')->nullable();
             $table->integer('tariff_id')->nullable();
-            $table->string('tariff_and_services')->nullable();
+            $table->date('contract_start')->nullable();
             $table->boolean('different_invoice_address')->nullable();
             $table->boolean('different_home_address')->nullable();
             $table->string('connection_overview')->nullable();

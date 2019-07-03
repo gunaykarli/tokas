@@ -14,6 +14,7 @@ use App\VfCreditActivation;
 use App\VfGsm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ContractController extends Controller
 {
@@ -46,7 +47,7 @@ class ContractController extends Controller
 
         // Depending on the provider id of the selected item in the shopping cart,
         // the program will be forwarded to the respective page to fill out the contract.
-        // session('providerID') canbe used. It is created in tariffs.providers.
+        // session('providerID') can be used. It is created in tariffs.providers.
 
         // if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone.
         if($shoppingCart->product_type == 1 and $shoppingCart->producer_id == 1)
@@ -58,8 +59,6 @@ class ContractController extends Controller
             return view('contracts.O2.create', compact('shoppingCart'));
     }
 
-
-
     /**
      * Initialized when entering http://tokasdraft.com/contract/generate-XML
      *
@@ -67,21 +66,6 @@ class ContractController extends Controller
     public function callToGenerateXMLGUI(){
         return view('contracts.vodafone.generateXMLTRY');
     }
-
-    /**
-     * Execution forwarded from "resources/views/contracts/vodafone/generateXMLTRY.blade.php"
-     *
-     */
-    public function forwardToGenerateXML(Request $request){
-
-
-        // And, XML file will be produced.
-        Contract::produceXMLForGsmVodafoneContract($request->contractID);
-
-        redirect()->home();
-    }
-
-
 
     /**
      * Execution forwarded from "resources/views/contracts/vodafone/finalize.blade.php"
@@ -96,9 +80,10 @@ class ContractController extends Controller
         Contract::changeStatusOfContract($request->contractID, 1);
 
         // And, XML file will be produced.
-        Contract::produceXMLForGsmVodafoneContract($request->contractID, $request);
+        Contract::produceXMLForGsmVodafoneContract($request->contractID);
 
-        redirect('home');
+        Session::flash('messageContractFinalised', 'contractFinalised');
+        return view('tariffs.providers');
     }
 
     /**
@@ -173,7 +158,8 @@ class ContractController extends Controller
 
         }
     }
-    public function forwardToStoreTRY(Request $request)
+
+    public function forwardToStoreTRY_DELETE(Request $request)
     {
         $formDataInCreateContract = $request->formDataInCreateContract;
         dd($request->formDataInCreateContract);
@@ -239,5 +225,17 @@ class ContractController extends Controller
         {
 
         }
+    }
+    /**
+     * Execution forwarded from "resources/views/contracts/vodafone/generateXMLTRY.blade.php"
+     *
+     */
+    public function forwardToGenerateXML_DELETE(Request $request){
+
+
+        // And, XML file will be produced.
+        Contract::produceXMLForGsmVodafoneContract($request->contractID);
+
+        redirect()->home();
     }
 }

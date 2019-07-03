@@ -23,6 +23,7 @@ class Service extends Model
 
     /** User defined functions */
 
+    // called from VodafoneTariff@manageCreationProcess
     public function setVodafoneTariffServices($vodafoneTariff, Request $request){
 
         //** Take all service info of newly created tariff from the excel to an array */

@@ -65,6 +65,11 @@ return [
     'groupMust' => 'Group Must',
     'tariffType' => 'Tarife Typ',
 
-    //** Service */
-    'selectFile' => 'Datei Aussuchen'
+    //** Service and Law Text*/
+    'selectFile' => 'Datei Aussuchen',
+    'lawTextOftariffs' => 'Rechtstext der Tarife',
+    'copyFromOtherTariff' => 'Kopie aus anderem Tarif',
+    'selectFromTheList' => 'aus der Liste auswählen',
+    'tariffs' => 'Tarife'
+
 ];

@@ -36,7 +36,7 @@ class VodafoneTariff extends Model
     public function manageCreationProcess($tariff,  $request)
     {
         //** Create a new Vodafone Tariff in VodafoneTariff table.
-        // Note that $this refers to VodafoneTariff instance
+        // Note that "$this" refers to VodafoneTariff instance
         // $tariff refers to main tariff that vodafone belongs to.*/
 
         $this->tariff_id = $tariff->id;
@@ -49,5 +49,9 @@ class VodafoneTariff extends Model
         //** Set the SERVICE of the newly created vodafone tariff */
         $service = new Service();
         $service->setVodafoneTariffServices($this, $request);
+
+        //** Set the LAWTEXTs of the newly created vodafone tariff */
+        $lawText = new LawText();
+        $lawText->setVodafoneTariffLawTexts($this, $request);
     }
 }

@@ -23,7 +23,7 @@ class CreateContractsTable extends Migration
             $table->integer('dealer_id');
             $table->integer('VO_id');
             //$table->integer('tariff_id')->nullable();
-            $table->date('contract_start');
+            //$table->date('contract_start');
             $table->smallInteger('status');
             $table->timestamps();
         });

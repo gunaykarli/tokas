@@ -191,6 +191,23 @@
                                     </div>
                                 </div>
 
+                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_5">
+                                    <a href="#" class="m-wizard__step-number">
+                                        <span><i class="fa  flaticon-layers"></i></span>
+                                    </a>
+                                    <div class="m-wizard__step-info">
+                                        <div class="m-wizard__step-title">
+                                            {{__('contracts\vodafone\create.tariffOptions')}}
+                                        </div>
+                                        <div class="m-wizard__step-desc">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
                                 <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_8">
                                     <a href="#" class="m-wizard__step-number">
                                         <span><i class="fa  flaticon-layers"></i></span>
@@ -754,21 +771,77 @@
                                                     <h3 class="m-form__heading-title">{{__('contracts\vodafone\create.contractOptions')}}</h3>
                                                 </div>
 
-                                                <!-- the below sections are transfered to "resources/views/contracts/vodafone/enterSimImeiServices.blade.php"
+                                                <!--begin: Contract Start Date -->
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.contractStartDate')}}</b></label>
+                                                    <div class="col-sm-4 col-sm-4">
+                                                        <input name="contractStartDate" class="form-control m-input" type="date" value="" id="example-date-input">
+                                                    </div>
+                                                </div>
                                                 <!--begin: Contract Start Date -->
 
-                                                <!--end: Contract Start Date -->
-
                                                 <!--begin: Connection fee -->
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.connectionFee')}}</b></label>
+                                                    <div class="col-sm-8 col-sm-8">
+                                                        <div class="m-radio-list" id="connectionFees">
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="connectionFee" id="connectionFee" value=1>{{__('contracts\vodafone\create.connectionFee1')}}
+                                                                <span></span>
+                                                            </label>
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="connectionFee" id="connectionFee" value=2>{{__('contracts\vodafone\create.connectionFee2')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
 
+                                                </div>
                                                 <!--end: Connection fee -->
 
                                                 <!--begin: Connection Overview -->
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.connectionOverview')}}</b></label>
+                                                    <div class="col-sm-8 col-sm-8">
+                                                        <div class="m-radio-list" id="connectionOverviews">
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="connectionOverview" id="connectionOverview" value=1 checked>{{__('contracts\vodafone\create.connectionOverview1')}}
+                                                                <span></span>
+                                                            </label>
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="connectionOverview" id="connectionOverview" value=2>{{__('contracts\vodafone\create.connectionOverview2')}}
+                                                                <span></span>
+                                                            </label>
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="connectionOverview" id="connectionOverview" value=3>{{__('contracts\vodafone\create.connectionOverview3')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
 
+                                                </div>
                                                 <!--end: Connection Overview -->
 
                                                 <!--begin: Destination number representation -->
-
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.destinationNumberRepresentation')}}</b></label>
+                                                    <div class="col-sm-8 col-sm-8">
+                                                        <div class="m-radio-list" id="destinationNumberRepresentations">
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="destinationNumberRepresentation" id="destinationNumberRepresentation" value=1 checked>{{__('contracts\vodafone\create.completed')}}
+                                                                <span></span>
+                                                            </label>
+                                                            <label class="m-radio">
+                                                                <input type="radio" name="destinationNumberRepresentation" id="destinationNumberRepresentation" value=2>{{__('contracts\vodafone\create.shortened')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <!--end: Destination number representation -->
 
 
@@ -1009,7 +1082,199 @@
                                 <!--end: Form Wizard Step 4-->
 
                                 <!--begin: Form Wizard Step 5 - Tariff Options --->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_5">
+                                    <div class="row">
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+                                                <!--begin::Portlet-->
+                                                <div class="m-portlet m-portlet--full-height">
+                                                    <div class="m-portlet__head">
+                                                        <div class="m-portlet__head-caption">
+                                                            <div class="m-portlet__head-title">
+                                                                <h3 class="m-portlet__head-text">
+                                                                    {{__('contracts\vodafone\create.serviceOptions')}}
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-portlet__body">
 
+                                                        <!--begin::Section-->
+                                                        <div class="m-accordion m-accordion--default" id="m_accordion_1" role="tablist">
+                                                            <!--begin::Item - general Services-->
+                                                            <div class="m-accordion__item">
+                                                                <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="    false">
+                                                                    <span class="m-accordion__item-icon"><i class="fa flaticon-user-ok"></i></span>
+                                                                    <span class="m-accordion__item-title">{{__('contracts\vodafone\create.generalServices')}}</span>
+                                                                    <span class="m-accordion__item-mode"></span>
+                                                                </div>
+                                                                <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_1_head" data-parent="#m_accordion_1">
+                                                                    <div class="m-accordion__item-content">
+
+                                                                        <!--begin: Call barring -->
+                                                                        <div class="form-group m-form__group row">
+                                                                            <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.callBarring')}}</b></label>
+                                                                            <div class="col-sm-7 col-sm-7">
+                                                                                <div class="m-radio-list" id="callBarrings">
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="callBarring" id="callBarring" value=1 checked>{{__('contracts\vodafone\create.callBarring1')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="callBarring" id="callBarring" value=2>{{__('contracts\vodafone\create.callBarring2')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--end: Call barring -->
+
+                                                                        <!--begin: Mailbox -->
+                                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                                        <div class="form-group m-form__group row">
+                                                                            <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.mailbox')}}</b></label>
+                                                                            <div class="col-sm-7 col-sm-7">
+                                                                                <div class="m-radio-list" id="mailboxes">
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="mailbox" id="mailbox" value=1 checked>{{__('contracts\vodafone\create.mailbox1')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="mailbox" id="mailbox" value=2>{{__('contracts\vodafone\create.mailbox2')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="mailbox" id="mailbox" value=3>{{__('contracts\vodafone\create.mailbox3')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="mailbox" id="mailbox" value=4>{{__('contracts\vodafone\create.mailbox4')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--end: Mailbox -->
+
+                                                                        <!--begin: Telephone number transmission -->
+                                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                                        <div class="form-group m-form__group row">
+                                                                            <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.telephoneNumberTransmission')}}</b></label>
+                                                                            <div class="col-sm-7 col-sm-7">
+                                                                                <div class="m-radio-list" id="telephoneNumberTransmissions" class="col-sm-9 col-lg-9">
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="telephoneNumberTransmission" id="telephoneNumberTransmission" value=1 checked>{{__('contracts\vodafone\create.telephoneNumberTransmission1')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio" name="telephoneNumberTransmission" id="telephoneNumberTransmission" value=2>{{__('contracts\vodafone\create.telephoneNumberTransmission2')}}
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--end: Telephone number transmission -->
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Item - general Services-->
+
+                                                            <!--begin::Item - dataServices-->
+                                                            <div class="m-accordion__item">
+                                                                <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_2_head" data-toggle="collapse" href="#m_accordion_1_item_2_body" aria-expanded="    false">
+                                                                    <span class="m-accordion__item-icon"><i class="fa  flaticon-placeholder"></i></span>
+                                                                    <span class="m-accordion__item-title">{{__('contracts\vodafone\create.dataServices')}}</span>
+                                                                    <span class="m-accordion__item-mode"></span>
+                                                                </div>
+                                                                <div class="m-accordion__item-body collapse" id="m_accordion_1_item_2_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_2_head" data-parent="#m_accordion_1">
+                                                                    <div class="m-accordion__item-content">
+
+                                                                        <div class="m-form__group form-group">
+                                                                            <div class="m-checkbox-list">
+                                                                                @foreach(\App\VodafoneTariff::where('tariff_id', $shoppingCart->product_id)->first()->services as $service)
+                                                                                    @if($service->type == 1)
+                                                                                        <label class="m-checkbox m-checkbox--success">
+                                                                                            <input type="checkbox" name="dataServices[]" value="{{$service->code}}" @if($service->pivot->property == 1) checked @endif > {{$service->name}}
+                                                                                            <span></span>
+                                                                                        </label>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Item - dataServices-->
+
+                                                            <!--begin::Item - additional Services-->
+                                                            <div class="m-accordion__item">
+                                                                <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_3_head" data-toggle="collapse" href="#m_accordion_1_item_3_body" aria-expanded="    false">
+                                                                    <span class="m-accordion__item-icon"><i class="fa  flaticon-alert-2"></i></span>
+                                                                    <span class="m-accordion__item-title">{{__('contracts\vodafone\create.additionalServices')}}</span>
+                                                                    <span class="m-accordion__item-mode"></span>
+                                                                </div>
+                                                                <div class="m-accordion__item-body collapse" id="m_accordion_1_item_3_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_3_head" data-parent="#m_accordion_1">
+                                                                    <div class="m-accordion__item-content">
+
+                                                                        <div class="m-form__group form-group">
+
+                                                                            <div class="m-checkbox-list">
+                                                                                @foreach(\App\VodafoneTariff::where('tariff_id', $shoppingCart->product_id)->first()->services as $service)
+                                                                                    @if($service->type == 2)
+                                                                                        <label class="m-checkbox m-checkbox--success">
+                                                                                            <input type="checkbox" name="additionalServices[]" value={{$service->code}} @if($service->pivot->property == 1) checked @endif > {{$service->name}}
+                                                                                            <span></span>
+                                                                                        </label>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Item additional Services-->
+
+                                                            <!--begin::Item - Promotion Services-->
+                                                            <div class="m-accordion__item">
+                                                                <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_4_head" data-toggle="collapse" href="#m_accordion_1_item_4_body" aria-expanded="    false">
+                                                                    <span class="m-accordion__item-icon"><i class="fa  flaticon-alert-2"></i></span>
+                                                                    <span class="m-accordion__item-title">{{__('contracts\vodafone\create.promotionServices')}}</span>
+                                                                    <span class="m-accordion__item-mode"></span>
+                                                                </div>
+                                                                <div class="m-accordion__item-body collapse" id="m_accordion_1_item_4_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_4_head" data-parent="#m_accordion_1">
+                                                                    <div class="m-accordion__item-content">
+
+                                                                        <div class="m-form__group form-group">
+                                                                            <div class="m-checkbox-list">
+                                                                                @foreach(\App\VodafoneTariff::where('tariff_id', $shoppingCart->product_id)->first()->services as $service)
+                                                                                    @if($service->type == 3)
+                                                                                        <label class="m-checkbox m-checkbox--success">
+                                                                                            <input type="checkbox" name="additionalServices[]" value={{$service->code}} @if($service->pivot->property == 1) checked @endif > {{$service->name}}
+                                                                                            <span></span>
+                                                                                        </label>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Ite Promotion Services-->
+                                                        </div>
+                                                        <!--end::Section-->
+
+                                                    </div>
+                                                </div>
+                                                <!--end::Portlet-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!--end: Form Wizard Step 5-->
 
 

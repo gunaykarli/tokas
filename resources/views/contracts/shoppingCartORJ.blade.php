@@ -146,7 +146,8 @@
                                             @endif
                                             @endif
                                             <td>
-                                                <a href="/contracts/vodafone/shopping-cart/enter-SIM-services/{{$content->product_id}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
+                                                <!-- href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/content->product_id/0- 0 means the SIM card is NOT additional tariff-->
+                                                <a href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/{{$content->product_id}}/{{0}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
                                                     <span>
                                                         <i class="la la-cart-plus"></i>
                                                         <span> {{__('contracts/shoppingCart.services')}}</span>
@@ -174,7 +175,7 @@
                                         </form>
                                     @elseif($content->additional_tariff == 1)
                                                 <!-- Set up the link according to the provider of the tariff.
-                                                With the link, instead of "$content->producer_id", "$content->id" is sent since it will be more useful in the "/contracts/.../create". -->
+                                                With the link, instead of "$content->producer_id", "$content->id" is sent, since it will be more useful in the "/contracts/.../create". -->
 
                                                     <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
                                                     @if($content->product_type == 1 and $content->producer_id == 1)
@@ -192,7 +193,7 @@
                                                                             <tr>
                                                                                 <td><a href="/contract/shopping-cart/delete-tariff/{{$content->product_id}}" class="btn btn-danger" ><span>{{__('contracts/shoppingCart.delete')}}</span>&nbsp;&nbsp;</a></td>
                                                                                 <td></td>
-                                                                            @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                                                            @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff, not a mobile phone. -->
                                                                                 <td>{{(\App\Tariff::find($content->product_id))->name}}</td>
                                                                                 @endif
                                                                                 <td><input type="text" name="SIMNumber[{{$content->id}}]" class="form-control m-input" placeholder="" value=""></td>
@@ -229,7 +230,8 @@
                                                                                     @endif
                                                                                 @endif
                                                                                 <td>
-                                                                                    <a href="/contracts/vodafone/shopping-cart/enter-SIM-services/{{$content->product_id}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
+                                                                                    <!-- href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/content->product_id/1- 1 means the SIM card is additional tariff-->
+                                                                                    <a href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/{{$content->product_id}}/{{1}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
                                                                                         <span>
                                                                                             <i class="la la-cart-plus"></i>
                                                                                             <span> {{__('contracts/shoppingCart.services')}}</span>

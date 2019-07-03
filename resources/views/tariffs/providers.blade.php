@@ -36,6 +36,15 @@
                 </div>
 
                 <div class="m-portlet__body" id="general">
+                    <!-- When new contract and XML are created successfully...
+                    forwarded from ContractController@forwardToFinalize-->
+                    @if(session()->has('messageContractFinalised'))
+                        <div class="form-group m-form__group">
+                            <div class="alert alert-success">
+                                {{__('tariffs/providers.'. session()->get('messageContractFinalised'))}}
+                            </div>
+                        </div>
+                    @endif
                     <table width="100%" border="0" valign="top" align="left">
                         <tr>
                             <!-- /tariff/index/{{1}}/{{0}} : 1 stand for providerID, 0 is the value of $isAdditionalTariff -->

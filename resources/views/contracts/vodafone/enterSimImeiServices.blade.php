@@ -73,13 +73,53 @@
 
                 <div class="m-portlet__body" id="">
                     <!--begin: Form -->
-                    <form method="POST" action="/contract/vodafone/shopping-cart/services/{{$tariff->id}}" class="m-form m-form--label-align-left- m-form--state-" id="m_form">
+                    <form method="POST" action="/contract/vodafone/shopping-cart/SIM-IMEI-services/{{$tariff->id}}/{{$isAdditionalTariff}}" class="m-form m-form--label-align-left- m-form--state-" id="m_form">
                     @csrf
                         <!--begin: Form Wizard Step 4 - Contract Options - -->
                         <div class="row">
                             <div class="col-xl-8 offset-xl-2">
 
+                                    <!--begin: SIM number -->
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-4 col-lg-4 col-form-label"><b>{{__('contracts\vodafone\enterSimImeiServices.SIMNumber')}}</b></label>
+                                        <div class="col-xl-4 col-lg-4">
+                                            <input type="text" name="SIMNumber" id="SIMNumber" class="form-control m-input form-control-sm">
+                                        </div>
+                                    </div>
+                                    <!--end: SIM number -->
+
+                                    <!--begin: IMEI options -->
+                                    <!-- If "IMEI On-Demand Pool Fields" is active -->
+                                    @if(\App\SystemVariable::where('name', 'isIMEIOnDemandFieldActive')->first()->value == 1)
+                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\enterSimImeiServices.captureIMEI')}}</b></label>
+                                        <div class="col-sm-8 col-sm-8">
+                                                            <div class="m-radio-list">
+                                                                <label class="m-radio m-radio--bold">
+                                                                    <input type="radio" name="IMEIOption" value="1"> {{__('contracts\vodafone\enterSimImeiServices.withoutDevice')}}
+                                                                    <span></span>
+                                                                </label>
+
+                                                                <label class="m-radio m-radio--bold">
+                                                                    <input type="radio" name="IMEIOption" value="2"> {{__('contracts\vodafone\enterSimImeiServices.IMEIOnDemand')}}
+                                                                    <span></span>
+                                                                </label>
+                                                                <label class="m-radio m-radio--bold">
+                                                                    <input type="radio" name="IMEIOption" value="3">
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control m-input" name="IMEINumber" placeholder="{{__('contracts\vodafone\enterSimImeiServices.enterIMEINumber')}}">
+                                                                    </div>
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    <!--end: IMEI options -->
+
                                     <!--begin: Contract Start Date -->
+                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                     <div class="form-group m-form__group row">
                                         <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.contractStartDate')}}</b></label>
                                         <div class="col-sm-4 col-sm-4">
@@ -104,7 +144,6 @@
                                                 </label>
                                             </div>
                                         </div>
-
                                     </div>
                                     <!--end: Connection fee -->
 
@@ -151,21 +190,74 @@
                                     </div>
                                     <!--end: Destination number representation -->
 
-
-                                    <!--begin: objection-advertising refusal (Widerspruch-Werbeverweigerung)-->
                                     <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                    <div class="form-group m-form__group row m--margin-top-5">
-                                            <div class="col-xl-1 col-lg-1">
-                                                <span class="m-switch m-switch--sm m-switch--icon">
-                                                    <label>
-                                                        <input type="checkbox"  name="objection" id="objection">
-                                                        <span></span>
-                                                    </label>
-                                                </span>
+
+                                    <!--begin: Call barring -->
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.callBarring')}}</b></label>
+                                        <div class="col-sm-7 col-sm-7">
+                                            <div class="m-radio-list" id="callBarrings">
+                                                <label class="m-radio">
+                                                    <input type="radio" name="callBarring" id="callBarring" value=1 checked>{{__('contracts\vodafone\create.callBarring1')}}
+                                                    <span></span>
+                                                </label>
+                                                <label class="m-radio">
+                                                    <input type="radio" name="callBarring" id="callBarring" value=2>{{__('contracts\vodafone\create.callBarring2')}}
+                                                    <span></span>
+                                                </label>
                                             </div>
-                                            <label class="col-xl-6 col-lg-6 col-form-label">{{__('contracts\vodafone\create.objectionContent')}}</label>
+                                        </div>
                                     </div>
-                                    <!--end: objection-advertising refusal (Widerspruch-Werbeverweigerung)-->
+                                    <!--end: Call barring -->
+
+                                    <!--begin: Mailbox -->
+                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.mailbox')}}</b></label>
+                                        <div class="col-sm-7 col-sm-7">
+                                            <div class="m-radio-list" id="mailboxes">
+                                                <label class="m-radio">
+                                                    <input type="radio" name="mailbox" id="mailbox" value=1 checked>{{__('contracts\vodafone\create.mailbox1')}}
+                                                    <span></span>
+                                                </label>
+                                                <label class="m-radio">
+                                                    <input type="radio" name="mailbox" id="mailbox" value=2>{{__('contracts\vodafone\create.mailbox2')}}
+                                                    <span></span>
+                                                </label>
+                                                <label class="m-radio">
+                                                    <input type="radio" name="mailbox" id="mailbox" value=3>{{__('contracts\vodafone\create.mailbox3')}}
+                                                    <span></span>
+                                                </label>
+                                                <label class="m-radio">
+                                                    <input type="radio" name="mailbox" id="mailbox" value=4>{{__('contracts\vodafone\create.mailbox4')}}
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end: Mailbox -->
+
+                                    <!--begin: Telephone number transmission -->
+                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.telephoneNumberTransmission')}}</b></label>
+                                        <div class="col-sm-7 col-sm-7">
+                                            <div class="m-radio-list" id="telephoneNumberTransmissions" class="col-sm-9 col-lg-9">
+                                                <label class="m-radio">
+                                                    <input type="radio" name="telephoneNumberTransmission" id="telephoneNumberTransmission" value=1 checked>{{__('contracts\vodafone\create.telephoneNumberTransmission1')}}
+                                                    <span></span>
+                                                </label>
+                                                <label class="m-radio">
+                                                    <input type="radio" name="telephoneNumberTransmission" id="telephoneNumberTransmission" value=2>{{__('contracts\vodafone\create.telephoneNumberTransmission2')}}
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end: Telephone number transmission -->
+                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+
                             </div>
                         </div>
                         <!--end: Form Wizard Step 4-->
@@ -188,84 +280,6 @@
 
                                             <!--begin::Section-->
                                             <div class="m-accordion m-accordion--default" id="m_accordion_1" role="tablist">
-                                                <!--begin::Item - general Services-->
-                                                <div class="m-accordion__item">
-                                                    <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="    false">
-                                                        <span class="m-accordion__item-icon"><i class="fa flaticon-user-ok"></i></span>
-                                                        <span class="m-accordion__item-title">{{__('contracts\vodafone\create.generalServices')}}</span>
-                                                        <span class="m-accordion__item-mode"></span>
-                                                    </div>
-                                                    <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_1_head" data-parent="#m_accordion_1">
-                                                        <div class="m-accordion__item-content">
-
-                                                            <!--begin: Call barring -->
-                                                            <div class="form-group m-form__group row">
-                                                                <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.callBarring')}}</b></label>
-                                                                <div class="col-sm-7 col-sm-7">
-                                                                    <div class="m-radio-list" id="callBarrings">
-                                                                        <label class="m-radio">
-                                                                            <input type="radio" name="callBarring" id="callBarring" value=1 checked>{{__('contracts\vodafone\create.callBarring1')}}
-                                                                            <span></span>
-                                                                        </label>
-                                                                        <label class="m-radio">
-                                                                            <input type="radio" name="callBarring" id="callBarring" value=2>{{__('contracts\vodafone\create.callBarring2')}}
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--end: Call barring -->
-
-                                                            <!--begin: Mailbox -->
-                                                            <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                                            <div class="form-group m-form__group row">
-                                                                <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.mailbox')}}</b></label>
-                                                                <div class="col-sm-7 col-sm-7">
-                                                                    <div class="m-radio-list" id="mailboxes">
-                                                                        <label class="m-radio">
-                                                                            <input type="radio" name="mailbox" id="mailbox" value=1 checked>{{__('contracts\vodafone\create.mailbox1')}}
-                                                                            <span></span>
-                                                                        </label>
-                                                                        <label class="m-radio">
-                                                                            <input type="radio" name="mailbox" id="mailbox" value=2>{{__('contracts\vodafone\create.mailbox2')}}
-                                                                            <span></span>
-                                                                        </label>
-                                                                        <label class="m-radio">
-                                                                            <input type="radio" name="mailbox" id="mailbox" value=3>{{__('contracts\vodafone\create.mailbox3')}}
-                                                                            <span></span>
-                                                                        </label>
-                                                                        <label class="m-radio">
-                                                                            <input type="radio" name="mailbox" id="mailbox" value=4>{{__('contracts\vodafone\create.mailbox4')}}
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--end: Mailbox -->
-
-                                                            <!--begin: Telephone number transmission -->
-                                                            <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                                            <div class="form-group m-form__group row">
-                                                                <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.telephoneNumberTransmission')}}</b></label>
-                                                                <div class="col-sm-7 col-sm-7">
-                                                                    <div class="m-radio-list" id="telephoneNumberTransmissions" class="col-sm-9 col-lg-9">
-                                                                        <label class="m-radio">
-                                                                            <input type="radio" name="telephoneNumberTransmission" id="telephoneNumberTransmission" value=1 checked>{{__('contracts\vodafone\create.telephoneNumberTransmission1')}}
-                                                                            <span></span>
-                                                                        </label>
-                                                                        <label class="m-radio">
-                                                                            <input type="radio" name="telephoneNumberTransmission" id="telephoneNumberTransmission" value=2>{{__('contracts\vodafone\create.telephoneNumberTransmission2')}}
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--end: Telephone number transmission -->
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--end::Item - general Services-->
 
                                                 <!--begin::Item - dataServices-->
                                                 <div class="m-accordion__item">

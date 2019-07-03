@@ -91,6 +91,13 @@ Route::get('/region/index', 'RegionController@index');
 Route::get('/region/edit/{regionID}', 'RegionController@edit')->name('region-edit');
 Route::post('/region/update/{region}', 'RegionController@update');
 
+//** Law Texts */
+Route::get('/law-text/index', 'LawTextController@index');
+Route::get('/law-text/create', 'LawTextController@create');
+Route::post('/law-text/store', 'LawTextController@store');
+Route::get('/law-text/edit/{lawText}', 'LawTextController@edit');
+Route::post('/law-text/update/{lawText}', 'LawTextController@update');
+
 //** Tariffs */
 Route::get('/tariff/providers-list', 'TariffController@providers');
 Route::get('/tariff/index/{provider}', 'TariffController@index');
@@ -114,8 +121,8 @@ Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiPoolController@forwardToChang
  Route::get('/contract/shopping-cart', 'ShoppingCartController@index');
  Route::get('/contract/shopping-cart/add-tariff/{tariff}/{isAdditionalTariff}', 'ShoppingCartController@addTariff');
  Route::get('/contract/shopping-cart/delete-tariff/{tariff}', 'ShoppingCartController@deleteTariff');
- Route::get('/contracts/vodafone/shopping-cart/enter-SIM-services/{tariff}', 'ShoppingCartController@callToSIMandServicesGUI');
- Route::post('/contract/vodafone/shopping-cart/services/{tariff}', 'ShoppingCartController@saveServicesToSession');
+ Route::get('/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/{tariff}/{isAdditionalTariff}', 'ShoppingCartController@callToSimImeiServicesGUI');
+ Route::post('/contract/vodafone/shopping-cart/SIM-IMEI-services/{tariff}/{isAdditionalTariff}', 'ShoppingCartController@saveSimImeiServicesToSession');
 
 
 

@@ -23,7 +23,10 @@ class LawTextController extends Controller
      */
     public function index()
     {
-        //
+        // Fetch all law texts
+        $lawTexts = LawText::all();
+
+        return view('lawTexts.index', compact('lawTexts'));
     }
 
     /**
@@ -33,7 +36,7 @@ class LawTextController extends Controller
      */
     public function create()
     {
-        //
+        return view('lawTexts.create');
     }
 
     /**
@@ -44,7 +47,15 @@ class LawTextController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // form a law text instance
+        $lawText = new LawText();
+
+        $lawText->code = $request->lawTextCode;
+        $lawText->content = $request->lawTextContent;
+
+        $lawText->save();
+
+        return redirect()->back()->with('message', 'success');
     }
 
     /**
@@ -66,7 +77,7 @@ class LawTextController extends Controller
      */
     public function edit(LawText $lawText)
     {
-        //
+        return view('lawTexts.edit', compact('lawText'));
     }
 
     /**
@@ -78,7 +89,12 @@ class LawTextController extends Controller
      */
     public function update(Request $request, LawText $lawText)
     {
-        //
+        $lawText->code = $request->lawTextCode;
+        $lawText->content = $request->lawTextContent;
+
+        $lawText->save();
+        return redirect('/law-text/index')->with('updateMessage', 'updateSuccess');
+
     }
 
     /**

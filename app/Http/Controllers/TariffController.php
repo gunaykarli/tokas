@@ -47,9 +47,9 @@ class TariffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Provider $provider, $isAdditionalTariff)
-    {
+    public function index(Provider $provider, $isAdditionalTariff){
         Session::put('providerID',$provider->id);
+
 
         // Take tariffs of the provider.
         $tariffs = Tariff
@@ -66,7 +66,7 @@ class TariffController extends Controller
 
         $tariffsWithOnTopForTheDealer = $dealer->tariffs()
             ->wherePivot('office_id', auth()
-                ->user()->office_id)
+            ->user()->office_id)
             ->get();
 
         if($provider->id == 1)

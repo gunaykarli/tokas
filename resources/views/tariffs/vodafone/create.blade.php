@@ -1184,7 +1184,69 @@
                                                 <div class="form-group m-form__group">
                                                     <input type="file" name="vodafoneTariffServiceProperty" />
                                                 </div>
+                                                <!--begin: Law Text Setup -->
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
 
+                                                <div class="form-group m-form__group row" >
+                                                    <label class="col-sm-3 col-sm-3 col-form-label"><b>{{__('tariffs\vodafone\create.lawTextOftariffs')}}</b></label>
+                                                    <div class="col-sm-6 col-sm-6">
+                                                        <div class="m-radio-list" id="lawTextOptionDiv">
+                                                            <label class="m-radio m-radio--bold">
+                                                                <input type="radio" name="lawTextOption" id="lawTextOption" value="1">{{__('tariffs\vodafone\create.copyFromOtherTariff')}}
+                                                                <span></span>
+                                                            </label>
+                                                            <label class="m-radio m-radio--bold">
+                                                                <input type="radio" name="lawTextOption" id="lawTextOption" value="2">{{__('tariffs\vodafone\create.selectFromTheList')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                                                <!--begin: list of the tariff -->
+                                                <div class="form-group m-form__group row" id="tariffListDiv">
+                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.tariffs')}}</label>
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <select name="tariffSelect" class="form-control m-input" id="tariffSelect">
+                                                            @foreach($provider->tariffs as $tariff)
+                                                                <option value={{$tariff->id}} >{{$tariff->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!--end: list of the tariff -->
+
+                                                <!--begin: list of the law text -->
+                                                <div class="form-group m-form__group row" id="lawTextListDiv">
+                                                    <table class="table table-striped- table-bordered table-hover table-checkable" id="m_table_1">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>{{__('lawTexts/index.lawTextID')}}</th>
+                                                            <th>{{__('lawTexts/index.code')}}</th>
+                                                            <th>{{__('lawTexts/index.content')}}</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach (\App\LawText::all() as $lawText)
+                                                            <tr>
+                                                                <td valign="center">{{$lawText->id}}</td>
+                                                                <td valign="center">
+                                                                    <label class="m-checkbox m-checkbox--success">
+                                                                        <input type="checkbox" name="lawTextCheckbox[]" value="{{$lawText->id}}"> {{$lawText->code}}
+                                                                        <span></span>
+                                                                    </label>
+                                                                </td>
+                                                                <td>{{$lawText->content}}</td>
+                                                            </tr>
+                                                        @endforeach
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!--end: list of the law text -->
+
+                                                <!--end: Law Text Setup -->
                                             </div>
                                         </div>
                                     </div>
@@ -1407,6 +1469,10 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-lg-4 m--align-right">
+                                                <button type="submit" class="btn btn-brand">Submit</button>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -1475,6 +1541,7 @@
     <!--begin::Page Scripts -->
     <script src="{{ asset('js/isLimited.js')}}" type="text/javascript"></script>
     <script src="{{ asset('js/ontop.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/tariffVodafoneCreate.js')}}" type="text/javascript"></script>
 
     <script src="{{ asset('metronic/assets/app/js/dashboard.js')}}" type="text/javascript"></script>
     <script src="{{ asset('metronic/assets/demo/default/custom/crud/wizard/createDealerFormWizard.js')}}" type="text/javascript"></script>

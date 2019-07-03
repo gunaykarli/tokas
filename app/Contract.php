@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contract extends Model
 {
-    protected $fillable = ['contract_type', 'provider_id', 'customer_id', 'salesperson_id', 'office_id', 'dealer_id', 'VO_id', 'contract_start', 'status'];
+    protected $fillable = ['contract_type', 'provider_id', 'customer_id', 'salesperson_id', 'office_id', 'dealer_id', 'VO_id', 'status'];
 
     /**
      * Define the relations
@@ -45,7 +45,7 @@ class Contract extends Model
         $contract->dealer_id = auth()->user()->dealer_id;
         $contract->VO_id = DealersMemberCode::where('dealer_id', auth()->user()->dealer_id)->first()->vodafone_UVP;
         //$contract->tariff_id has been excluded from the Contracts table...since there might be more than one tariff in the shopping cart.
-        $contract->contract_start = $request->contractStartDate;
+        //$contract->contract_start = $request->contractStartDate;
         $contract->status = 0;// Contract has been saved to the database without any control, First step...
 
         $contract->save();
@@ -125,9 +125,10 @@ class Contract extends Model
             ::where('customer_id', $customer->id)
             ->first();
 
-        // there may be more than one gsm...
+        // there may be more than one gsm like additional gsm...
         $mainCardVfGsm = VfGSM
             ::where('contract_id', $contract->id)
+            ->where('additional_tariff', 0) // 0 means the tariff is not additional, main.
             ->first();
 
         // Fetch the VF-GSM with the current contract ID from "VfGsm" table
@@ -135,7 +136,7 @@ class Contract extends Model
             ::where('contract_id', $contractID)
             ->get();
 
-
+//dd( $contractID);
 
         $dateTime = Carbon::now();
         $dateTimeString = $dateTime->year .'-'. $dateTime->month .'-'. $dateTime->day .'-'. $dateTime->hour .'-'. $dateTime->minute .'-'. $dateTime->second;
@@ -252,24 +253,24 @@ class Contract extends Model
                     Contract::xmlclose($XMLFile, 3, 'Widerspruch');
                 }
 
-                Contract::xmlrow($XMLFile, 3, 'Erfassungsdatum', $contract->contract_start);
+                Contract::xmlrow($XMLFile, 3, 'Erfassungsdatum', $mainCardVfGsm->contract_start);
             Contract::xmlclose($XMLFile, 2, 'Kundendaten');
 
             /** begin: Teilnehmer Hauptkarte */
-
             Contract::xmlopen($XMLFile, 2, 'Produkte');
                 $subscriberID = 1;
                 foreach ($allCardsVfGsmInTheContract as $currentCardVfGsm){
                     // find the tariff included by the $currentCardVfGsm
-                    $currentTariff = Tariff::where('id', $currentCardVfGsm->tariff_id)->first();
-
+                    $currentTariff = Tariff
+                        ::where('id', $currentCardVfGsm->tariff_id)
+                        ->first();
                     Contract::xmlopen($XMLFile, 3, 'Teilnehmer');
                         Contract::xmlopen($XMLFile, 4, 'GSM');
                             Contract::xmlrow($XMLFile, 5, 'TeilnehmerID', $subscriberID);
                             Contract::xmlopen($XMLFile, 5, 'Simkarte');
                                 Contract::xmlrow($XMLFile, 6, 'VFSIMSeriennummer', $currentCardVfGsm->SIM_serial_number);
 
-                                if ($currentTariff->tariff_code == "VFZH24FFN") {
+                                if($currentTariff->tariff_code == 'VFZH24FFN'){
                                         Contract::xmlopen($XMLFile, 6, 'IMEI');
                                             Contract::xmloac($XMLFile, 7, 'keineHardware');
                                         Contract::xmlclose($XMLFile, 6, 'IMEI');
@@ -291,18 +292,18 @@ class Contract extends Model
                                         Contract::xmlclose($XMLFile, 6, 'IMEI');
                                 }
                             Contract::xmlclose($XMLFile, 5, 'Simkarte');
-                            Contract::xmlrow($XMLFile, 5, 'Vertragsbeginn', $contract->contract_start);
+                            Contract::xmlrow($XMLFile, 5, 'Vertragsbeginn', $currentCardVfGsm->contract_start);
 
                             Contract::xmlrow($XMLFile, 5, 'Tarif', $currentTariff->tariff_code);
 
                             Contract::xmlopen($XMLFile, 5, 'Dienste');
-                                foreach ($currentCardVfGsm->supplementary_services as $supplementaryService) {
+                                foreach($currentCardVfGsm->supplementary_services as $supplementaryService){
                                     Contract::xmlopen($XMLFile, 6, 'Zusatzdienst');
                                         Contract::xmlrow($XMLFile, 7, 'Name', $supplementaryService);
                                     Contract::xmlclose($XMLFile, 6, 'Zusatzdienst');
                                 }
 
-                                foreach ($currentCardVfGsm->data_services as $dataService) {
+                                foreach($currentCardVfGsm->data_services as $dataService){
                                     Contract::xmlopen($XMLFile, 6, 'Datendienst');
                                         Contract::xmlrow($XMLFile, 7, 'Name', $dataService);
                                     Contract::xmlclose($XMLFile, 6, 'Datendienst');
@@ -353,7 +354,7 @@ class Contract extends Model
                     Contract::xmlclose($XMLFile, 3, 'Teilnehmer');
 
                     $subscriberID++;
-                }
+                } // end: foreach ($allCardsVfGsmInTheContract as $currentCardVfGsm)
             Contract::xmlclose($XMLFile, 2, 'Produkte');
             /** end: Teilnehmer Hauptkarte */
         Contract::xmlclose($XMLFile, 1, 'Aktivierung');

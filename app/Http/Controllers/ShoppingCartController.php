@@ -104,7 +104,10 @@ class ShoppingCartController extends Controller
         $item->delete();
 
         $contents = ShoppingCart
-            ::where('employee_id', auth()->user()->id)
+            ::where('product_type', 1)
+            ->where('dealer_id', auth()->user()->dealer_id)
+            ->where('office_id', auth()->user()->office_id)
+            ->where('employee_id', auth()->user()->id)
             ->get();
 
         $provider = Provider::find($tariff->provider_id);
@@ -113,20 +116,56 @@ class ShoppingCartController extends Controller
     }
 
     /**
-     * called from resources/views/contracts/shoppingCart.blade.php
-     *
+     * called from resources/views/contracts/vodafone/enterSimImeiServices.blade.php
      */
-    public function saveServicesToSession(Request $request, Tariff $tariff){
-        // Save services of the tariff to a Session as an associative array
-        $servicesOfTheTariff = [
+    public function saveSimImeiServicesToSession(Request $request, Tariff $tariff, $isAdditionalTariff){
+
+        // Save SIM number, IMEI option and services of the tariff to a Session as an associative array
+        // It is used id app/VfGsm.php store()
+        $simImeiServicesOfTheTariff = [
+            'tariffID' => $tariff->id,
+            'isAdditionalTariff' => $isAdditionalTariff,
+            'SIMNumber' => $request->SIMNumber,
+            'IMEIOption' => $request->IMEIOption,
+            'IMEINumber' => $request->IMEINumber,
             'contractStartDate' => $request->contractStartDate,
-            'connectionFee'=> $request->connectionFee
+            'connectionFee'=> $request->connectionFee,
+            'connectionOverview' => $request->connectionOverview,
+            'destinationNumberRepresentation' => $request->destinationNumberRepresentation,
+            'callBarring' => $request->callBarring,
+            'mailbox' => $request->mailbox,
+            'telephoneNumberTransmission' => $request->telephoneNumberTransmission,
+            'additionalServices' => $request->additionalServices,
+            'dataServices' => $request->dataServices
         ];
 
-        session([$tariff->name => $servicesOfTheTariff]);
+        //Session::put($tariff->id, $request->SIMNumber); ***** Numerical values ($tariff->id) can NOT be a KEY
 
-        $servicesFromSession = session($tariff->name);
-        //dd($servicesFromSession['contractStartDate']);
+        if (session()->exists($tariff->name)) {
+            session()->forget($tariff->name);
+            Session::put($tariff->name, $simImeiServicesOfTheTariff);
+        }
+        else{
+            Session::put($tariff->name, $simImeiServicesOfTheTariff);
+        }
+/*
+                             foreach(ShoppingCart::all() as $shoppingCart){
+                                 if($shoppingCart->product_type == 1){// the product is Tariff not handy
+                                     $simImeiServicesFromSession = session($shoppingCart->product_id);
+                                     echo "In For- ID: ".$shoppingCart->product_id;
+                                     echo " \n";
+                                     echo "SIM: ".$simImeiServicesFromSession['SIMNumber'];
+                                     echo " \n";
+
+                                 }
+                             }
+*/
+                $simImeiServicesFromSession = Session::get( 'VF-Tariff-1');
+                echo "-: ".($simImeiServicesFromSession['IMEIOption']);
+                echo "\n";
+                $simImeiServicesFromSession = Session::get('VF-Tariff-4');
+                 echo "-: ".($simImeiServicesFromSession['IMEIOption']);
+                echo "\n";
 
 
         // return to the shopping cart
@@ -140,11 +179,11 @@ class ShoppingCartController extends Controller
     }
 
     /**
-     * called from  resources/views/contracts/vodafone/enterSIMandServices.blade.php
+     * called from  resources/views/contracts/shoppingCartORJ.blade.php
      *
      */
-    public function callToSIMandServicesGUI(Tariff $tariff){
-        return view('contracts.vodafone.enterSIMandServices', compact('tariff'));
+    public function callToSimImeiServicesGUI(Tariff $tariff, $isAdditionalTariff){
+        return view('contracts.vodafone.enterSimImeiServices', compact('tariff', 'isAdditionalTariff'));
     }
 
     /**
