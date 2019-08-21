@@ -54,4 +54,29 @@ class VodafoneTariff extends Model
         $lawText = new LawText();
         $lawText->setVodafoneTariffLawTexts($this, $request);
     }
+
+    public static function renewBasePrice($request){
+
+        //** renew the provision of the tariffs
+        // Called from VodafoneTariffController@storeBasePriceForTariffs*/
+
+        // tariffs are fetched to reach the id of the tariff which will be used "newProvisions[$tariff->id]"
+        // No other way exists to determine tariff whose provision are to be upgraded.
+        $tariffs = Tariff
+            ::where('provider_id', 1)
+            ->where('group_id', $request->tariffGroup)
+            ->get();
+        foreach($tariffs as $tariff){
+
+            if ($request->newBasePrices[$tariff->id] != ""){
+                $tariff->base_price = $request->newBasePrices[$tariff->id];
+                $tariff->update();
+            }
+        }
+
+        //echo " " . ($request->newProvisions[$tariff->id]) ;
+        //dd("stop");
+
+        return redirect()->back()->with('message', 'success');
+    }
 }

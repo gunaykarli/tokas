@@ -17,10 +17,10 @@ class CreateTariffsProvisionsTable extends Migration
             $table->increments('id');
             $table->integer('tariff_id');
             $table->smallInteger('status');
-            $table->float('base_price');
+            $table->float('base_price')->nullable();
             $table->float('provision');
-            $table->dateTime('valid_from');
-            $table->dateTime('valid_to')->nullable();
+            $table->date('valid_from');
+            $table->date('valid_to')->nullable();
             $table->timestamps();
         });
     }

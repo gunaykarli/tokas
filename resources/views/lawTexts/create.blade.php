@@ -108,6 +108,7 @@
                         <form method="POST" action="/law-text/store" class="m-form m-form--fit m-form--label-align-right">
                             {{csrf_field()}}
                             <div class="m-portlet__body">
+
                                 @if(session()->has('message'))
                                     <div class="form-group m-form__group">
                                         <div class="alert alert-success">
@@ -115,6 +116,7 @@
                                         </div>
                                     </div>
                                 @endif
+
                                 <div class="form-group m-form__group">
                                     <label for="code"> {{__('lawTexts/create.code')}}</label>
                                     <input class="form-control m-input" type="text" name="lawTextCode" id="code">

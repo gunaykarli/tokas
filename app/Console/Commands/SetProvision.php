@@ -43,7 +43,7 @@ class SetProvision extends Command
     {
 
         //** Take the provisions whose status is 2 in "tariffs_provisions" table.
-        // 2 indicates that the provision will be uptated in specific date that valid_from field shows.*/
+        // 2 indicates that the provision will be updated in specific date that valid_from field shows.*/
         $tariffsProvisions = TariffsProvision::where('status', 2)->get();
 
 
@@ -62,6 +62,5 @@ class SetProvision extends Command
                 $tariff->save();
             }
         }
-
     }
 }

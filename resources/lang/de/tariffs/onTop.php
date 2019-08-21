@@ -2,12 +2,8 @@
 
 return [
     'tariffs' => 'Tarife',
-    'network' => 'Netz',
-    'name' => 'Name',
-    'info' => 'Tarif-Info',
-    'basePrice' => 'Grundpreis',
-    'provision' => 'Provision',
     'onTop' => 'on-Top',
+
     'action' => 'Aktion',
     'order' => 'Bestellen',
     'edit' => 'Bearbeiten',
@@ -15,8 +11,8 @@ return [
     'groups' => 'Gruppe',
     'all' => 'Alle',
     'maxBasePrice' => 'max Grundpreis',
-    'minSpeed' => 'min Datengeschwindigkeit',
-    'minBandWidth' => 'min Datenvolumen',
+    'maxSpeed' => 'max Datengeschwindigkeit',
+    'maxBandWidth' => 'max Datenvolumen',
     'filterParameters' => 'Filter Parameter',
     'resetFilter' => 'Filter Zurücksetzen',
     'justActiveTariffs' => 'Nur Aktive Tarife',

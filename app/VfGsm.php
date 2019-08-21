@@ -34,7 +34,7 @@ class VfGsm extends Model
 
     /** Stores the data related to the fields in vf_gsm table
      the following method is working without problem...*/
-    public static function storeWithOutSession($contractID, $request){ // Execution forwarded from ContractController@forwardToStore
+    public static function storeWithOutSession_NOT_USED($contractID, $request){ // Execution forwarded from ContractController@forwardToStore
         $VfGsmContract = new VfGsm();
 
         $VfGsmContract->contract_id = $contractID;

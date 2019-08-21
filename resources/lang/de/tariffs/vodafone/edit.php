@@ -2,6 +2,7 @@
 
 return [
     //** Nav */
+    'editTariff' => 'Tarif Bearbeiten',
     'tariff' => 'Tarife',
     'regions' => 'Regionen',
     'provision' => 'Provision',
@@ -16,7 +17,6 @@ return [
     //** General Info */
     'tariffDetails' => 'Tarife',
     'tariffName' => 'Tarif Name',
-    'tariffStatus' => 'Status des Tarifs',
     'tariffCode' => 'Tarif-Code',
     'actionTariff' => 'AktionsTarife',
     'madeByToker' => 'Gemacht von Toker',
@@ -26,23 +26,6 @@ return [
     'isLimited' => 'Ist begrenzt',
     'group' => 'Gruppe',
     'network' => 'Netz',
-    // for editing
-    'activateEditingTariffBasics' => 'Aktivieren Sie die Bearbeitung für den Tarif Basic',
-    'activateEditingRegions' => 'Aktivieren Sie die Bearbeitung für die Regionen',
-    'activateEditingLimit' => 'Aktivieren Sie die Bearbeitung für das Limit des Tarifs',
-    'activateEditingProperties' => 'Aktivieren Sie die Bearbeitung für die Eigenschaften des Tarifs',
-    'activateEditingPlausibility' => 'Aktivieren Sie die Bearbeitung für die Plausibilität des Tarifs',
-    'activateEditingServices' => 'Aktivieren Sie die Bearbeitung für die Dienste des Tarifs',
-    'activateEditingLawTexts' => 'Aktivieren Sie die Bearbeitung für die Rechtstexte des Tarifs',
-
-
-
-
-
-
-
-
-
 
     //** Regions */
     'allRegions' => 'Alle Regionen',
@@ -89,8 +72,6 @@ return [
     'lawTextOftariffs' => 'Rechtstext der Tarife',
     'copyFromOtherTariff' => 'Kopie aus anderem Tarif',
     'selectFromTheList' => 'aus der Liste auswählen',
-    'tariffs' => 'Tarife',
-    'lawTexts' => 'Rechtstexte',
-
+    'tariffs' => 'Tarife'
 
 ];

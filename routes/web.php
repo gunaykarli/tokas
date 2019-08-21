@@ -101,12 +101,31 @@ Route::post('/law-text/update/{lawText}', 'LawTextController@update');
 //** Tariffs */
 Route::get('/tariff/providers-list', 'TariffController@providers');
 Route::get('/tariff/index/{provider}', 'TariffController@index');
-Route::get('/tariff/index/{provider}/{isAdditionalTariff}', 'TariffController@index');
+Route::get('/tariff/index', 'TariffController@index');
 Route::post('/tariff/index/tariffs-with-filter', 'TariffController@fetchTariffsWithFilter')->name('fetchTariffsWithFilter');
+Route::post('/tariff/index/change-status-of-tariff', 'TariffController@changeStatusOfTariff');
 
-Route::get('/tariff/vodafone/create', 'TariffController@create');
-Route::post('/tariff/vodafone/store', 'TariffController@store');
-Route::get('/tariff/vodafone/index', 'TariffController@create');
+ //** On-Top */
+Route::get('/tariff/on-top/edit/{tariff}', 'TariffController@providers');
+
+
+Route::get('/tariff/vodafone/create', 'VodafoneTariffController@create');
+Route::post('/tariff/vodafone/store', 'VodafoneTariffController@store');
+Route::get('/tariff/vodafone/edit/{tariff}', 'VodafoneTariffController@edit');
+Route::post('/tariff/vodafone/update/{tariff}', 'VodafoneTariffController@update');
+
+Route::get('/tariff/index/{provider}/{isAdditionalTariff}', 'VodafoneTariffController@index');
+Route::post('/tariff/vodafone/tariffs-with-filter', 'VodafoneTariffController@fetchTariffsWithFilter');
+
+Route::get('/tariff/vodafone/provision-setup', 'TariffsProvisionController@showProvisionSetupPage');
+Route::post('/tariff/vodafone/provision-setup/store-for-a-tariff', 'TariffsProvisionController@storeForTariff');
+Route::post('/tariff/vodafone/fetch-provision-of-tariffs-by-group', 'TariffsProvisionController@fetchProvisionOfTariffs');
+
+Route::get('/tariff/vodafone/base-price-setup', 'VodafoneTariffController@showBasePriceSetupPage');
+Route::post('/tariff/vodafone/fetch-base-price-of-tariffs-by-group', 'VodafoneTariffController@fetchBasePriceOfTariffs');
+Route::post('/tariff/vodafone/base-price-setup/store-for-tariffs', 'VodafoneTariffController@storeBasePriceForTariffs');
+
+
 
 Route::get('/service/create', 'ServiceController@create');
 Route::post('/service/store', 'ServiceController@store');
@@ -123,6 +142,10 @@ Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiPoolController@forwardToChang
  Route::get('/contract/shopping-cart/delete-tariff/{tariff}', 'ShoppingCartController@deleteTariff');
  Route::get('/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/{tariff}/{isAdditionalTariff}', 'ShoppingCartController@callToSimImeiServicesGUI');
  Route::post('/contract/vodafone/shopping-cart/SIM-IMEI-services/{tariff}/{isAdditionalTariff}', 'ShoppingCartController@saveSimImeiServicesToSession');
+ Route::get('/contracts/vodafone/shopping-cart/change-main-tariff/{tariff}', 'ShoppingCartController@changeTariff'); //resources/views/contracts/shoppingCartORJ.blade.php - to change the main tariff in shopping cart
+
+ Route::get('/contracts/vodafone/XML/takeXML', 'ContractController@viewTakeXML');
+ Route::post('/contracts/vodafone/XML/readXML', 'ContractController@forwardToReadXML');
 
 
 
@@ -133,7 +156,7 @@ Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiPoolController@forwardToChang
  Route::post('/contract/forward-to-store', 'ContractController@forwardToStore');
 
  //** Contracts Vodafone*/
- Route::post('/contracts/vodafone/create/{shoppingCartID}', 'ContractController@create');
+ Route::get('/contracts/vodafone/create', 'ContractController@create');
 
  //Route::post('/contracts/vodafone/store', 'ContractController@store');
 

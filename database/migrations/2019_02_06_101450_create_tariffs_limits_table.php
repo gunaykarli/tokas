@@ -16,8 +16,8 @@ class CreateTariffsLimitsTable extends Migration
         Schema::create('tariffs_limits', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tariff_id');
-            $table->dateTime('valid_from');
-            $table->dateTime('valid_to');
+            $table->date('valid_from');
+            $table->date('valid_to');
             $table->integer('limit');
             $table->integer('remaining_amount');
             $table->timestamps();

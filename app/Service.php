@@ -23,7 +23,10 @@ class Service extends Model
 
     /** User defined functions */
 
-    // called from VodafoneTariff@manageCreationProcess
+
+    /**
+     * forwated from from VodafoneTariff@manageCreationProcess
+     */
     public function setVodafoneTariffServices($vodafoneTariff, Request $request){
 
         //** Take all service info of newly created tariff from the excel to an array */
@@ -46,6 +49,52 @@ class Service extends Model
                         $propertyValue = 3;
 
                    //** Excel de isFavorite kolon ismini tanımıyor....camel case tanınmıyor...
+                    if($row['favorite'] == 1)
+                        $isFavoriteValue = true;
+                    else
+                        $isFavoriteValue = false;
+
+                    //** save the values to the 'service_vodafonetariff pivot table' */
+                    $service->vodafoneTariffs()->attach($vodafoneTariff->id, ['property' => $propertyValue, 'is_favorite' => $isFavoriteValue]);
+                }
+            }
+        }
+    }
+
+    /**
+     * forwated from VodafoneTariffController@update
+     */
+    public function updateVodafoneTariffServices($vodafoneTariff, Request $request){
+
+        // First, detach all services of the tariff  in the related pivot table...
+        if($request->hasFile('vodafoneTariffServiceProperty'))
+            $vodafoneTariff->services()->detach();
+        else{
+            // and warning message
+            echo("No file selected");
+        }
+
+
+        //** Take all service info of newly created tariff from the excel to an array */
+        if($request->hasFile('vodafoneTariffServiceProperty')) {
+            $tariffServicePropertiesInExcel = Excel::load($request->file('vodafoneTariffServiceProperty')->getRealPath());
+            $tariffServicePropertiesInArray = $tariffServicePropertiesInExcel->toArray();
+
+            foreach ($tariffServicePropertiesInArray as $key => $row) {
+                //** if current service is not inadmissible (x-unzulässig-ausschulüsse )(ok or !) then save it to the ServiceVodafoneTariff table. */
+                if($row['property'] != 'X' and $row['property'] != 'x'){ // X - unzulässig-ausschulüsse
+                    $service = Service::where('code', $row['code'])->first();
+                    /** IF THE CURRENT SERVIS in the "ServiceForNewVFTariff" excel table, IS NOT IN THE SERVICE TABLE in the DB, IT MUST BE ADDED TO THE SERVICE TABLE in the DB FIRST. */
+                    //** Set value of property and favorite according to the value type in related tables. */
+                    if($row['property'] =='!'){ // ! - Pflichtfeld
+                        $propertyValue = 1;
+                    }
+                    else if($row['property'] =='ok' and $row['property'] =='OK') // ok - zulässig
+                        $propertyValue = 2;
+                    else
+                        $propertyValue = 3;
+
+                    //** Excel de isFavorite kolon ismini tanımıyor....camel case tanınmıyor...
                     if($row['favorite'] == 1)
                         $isFavoriteValue = true;
                     else

@@ -64,7 +64,6 @@
                                     </a>
                                 @endcan
                             </li>
-
                             <li class="m-portlet__nav-item"></li>
 
                         </ul>
@@ -73,7 +72,7 @@
 
                 <div class="m-portlet__body" id="">
                     <!--begin: Form -->
-                    <form method="POST" action="/contract/vodafone/shopping-cart/SIM-IMEI-services/{{$tariff->id}}/{{$isAdditionalTariff}}" class="m-form m-form--label-align-left- m-form--state-" id="m_form">
+                    <form method="POST" action="/contract/vodafone/shopping-cart/SIM-IMEI-services/{{$tariff->id}}/{{$isAdditionalTariff}}" class="m-form m-form--label-align-left- m-form--state-" id="enterSimEmeiServices">
                     @csrf
                         <!--begin: Form Wizard Step 4 - Contract Options - -->
                         <div class="row">
@@ -84,37 +83,44 @@
                                         <label class="col-xl-4 col-lg-4 col-form-label"><b>{{__('contracts\vodafone\enterSimImeiServices.SIMNumber')}}</b></label>
                                         <div class="col-xl-4 col-lg-4">
                                             <input type="text" name="SIMNumber" id="SIMNumber" class="form-control m-input form-control-sm">
+                                            <span id="SIMNumber-ErrorSpan"></span>
                                         </div>
                                     </div>
                                     <!--end: SIM number -->
 
                                     <!--begin: IMEI options -->
                                     <!-- If "IMEI On-Demand Pool Fields" is active -->
-                                    @if(\App\SystemVariable::where('name', 'isIMEIOnDemandFieldActive')->first()->value == 1)
-                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                    <div class="form-group m-form__group row">
-                                        <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\enterSimImeiServices.captureIMEI')}}</b></label>
-                                        <div class="col-sm-8 col-sm-8">
-                                                            <div class="m-radio-list">
-                                                                <label class="m-radio m-radio--bold">
-                                                                    <input type="radio" name="IMEIOption" value="1"> {{__('contracts\vodafone\enterSimImeiServices.withoutDevice')}}
-                                                                    <span></span>
-                                                                </label>
+                                    @if(session('providerID') == 1)
+                                        @if(\App\SystemVariable::where('name', 'isIMEIOnDemandFieldActive')->first()->value == 1)
+                                            <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                            <div class="form-group m-form__group row">
+                                                <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\enterSimImeiServices.captureIMEI')}}</b></label>
+                                                <div class="col-sm-8 col-sm-8">
+                                                    <div class="m-radio-list" id="IMEIOptions">
+                                                        <label class="m-radio m-radio--bold">
+                                                            <input type="radio" name="IMEIOption" id="IMEIOption" value="1" checked> {{__('contracts\vodafone\enterSimImeiServices.withoutDevice')}}
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="m-radio m-radio--bold">
+                                                            <input type="radio" name="IMEIOption" id="IMEIOption" value="2"> {{__('contracts\vodafone\enterSimImeiServices.IMEIOnDemand')}}
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="m-radio m-radio--bold">
+                                                            <input type="radio" name="IMEIOption" id="IMEIOption" value="3"> {{__('contracts\vodafone\enterSimImeiServices.enterIMEINumber')}}
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <span id="IMEIOption-ErrorSpan"></span>
 
-                                                                <label class="m-radio m-radio--bold">
-                                                                    <input type="radio" name="IMEIOption" value="2"> {{__('contracts\vodafone\enterSimImeiServices.IMEIOnDemand')}}
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="m-radio m-radio--bold">
-                                                                    <input type="radio" name="IMEIOption" value="3">
-                                                                    <div class="input-group">
-                                                                        <input type="text" class="form-control m-input" name="IMEINumber" placeholder="{{__('contracts\vodafone\enterSimImeiServices.enterIMEINumber')}}">
-                                                                    </div>
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                        </div>
-                                    </div>
+                                                    <div class="col-sm-8 col-sm-8" id="IMEINumber-Div">
+                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                        <input type="text" class="form-control m-input col-sm-8 col-sm-8" name="IMEINumber" placeholder="{{__('contracts\vodafone\enterSimImeiServices.enterIMEINumber')}}" >
+                                                    </div>
+                                                    <span id="IMEINumber-ErrorSpan"></span>
+                                                </div>
+
+                                            </div>
+                                        @endif
                                     @endif
                                     <!--end: IMEI options -->
 
@@ -129,22 +135,25 @@
                                     <!--begin: Contract Start Date -->
 
                                     <!--begin: Connection fee -->
-                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                    <div class="form-group m-form__group row">
-                                        <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.connectionFee')}}</b></label>
-                                        <div class="col-sm-8 col-sm-8">
-                                            <div class="m-radio-list" id="connectionFees">
-                                                <label class="m-radio">
-                                                    <input type="radio" name="connectionFee" id="connectionFee" value=1>{{__('contracts\vodafone\create.connectionFee1')}}
-                                                    <span></span>
-                                                </label>
-                                                <label class="m-radio">
-                                                    <input type="radio" name="connectionFee" id="connectionFee" value=2>{{__('contracts\vodafone\create.connectionFee2')}}
-                                                    <span></span>
-                                                </label>
+                                    @if($isAdditionalTariff != 1) <!-- additional tariff has NO connection fee -->
+                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                        <div class="form-group m-form__group row">
+                                            <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.connectionFee')}}</b></label>
+                                            <div class="col-sm-8 col-sm-8">
+                                                <div class="m-radio-list" id="connectionFees">
+                                                    <label class="m-radio">
+                                                        <input type="radio" name="connectionFee" id="connectionFee" value=1>{{__('contracts\vodafone\create.connectionFee1')}}
+                                                        <span></span>
+                                                    </label>
+                                                    <label class="m-radio">
+                                                        <input type="radio" name="connectionFee" id="connectionFee" value=2>{{__('contracts\vodafone\create.connectionFee2')}}
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <span id="connectionFee-ErrorSpan"></span>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endif
                                     <!--end: Connection fee -->
 
                                     <!--begin: Connection Overview -->
@@ -256,8 +265,6 @@
                                     </div>
                                     <!--end: Telephone number transmission -->
                                     <div class="m-separator m-separator--dashed m-separator--lg"></div>
-
-
                             </div>
                         </div>
                         <!--end: Form Wizard Step 4-->
@@ -277,10 +284,8 @@
                                             </div>
                                         </div>
                                         <div class="m-portlet__body">
-
                                             <!--begin::Section-->
                                             <div class="m-accordion m-accordion--default" id="m_accordion_1" role="tablist">
-
                                                 <!--begin::Item - dataServices-->
                                                 <div class="m-accordion__item">
                                                     <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_2_head" data-toggle="collapse" href="#m_accordion_1_item_2_body" aria-expanded="    false">
@@ -399,6 +404,7 @@
     <!--end::Page Vendors -->
 
     <!--begin::Page Scripts-->
+    <script src="{{ asset('js/validations/enterSimImeiServices1.js')}}" type="text/javascript"></script>
     <script src="{{ asset('js/tariffListWithFilter.js')}}" type="text/javascript"></script>
     <!--end::Page Scripts-->
 @endsection

@@ -7,6 +7,8 @@ use App\Office;
 use App\Policies\DealerPolicy;
 use App\Policies\EmployeePolicy;
 use App\Policies\OfficePolicy;
+use App\Policies\ShoppingCartPolicy;
+use App\ShoppingCart;
 use App\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -23,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         Dealer::class => DealerPolicy::class,
         Office::class => OfficePolicy::class,
         User::class => EmployeePolicy::class,
+        ShoppingCart::class => ShoppingCartPolicy::class,
     ];
 
     /**

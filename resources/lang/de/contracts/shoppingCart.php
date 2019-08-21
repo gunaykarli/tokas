@@ -7,10 +7,13 @@ return [
     'tariff' => 'Tarife',
     'SIMNumber' => 'SIM Nummer',
     'CartType' => 'SIM Karten Typ',
-    'Customer' => 'Antragsteller',
+    'SIMImeiAndServices' => 'SIM Nummer, IMEI und Dienste',
+    'basePrice' => 'Grundpreis',
+    'provision' => 'Provision',
     'mini' => 'Mini',
     'micro' => 'Micro',
     'nano' => 'Nano',
+    'changeTariff' => 'Tarif Ändern',
     'delete' => 'Löschen',
     'pleaseSelect' => 'bitte wahlen',
     'captureIMEI' => 'IMEI erfassen',
@@ -20,6 +23,8 @@ return [
     'IMEIOnDemand' => 'Vodafone Gerät auswählen (IMEI on demand)',
     'enterIMEINumber' => 'IMEI Nummer Eingabe',
     'services' => 'Dienste',
-    'save' => 'Speichern'
+    'save' => 'Speichern',
+    'totalProvision' => 'Gesamtprovision',
+    'totalBasePrice' => 'Gesamtgrundgebühr'
 
 ];

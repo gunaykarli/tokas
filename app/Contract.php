@@ -4,6 +4,9 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Orchestra\Parser\Xml\Facade as XmlParser;
+
 
 class Contract extends Model
 {
@@ -360,6 +363,81 @@ class Contract extends Model
         Contract::xmlclose($XMLFile, 1, 'Aktivierung');
 
         Contract::xmlclose($XMLFile, 0, 'Auftraege');
+    }
+
+    /**
+     * forwarded from "app/Http/Controllers/ContractController@forwardToReadXML"
+     */
+    public static function get_string_between($string, $start, $end){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
+    }
+    public static function readXML(Request $request){
+        if($request->hasFile('XMLFile')) {
+            $deneXML = simplexml_load_file($request->file('XMLFile')->getRealPath());
+            $deneXMLStr = str_replace(array('<Bestaetigung />', '<Bestaetigung/>'), '<Bestaetigung>Comfirmation<Bestaetigung/>', $deneXML->asXML());
+
+            dd(Contract::get_string_between($deneXMLStr, '<Fehlertext>', '</Fehlertext>'));
+
+            if(stristr($deneXMLStr, "Portierung")) // for a case insenstive version of this function.
+                dd("Portierung");
+            else if(strstr($deneXMLStr, "Aktivierung"))
+                dd('Aktivierung');
+
+
+
+        }
+    }
+    public static function readXML_(Request $request){
+
+        if($request->hasFile('XMLFile')) {
+            $deneXML = simplexml_load_file($request->file('XMLFile')->getRealPath());
+            $readXMLFile = XmlParser::load($request->file('XMLFile')->getRealPath());
+            //$readXMLFile = simplexml_load_file($request->file('XMLFile')->getRealPath());
+            //str_replace( '<Bestaetigung />', '<Bestaetigung>Comfirmation<Bestaetigung />',$readXMLFile ) ;
+            /*
+            $error = $readXMLFile->parse([
+                'id' => ['uses' => 'user.id'],
+                'email' => ['uses' => 'user.email'],
+                'followers' => ['uses' => 'user::followers'],
+            ]);
+            */
+            dd($readXMLFile);
+
+            $case1 = $readXMLFile->parse([
+                'caseAktivierung' => ['uses' => 'Aktivierung.BatchId'],
+            ]);
+
+            $case2 = $readXMLFile->parse([
+                'casePortierung' => ['uses' => 'Portierung.BatchId'],
+            ]);
+
+            if ($case1['caseAktivierung'] != null){
+                $case1 = $readXMLFile->parse([
+                    '$comfirmation' => ['uses' => 'Aktivierung.Antwortstatus.Bestaetigung'],
+                ]);
+                if($case1['$comfirmation'] == "Comfirmation")
+                    dd($case1['$comfirmation']);
+                dd("stop");
+
+                $error = $readXMLFile->parse([
+                    'errorText' => ['uses' => 'Aktivierung.Antwortstatus.Auftragsfehler.Fehlertext'],
+                ]);
+            }
+            else if($case2['casePortierung'] != null){
+                $error = $readXMLFile->parse([
+                    'errorText' => ['uses' => 'Portierung.Antwortstatus.Auftragsfehler.Fehlertext'],
+                ]);
+            }
+
+
+            dd($error['errorText']);
+        }
+        return back();
     }
     public static function produceXMLForGsmVodafoneContractTRY1($contractID){
 

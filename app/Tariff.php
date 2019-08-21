@@ -2,12 +2,13 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Tariff extends Model
 {
     //protected $guarded = [];
-    protected $fillable = ['name', 'tariff_code', 'status', 'group_id', 'provider_id', 'network_id', 'made_by_toker', 'base_price', 'provision', 'valid_from', 'valid_to', 'is_limited'];
+    protected $fillable = ['name', 'tariff_code', 'status', 'group_id', 'provider_id', 'network_id', 'made_by_toker', 'action_tariff', 'base_price', 'provision', 'valid_from', 'valid_to', 'is_limited'];
 
     /** Relationship setups according to the ER diagram */
 
@@ -47,7 +48,7 @@ class Tariff extends Model
     }
 
     public function tariffsLimit(){
-        return $this->hasMany(TariffsLimit::class);
+        return $this->hasOne(TariffsLimit::class);
     }
 
     public function tariffsGroup(){
@@ -60,6 +61,10 @@ class Tariff extends Model
 
     /** User Defined Functions */
 
+
+    /**
+     * forwarted from VodafoneTariffController@store
+     */
     public function setBasicInfo($request){
         $this->name = $request->tariffName;
         $this->tariff_code = $request->tariffCode;
@@ -81,6 +86,12 @@ class Tariff extends Model
         else
             $this->made_by_toker = 0;
 
+        if ($request->actionTariff == 'on')
+            $this->action_tariff = 1;
+        else
+            $this->action_tariff = 0;
+
+        // set limited amount of the tariff. valid_from, valid_to, limit and remaining amount fields will be set up in setLimit@TariffLimit called form store@VodafoneTariffController
         if ($request->isLimited == 'on')
             $this->is_limited = 1;
         else
@@ -90,6 +101,74 @@ class Tariff extends Model
 
         return $this;
 
+    }
+
+    /**
+     * called from VodafoneTariffController@update
+     */
+    public function updateBasicInfo($tariff, $request){
+        $tariff->name = $request->tariffName;
+        $tariff->tariff_code = $request->tariffCode;
+
+        /** change status of the tariff */
+        if($tariff->status == 1) // current status of the tariff is on/1
+            if($request->tariffStatus == 'on') // no change
+                $tariff->status = 1;
+            else{ // disable the tariff
+                $tariff->status = 0;
+                $tariff->validTo = Carbon::today()-1;
+            }
+        else if($tariff->status == 0) // current status of the tariff in off/0
+            if($request->tariffStatus == 'off') // no change
+                $tariff->status = 0;
+            else if($request->tariffStatus == 'on'){ // activate the tariff
+                $tariff->valid_from = $request->tariffValidFrom;
+
+                if($request->tariffValidFrom == Carbon::today())
+                    $tariff->status = 1;
+                else
+                    /** set up using CronJob*/
+
+                if($request->tariffValidToIndefinite == 'on')
+                    $tariff->valid_to = null;
+                else
+                    $tariff->valid_to = $request->tariffValidTo;
+            }
+
+        /** change status of the tariff according to the "valid_to". */
+        // If valid_to has the date before today, then change the status of the tariff from 1 to 0
+        $todaysDate = new Carbon;
+        if($todaysDate > $request->tariffValidTo)
+            $tariff->status = 0;
+
+
+        $tariff->group_id = $request->groupID;
+        $tariff->provider_id = $request->providerID;
+        $tariff->network_id = $request->networkID;
+
+        // base_price and provision can be edited in separate GUI...
+        //$this->base_price = 0;
+        //$this->provision = 0;
+
+        // edit for "special" tariff
+        if ($request->madeByToker == 'on')
+            $tariff->made_by_toker = 1;
+        else
+            $tariff->made_by_toker = 0;
+
+        // edit for "aktion" tariff
+        if ($request->actionTariff == 'on')
+            $tariff->action_tariff = 1;
+        else
+            $tariff->action_tariff = 0;
+
+        // edit for tariff with limited amount. Eğer limitsiz bir tarife limit ekleniyorsa bu bölüm aktifleştirilmeli. Aksi taktirte sil...
+        if ($request->isLimited == 'on')
+            $tariff->is_limited = 1;
+        else
+            $tariff->is_limited = 0;
+
+        $tariff->update();
     }
 
     public function setOnTop($request){

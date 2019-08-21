@@ -26,10 +26,10 @@ class CustomerContact extends Model
         $customerContact->street = $request->mainCustomerStreet ;
         $customerContact->house_number = $request->mainCustomerHouseNumber ;
         $customerContact->city = $request->mainCustomerCity ;
-        $customerContact->country = 'Germany' ;
+        $customerContact->country = 'D' ;
         $customerContact->postal_code = $request->mainCustomerPostalCode ;
-        $customerContact->country_code = 49 ;
-        $customerContact->area_code = 0 ;
+        $customerContact->country_code = "049" ;
+        $customerContact->area_code = $request->mainCustomerAreaCode ;
         $customerContact->phone_number = $request->mainCustomerTelephone ;
         $customerContact->contact_person = $request->mainCustomerContactPerson ;
         $customerContact->email = $request->mainCustomerEmail ;

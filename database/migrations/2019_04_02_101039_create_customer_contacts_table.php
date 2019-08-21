@@ -21,8 +21,8 @@ class CreateCustomerContactsTable extends Migration
             $table->string('city');
             $table->string('country');
             $table->integer('postal_code');
-            $table->smallInteger('country_code');
-            $table->smallInteger('area_code')->nullable();
+            $table->string('country_code', 5);
+            $table->string('area_code', 6)->nullable();
             $table->string('phone_number');
             $table->string('contact_person');
             $table->string('email');

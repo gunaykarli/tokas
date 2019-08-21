@@ -31,8 +31,10 @@ return [
     'customerName' => 'Vorname',
     'customerSurname' => 'Name',
     'customerContactPerson' => 'Ansprechpartner',
-    'birthData' => 'Geburtstag',
+    'birthDate' => 'Geburtstag',
     'customerIDType' => 'Ausweistyp',
+    'personal' => 'Personal',
+    'foreigner' => 'Ausländer',
     'customerIDNumber' => 'Ausweisnummer',
 
     'address' => 'Adress',
@@ -40,6 +42,7 @@ return [
     'cityAndPostalCode' => 'Ort / PLZ',
     'email' => 'E-Mail',
     'emailConfirmation' => 'E-Mail Bestätigung',
+    'areaCode' => 'Vorwahl',
     'telephone' => 'Telefon',
     'fax' => 'Telefax',
 

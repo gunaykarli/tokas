@@ -143,16 +143,15 @@
                                     <td>{{$lawText->content}}</td>
                                     <td>
                                         <span class="dropdown">
-                                            <a href="#" class="btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown" aria-expanded="true">
+                                            <a  href="/law-text/edit/{{$lawText->id}}" class="btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown" aria-expanded="true">
                                                 <i class="la la-ellipsis-h"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item"  href="/law-text/create" ><i class="la la-edit"></i>Create</a>
                                                 <a class="dropdown-item" href="/law-text/edit/{{$lawText->id}}"><i class="la la-leaf"></i>Update </a>
                                                 <a class="dropdown-item" href="/law-text/delete/{{$lawText->id}}"><i class="la la-print"></i>Delete</a>
                                             </div>
                                         </span>
-                                        <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="View">
+                                        <a href="/law-text/edit/{{$lawText->id}}" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="View">
                                             <i class="la la-edit"></i>
                                         </a>
                                     </td>

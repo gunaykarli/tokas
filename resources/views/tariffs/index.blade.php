@@ -137,12 +137,12 @@
 
                                 <div class="m-radio-inline" id="radioInLineProviders">
                                     <label class="m-radio">
-                                        <input type="radio" name="provider" id="provider" value=0 checked> {{__('tariffs/index.all')}}
+                                        <input type="radio" name="providerID" id="providerID" value=0 checked> {{__('tariffs/index.all')}}
                                         <span></span>
                                     </label>
                                     @foreach($providers as $provider)
                                         <label class="m-radio">
-                                            <input type="radio" name="provider" id="provider" value={{$provider->id}}> {{$provider->name}}
+                                            <input type="radio" name="providerID" id="providerID" value={{$provider->id}}> {{$provider->name}}
                                             <span></span>
                                         </label>
                                     @endforeach
@@ -160,7 +160,7 @@
                                         <input type="radio" name="tariffGroup" id="tariffGroup" value=0 checked> {{__('tariffs/index.all')}}
                                         <span></span>
                                     </label>
-                                    <!-- Radio buttons will be added HERE by the "tariffList-Provider.js"
+                                    <!-- Radio buttons will be added HERE by the "js/allTariffListWithFilter1.js"
                                     once any radio button change in the div radio group with id named "radioInLineProviders"  -->
                                 </div>
                             </div>
@@ -193,6 +193,32 @@
                                     <form class="m-form m-form--fit m-form--label-align-right">
                                         <div class="m-portlet__body">
                                             <div class="m-form__group form-group" id="filterPortlet">
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.statusOfTariffs')}}:</label>
+
+                                                    <div class="col-xl-2 col-lg-2">
+                                                        <label class="m-radio">
+                                                            <input type="radio" name="statusOfTariffs" id="statusOfTariffs" value=1 checked="checked" > {{__('tariffs/index.justActiveTariffs')}}
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="col-xl-2 col-lg-2">
+                                                        <label class="m-radio">
+                                                            <input type="radio" name="statusOfTariffs" id="statusOfTariffs" value=0 > {{__('tariffs/index.justDisabledTariffs')}}
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="col-xl-2 col-lg-2">
+                                                        <label class="m-radio">
+                                                            <input type="radio" name="statusOfTariffs" id="statusOfTariffs" value=2 > {{__('tariffs/index.all')}}
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-group m-form__group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.maxBasePrice')}}:</label>
                                                     <div class="col-xl-3 col-lg-3">
@@ -206,25 +232,25 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.maxSpeed')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.minSpeed')}}:</label>
                                                     <div class="col-xl-3 col-lg-3">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Mbit/s</span>
                                                             </div>
-                                                            <input type="text" class="form-control m-input" name="maxSpeed" id="maxSpeed">
+                                                            <input type="text" class="form-control m-input" name="minSpeed" id="minSpeed">
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.maxBandWidth')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.minBandWidth')}}:</label>
                                                     <div class="col-xl-3 col-lg-3">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">GB</span>
                                                             </div>
-                                                            <input type="text" class="form-control m-input" name="maxBandWidth" id="maxBandWidth">
+                                                            <input type="text" class="form-control m-input" name="minBandWidth" id="minBandWidth">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -259,7 +285,8 @@
                             <th> {{__('tariffs/index.basePrice')}}</th>
                             <th> {{__('tariffs/index.provision')}}</th>
                             <th> {{__('tariffs/index.onTop')}}</th>
-                            <th>{{__('tariffs/index.order')}}</th>
+                            <th>{{__('tariffs/index.status')}}</th>
+                            <th>{{__('tariffs/index.action')}}</th>
                         </tr>
                         </thead>
                         <tbody id="tableBody">
@@ -278,7 +305,27 @@
                                         @endif
                                     @endforeach
                                     </td>
-                                    <td><a href="/contract/shopping-cart/add-tariff/{{$tariff->id}}" class="btn btn-primary" ><span>{{__('tariffs/index.order')}}</span>&nbsp;&nbsp;</a></td>
+                                    <td>
+                                        @if($tariff->status == 1)
+                                            {{__('tariffs/index.active')}}
+                                        @else
+                                            {{__('tariffs/index.disabled')}}
+                                        @endif
+
+
+                                        <button type="button" class="btn btn-danger" name="{{$tariff->name}}" id="{{$tariff->id}}">
+                                            {{__('tariffs/index.change')}}
+                                        </button>
+                                    </td>
+                                    <td>
+                                        @if($tariff->provider_id == 1)
+                                            <a href="/tariff/vodafone/edit/{{$tariff->id}}" type="button" class="btn btn-primary"> {{__('tariffs/index.edit')}}</a>
+                                        @elseif($tariff->provider_id == 2)
+                                            <a href="/tariff/ayYildiz/edit/{{$tariff->id}}" type="button" class="btn btn-primary"> {{__('tariffs/index.edit')}}</a>
+                                        @elseif(($tariff->provider_id == 3))
+                                            <a href="/tariff/O2/edit/{{$tariff->id}}" type="button" class="btn btn-primary"> {{__('tariffs/index.edit')}}</a>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
 
@@ -302,6 +349,6 @@
     <!--end::Page Vendors -->
 
     <!--begin::Page Scripts-->
-    <script src="{{ asset('js/tariffListWithFilter.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/allTariffListWithFilter3.js')}}" type="text/javascript"></script>
     <!--end::Page Scripts-->
 @endsection

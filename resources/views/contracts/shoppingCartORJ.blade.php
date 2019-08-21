@@ -54,203 +54,175 @@
                     <div class="m-portlet__head-tools">
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
-                                <!-- Only authorized users who are "Admin and power user in Toker" can generate new dealer...-->
-                                @can('create', \App\Dealer::class)
-                                    <a  href="/dealer/create"  class="btn btn-info m-btn m-btn--custom m-btn--icon m-btn--air">
-                                                    <span>
-                                                        <i class="la la-plus"></i>
-                                                        <span>{{__('dealers\list.newDealer')}}</span>
-                                                    </span>
-                                    </a>
-                                @endcan
+
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="m-portlet__body" id="general">
-                    <!--BEGIN: Datatable -->
+
+                    <!--BEGIN: main tariff -->
                     <table class="table table-striped- table-bordered table-hover table-checkable" >
                         <thead>
-                        <tr>
-                            <th> {{__('contracts/shoppingCart.delete')}}</th>
-                            <th> {{__('contracts/shoppingCart.provider')}}</th>
-                            <th> {{__('contracts/shoppingCart.tariff')}}</th>
-                            <th> {{__('contracts/shoppingCart.SIMNumber')}}</th>
-                            @if(session('providerID') == 1)
-                            @if(\App\SystemVariable::where('name', 'isIMEIOnDemandFieldActive')->first()->value == 1)
-                                <th> {{__('contracts/shoppingCart.captureIMEI')}}</th>
-                            @endif
-                            @endif
-                            <th> {{__('contracts/shoppingCart.Customer')}}</th>
-
-                        </tr>
+                            <tr>
+                                <th> {{__('contracts/shoppingCart.provider')}}</th>
+                                <th> {{__('contracts/shoppingCart.tariff')}}</th>
+                                <th> {{__('contracts/shoppingCart.SIMImeiAndServices')}}</th>
+                                <th> {{__('contracts/shoppingCart.delete')}}</th>
+                                <th> {{__('contracts/shoppingCart.basePrice')}}</th>
+                                @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                    <th> {{__('contracts/shoppingCart.provision')}}</th>
+                                @endcan
+                            </tr>
                         </thead>
                         <tbody id="">
-                            @foreach($contents as $content)
-
-                                    @if($content->additional_tariff == 0)
-                                        <!-- Set up the link according to the provider of the tariff.
-                                        With the link, instead of "$content->producer_id", "$content->id" is sent since it will be more useful in the "/contracts/.../create". -->
-
-                                        <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
-                                        @if($content->product_type == 1 and $content->producer_id == 1)
-                                            <form method="POST" action="/contracts/vodafone/create/{{$content->id}}"  class="m-form m-form--label-align-left- m-form--state-" id="m_form">
-                                            <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 2) belongs to Ay Yıldız -->
-                                        @elseif($content->product_type == 1 and $content->producer_id == 2)
-                                            <form method="POST" action="/contracts/ayYildiz/create/{{$content->id}}"  class="m-form m-form--label-align-left- m-form--state-" id="m_form">
-                                            <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 3) belongs to O2 -->
-                                        @elseif($content->product_type == 1 and $content->producer_id == 3)
-                                            <form method="POST" action="/contracts/O2/create/{{$content->id}}"  class="m-form m-form--label-align-left- m-form--state-" id="m_form">
-                                        @endif
-
-                                            @csrf
-
-                                        <tr>
-                                            <td><a href="/contract/shopping-cart/delete-tariff/{{$content->product_id}}" class="btn btn-danger" ><span>{{__('contracts/shoppingCart.delete')}}</span>&nbsp;&nbsp;</a></td>
-                                            <td></td>
-                                            @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
-                                                <td>{{(\App\Tariff::find($content->product_id))->name}}</td>
-                                            @endif
-                                                <td><input type="text" name="SIMNumber[{{$content->id}}]" class="form-control m-input" placeholder="" value=""></td>
-
-                                            <!-- If the current provider is Vodafone -->
-                                            @if($content->product_type == 1 and $content->producer_id == 1)
-                                            <!-- If "IMEI On-Demand Pool Fields" is active -->
-                                            @if(\App\SystemVariable::where('name', 'isIMEIOnDemandFieldActive')->first()->value == 1)
-                                                <td>
-                                                    <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
-                                                    @if($content->product_type == 1 and $content->producer_id == 1)
-                                                        <div class="m-form__group form-group">
-                                                            <div class="m-radio-list">
-                                                                <label class="m-radio m-radio--bold">
-                                                                    <input type="radio" name="IMEIOption[{{$content->id}}]" value="1"> {{__('contracts/shoppingCart.withoutDevice')}}
-                                                                    <span></span>
-                                                                </label>
-
-                                                                <label class="m-radio m-radio--bold">
-                                                                    <input type="radio" name="IMEIOption[{{$content->id}}]" value="2"> {{__('contracts/shoppingCart.IMEIOnDemand')}}
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="m-radio m-radio--bold">
-                                                                    <input type="radio" name="IMEIOption[{{$content->id}}]" value="3">
-                                                                    <div class="input-group">
-                                                                        <input type="text" class="form-control m-input" name="IMEINumber[{{$content->id}}]" placeholder="{{__('contracts/shoppingCart.enterIMEINumber')}}">
-                                                                    </div>
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                </td>
-                                            @endif
-                                            @endif
-                                            <td>
-                                                <!-- href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/content->product_id/0- 0 means the SIM card is NOT additional tariff-->
-                                                <a href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/{{$content->product_id}}/{{0}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
-                                                    <span>
-                                                        <i class="la la-cart-plus"></i>
-                                                        <span> {{__('contracts/shoppingCart.services')}}</span>
-                                                    </span>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h4 class="m-portlet__head-text">
-                                                    {{__('contracts/shoppingCart.additionalCard')}}
-                                                </h4>
-                                            </td>
-                                            <td colspan="6" align="left">
-                                                <a href="/tariff/index/{{session('providerID')}}/{{1}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
-                                                    <span>
-                                                        <i class="la la-cart-plus"></i>
-                                                        <span> {{__('contracts/shoppingCart.additionalTariffOrder')}}</span>
-                                                    </span>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                      
-
-                                        </form>
-                                    @elseif($content->additional_tariff == 1)
-                                                <!-- Set up the link according to the provider of the tariff.
-                                                With the link, instead of "$content->producer_id", "$content->id" is sent, since it will be more useful in the "/contracts/.../create". -->
-
-                                                    <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
-                                                    @if($content->product_type == 1 and $content->producer_id == 1)
-                                                        <form method="POST" action="/contracts/vodafone/create/{{$content->id}}"  class="m-form m-form--label-align-left- m-form--state-" id="m_form">
-                                                            <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 2) belongs to Ay Yıldız -->
-                                                            @elseif($content->product_type == 1 and $content->producer_id == 2)
-                                                                <form method="POST" action="/contracts/ayYildiz/create/{{$content->id}}"  class="m-form m-form--label-align-left- m-form--state-" id="m_form">
-                                                                    <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 3) belongs to O2 -->
-                                                                    @elseif($content->product_type == 1 and $content->producer_id == 3)
-                                                                        <form method="POST" action="/contracts/O2/create/{{$content->id}}"  class="m-form m-form--label-align-left- m-form--state-" id="m_form">
-                                                                            @endif
-
-                                                                            @csrf
-
-                                                                            <tr>
-                                                                                <td><a href="/contract/shopping-cart/delete-tariff/{{$content->product_id}}" class="btn btn-danger" ><span>{{__('contracts/shoppingCart.delete')}}</span>&nbsp;&nbsp;</a></td>
-                                                                                <td></td>
-                                                                            @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff, not a mobile phone. -->
-                                                                                <td>{{(\App\Tariff::find($content->product_id))->name}}</td>
-                                                                                @endif
-                                                                                <td><input type="text" name="SIMNumber[{{$content->id}}]" class="form-control m-input" placeholder="" value=""></td>
-
-                                                                                <!-- If the current provider is Vodafone -->
-                                                                                @if($content->product_type == 1 and $content->producer_id == 1)
-                                                                                <!-- If "IMEI On-Demand Pool Fields" is active -->
-                                                                                    @if(\App\SystemVariable::where('name', 'isIMEIOnDemandFieldActive')->first()->value == 1)
-                                                                                        <td>
-                                                                                            <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
-                                                                                            @if($content->product_type == 1 and $content->producer_id == 1)
-                                                                                                <div class="m-form__group form-group">
-                                                                                                    <div class="m-radio-list">
-                                                                                                        <label class="m-radio m-radio--bold">
-                                                                                                            <input type="radio" name="IMEIOption[{{$content->id}}]" value="1"> {{__('contracts/shoppingCart.withoutDevice')}}
-                                                                                                            <span></span>
-                                                                                                        </label>
-
-                                                                                                        <label class="m-radio m-radio--bold">
-                                                                                                            <input type="radio" name="IMEIOption[{{$content->id}}]" value="2"> {{__('contracts/shoppingCart.IMEIOnDemand')}}
-                                                                                                            <span></span>
-                                                                                                        </label>
-                                                                                                        <label class="m-radio m-radio--bold">
-                                                                                                            <input type="radio" name="IMEIOption[{{$content->id}}]" value="3">
-                                                                                                            <div class="input-group">
-                                                                                                                <input type="text" class="form-control m-input" name="IMEINumber[{{$content->id}}]" placeholder="{{__('contracts/shoppingCart.enterIMEINumber')}}">
-                                                                                                            </div>
-                                                                                                            <span></span>
-                                                                                                        </label>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            @endif
-                                                                                        </td>
-                                                                                    @endif
-                                                                                @endif
-                                                                                <td>
-                                                                                    <!-- href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/content->product_id/1- 1 means the SIM card is additional tariff-->
-                                                                                    <a href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/{{$content->product_id}}/{{1}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
-                                                                                        <span>
-                                                                                            <i class="la la-cart-plus"></i>
-                                                                                            <span> {{__('contracts/shoppingCart.services')}}</span>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td colspan="6" align="center">
-                                                                                    <button type="submit" class="btn btn-primary">{{__('contracts/shoppingCart.enterTariffRequest')}}</button>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </form>
+                            @foreach($contents->where('additional_tariff', 0) as $content)
+                                <tr>
+                                    <td>{{(\App\Provider::where('id', $content->producer_id)->first()->name)}}</td>
+                                    @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                        <td>{{(\App\Tariff::where('id', $content->product_id))->first()->name}}</td>
                                     @endif
+                                    <td>
+                                        <!-- href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/content->product_id/0- 0 means the SIM card is NOT additional tariff-->
+                                        <a href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/{{$content->product_id}}/{{0}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
+                                            <span>
+                                                <i class="la la-cart-plus"></i>
+                                                <span> {{__('contracts/shoppingCart.services')}}</span>
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td><a href="/contracts/vodafone/shopping-cart/change-main-tariff/{{$content->product_id}}" class="btn btn-danger" ><span>{{__('contracts/shoppingCart.changeTariff')}}</span>&nbsp;&nbsp;</a></td>
+                                    @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                    <td>{{(\App\Tariff::where('id', $content->product_id))->first()->base_price}}</td>
+                                    @endif
+                                    @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                        @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                        <td>{{(\App\Tariff::where('id', $content->product_id))->first()->provision}}</td>
+                                        @endif
+                                    @endcan
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <!--END: main tariff -->
 
-                    <!--END: Datatable -->
+                    <!--BEGIN: additional tariffs button-->
+                    <table class="table table-striped- table-bordered table-hover table-checkable" >
+                        <tbody id="">
+                        <tr>
+                            <td colspan="7" align="left">
+                                <a href="/tariff/index/{{session('providerID')}}/{{1}}" class="btn btn-outline-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                    <span>
+                                        <i class="la la-cart-plus"></i>
+                                        <span> {{__('contracts/shoppingCart.additionalTariffOrder')}}</span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--END: additional tariffs button -->
+
+                    <!--BEGIN: additional tariffs -->
+                    @if($contents->where('additional_tariff', 1)->first())
+                        <table class="table table-striped- table-bordered table-hover table-checkable" >
+                        <thead>
+                        <tr>
+                            <th> {{__('contracts/shoppingCart.provider')}}</th>
+                            <th> {{__('contracts/shoppingCart.tariff')}}</th>
+                            <th> {{__('contracts/shoppingCart.SIMImeiAndServices')}}</th>
+                            <th> {{__('contracts/shoppingCart.delete')}}</th>
+                            <th> {{__('contracts/shoppingCart.basePrice')}}</th>
+                            @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                <th> {{__('contracts/shoppingCart.provision')}}</th>
+                            @endcan
+                        </tr>
+                        </thead>
+                        <tbody id="">
+                            @foreach($contents->where('additional_tariff', 1) as $content)
+                                <tr>
+                                    <td>{{(\App\Provider::where('id', $content->producer_id)->first()->name)}}</td>
+                                    @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                        <td>{{(\App\Tariff::where('id', $content->product_id))->first()->name}}</td>
+                                    @endif
+                                    <td>
+                                        <!-- href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/content->product_id/1- 1 means the SIM card is additional tariff-->
+                                        <a href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/{{$content->product_id}}/{{1}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
+                                            <span>
+                                                <i class="la la-cart-plus"></i>
+                                                <span> {{__('contracts/shoppingCart.services')}}</span>
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td><a href="/contract/shopping-cart/delete-tariff/{{$content->product_id}}" class="btn btn-danger" ><span>{{__('contracts/shoppingCart.delete')}}</span>&nbsp;&nbsp;</a></td>
+                                    @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                    <td>{{(\App\Tariff::where('id', $content->product_id))->first()->base_price}}</td>
+                                    @endif
+                                    @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                        @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                        <td>{{(\App\Tariff::where('id', $content->product_id))->first()->provision}}</td>
+                                        @endif
+                                    @endcan
+                                </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    @endif
+                    <!--END: additional tariffs -->
+
+                    <!--BEGIN: totals -->
+                    <table class="table table-striped- table-bordered table-hover table-checkable" >
+                        <tbody id="">
+                        <tr>
+                            <td colspan="4" align="right">{{__('contracts/shoppingCart.totalBasePrice')}}</td>
+                            <td align="center">{{$totalBasePrice}}</td>
+                            <td align="left"></td>
+                        </tr>
+                        @can('viewProvisionColumn', \App\ShoppingCart::class)
+                            <tr>
+                                <td colspan="4" align="right">{{__('contracts/shoppingCart.totalProvision')}}</td>
+                                <td align="left"></td>
+                                <td align="center">{{$totalProvision}}</td>
+                            </tr>
+                        @endcan
+                        <tr>
+                            <td colspan="6" align="center">
+                                <!-- Set up the link according to the provider of the tariff.
+                                With the link, instead of "$content->producer_id", "$content->id" is sent, since it will be more useful in the "/contracts/.../create". -->
+
+                                <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
+                                @if(session()->get('providerID') == 1)
+                                    <a href="/contracts/vodafone/create" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                        <span>
+                                            <i class="la la-cart-plus"></i>
+                                            <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>
+                                        </span>
+                                    </a>
+                                    <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 2) belongs to Ay Yıldız -->
+                                @elseif(session()->get('providerID') == 2)
+                                    <a href="/contracts/ayYildiz/create" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                        <span>
+                                            <i class="la la-cart-plus"></i>
+                                            <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>
+                                        </span>
+                                    </a>
+                                    <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 3) belongs to O2 -->
+                                @elseif(session()->get('providerID') == 3)
+                                    <a href="/contracts/O2/create" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                        <span>
+                                            <i class="la la-cart-plus"></i>
+                                            <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>
+                                        </span>
+                                    </a>
+                                @endif
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <!--END: totals -->
+
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->

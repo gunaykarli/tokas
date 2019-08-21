@@ -14,8 +14,7 @@
                         <div class="m-portlet__head-title">
                             <h3 class="m-portlet__head-text">
                                 <!-- define hidden field for provider id which is used in js/tariffListWithFilter.js -->
-
-                                <input type="radio" name="providerID" id="providerID" value={{$provider->id}} checked>{{$provider->name}} {{__('tariffs/index.tariffs')}}
+                                {{$provider->name}} {{__('tariffs/index.tariffs')}}
                             </h3>
                         </div>
                     </div>
@@ -153,27 +152,29 @@
                             <th> {{__('tariffs/index.basePrice')}}</th>
                             <th> {{__('tariffs/index.provision')}}</th>
                             <th> {{__('tariffs/index.onTop')}}</th>
-                            <th>{{__('tariffs/index.order')}}</th>
+                            <th> {{__('tariffs/index.order')}}</th>
                         </tr>
                         </thead>
                         <tbody id="tableBody">
 
                         @foreach ($tariffs as $tariff)
-                            <tr>
-                                <td>{{$tariff->network->name}}</td>
-                                <td>{{$tariff->name}}</td>
-                                <td><button type="button" class="btn btn-danger" data-toggle="m-popover" title="{{$tariff->name}}" data-content="{{$tariff->network->name}} {{$tariff->base_price}}">Info</button></td>
-                                <td>{{$tariff->base_price}}</td>
-                                <td>{{$tariff->provision}}</td>
-                                <td>
-                                    @foreach($tariffsWithOnTopForTheDealer as $tariffWithOnTopForTheDealer)
-                                        @if($tariffWithOnTopForTheDealer->id == $tariff->id)
-                                            {{$tariffWithOnTopForTheDealer->pivot->ontop}}
-                                        @endif
-                                    @endforeach
-                                </td>
-                                <td><a href="/contract/shopping-cart/add-tariff/{{$tariff->id}}/{{$isAdditionalTariff}}" class="btn btn-primary" ><span>{{__('tariffs/index.order')}}</span>&nbsp;&nbsp;</a></td>
-                            </tr>
+                            @if($tariff->status == 1)<!-- Only "active" tariff is to be listed. -->
+                                <tr>
+                                    <td>{{$tariff->network->name}}</td>
+                                    <td>{{$tariff->name}}</td>
+                                    <td><button type="button" class="btn btn-danger" data-toggle="m-popover" title="{{$tariff->name}}" data-content="{{$tariff->network->name}} {{$tariff->base_price}}">Info</button></td>
+                                    <td>{{$tariff->base_price}}</td>
+                                    <td>{{$tariff->provision}}</td>
+                                    <td>
+                                        @foreach($tariffsWithOnTopForTheDealer as $tariffWithOnTopForTheDealer)
+                                            @if($tariffWithOnTopForTheDealer->id == $tariff->id)
+                                                {{$tariffWithOnTopForTheDealer->pivot->ontop}}
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                    <td><a href="/contract/shopping-cart/add-tariff/{{$tariff->id}}/{{$isAdditionalTariff}}" class="btn btn-primary" ><span>{{__('tariffs/index.order')}}</span>&nbsp;&nbsp;</a></td>
+                                </tr>
+                            @endif
                         @endforeach
 
                         </tbody>
@@ -196,6 +197,6 @@
     <!--end::Page Vendors -->
 
     <!--begin::Page Scripts-->
-    <script src="{{ asset('js/tariffListWithFilter1.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/vodafoneTariffsListWithFilter2.js')}}" type="text/javascript"></script>
     <!--end::Page Scripts-->
 @endsection

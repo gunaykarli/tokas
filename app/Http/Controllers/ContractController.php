@@ -7,6 +7,7 @@ use App\Customer;
 use App\CustomerContact;
 use App\CustomerPaymentTool;
 use App\Output;
+use App\Region;
 use App\Service;
 use App\ShoppingCart;
 use App\Tariff;
@@ -29,7 +30,22 @@ class ContractController extends Controller
      * Show the GUI for creating a new contract.
      *
      */
-    public function create(Request $request, $shoppingCartID){
+    public function create(){
+
+        // Depending on the provider id of the selected item in the shopping cart,
+        // the program will be forwarded to the respective page to fill out the contract.
+        // session('providerID') can be used. It is created in tariffs.providers.
+
+        // if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone.
+        if(session('providerID') == 1)
+            return view('contracts.vodafone.create');
+        // if product (product_type == 1) is "Tariff" and tariff (producer_id == 2) belongs to Ay Yıldız.
+        elseif (session('providerID') == 2)
+            return view('contracts.ayYildiz.create', compact('shoppingCart'));
+        else
+            return view('contracts.O2.create', compact('shoppingCart'));
+    }
+    public function create_0705(Request $request, $shoppingCartID){
 
         $shoppingCart = ShoppingCart
             ::where('id', $shoppingCartID)
@@ -82,6 +98,8 @@ class ContractController extends Controller
         // And, XML file will be produced.
         Contract::produceXMLForGsmVodafoneContract($request->contractID);
 
+        // After the XML has been produced, shopping cart must be emptied and related session variables must be deleted.
+        ShoppingCart::emptyShoppingCart(auth()->user()->id);
         Session::flash('messageContractFinalised', 'contractFinalised');
         return view('tariffs.providers');
     }
@@ -159,6 +177,22 @@ class ContractController extends Controller
         }
     }
 
+    /**
+     * Initialized URL: "/contracts/vodafone/XML/takeXML"
+     */
+    public function viewTakeXML(){
+        return view('contracts.vodafone.takeXML');
+    }
+
+    /**
+     * forwarded from resources/views/contracts/vodafone/takeXML.blade.php by post method.
+     */
+    public function forwardToReadXML(Request $request){
+        Contract::readXML($request);
+    }
+
+
+
     public function forwardToStoreTRY_DELETE(Request $request)
     {
         $formDataInCreateContract = $request->formDataInCreateContract;
@@ -231,8 +265,6 @@ class ContractController extends Controller
      *
      */
     public function forwardToGenerateXML_DELETE(Request $request){
-
-
         // And, XML file will be produced.
         Contract::produceXMLForGsmVodafoneContract($request->contractID);
 

@@ -16,6 +16,10 @@ class Plausibility extends Model
 
 
     //* User defined methods of the model (class)
+
+    /**
+     * forwated from VodafoneTariffController@store
+     */
     public function setPlausibility($vodafoneTariffID, $request){
 
         $VFPlausibility = new Plausibility();
@@ -35,5 +39,33 @@ class Plausibility extends Model
         $VFPlausibility->group_must = $request->groupMust ;
         $VFPlausibility->tariff_type = $request->tariffType ;
         $VFPlausibility->save();
+    }
+
+    /**
+     * forwated from VodafoneTariffController@update
+     */
+    public function updatePlausibility($tariffID, $request){
+
+        // Determine the specific row to be updated in the table
+        $VFPlausibility = Plausibility
+            ::where('vodafone_tariff_id', $tariffID)
+            ->first();
+
+        $VFPlausibility->vodafone_tariff_id = $tariffID ;
+        $VFPlausibility->min_period_of_validity = $request->minPeriodOfValidity ;
+        $VFPlausibility->debit_authorization = $request->debitAuthorization ;
+        $VFPlausibility->subsidy_authorization = $request->subsidyAuthorization ;
+        $VFPlausibility->IMEI_acquisition = $request->IMEIAcquisition ;
+        $VFPlausibility->telephone_book_entry = $request->telephoneBookEntry ;
+        $VFPlausibility->fax_book_entry = $request->faxBookEntry ;
+        $VFPlausibility->general_agreement = $request->generalAgreement ;
+        $VFPlausibility->VF_home_address = $request->VFHomeAddress ;
+        $VFPlausibility->ultra_card = $request->ultraCard ;
+        $VFPlausibility->FN_porting = $request->FNPorting ;
+        $VFPlausibility->AO_bundle = $request->AOBundle ;
+        $VFPlausibility->member_type = $request->memberType ;
+        $VFPlausibility->group_must = $request->groupMust ;
+        $VFPlausibility->tariff_type = $request->tariffType ;
+        $VFPlausibility->update();
     }
 }

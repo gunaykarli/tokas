@@ -10,6 +10,7 @@ return [
     'IMEIOnDemand' => 'Vodafone Gerät auswählen (IMEI on demand)',
     'enterIMEINumber' => 'IMEI Nummer Eingabe',
     'services' => 'Dienste',
-    'save' => 'Speichern'
+    'save' => 'Speichern',
+    'digitOnly' => 'Bitte geben Sie nur Zahlen ein',
 
 ];

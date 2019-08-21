@@ -12,10 +12,37 @@ class Property extends Model
         return $this->belongsToMany(Tariff::class)->withPivot('value');
     }
 
+    /**
+     * forwated from VodafoneTariffController@store
+     */
     public function setProperties($tariff, $request){
         // According to inputOfProperties in resources/views/tariffs/vodafone/create.blade.php,  the pivot table (tariff_property) of Property and Tariff is set.
         // Since inputOfProperties takes its names' values from the Property table.,
         // we need to check if the key exist in the array inputOfProperty, if so, use the value sent from the form. */
+
+        $properties = Property::all();
+        foreach($properties as $property){
+            if($property->data_type == 'boolean')
+                if($request->booleanInputOfProperties[$property->id] != Null)//****
+                    $tariff->properties()->attach($property->id, ['value' => 1]);
+                else
+                    $tariff->properties()->attach($property->id, ['value' => 0]);
+            else
+                if($request->textInputOfProperties[$property->id] != Null)
+                    $tariff->properties()->attach($property->id, ['value' => $request->textInputOfProperties[$property->id]]);
+        }
+    }
+
+    /**
+     * forwated from VodafoneTariffController@update
+     */
+    public function updateProperties($tariff, $request){
+        // According to inputOfProperties in resources/views/tariffs/vodafone/create.blade.php,  the pivot table (tariff_property) of Property and Tariff is set.
+        // Since inputOfProperties takes its names' values from the Property table.,
+        // we need to check if the key exist in the array inputOfProperty, if so, use the value sent from the form. */
+
+        // First, detach all properties of the tariff in the related pivot table...
+        $tariff->properties()->detach();
 
         $properties = Property::all();
         foreach($properties as $property){
