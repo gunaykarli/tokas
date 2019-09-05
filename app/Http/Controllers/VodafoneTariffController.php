@@ -247,29 +247,28 @@ class VodafoneTariffController extends Controller
         $tariff = new Tariff();
         $tariff->setBasicInfo($request);
 
+        /** Set the LIMIT of the newly created tariff */
+        $tariffsLimit = new TariffsLimit();
+        $tariffsLimit->setLimit($tariff->id, $request);
+
         /** Set the REGION(s) of the newly created Vodafone tariff */
         $regions = new Region();
         $regions->setVodafoneRegions($tariff, $request);
 
         /** Set the PROVISION of the newly created tariff */
-        $tariffsProvisions = new TariffsProvision();
-        $tariffsProvisions->setProvision($tariff->id, $request);
+        //$tariffsProvisions = new TariffsProvision();
+        //$tariffsProvisions->setProvision($tariff->id, $request);
 
         /** Set the ON-TOP of the newly created tariff */
-        $tariff->setOnTop($request);
-
-        /** Set the LIMIT of the newly created tariff */
-        $tariffsLimit = new TariffsLimit();
-        $tariffsLimit->setLimit($tariff->id, $request);
+        //$tariff->setOnTop($request);
 
         /** Set the PROPERTIES of the newly created tariff */
         $tariffsProperties = new Property();
         $tariffsProperties->setProperties($tariff, $request);
 
         /** Set the HIGHLIGHTS of the newly created tariff */
-        $tariffsHighlights = new TariffsHighlight();
+        //$tariffsHighlights = new TariffsHighlight();
         //$tariffsHighlights->setHighlight($tariff->id, $request);
-
 
         /** if the tariff to be created belongs to VODAFONE then perform vodafone-related activities...
         //  manageCreationProcess() manages all the activities related to creation of new Vodafone Tariff*/
@@ -299,9 +298,7 @@ class VodafoneTariffController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the VodafoneTariff.
-     */
+    /** Show the form for editing the VodafoneTariff. */
     public function edit(Tariff $tariff)
     {
         //dd($tariff->id);
@@ -331,13 +328,7 @@ class VodafoneTariffController extends Controller
         //$tariff has been created by Model-Route injection
 
         /** Update basic info of the new tariff */
-
-        dd($request->editTariffBasics);
-        if($request->editTariffBasics == 'on'){
-            dd($request->editTariffBasics);
-            $tariff->updateBasicInfo($tariff, $request);
-        }
-
+        $tariff->updateBasicInfo($tariff, $request);
 
         /** Update the REGION(s) of the tariff */
         if($request->editRegions == 'on'){
@@ -394,14 +385,34 @@ class VodafoneTariffController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\VodafoneTariff  $vodafoneTariff
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(VodafoneTariff $vodafoneTariff)
+    /** Displays page to set up "on-top" for a tariff */
+    public function createOnTop()
     {
-        //
+        // Determine Vodafone provider
+        $provider = Provider
+            ::where('id', 1)
+            ->first();
+
+        $dealers = Dealer::all();
+
+        // Get all Vodafone tariffs
+        $vodafoneTariffs = Tariff
+            ::where('provider_id', $provider->id )
+            ->get();
+
+        return view('tariffs.vodafone.onTop', compact('vodafoneTariffs','provider', 'dealers'));
     }
+
+
+    /** Called from resources/views/tariffs/vodafone/onTop.blade.php */
+    public function storeOnTop(Request $request){
+        $provider = Provider::where('id', 1)->first();
+
+        $tariff = new Tariff;
+        $tariff->setOnTop($provider, $request);
+
+        return redirect()->back()->with('storeMessage', 'success');
+    }
+
+
 }

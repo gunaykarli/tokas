@@ -20,13 +20,14 @@ return [
     'tariffCode' => 'Tarif-Code',
     'actionTariff' => 'AktionsTarife',
     'madeByToker' => 'Gemacht von Toker',
+    'isLimitedAmount' => 'Begrenzte Menge',
     'validFrom' => 'Gültig ab',
     'validTo' => 'Gültig bis',
     'inDefinite' => 'Unbegrenzt',
     'isLimited' => 'Ist begrenzt',
     'group' => 'Gruppe',
     'network' => 'Netz',
-    // for editing
+    // for editing page
     'activateEditingTariffBasics' => 'Aktivieren Sie die Bearbeitung für den Tarif Basic',
     'activateEditingRegions' => 'Aktivieren Sie die Bearbeitung für die Regionen',
     'activateEditingLimit' => 'Aktivieren Sie die Bearbeitung für das Limit des Tarifs',
@@ -34,15 +35,6 @@ return [
     'activateEditingPlausibility' => 'Aktivieren Sie die Bearbeitung für die Plausibilität des Tarifs',
     'activateEditingServices' => 'Aktivieren Sie die Bearbeitung für die Dienste des Tarifs',
     'activateEditingLawTexts' => 'Aktivieren Sie die Bearbeitung für die Rechtstexte des Tarifs',
-
-
-
-
-
-
-
-
-
 
     //** Regions */
     'allRegions' => 'Alle Regionen',

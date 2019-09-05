@@ -31,22 +31,15 @@ class TariffController extends Controller
         $this->middleware('auth');
     }
 
-
-    /**
-     * Display a listing of the providers.
-     *
-     */
-
+    /** Display a listing of the providers. */
     public function providers()
     {
         return view('tariffs.providers');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+    /** Display a listing of the tariffs. */
     public function index()
     {
         // Take all ACTIVE tariffs from the DB.
@@ -370,8 +363,6 @@ class TariffController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -386,11 +377,7 @@ class TariffController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-
     public function store(Request $request)
     {
 
@@ -440,11 +427,30 @@ class TariffController extends Controller
          */
     }
 
+
+    /**
+     * Show the form for creating new on-top cloning */
+    public function createCloning(){
+
+        return view('tariffs.onTopCloning');
+    }
+
+    /**
+     * forward the program execution to set the on-top cloning */
+    public function storeOnTopCloning(Request $request){
+        $tariff = new Tariff();
+        $tariff->setOnTopCloning($request);
+
+        return redirect()->back()->with('storeMessage', 'success');
+    }
+
+
+
+
+
+
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Tariff  $tariff
-     * @return \Illuminate\Http\Response
      */
     public function show(Tariff $tariff)
     {

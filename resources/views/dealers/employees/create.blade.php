@@ -51,6 +51,7 @@
                                     </div>
                                 </div>
                                 <div class="m-portlet__body">
+
                                     <div class="form-group m-form__group">
                                         <input type="text" name="name" class="form-control m-input m-input--air m-input--pill" placeholder="Name" >
                                     </div>
@@ -61,7 +62,7 @@
                                         <input type="email" name="email" class="form-control m-input m-input--air m-input--pill" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
                                     </div>
                                     <div class="form-group m-form__group">
-                                        <input type="text" name="mobile" class="form-control m-input m-input--air m-input--pill"  placeholder="mobile">
+                                        <input type="text" name="mobile" class="form-control m-input m-input--air m-input--pill"  placeholder="Mobile">
                                     </div>
                                     <div class="form-group m-form__group">
                                         @if (auth()->check())
@@ -72,6 +73,9 @@
                                                 @endforeach
                                             </select>
                                         @endif
+                                    </div>
+                                    <div class="form-group m-form__group">
+                                        <button type="submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn">Register</button>&nbsp;&nbsp;
                                     </div>
                                     <div class="form-group m-form__group">
                                         <button id="m_login_signup_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn">Sign Up</button>&nbsp;&nbsp;

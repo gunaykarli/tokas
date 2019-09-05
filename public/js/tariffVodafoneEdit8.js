@@ -8,8 +8,8 @@ $(document).ready(function()
 
 
     // set if the tariff is unlimited (it is not related to the limit which indicates amount of the tariff...) it means "valid_to" field of the tariff is null. In this case "tariffValidToIndefinite" check box is "on"
-    tariffValidToIndefinite = $("input[name='tariffValidToIndefinite']").val();
-    if(tariffValidToIndefinite === 'on')
+    tariffValidToIndefinite = $("input[name='tariffValidToIndefinite']").prop('checked');
+    if(tariffValidToIndefinite === true)
         $('#tariffValidTo').hide();
     else
         $('#tariffValidTo').show();
@@ -59,9 +59,10 @@ $(document).ready(function()
     });
 
     // Default: set visibility of the elements that show "gültüg ab/gültüg bis" depending on the status of the tariff
-    statusOfTariff = $("input[name='tariffStatus']").val();
+    statusOfTariff = $("input[name='tariffStatus']").prop('checked');
 
-    if(statusOfTariff === 'on'){
+    alert("statusOfTarife: " + statusOfTariff);
+    if(statusOfTariff === true){
         $('.tariffValidationDateDIV').show();
     }
     else{

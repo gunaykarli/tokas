@@ -172,7 +172,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.properties')}}
+                                            {{__('tariffs\vodafone\create.provision')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -186,7 +186,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.highlight')}}
+                                            {{__('tariffs\vodafone\create.ontop')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -200,7 +200,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.plausibility')}}
+                                            {{__('tariffs\vodafone\create.tariffLimit')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -214,7 +214,7 @@
                                     </a>
                                     <div class="m-wizard__step-info">
                                         <div class="m-wizard__step-title">
-                                            {{__('tariffs\vodafone\create.service')}}
+                                            {{__('tariffs\vodafone\create.properties')}}
                                         </div>
                                         <div class="m-wizard__step-desc">
 
@@ -223,6 +223,48 @@
                                 </div>
 
                                 <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_7">
+                                    <a href="#" class="m-wizard__step-number">
+                                        <span><i class="fa  flaticon-layers"></i></span>
+                                    </a>
+                                    <div class="m-wizard__step-info">
+                                        <div class="m-wizard__step-title">
+                                            {{__('tariffs\vodafone\create.highlight')}}
+                                        </div>
+                                        <div class="m-wizard__step-desc">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_8">
+                                    <a href="#" class="m-wizard__step-number">
+                                        <span><i class="fa  flaticon-layers"></i></span>
+                                    </a>
+                                    <div class="m-wizard__step-info">
+                                        <div class="m-wizard__step-title">
+                                            {{__('tariffs\vodafone\create.plausibility')}}
+                                        </div>
+                                        <div class="m-wizard__step-desc">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_9">
+                                    <a href="#" class="m-wizard__step-number">
+                                        <span><i class="fa  flaticon-layers"></i></span>
+                                    </a>
+                                    <div class="m-wizard__step-info">
+                                        <div class="m-wizard__step-title">
+                                            {{__('tariffs\vodafone\create.service')}}
+                                        </div>
+                                        <div class="m-wizard__step-desc">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_10">
                                     <a href="#" class="m-wizard__step-number">
                                         <span><i class="fa  flaticon-layers"></i></span>
                                     </a>
@@ -255,7 +297,7 @@
                         <!--begin: Form Body -->
                             <div class="m-portlet__body">
 
-                                <!--begin: Form Wizard Step 1 - Tariff Details-->
+                                <!--begin: Form Wizard Step 1 tariffDetails-->
                                 <div class="m-wizard__form-step m-wizard__form-step--current" id="m_wizard_form_step_1">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
@@ -279,29 +321,6 @@
                                                         <input type="text" name="tariffCode" class="form-control m-input" placeholder="" value="">
                                                     </div>
                                                 </div>
-
-
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.isLimitedAmount')}}:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <span class="m-switch m-switch--sm m-switch--icon">
-                                                            <label>
-                                                                <input type="checkbox"  name="isLimitedAmount" id="isLimitedAmount">
-                                                                <span></span>
-                                                            </label>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="is-limited">
-                                                    <div class="form-group m-form__group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.limit')}}:</label>
-                                                        <div class="col-xl-9 col-lg-9">
-                                                            <input type="text" name="limit" class="form-control m-input">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
 
                                                 <div class="form-group m-form__group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validFrom')}}:</label>
@@ -381,7 +400,7 @@
                                 </div>
                                 <!--end: Form Wizard Step 1-->
 
-                                <!--begin: Form Wizard Step 2 - Regions -->
+                                <!--begin: Form Wizard Step 2-->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_2">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
@@ -425,17 +444,248 @@
                                 </div>
                                 <!--end: Form Wizard Step 2-->
 
-                                <!--begin: Form Wizard Step 3 - Provision - Deleted. There is a special part for this function-->
+                                <!--begin: Form Wizard Step 3-->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_3">
+                                    <div class="row">
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+                                                <div class="m-form__heading">
+                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.provision')}}</h3>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.basePrice')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">€</span>
+                                                                <span class="input-group-text">0.00</span>
+                                                            </div>
+                                                            <input type="text" class="form-control m-input" name="basePrice">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.provision')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">€</span>
+                                                                <span class="input-group-text">0.00</span>
+                                                            </div>
+                                                            <input type="text" class="form-control m-input" name="provision">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validFrom')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <input name="provisionValidFrom" class="form-control m-input" type="date" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validTo')}}:</label>
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <input name="provisionValidTo" class="form-control m-input" type="date" value="2011-08-19T13:45:00" id="provisionValidTo">
+                                                    </div>
+                                                    <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.inDefinite')}}</label>
+                                                    <div class="col-xl-1 col-lg-1">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox"  name="provisionValidToIndefinite" id="provisionValidToIndefinite">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!--end: Form Wizard Step 3-->
 
-                                <!--begin: Form Wizard Step 4 - on-top - Deleted. There is a special part for this function-->
+                                <!--begin: Form Wizard Step 4 on-top -->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_4">
+                                    <div class="row">
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+                                                <div class="m-form__section m-form__section--first">
+                                                    <div class="m-form__heading">
+                                                        <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.ontop')}}</h3>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.ontop')}}?</label>
+                                                        <div class="col-xl-1 col-lg-1">
+                                                            <span class="m-switch m-switch--sm m-switch--icon">
+                                                                <label>
+                                                                    <input type="checkbox"  name="ontop" id="ontop">
+                                                                    <span></span>
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                    </div>
+
+                                                    <div class="on-top-dealer-dependency">
+                                                        <label>{{__('tariffs\vodafone\create.dealerDependency')}}</label>
+                                                        <div class="m-radio-list">
+                                                            <label class="m-radio m-radio--success">
+                                                                <input type="radio" name="ontopDealerDependency"  value="1"> {{__('tariffs\vodafone\create.forAllDealer')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-radio-list">
+                                                            <label class="m-radio m-radio--success">
+                                                                <input type="radio" name="ontopDealerDependency" value="2"> {{__('tariffs\vodafone\create.forCertainDealer')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-radio-list">
+                                                            <label class="m-radio m-radio--success">
+                                                                <input type="radio" name="ontopDealerDependency" value="3"> {{__('tariffs\vodafone\create.forCertainCategory')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-radio-list">
+                                                            <label class="m-radio m-radio--success">
+                                                                <input type="radio" name="ontopDealerDependency" value="4"> {{__('tariffs\vodafone\create.forCertainRegions')}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                    </div>
+
+                                                    <div class="on-top-dealers">
+                                                        <label>{{__('tariffs\vodafone\create.dealers')}}</label>
+                                                        <div class="m-form__group form-group">
+                                                            <div class="m-checkbox-list">
+                                                                @foreach($dealers as $dealer)
+                                                                    <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                        <input type="checkbox" name="ontopCheckboxOfDealers[{{$dealer->id}}]"> {{$dealer->name}}
+                                                                        <span></span>
+                                                                    </label>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                    </div>
+
+                                                    <div class="on-top-categories">
+                                                        <label>{{__('tariffs\vodafone\create.categories')}}</label>
+                                                        <div class="m-form__group form-group">
+                                                            <div class="m-checkbox-list">
+                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[1]"> {{__('tariffs\vodafone\create.category')}}-1
+                                                                    <span></span>
+                                                                </label>
+                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[2]"> {{__('tariffs\vodafone\create.category')}}-2
+                                                                    <span></span>
+                                                                </label>
+                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[3]"> {{__('tariffs\vodafone\create.category')}}-3
+                                                                    <span></span>
+                                                                </label>
+                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[4]"> {{__('tariffs\vodafone\create.category')}}-4
+                                                                    <span></span>
+                                                                </label>
+                                                                <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                    <input type="checkbox" name="ontopCheckboxOfCategories[5]"> {{__('tariffs\vodafone\create.category')}}-5
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                    </div>
+
+                                                    <div class="on-top-regions">
+                                                        <label>{{__('tariffs\vodafone\create.regions')}}</label>
+                                                        <div class="m-form__group form-group">
+                                                            <div class="m-checkbox-list">
+                                                                @foreach($provider->regions as $region)
+                                                                    <label class="m-checkbox m-checkbox--solid m-checkbox--success">
+                                                                        <input type="checkbox" name="ontopCheckboxOfRegions[{{$region->id}}]"> {{$region->abbreviation}}
+                                                                        <span></span>
+                                                                    </label>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                    </div>
+
+                                                    <div class="on-top-amount">
+                                                        <div class="form-group m-form__group row">
+                                                            <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.ontop')}}:</label>
+                                                            <div class="col-xl-3 col-lg-3">
+                                                                <input type="text" name="ontopAmount" id="ontopAmount" class="form-control m-input" placeholder="" value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!--end: Form Wizard Step 4-->
 
-                                <!--begin: Form Wizard Step 5 Limit - Moved to the first step-->
+                                <!--begin: Form Wizard Step 5 Limit -->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_5">
+                                    <div class="row">
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+                                                <div class="m-form__heading">
+                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.tariffLimit')}}</h3>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.isLimited')}}:</label>
+                                                    <div class="col-xl-9 col-lg-9">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox"  name="isLimited" id="isLimited">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="is-limited">
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.limit')}}:</label>
+                                                        <div class="col-xl-9 col-lg-9">
+                                                            <input type="text" name="limit" class="form-control m-input" placeholder="" value="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validFrom')}}:</label>
+                                                        <div class="col-xl-9 col-lg-9">
+                                                            <input name="limitValidFrom" class="form-control m-input" type="date" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.validTo')}}:</label>
+                                                        <div class="col-xl-9 col-lg-9">
+                                                            <input name="limitValidTo" class="form-control m-input" type="date" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!--end: Form Wizard Step 5-->
 
-                                <!--begin: Form Wizard Step 6 - Properties -->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_3">
+                                <!--begin: Form Wizard Step 6 Properties -->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_6">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
@@ -480,8 +730,8 @@
                                 </div>
                                 <!--end: Form Wizard Step 6-->
 
-                                <!--begin: Form Wizard Step 7 - Highlight-->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_4">
+                                <!--begin: Form Wizard Step 7-->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_7">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
@@ -665,8 +915,8 @@
                                 </div>
                                 <!--end: Form Wizard Step 7-->
 
-                                <!--begin: Form Wizard Step 8 - Plausibility-->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_5">
+                                <!--begin: Form Wizard Step 8 Plausibility-->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_8">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
@@ -936,8 +1186,8 @@
                                 </div>
                                 <!--end: Form Wizard Step 8-->
 
-                                <!--begin: Form Wizard Step 9 - Services-->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_6">
+                                <!--begin: Form Wizard Step 9-->
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_9">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
@@ -1018,7 +1268,7 @@
                                 <!--end: Form Wizard Step 9-->
 
                                 <!--begin: Form Wizard Step X Confirmation-->
-                                <div class="m-wizard__form-step" id="m_wizard_form_step_7">
+                                <div class="m-wizard__form-step" id="m_wizard_form_step_10">
                                     <div class="row">
                                         <div class="col-xl-8 offset-xl-2">
 
@@ -1301,7 +1551,7 @@
     <!--end::Page Vendors -->
 
     <!--begin::Page Scripts -->
-    <script src="{{ asset('js/isLimited1.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/isLimited.js')}}" type="text/javascript"></script>
     <script src="{{ asset('js/ontop.js')}}" type="text/javascript"></script>
     <script src="{{ asset('js/tariffVodafoneCreate.js')}}" type="text/javascript"></script>
 

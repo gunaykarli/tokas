@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Dealer;
+use App\Mail\SendMailable;
 use App\Office;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -24,7 +26,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    use RegistersUsers; //vendor/laravel/framework/src/Illuminate/Foundation/Auth/RegistersUsers.php
 
     /**
      * Where to redirect users after registration.
@@ -67,11 +69,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // V1. set up the user_name of the newly created employee: $userNameOfAdminOfDealer . "-" . $request->name . $request->surname (00074-İsimSoyisim
+        $userNameOfAdminOfDealer = User
+            ::where('dealer_id', Office::where('id', $data['officeID'])->first()->dealer_id)
+            ->where('role_id', 4)
+            ->first()
+            ->user_name;
+        //$userNameOfEmployee = $userNameOfAdminOfDealer . "-" . $request->name . $request->surname;
+
+        // V1. set up the user_name of the newly created employee: $userNameOfAdminOfDealer . "-"
+        $theNumberOfEmployeeofDealer = User::where('dealer_id', Office::where('id', $data['officeID'])->first()->dealer_id)->count();
+        $userNameOfEmployee = $userNameOfAdminOfDealer . "-" . ($theNumberOfEmployeeofDealer+1);
+
+        // send mail to the new user
+        Mail::to($data['email'])->send(new SendMailable($data['name'], $userNameOfEmployee,$data['password']));
+
         return User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'email' => $data['email'],
+            'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
+
+            'mobile' => '+49 177',
+            'user_name' => $userNameOfEmployee,
+            'status' => 'on',
+            'role_id' => 5,
+            'office_id' => $data['officeID'],
+            'dealer_id' => Office::where('id', $data['officeID'])->first()->dealer_id,
         ]);
     }
 
@@ -96,8 +121,22 @@ class RegisterController extends Controller
         $office = Office::where('id', $request->officeID)->first();
         $user->dealer_id = $office->dealer_id;
 
+        // V1. set up the user_name of the newly created employee: $userNameOfAdminOfDealer . "-" . $request->name . $request->surname (00074-İsimSoyisim
+        $userNameOfAdminOfDealer = User
+            ::where('dealer_id', $office->dealer_id)
+            ->where('role_id', 4)
+            ->first()
+            ->user_name;
+        //$userNameOfEmployee = $userNameOfAdminOfDealer . "-" . $request->name . $request->surname;
+
+        // V1. set up the user_name of the newly created employee: $userNameOfAdminOfDealer . "-"
+        $theNumberOfEmployeeofDealer = User::where('dealer_id', $office->dealer_id)->count();
+        $userNameOfEmployee = $userNameOfAdminOfDealer . "-" . ($theNumberOfEmployeeofDealer+1);
+        $user->user_name = $userNameOfEmployee;
         $user->password = Hash::make("123.qaz");
         $user->save();
+
+        Mail::to($request->email)->send(new SendMailable($request->name, $userNameOfEmployee,"123.qaz"));
 
         return back();
     }

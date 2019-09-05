@@ -19,21 +19,10 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('home');
-    }
-
-    public function dene()
-    {
-        return view('Mis.raleway.index-raleway');
-
-    }
-    public function welcome1()
-    {
-        return view('welcome1');
-
+        return view('home57');
     }
 }

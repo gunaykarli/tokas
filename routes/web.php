@@ -26,6 +26,10 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// sending email
+Route::get('/send/employee-registration', 'HomeController@employeeRegistration');
+
+
 Route::get('/provider/create', 'ProviderController@create')->name('createProvider');
 Route::post('/provider/store', 'ProviderController@store')->middleware('auth');
 Route::get('/provider/index', 'ProviderController@index')->name('indexProvider');
@@ -105,8 +109,15 @@ Route::get('/tariff/index', 'TariffController@index');
 Route::post('/tariff/index/tariffs-with-filter', 'TariffController@fetchTariffsWithFilter')->name('fetchTariffsWithFilter');
 Route::post('/tariff/index/change-status-of-tariff', 'TariffController@changeStatusOfTariff');
 
- //** On-Top */
-Route::get('/tariff/on-top/edit/{tariff}', 'TariffController@providers');
+ /** On-Top */
+ //Cloning
+Route::get('/tariff/on-top-cloning/create', 'TariffController@createCloning');
+Route::post('/tariff/on-top-cloning/store', 'TariffController@storeOnTopCloning');
+ //Vodafone
+Route::get('/tariff/vodafone/on-top/create', 'VodafoneTariffController@createOnTop');
+Route::post('/tariff/vodafone/on-top/store', 'VodafoneTariffController@storeOnTop');
+Route::get('/tariff/vodafone/on-top/edit/{tariff}', 'VodafoneTariffController@editOnTop');
+
 
 
 Route::get('/tariff/vodafone/create', 'VodafoneTariffController@create');
@@ -169,3 +180,6 @@ Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiPoolController@forwardToChang
  Route::get('/re', 'ImportController@getImport')->name('import');
  Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse');
  Route::post('/import_process', 'ImportController@processImport')->name('import_process');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

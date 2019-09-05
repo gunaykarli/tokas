@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    alert("booş");
+    alert("boş");
 
     $('#radioInLineProviders').change(function(){
         var providerID = $("input[name='providerID']:checked").val();

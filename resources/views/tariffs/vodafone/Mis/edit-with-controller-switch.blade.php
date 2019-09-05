@@ -313,6 +313,27 @@
 
                                 <!--begin: Form Wizard Step 1 Tariff Basics-->
                                 <div class="m-wizard__form-step m-wizard__form-step--current" id="m_wizard_form_step_1">
+
+                                    <div class="row" >
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-5 col-lg-5 col-form-label" style="color:red">{{__('tariffs\vodafone\create.activateEditingTariffBasics')}}</label>
+                                                    <div class="col-xl-7 col-lg-7">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox" name="editTariffBasics" id="editTariffBasics" value="off">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row" id="tariffBasicsDIV">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
@@ -343,7 +364,7 @@
                                                     <div class="col-xl-9 col-lg-9">
                                                         <span class="m-switch m-switch--sm m-switch--icon">
                                                             <label>
-                                                                <input type="checkbox" name="tariffStatus" id="tariffStatus"  @if($tariff->status == 1) checked="checked" @endif>
+                                                                <input type="checkbox" name="tariffStatus" id="tariffStatus"  @if($tariff->status == 1) checked="checked" value="on" @else value="off" @endif>
                                                                 <span></span>
                                                             </label>
                                                         </span>
@@ -367,7 +388,7 @@
                                                         <div class="col-xl-1 col-lg-1">
                                                         <span class="m-switch m-switch--sm m-switch--icon">
                                                             <label>
-                                                                <input type="checkbox"  name="tariffValidToIndefinite" id="tariffValidToIndefinite" @if($tariff->valid_to == null) checked="checked" @endif>
+                                                                <input type="checkbox"  name="tariffValidToIndefinite" id="tariffValidToIndefinite" @if($tariff->valid_to == null) checked="checked" value="on" @else value="off" @endif>
                                                                 <span></span>
                                                             </label>
                                                         </span>
@@ -443,11 +464,32 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <!--end: Form Wizard Step 1 Tariff Basics-->
 
                                 <!--begin: Form Wizard Step 2 Regions -->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_2">
+
+                                    <div class="row" >
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-5 col-lg-5 col-form-label" style="color:red">{{__('tariffs\vodafone\create.activateEditingRegions')}}</label>
+                                                    <div class="col-xl-7 col-lg-7">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox" name="editRegions" id="editRegions" value="off">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="row" id="regionsDIV">
                                         <div class="col-xl-8 offset-xl-2">
@@ -691,6 +733,28 @@
                                 <!--begin: Form Wizard Step 5 Limit -->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_5">
 
+                                    <div class="row">
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-5 col-lg-5 col-form-label" style="color:red">{{__('tariffs\vodafone\create.activateEditingLimit')}}</label>
+                                                    <div class="col-xl-7 col-lg-7">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox" name="editLimit" id="editLimit" value="off">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row" id="limitDIV">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
@@ -740,6 +804,28 @@
 
                                 <!--begin: Form Wizard Step 6 Properties -->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_6">
+
+                                    <div class="row" >
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-5 col-lg-5 col-form-label" style="color:red">{{__('tariffs\vodafone\create.activateEditingProperties')}}</label>
+                                                    <div class="col-xl-7 col-lg-7">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox" name="editProperties" id="editProperties" value="off">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="row" id="propertiesDIV">
                                         <div class="col-xl-8 offset-xl-2">
@@ -988,6 +1074,28 @@
 
                                 <!--begin: Form Wizard Step 8 Plausibility-->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_8">
+
+                                    <div class="row" >
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-5 col-lg-5 col-form-label" style="color:red">{{__('tariffs\vodafone\create.activateEditingPlausibility')}}</label>
+                                                    <div class="col-xl-7 col-lg-7">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox" name="editPlausibility" id="editPlausibility" value="off">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="row" id="plausibilityDIV">
                                         <div class="col-xl-8 offset-xl-2">
@@ -1259,6 +1367,26 @@
                                 <!--begin: Form Wizard Step 9 Services-->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_9">
 
+                                    <div class="row" >
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-5 col-lg-5 col-form-label" style="color:red">{{__('tariffs\vodafone\create.activateEditingServices')}}</label>
+                                                    <div class="col-xl-7 col-lg-7">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox" name="editServices" id="editServices" value="off">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row" id="serviceDIV">
                                         <div class="col-xl-8 offset-xl-2">
                                             <div class="m-form__section m-form__section--first">
@@ -1390,6 +1518,28 @@
 
                                 <!--begin: Form Wizard Step 10 Law Text-->
                                 <div class="m-wizard__form-step" id="m_wizard_form_step_10">
+
+                                    <div class="row" >
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="m-form__section m-form__section--first">
+
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-5 col-lg-5 col-form-label" style="color:red">{{__('tariffs\vodafone\create.activateEditingLawTexts')}}</label>
+                                                    <div class="col-xl-7 col-lg-7">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox" name="editLawTexts" id="editLawTexts" value="off">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="row" id="lawTextDIV">
                                         <div class="col-xl-8 offset-xl-2">
@@ -1760,7 +1910,7 @@
     <!--begin::Page Scripts -->
     <script src="{{ asset('js/isLimited.js')}}" type="text/javascript"></script>
     <script src="{{ asset('js/ontop.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('js/tariffVodafoneEdit8.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/tariffVodafoneEdit6.js')}}" type="text/javascript"></script>
 
     <script src="{{ asset('metronic/assets/app/js/dashboard.js')}}" type="text/javascript"></script>
     <script src="{{ asset('metronic/assets/demo/default/custom/crud/wizard/createDealerFormWizard.js')}}" type="text/javascript"></script>

@@ -1,20 +1,23 @@
-@extends ('partials.master')
+@extends('layouts.app')
 
-@section ('content')
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Dashboard</div>
 
-    <!-- BEGIN: Main Content "stays right before 'Subheader' section and rigth after 'END: Left Aside' section of the original html files'"-->
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-    <!-- END: Main Content -->
-
-@endsection
-
-@section ('pageVendorsAndScripts')
-    <!--begin::Page Vendors -->
-    <script src="{{ asset('metronic/assets/vendors/custom/fullcalendar/fullcalendar.bundle.js')}}" type="text/javascript"></script>
-    <!--end::Page Vendors -->
-
-    <!--begin::Page Scripts -->
-    <script src="{{ asset('metronic/assets/app/js/dashboard.js')}}" type="text/javascript"></script>
-
-    <!--end::Page Scripts -->
+                    You are logged in!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

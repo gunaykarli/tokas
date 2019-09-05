@@ -28,9 +28,9 @@ $(document).ready(function()
 
     });
 
-    //** If the tariff to be created is limited tariff then related form appear when the checkbox checked.
+    //** If the tariff to be created is tariff with limited amount then related form appear when the checkbox checked.
     $('.is-limited').hide();
-    $('#isLimited').change(function()
+    $('#isLimitedAmount').change(function()
     {
         if(this.checked === true)
             $('.is-limited').show();

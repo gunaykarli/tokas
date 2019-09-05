@@ -175,8 +175,7 @@ class ShoppingCartController extends Controller
             ->dealer_id);
 
         $tariffsWithOnTopForTheDealer = $dealer->tariffs()
-            ->wherePivot('office_id', auth()
-            ->user()->office_id)
+            ->wherePivot('office_id', auth()->user()->office_id)
             ->get();
 
         return view('tariffs.vodafone.index', compact('tariffs','tariffGroups', 'tariffsWithOnTopForTheDealer', 'provider', 'isAdditionalTariff'));

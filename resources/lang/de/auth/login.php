@@ -2,7 +2,7 @@
 
 return [
     'login' => 'Einloggen',
-    'userName' => 'Benutzername (E-Mail)',
+    'userName' => 'Benutzername',
     'password' => 'Kennwort',
     'rememberMe' => 'Erinnere dich an mich',
     'forgotYourPassword' => 'Passwort vergessen?',
