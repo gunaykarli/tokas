@@ -220,6 +220,18 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
+                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.network')}}:</label>
+                                                    <div class="col-xl-3 col-lg-3">
+                                                        <select class="form-control m-input" name="networkID" id="networkID">
+                                                            <option value=0 >{{__('tariffs/index.allNetworks')}}</option>
+                                                            @foreach(\App\Network::all() as $network)
+                                                                <option value={{$network->id}} >{{$network->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.maxBasePrice')}}:</label>
                                                     <div class="col-xl-3 col-lg-3">
                                                         <div class="input-group">
@@ -232,13 +244,13 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.minSpeed')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.minDataVolume')}}:</label>
                                                     <div class="col-xl-3 col-lg-3">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text">Mbit/s</span>
+                                                                <span class="input-group-text">GB</span>
                                                             </div>
-                                                            <input type="text" class="form-control m-input" name="minSpeed" id="minSpeed">
+                                                            <input type="text" class="form-control m-input" name="minDataVolume" id="minDataVolume">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -248,12 +260,50 @@
                                                     <div class="col-xl-3 col-lg-3">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text">GB</span>
+                                                                <span class="input-group-text">Mbit/s</span>
                                                             </div>
                                                             <input type="text" class="form-control m-input" name="minBandWidth" id="minBandWidth">
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.allNetFlatTelephony')}}:</label>
+                                                    <div class="col-xl-3 col-lg-3">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox"  name="allNetFlatTelephony" id="allNetFlatTelephony">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.allNetFlatInternet')}}:</label>
+                                                    <div class="col-xl-3 col-lg-3">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox"  name="allNetFlatInternet" id="allNetFlatInternet">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group m-form__group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.allNetFlatSMS')}}:</label>
+                                                    <div class="col-xl-3 col-lg-3">
+                                                        <span class="m-switch m-switch--sm m-switch--icon">
+                                                            <label>
+                                                                <input type="checkbox"  name="allNetFlatSMS" id="allNetFlatSMS">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+
                                             </div>
                                         </div>
 
@@ -295,7 +345,59 @@
                                 <tr>
                                     <td>{{$tariff->network->name}}</td>
                                     <td>{{$tariff->name}}</td>
-                                    <td><button type="button" class="btn btn-danger" data-toggle="m-popover" title="{{$tariff->name}}" data-content="{{$tariff->network->name}} {{$tariff->base_price}}">Info</button></td>
+                                    <td>
+                                            <button type="button" class="btn btn-danger" data-toggle="m-popover" title="{{$tariff->name}}" data-html="true"
+                                                data-content="
+                                                    @if ($tariff->tariffsHighlight)
+                                                        @if($tariff->tariffsHighlight->content['internet1'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['internet1']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['internet2'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['internet2']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['internet3'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['internet3']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['internet4'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['internet4']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['SMS1'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['SMS1']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['SMS2'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['SMS2']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['SMS3'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['SMS3']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['SMS4'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['SMS4']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['telephony1'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['telephony1']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['telephony2'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['telephony2']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['telephony3'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['telephony3']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['telephony4'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['telephony4']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['other1'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['other1']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['other2'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['other2']}}</li>
+                                                        @endif
+                                                        @if($tariff->tariffsHighlight->content['other3'] != '')
+                                                            <li>{{$tariff->tariffsHighlight->content['other3']}}</li>
+                                                        @endif
+                                                    @endif
+                                                ">Info
+                                            </button>
+                                    </td>
                                     <td>{{$tariff->base_price}}</td>
                                     <td>{{$tariff->provision}}</td>
                                     <td>
@@ -312,7 +414,9 @@
                                             {{__('tariffs/index.disabled')}}
                                         @endif
 
-
+                                        <!-- In order to change status of the tariff
+                                        the button is clicked and "$('#tableBody').click('.btn-danger', function (element)" is activated
+                                        in "public/js/allTariffListWithFilter8.js" -->
                                         <button type="button" class="btn btn-danger" name="{{$tariff->name}}" id="{{$tariff->id}}">
                                             {{__('tariffs/index.change')}}
                                         </button>
@@ -349,6 +453,6 @@
     <!--end::Page Vendors -->
 
     <!--begin::Page Scripts-->
-    <script src="{{ asset('js/allTariffListWithFilter3.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/allTariffListWithFilter9.js')}}" type="text/javascript"></script>
     <!--end::Page Scripts-->
 @endsection

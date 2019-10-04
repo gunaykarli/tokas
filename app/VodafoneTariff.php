@@ -22,7 +22,7 @@ class VodafoneTariff extends Model
     }
 
     public function lawTexts(){
-        return $this->belongsToMany(LawText::class);
+        return $this->belongsToMany(LawText::class)->withTimestamps();;
     }
 
     public function plausibility(){
@@ -37,7 +37,7 @@ class VodafoneTariff extends Model
     {
         //** Create a new Vodafone Tariff in VodafoneTariff table.
         // Note that "$this" refers to VodafoneTariff instance
-        // $tariff refers to main tariff that vodafone belongs to.*/
+        // $tariff refers to main tariff that vodafone tariff belongs to.*/
 
         $this->tariff_id = $tariff->id;
         $this->save();

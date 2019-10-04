@@ -55,10 +55,40 @@ return [
 
 
     //** Tariff Limit */
+    'newProperty'=> 'Neue Eigenschaft',
+    'newPropertyAttribute' => 'neues Eigenschaftsattribut',
+    'newPropertyValue' => 'neuer Eigenschaftswert',
 
     //** Properties */
+    'tariffMobilInternet' => 'Mobil Internet',
+    'dataVolume' => 'Datenvolumen',
+    'bandwidth' => 'Bandbreite',
+    'LTECapable' => 'LTE-fähig',
+    'tariffAdvantages' => 'Tarifvorteile',
+    'telephony' => 'Telefonie',
+    'internet' => 'Internet',
+    'SMS' => 'SMS',
+    'other' => 'Sonstige',
+    'allNetFlat' => 'Alle Netze Flat',
+    'valueForTelephony' => 'Geben Sie einen Wert für die Telefonie-Eigenschaft ein',
+    'valueForInternet' => 'Geben Sie einen Wert für die Internet-Eigenschaft ein',
+    'valueForSMS' => 'Geben Sie einen Wert für die SMS-Eigenschaft ein',
+    'pleaseSelect' => 'Bitte auswählen',
+    'amountOfValue' => 'Menge',
+    'textOfValue' => 'Text',
+    'newValue' => 'neuer Wert',
+    'newValueForTelephony' => 'Neuer Wert für die Telefonie',
+    'newValueForInternet' => 'Neuer Wert für das Internet',
+    'newValueForSMS' => 'Neuer Wert für SMS',
+    'newTariffAdvantage' => 'Neuer Tarifvorteil?',
 
     //** Highlight */
+    'highlights' => 'Highlights',
+    'showHighlights' => 'Highlights anzeigen',
+    'newHighlight' => 'Neues Highlight',
+    'enterNewHighlight' => 'Bitte geben Sie Highlight ein',
+
+
 
     //** Plausibility  */
     'minPeriodOfValidity' => 'Mindestlaufzeit',

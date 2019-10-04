@@ -214,14 +214,12 @@ class VodafoneTariffController extends Controller
         return view('tariffs.vodafone.basePriceSetup', compact('tariffs','tariffGroups', 'provider'));
     }
 
-
     /**
      * forwarded from "resources/views/tariffs/vodafone/basePriceSetup.blade.php"
      */
     public function storeBasePriceForTariffs(Request $request){
         VodafoneTariff::renewBasePrice($request);
     }
-
 
     /**
      * Show the form for creating a new vodafone tariff.
@@ -236,7 +234,6 @@ class VodafoneTariffController extends Controller
         return view('tariffs.vodafone.create', compact('provider', 'dealers', 'properties', 'networks'));
     }
 
-
     /**
      * Store a newly created vodafone tariff in storage.
      * called from "/tariffs/vodafone/create.blade.php"
@@ -247,7 +244,7 @@ class VodafoneTariffController extends Controller
         $tariff = new Tariff();
         $tariff->setBasicInfo($request);
 
-        /** Set the LIMIT of the newly created tariff */
+        /** Set the AMOUNT LIMIT of the newly created tariff */
         $tariffsLimit = new TariffsLimit();
         $tariffsLimit->setLimit($tariff->id, $request);
 
@@ -267,8 +264,8 @@ class VodafoneTariffController extends Controller
         $tariffsProperties->setProperties($tariff, $request);
 
         /** Set the HIGHLIGHTS of the newly created tariff */
-        //$tariffsHighlights = new TariffsHighlight();
-        //$tariffsHighlights->setHighlight($tariff->id, $request);
+        $tariffsHighlights = new TariffsHighlight();
+        $tariffsHighlights->setHighlight($tariff->id, $request);
 
         /** if the tariff to be created belongs to VODAFONE then perform vodafone-related activities...
         //  manageCreationProcess() manages all the activities related to creation of new Vodafone Tariff*/
@@ -285,23 +282,10 @@ class VodafoneTariffController extends Controller
         return back();
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\VodafoneTariff  $vodafoneTariff
-     * @return \Illuminate\Http\Response
-     */
-    public function show(VodafoneTariff $vodafoneTariff)
-    {
-        //
-    }
-
-
     /** Show the form for editing the VodafoneTariff. */
     public function edit(Tariff $tariff)
     {
-        //dd($tariff->id);
+        //dd($tariff->vodafoneTariff->plausibility->min_period_of_validity);
         $vodafoneTariff = VodafoneTariff
             ::where('tariff_id', $tariff->id)
             ->first();
@@ -318,7 +302,6 @@ class VodafoneTariffController extends Controller
         return view('tariffs.vodafone.edit', compact('vodafoneTariff', 'tariff', 'provider', 'dealers', 'properties', 'networks'));
     }
 
-
     /**
      * Update the specified vodafone tariff in storage.
      * forwarded from "resources/views/tariffs/vodafone/edit.blade.php"
@@ -327,62 +310,67 @@ class VodafoneTariffController extends Controller
     {
         //$tariff has been created by Model-Route injection
 
-        /** Update basic info of the new tariff */
+        /** Update BASIC INFO of the new tariff */
         $tariff->updateBasicInfo($tariff, $request);
 
+        /** Update the LIMITED AMOUNT of the tariff */
+        $tariffsLimit = new TariffsLimit();
+        $tariffsLimit->updateLimit($tariff->id, $request);
+
         /** Update the REGION(s) of the tariff */
-        if($request->editRegions == 'on'){
-            $regions = new Region();
-            $regions->updateVodafoneRegions($tariff, $request);
-        }
+        $regions = new Region();
+        $regions->updateVodafoneRegions($tariff, $request);
 
         /** DO NOT Update the PROVISION of the tariff since there is a specific section for this function (/tariff/vodafone/provision-setup)
         $tariffsProvisions = new TariffsProvision();
         $tariffsProvisions->setProvision($tariff->id, $request);
-        */
+         */
 
         /** DO NOT Update the OnTop of the tariff since there is a specific section for this function ()
         $tariff->setOnTop($request);
          */
 
-        /** Update the LIMIT of the tariff */
-        if($request->editLimit == 'on'){
-            $tariffsLimit = new TariffsLimit();
-            $tariffsLimit->updateLimit($tariff->id, $request);
-        }
-
         /** update the PROPERTIES of the tariff */
-        if($request->editProperties == 'on'){
-            $tariffsProperties = new Property();
-            $tariffsProperties->updateProperties($tariff, $request);
-        }
+        $tariffsProperties = new Property();
+        $tariffsProperties->updateProperties($tariff, $request);
 
-        //** Set the HIGHLIGHTS of the newly created tariff */
+
+        /** update the HIGHLIGHTS of the newly created tariff */
         //$tariffsHighlights = new TariffsHighlight();
         //$tariffsHighlights->setHighlight($tariff->id, $request);
 
         /** update the PLAUSIBILITY  of the tariff */
-        if($request->editPlausibility == 'on'){
-            $VFPlausibility = new Plausibility();
-            $VFPlausibility->updatePlausibility($tariff->id, $request);
-        }
+        $VFPlausibility = new Plausibility();
+        $VFPlausibility->updatePlausibility($tariff->id, $request);
+
 
         /** update the SERVICES  of the tariff */
+        // Edit the services only if the "editServices" checkbox is checked.
         if($request->editServices == 'on'){
             $service = new Service();
             $service->updateVodafoneTariffServices($tariff, $request);
         }
 
         /** update the LAWTEXT  of the tariff */
-        if($request->editLawTexts == 'on'){
-            $lawText = new LawText();
-            $lawText->updateVodafoneTariffLawTexts($tariff, $request);
-        }
+        $lawText = new LawText();
+        $lawText->updateVodafoneTariffLawTexts($tariff, $request);
 
         /** NOTE: $vodafoneTariff->manageCreationProcess($tariff, $request); is not used as it is used in "store" process of the newly created tariff*/
 
         return redirect('tariff/index');
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\VodafoneTariff  $vodafoneTariff
+     * @return \Illuminate\Http\Response
+     */
+    public function show(VodafoneTariff $vodafoneTariff)
+    {
+        //
+    }
+
 
 
     /** Displays page to set up "on-top" for a tariff */

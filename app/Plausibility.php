@@ -23,6 +23,7 @@ class Plausibility extends Model
     public function setPlausibility($vodafoneTariffID, $request){
 
         $VFPlausibility = new Plausibility();
+
         $VFPlausibility->vodafone_tariff_id = $vodafoneTariffID ;
         $VFPlausibility->min_period_of_validity = $request->minPeriodOfValidity ;
         $VFPlausibility->debit_authorization = $request->debitAuthorization ;
@@ -46,12 +47,13 @@ class Plausibility extends Model
      */
     public function updatePlausibility($tariffID, $request){
 
+
         // Determine the specific row to be updated in the table
         $VFPlausibility = Plausibility
-            ::where('vodafone_tariff_id', $tariffID)
+            ::where('vodafone_tariff_id', VodafoneTariff::where('tariff_id', $tariffID)->first()->id )
             ->first();
 
-        $VFPlausibility->vodafone_tariff_id = $tariffID ;
+        $VFPlausibility->vodafone_tariff_id =  VodafoneTariff::where('tariff_id', $tariffID)->first()->id ;
         $VFPlausibility->min_period_of_validity = $request->minPeriodOfValidity ;
         $VFPlausibility->debit_authorization = $request->debitAuthorization ;
         $VFPlausibility->subsidy_authorization = $request->subsidyAuthorization ;

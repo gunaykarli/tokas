@@ -250,7 +250,7 @@
                         -->
 
                         <!--begin: Form -->
-                        <form method="POST" action="/tariff/vodafone/store" enctype="multipart/form-data" class="m-form m-form--label-align-left- m-form--state-" id="m_form">
+                        <form method="POST" action="/tariff/vodafone/store"  class="m-form m-form--label-align-left- m-form--state-" id="m_form">
                         @csrf
                         <!--begin: Form Body -->
                             <div class="m-portlet__body">
@@ -325,7 +325,7 @@
                                                     <div class="col-xl-6 col-lg-6">
                                                         <input name="tariffValidTo" class="form-control m-input" type="date" value="" id="tariffValidTo">
                                                     </div>
-                                                    <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.inDefinite')}}?</label>
+                                                    <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.inDefinite')}}</label>
                                                     <div class="col-xl-1 col-lg-1">
                                                         <span class="m-switch m-switch--sm m-switch--icon">
                                                             <label>
@@ -535,8 +535,9 @@
                                                     <!-- end: All net flats checkboxes-->
 
                                                     <!-- tariff advantages DIV1 -->
+                                                    <label> <b>{{__('tariffs\vodafone\create.addNewTariffAdvantages')}}</b> </label>
                                                     <div class="form-group m-form__group row" id="tariffAdvantagesDIV1">
-                                                        <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.newTariffAdvantage')}}</label>
+
                                                         <div class="col-xl-1 col-lg-1">
                                                             <span class="m-switch m-switch--sm m-switch--icon">
                                                                 <label>
@@ -554,7 +555,23 @@
                                                                 <option value=4 >{{__('tariffs\vodafone\create.other')}}</option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-xl-6 col-lg-6" id="textOfValueDIV1">
+                                                        <div class="col-xl-3 col-lg-3">
+                                                            <select name="textOfValueSelectBox1" id="textOfValueSelectBox1" class="form-control m-input" >
+                                                                <option value=0 >{{__('tariffs\vodafone\create.pleaseSelect')}}</option>
+                                                                <option value=1 >{{__('tariffs\vodafone\create.newValue')}}</option>
+                                                                @foreach(\Illuminate\Support\Facades\DB::table('property_tariff')->get()->unique('text_of_value') as $instanceForPropertyTariff)
+                                                                    @if($instanceForPropertyTariff->text_of_value == "Alle Netze Flat")
+                                                                        <option value=2 >{{$instanceForPropertyTariff->text_of_value}}</option>
+                                                                    @else
+                                                                        <option value={{$instanceForPropertyTariff->text_of_value}} >{{$instanceForPropertyTariff->text_of_value}}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xl-2 col-lg-2" id="amountOfValueDIV1">
+                                                            <input name="amountOfValue1" id="amountOfValue1" class="form-control m-input" type="text" placeholder="{{__('tariffs\vodafone\create.amountOfValue')}}">
+                                                        </div>
+                                                        <div class="col-xl-3 col-lg-3" id="textOfValueDIV1">
                                                             <input name="textOfValue1" id="textOfValue1" class="form-control m-input" type="text" placeholder="{{__('tariffs\vodafone\create.textOfValue')}}">
                                                         </div>
 
@@ -562,7 +579,6 @@
 
                                                     <!-- tariff advantages DIV2 -->
                                                     <div class="form-group m-form__group row" id="tariffAdvantagesDIV2">
-                                                        <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.newTariffAdvantage')}}</label>
                                                         <div class="col-xl-1 col-lg-1">
                                                             <span class="m-switch m-switch--sm m-switch--icon">
                                                                 <label>
@@ -580,7 +596,23 @@
                                                                 <option value=4 >{{__('tariffs\vodafone\create.other')}}</option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-xl-6 col-lg-6" id="textOfValueDIV2">
+                                                        <div class="col-xl-3 col-lg-3">
+                                                            <select name="textOfValueSelectBox2" id="textOfValueSelectBox2" class="form-control m-input" >
+                                                                <option value=0 >{{__('tariffs\vodafone\create.pleaseSelect')}}</option>
+                                                                <option value=1 >{{__('tariffs\vodafone\create.newValue')}}</option>
+                                                                @foreach(\Illuminate\Support\Facades\DB::table('property_tariff')->get()->unique('text_of_value') as $instanceForPropertyTariff)
+                                                                    @if($instanceForPropertyTariff->text_of_value == "Alle Netze Flat")
+                                                                        <option value=2 >{{$instanceForPropertyTariff->text_of_value}}</option>
+                                                                    @else
+                                                                        <option value={{$instanceForPropertyTariff->text_of_value}} >{{$instanceForPropertyTariff->text_of_value}}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xl-2 col-lg-2" id="amountOfValueDIV2">
+                                                            <input name="amountOfValue2" id="amountOfValue2" class="form-control m-input" type="text" placeholder="{{__('tariffs\vodafone\create.amountOfValue')}}">
+                                                        </div>
+                                                        <div class="col-xl-3 col-lg-3" id="textOfValueDIV2">
                                                             <input name="textOfValue2" id="textOfValue2" class="form-control m-input" type="text" placeholder="{{__('tariffs\vodafone\create.textOfValue')}}">
                                                         </div>
 
@@ -588,7 +620,6 @@
 
                                                     <!-- tariff advantages DIV3 -->
                                                     <div class="form-group m-form__group row" id="tariffAdvantagesDIV3">
-                                                        <label class="col-xl-2 col-lg-2 col-form-label">{{__('tariffs\vodafone\create.newTariffAdvantage')}}</label>
                                                         <div class="col-xl-1 col-lg-1">
                                                             <span class="m-switch m-switch--sm m-switch--icon">
                                                                 <label>
@@ -606,11 +637,110 @@
                                                                 <option value=4 >{{__('tariffs\vodafone\create.other')}}</option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-xl-6 col-lg-6" id="textOfValueDIV3">
+                                                        <div class="col-xl-3 col-lg-3">
+                                                            <select name="textOfValueSelectBox3" id="textOfValueSelectBox3" class="form-control m-input" >
+                                                                <option value=0 >{{__('tariffs\vodafone\create.pleaseSelect')}}</option>
+                                                                <option value=1 >{{__('tariffs\vodafone\create.newValue')}}</option>
+                                                                @foreach(\Illuminate\Support\Facades\DB::table('property_tariff')->get()->unique('text_of_value') as $instanceForPropertyTariff)
+                                                                    @if($instanceForPropertyTariff->text_of_value == "Alle Netze Flat")
+                                                                        <option value=2 >{{$instanceForPropertyTariff->text_of_value}}</option>
+                                                                    @else
+                                                                        <option value={{$instanceForPropertyTariff->text_of_value}} >{{$instanceForPropertyTariff->text_of_value}}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xl-2 col-lg-2" id="amountOfValueDIV3">
+                                                            <input name="amountOfValue3" id="amountOfValue3" class="form-control m-input" type="text" placeholder="{{__('tariffs\vodafone\create.amountOfValue')}}">
+                                                        </div>
+                                                        <div class="col-xl-3 col-lg-3" id="textOfValueDIV3">
                                                             <input name="textOfValue3" id="textOfValue3" class="form-control m-input" type="text" placeholder="{{__('tariffs\vodafone\create.textOfValue')}}">
                                                         </div>
 
                                                     </div>
+
+                                                    <!-- tariff advantages DIV4 -->
+                                                    <div class="form-group m-form__group row" id="tariffAdvantagesDIV4">
+                                                        <div class="col-xl-1 col-lg-1">
+                                                            <span class="m-switch m-switch--sm m-switch--icon">
+                                                                <label>
+                                                                    <input type="checkbox"  name="addNewAdvantageCheckbox4" id="addNewAdvantageCheckbox4">
+                                                                    <span></span>
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-xl-3 col-lg-3">
+                                                            <select name="nameOfPropertySelectBox4" id="nameOfPropertySelectBox4" class="form-control m-input" >
+                                                                <option value=0 >{{__('tariffs\vodafone\create.pleaseSelect')}}</option>
+                                                                <option value=1 >{{__('tariffs\vodafone\create.telephony')}}</option>
+                                                                <option value=2 >{{__('tariffs\vodafone\create.internet')}}</option>
+                                                                <option value=3 >{{__('tariffs\vodafone\create.SMS')}}</option>
+                                                                <option value=4 >{{__('tariffs\vodafone\create.other')}}</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xl-3 col-lg-3">
+                                                            <select name="textOfValueSelectBox4" id="textOfValueSelectBox4" class="form-control m-input" >
+                                                                <option value=0 >{{__('tariffs\vodafone\create.pleaseSelect')}}</option>
+                                                                <option value=1 >{{__('tariffs\vodafone\create.newValue')}}</option>
+                                                                @foreach(\Illuminate\Support\Facades\DB::table('property_tariff')->get()->unique('text_of_value') as $instanceForPropertyTariff)
+                                                                    @if($instanceForPropertyTariff->text_of_value == "Alle Netze Flat")
+                                                                        <option value=2 >{{$instanceForPropertyTariff->text_of_value}}</option>
+                                                                    @else
+                                                                        <option value={{$instanceForPropertyTariff->text_of_value}} >{{$instanceForPropertyTariff->text_of_value}}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xl-2 col-lg-2" id="amountOfValueDIV4">
+                                                            <input name="amountOfValue4" id="amountOfValue4" class="form-control m-input" type="text" placeholder="{{__('tariffs\vodafone\create.amountOfValue')}}">
+                                                        </div>
+                                                        <div class="col-xl-3 col-lg-3" id="textOfValueDIV4">
+                                                            <input name="textOfValue4" id="textOfValue4" class="form-control m-input" type="text" placeholder="{{__('tariffs\vodafone\create.textOfValue')}}">
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- tariff advantages DIV5 -->
+                                                    <div class="form-group m-form__group row" id="tariffAdvantagesDIV5">
+                                                        <div class="col-xl-1 col-lg-1">
+                                                            <span class="m-switch m-switch--sm m-switch--icon">
+                                                                <label>
+                                                                    <input type="checkbox"  name="addNewAdvantageCheckbox5" id="addNewAdvantageCheckbox5">
+                                                                    <span></span>
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-xl-3 col-lg-3">
+                                                            <select name="nameOfPropertySelectBox5" id="nameOfPropertySelectBox5" class="form-control m-input" >
+                                                                <option value=0 >{{__('tariffs\vodafone\create.pleaseSelect')}}</option>
+                                                                <option value=1 >{{__('tariffs\vodafone\create.telephony')}}</option>
+                                                                <option value=2 >{{__('tariffs\vodafone\create.internet')}}</option>
+                                                                <option value=3 >{{__('tariffs\vodafone\create.SMS')}}</option>
+                                                                <option value=4 >{{__('tariffs\vodafone\create.other')}}</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xl-3 col-lg-3">
+                                                            <select name="textOfValueSelectBox5" id="textOfValueSelectBox5" class="form-control m-input" >
+                                                                <option value=0 >{{__('tariffs\vodafone\create.pleaseSelect')}}</option>
+                                                                <option value=1 >{{__('tariffs\vodafone\create.newValue')}}</option>
+                                                                @foreach(\Illuminate\Support\Facades\DB::table('property_tariff')->get()->unique('text_of_value') as $instanceForPropertyTariff)
+                                                                    @if($instanceForPropertyTariff->text_of_value == "Alle Netze Flat")
+                                                                        <option value=2 >{{$instanceForPropertyTariff->text_of_value}}</option>
+                                                                    @else
+                                                                        <option value={{$instanceForPropertyTariff->text_of_value}} >{{$instanceForPropertyTariff->text_of_value}}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xl-2 col-lg-2" id="amountOfValueDIV5">
+                                                            <input name="amountOfValue5" id="amountOfValue5" class="form-control m-input" type="text" placeholder="{{__('tariffs\vodafone\create.amountOfValue')}}">
+                                                        </div>
+                                                        <div class="col-xl-3 col-lg-3" id="textOfValueDIV5">
+                                                            <input name="textOfValue5" id="textOfValue5" class="form-control m-input" type="text" placeholder="{{__('tariffs\vodafone\create.textOfValue')}}">
+                                                        </div>
+
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -625,56 +755,104 @@
                                             <div class="m-form__section m-form__section--first">
 
                                                 <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.highlights')}}</h3>
+                                                    <h3 class="m-form__heading-title">{{__('tariffs\vodafone\create.highlight')}}</h3>
                                                 </div>
 
                                                 <div class="form-group m-form__group">
 
                                                     <div class="form-group m-form__group row">
-                                                        <div class="col-lg-4 m--align-left">
-                                                            <button type="button"  name="showHighlights" id="showHighlights" class="btn btn-info m-btn--wide">{{__('tariffs\vodafone\create.showHighlights')}}</button>
-                                                    </div>
-                                                    </div>
-                                                    <div id="highlight1DIV" class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.highlight')}} 1:</label>
                                                         <div class="col-xl-6 col-lg-6">
                                                             <input type="text" name="highlight1" id="highlight1" class="form-control m-input">
                                                         </div>
                                                     </div>
-                                                    <div id="highlight2DIV" class="form-group m-form__group row">
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.highlight')}} 2:</label>
                                                         <div class="col-xl-6 col-lg-6">
                                                             <input type="text" name="highlight2" id="highlight2" class="form-control m-input">
                                                         </div>
                                                     </div>
-                                                    <div id="highlight3DIV" class="form-group m-form__group row">
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.highlight')}} 3:</label>
                                                         <div class="col-xl-6 col-lg-6">
                                                             <input type="text" name="highlight3" id="highlight3" class="form-control m-input">
                                                         </div>
                                                     </div>
-                                                    <div id="highlight4DIV" class="form-group m-form__group row">
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.highlight')}} 4:</label>
                                                         <div class="col-xl-6 col-lg-6">
                                                             <input type="text" name="highlight4" id="highlight4" class="form-control m-input">
                                                         </div>
                                                     </div>
-                                                    <div id="highlight5DIV" class="form-group m-form__group row">
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.highlight')}} 5:</label>
                                                         <div class="col-xl-6 col-lg-6">
                                                             <input type="text" name="highlight5" id="highlight5" class="form-control m-input">
                                                         </div>
                                                     </div>
-                                                    <div id="highlight6DIV" class="form-group m-form__group row">
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.highlight')}} 6:</label>
                                                         <div class="col-xl-6 col-lg-6">
                                                             <input type="text" name="highlight6" id="highlight6" class="form-control m-input">
                                                         </div>
                                                     </div>
-                                                    <div id="highlight7DIV" class="form-group m-form__group row">
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.highlight')}} 7:</label>
                                                         <div class="col-xl-6 col-lg-6">
                                                             <input type="text" name="highlight7" id="highlight7" class="form-control m-input">
                                                         </div>
                                                     </div>
-                                                    <div id="highlight8DIV" class="form-group m-form__group row">
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.highlight')}} 8:</label>
                                                         <div class="col-xl-6 col-lg-6">
                                                             <input type="text" name="highlight8" id="highlight8" class="form-control m-input">
                                                         </div>
                                                     </div>
+                                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                                                    <div class="form-group m-form__group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.newHighlight')}}</label>
+                                                        <div class="col-xl-1 col-lg-1">
+                                                            <span class="m-switch m-switch--sm m-switch--icon">
+                                                                <label>
+                                                                    <input type="checkbox"  name="newHighlightCheckbox1" id="newHighlightCheckbox1">
+                                                                    <span></span>
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6" id="">
+                                                            <input name="newHighlightText1" id="newHighlightText1" class="form-control m-input" type="text" placeholder="{{__('tariffs\vodafone\create.enterNewHighlight')}}" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group m-form__group row" id="newHighlightDIVGROUP2">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.newHighlight')}}</label>
+                                                        <div class="col-xl-1 col-lg-1">
+                                                            <span class="m-switch m-switch--sm m-switch--icon">
+                                                                <label>
+                                                                    <input type="checkbox"  name="newHighlightCheckbox2" id="newHighlightCheckbox2">
+                                                                    <span></span>
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6" id="">
+                                                            <input name="newHighlightText2" id="newHighlightText2" class="form-control m-input" type="text" placeholder="{{__('tariffs\vodafone\create.enterNewHighlight')}}" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group m-form__group row" id="newHighlightDIVGROUP3">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs\vodafone\create.newHighlight')}}</label>
+                                                        <div class="col-xl-1 col-lg-1">
+                                                            <span class="m-switch m-switch--sm m-switch--icon">
+                                                                <label>
+                                                                    <input type="checkbox"  name="newHighlightCheckbox3" id="newHighlightCheckbox3">
+                                                                    <span></span>
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6" id="">
+                                                            <input name="newHighlightText3" id="newHighlightText3" class="form-control m-input" type="text" placeholder="{{__('tariffs\vodafone\create.enterNewHighlight')}}" >
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                             </div>
@@ -1319,6 +1497,7 @@
     <!--end::Page Vendors -->
 
     <!--begin::Page Scripts -->
+    <script src="{{ asset('js/isLimited1.js')}}" type="text/javascript"></script>
     <script src="{{ asset('js/ontop.js')}}" type="text/javascript"></script>
     <script src="{{ asset('js/tariffVodafoneCreate9.js')}}" type="text/javascript"></script>
 

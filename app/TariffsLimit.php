@@ -14,7 +14,7 @@ class TariffsLimit extends Model
     }
 
     /**
-     * sets limited amount of the newly created tariff
+     * sets amount limit  of the newly created tariff
      * called from VodafoneTariffController@store
      */
     public function setLimit($tariffID, $request){
@@ -30,6 +30,7 @@ class TariffsLimit extends Model
 
 
     /**
+     * * updates amount limit of the tariff
      * forwated from VodafoneTariffController@update */
     public function updateLimit($tariffID, $request){
 

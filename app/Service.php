@@ -25,12 +25,13 @@ class Service extends Model
 
 
     /**
-     * forwated from from VodafoneTariff@manageCreationProcess
+     * forwarded from from VodafoneTariff@manageCreationProcess
      */
     public function setVodafoneTariffServices($vodafoneTariff, Request $request){
 
         //** Take all service info of newly created tariff from the excel to an array */
         if($request->hasFile('vodafoneTariffServiceProperty')) {
+            dd($request->file('vodafoneTariffServiceProperty')->getRealPath());
             $tariffServicePropertiesInExcel = Excel::load($request->file('vodafoneTariffServiceProperty')->getRealPath());
             $tariffServicePropertiesInArray = $tariffServicePropertiesInExcel->toArray();
 
@@ -39,11 +40,20 @@ class Service extends Model
                 if($row['property'] != 'X' and $row['property'] != 'x'){ // X - unzulässig-ausschulüsse
                     $service = Service::where('code', $row['code'])->first();
                     /** IF THE CURRENT SERVIS in the "ServiceForNewVFTariff" excel table, IS NOT IN THE SERVICE TABLE in the DB, IT MUST BE ADDED TO THE SERVICE TABLE in the DB FIRST. */
+                    if(!$service){
+                        $service = new Service();
+                        $service->code = $row['code'];
+                        $service->name = $row['name'];
+                        $service->type = 1; /** this value must be taken from the USER.!!! */
+                        $service->provider_id = $request->providerID;
+                        $service->save();
+                    }
+
                     //** Set value of property and favorite according to the value type in related tables. */
                     if($row['property'] =='!'){ // ! - Pflichtfeld
                         $propertyValue = 1;
                     }
-                    else if($row['property'] =='ok' and $row['property'] =='OK') // ok - zulässig
+                    else if($row['property'] =='ok' or $row['property'] =='OK' or $row['property'] =='oK' or $row['property'] =='Ok') // ok - zulässig
                         $propertyValue = 2;
                     else
                         $propertyValue = 3;
@@ -59,13 +69,16 @@ class Service extends Model
                 }
             }
         }
+        else
+            dd("No File Selected");
     }
 
     /**
-     * forwated from VodafoneTariffController@update
+     * forwarded from VodafoneTariffController@update
      */
-    public function updateVodafoneTariffServices($vodafoneTariff, Request $request){
+    public function updateVodafoneTariffServices($tariff, Request $request){
 
+        $vodafoneTariff = VodafoneTariff::where('tariff_id', $tariff->id)->first();
         // First, detach all services of the tariff  in the related pivot table...
         if($request->hasFile('vodafoneTariffServiceProperty'))
             $vodafoneTariff->services()->detach();
@@ -85,11 +98,19 @@ class Service extends Model
                 if($row['property'] != 'X' and $row['property'] != 'x'){ // X - unzulässig-ausschulüsse
                     $service = Service::where('code', $row['code'])->first();
                     /** IF THE CURRENT SERVIS in the "ServiceForNewVFTariff" excel table, IS NOT IN THE SERVICE TABLE in the DB, IT MUST BE ADDED TO THE SERVICE TABLE in the DB FIRST. */
+                    if(!$service){
+                        $service = new Service();
+                        $service->code = $row['code'];
+                        $service->name = $row['name'];
+                        $service->type = 1; /** this value must be taken from the USER.!!! */
+                        $service->provider_id = $request->providerID;
+                        $service->save();
+                    }
                     //** Set value of property and favorite according to the value type in related tables. */
                     if($row['property'] =='!'){ // ! - Pflichtfeld
                         $propertyValue = 1;
                     }
-                    else if($row['property'] =='ok' and $row['property'] =='OK') // ok - zulässig
+                    else if($row['property'] =='ok' or $row['property'] =='OK' or $row['property'] =='oK' or $row['property'] =='Ok') // ok - zulässig
                         $propertyValue = 2;
                     else
                         $propertyValue = 3;

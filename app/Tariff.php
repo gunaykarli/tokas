@@ -14,11 +14,15 @@ class Tariff extends Model
     /** Relationship setups according to the ER diagram */
 
     public function properties(){
-        return $this->belongsToMany(Property::class)->withPivot('value');
+        return $this->belongsToMany(Property::class, 'property_tariff')
+            ->withPivot('amount_of_value', 'text_of_value')
+            ->withTimestamps();
     }
 
     public function regions(){
-        return $this->belongsToMany(Region::class, 'tariff_region')->withPivot('provider_id')->withTimestamps();
+        return $this->belongsToMany(Region::class, 'tariff_region')
+            ->withPivot('provider_id')
+            ->withTimestamps();
         //** Eloquent will join the two related model names in alphabetical order. However, you are free to override this convention.
         // Normally the name of the pivot table is 'region_tariff'. We have overrided this convention
         // additionally provider_id is extra attribute of the pivot table.*/
@@ -33,15 +37,16 @@ class Tariff extends Model
         //** In naming pivot table, Eloquent will join the two related model names  in alphabetical order . However, you are free to override this convention.
         // Normally the name of the pivot table is 'dealer_tariff'. We have overrided this convention by giving 'ontop'
         // additionally 'office_id', 'amount' are extra attributes of the pivot table.*/
-        return $this->belongsToMany(Dealer::class, 'ontop')->withPivot('office_id', 'ontop')->withTimestamps();
+        return $this->belongsToMany(Dealer::class, 'ontop')
+            ->withPivot('office_id', 'ontop')->withTimestamps();
     }
 
     public function vodafoneTariff(){
         return $this->hasOne(VodafoneTariff::class);
     }
 
-    public function tariffsHighlights(){
-        return $this->hasMany(TariffsHighlight::class);
+    public function tariffsHighlight(){
+        return $this->hasOne(TariffsHighlight::class);
     }
 
     public function tariffsProvisions(){
@@ -68,6 +73,7 @@ class Tariff extends Model
     public function setBasicInfo($request){
         $this->name = $request->tariffName;
         $this->tariff_code = $request->tariffCode;
+        $this->base_price = $request->basePrice;
 
         // if the given tariffValidFrom is today then activate the status of the tariff immediately, otherwise CronJob will activate it on the given date
         $difference = Carbon::parse($request->tariffValidFrom)->diffInDays(Carbon::now());
@@ -79,11 +85,14 @@ class Tariff extends Model
             $this->status = 1;
         }
 
+        // Assign 1 to the status of the group without checking if the status is already 1 or not.
+        // Since a new tariff is being assigned to the group. The status must be 1 anyway.
         $this->group_id = $request->groupID;
+        TariffsGroup::assignOneToStatusOfGroup($request->groupID);
+
         $this->provider_id = $request->providerID;
         $this->network_id = $request->networkID;
-        $this->base_price = 0; /** base_price and provision will be entered in next step...VEYA burada mı verilmeli SOR!*/
-        $this->provision = 0;
+        $this->provision = 0;/** provision will be entered in next step...VEYA burada mı verilmeli SOR!*/
         $this->valid_from = $request->tariffValidFrom;
 
         if($request->tariffValidToIndefinite == 'on')
@@ -121,6 +130,7 @@ class Tariff extends Model
         //dd ($request->tariffStatus);
         $tariff->name = $request->tariffName;
         $tariff->tariff_code = $request->tariffCode;
+        $tariff->base_price = $request->basePrice;
 
         /** begin: change status of the tariff */
         if($tariff->status == 1) // current status of the tariff is 1/on
@@ -175,7 +185,13 @@ class Tariff extends Model
         }
         /** end: change status of the tariff */
 
+        // Assign 1 to the status of the group without checking if the status is already 1 or not.
+        // Since an edited tariff is being assigned to the group (or no group change). The status must be 1 anyway.
+        // And after updating the tariff - at the bottom of this function ( $tariff->update(); )- controlAndAlterStatusOfGroup() in TariffsGroup.php,
+        // since the status of the edited tariff might be altered.
         $tariff->group_id = $request->groupID;
+        TariffsGroup::assignOneToStatusOfGroup($request->groupID);
+
         $tariff->provider_id = $request->providerID;
         $tariff->network_id = $request->networkID;
 
@@ -202,6 +218,10 @@ class Tariff extends Model
             $tariff->is_limited = 0;
 
         $tariff->update();
+
+        // And after updating the tariff, status of the group to which the edited tariff belongs, must be controlled.
+        // since the status of the edited tariff might be altered. And if no tariff of active tariff in the group, status of the group must be altered to 0.
+        TariffsGroup::controlAndAlterStatusOfGroup($request->groupID);
     }
 
     /**

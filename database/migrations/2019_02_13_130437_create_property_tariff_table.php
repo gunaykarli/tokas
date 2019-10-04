@@ -13,6 +13,16 @@ class CreatePropertyTariffTable extends Migration
      */
     public function up()
     {
+
+        Schema::create('property_tariff', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('tariff_id');
+            $table->integer('property_id');
+            $table->string('amount_of_value')->nullable();//extra field for the pivot.
+            $table->string('text_of_value')->nullable();//extra field for the pivot.
+            $table->timestamps();
+        });
+        /**
         Schema::create('property_tariff', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tariff_id');
@@ -20,6 +30,7 @@ class CreatePropertyTariffTable extends Migration
             $table->string('value');//extra field for the pivot.
             $table->timestamps();
         });
+         */
     }
 
     /**
