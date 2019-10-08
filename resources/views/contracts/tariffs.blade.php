@@ -47,7 +47,7 @@
                     <div class="m-portlet__head-caption">
                         <div class="m-portlet__head-title">
                             <h3 class="m-portlet__head-text">
-                                {{__('tariffs/index.tariffs')}}
+                                {{__('contracts/tariffs.tariffs')}}
                             </h3>
                         </div>
                     </div>
@@ -129,23 +129,15 @@
                 </div>
 
                 <div class="m-portlet__body" id="general">
-                    <!-- When new contract and XML are created successfully...
-                        forwarded from ContractController@finalize-->
-                    @if(session()->has('messageContractFinalised'))
-                        <div class="form-group m-form__group">
-                            <div class="alert alert-success">
-                                {{__('tariffs/index.'. session()->get('messageContractFinalised'))}}
-                            </div>
-                        </div>
-                    @endif
+
                             @csrf
                             <!--BEGIN:List of the providers -->
                             <div class="m-form__group form-group">
-                                <label>{{__('tariffs/index.providers')}}</label>
+                                <label>{{__('contracts/tariffs.providers')}}</label>
 
                                 <div class="m-radio-inline" id="radioInLineProviders">
                                     <label class="m-radio">
-                                        <input type="radio" name="providerID" id="providerID" value=0 checked> {{__('tariffs/index.all')}}
+                                        <input type="radio" name="providerID" id="providerID" value=0 checked> {{__('contracts/tariffs.all')}}
                                         <span></span>
                                     </label>
                                     @foreach($providers as $provider)
@@ -161,11 +153,11 @@
 
                             <!--BEGIN:List of the tariffs groups of the selected providers -->
                             <div class="m-form__group form-group">
-                                <label>{{__('tariffs/index.groups')}}</label>
+                                <label>{{__('contracts/tariffs.groups')}}</label>
 
                                 <div class="m-radio-inline" id="radioInLineGroups">
                                     <label class="m-radio">
-                                        <input type="radio" name="tariffGroup" id="tariffGroup" value=0 checked> {{__('tariffs/index.all')}}
+                                        <input type="radio" name="tariffGroup" id="tariffGroup" value=0 checked> {{__('contracts/tariffs.all')}}
                                         <span></span>
                                     </label>
                                     <!-- Radio buttons will be added HERE by the "js/allTariffListWithFilter1.js"
@@ -184,7 +176,7 @@
 													<i class="fa fa-filter"></i>
 												</span>
                                                 <h3 class="m-portlet__head-text">
-                                                    {{__('tariffs/index.filterParameters')}}
+                                                    {{__('contracts/tariffs.filterParameters')}}
                                                 </h3>
                                             </div>
                                         </div>
@@ -203,35 +195,35 @@
                                             <div class="m-form__group form-group" id="filterPortlet">
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.statusOfTariffs')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts/tariffs.statusOfTariffs')}}:</label>
 
                                                     <div class="col-xl-2 col-lg-2">
                                                         <label class="m-radio">
-                                                            <input type="radio" name="statusOfTariffs" id="statusOfTariffs" value=1 checked="checked" > {{__('tariffs/index.justActiveTariffs')}}
+                                                            <input type="radio" name="statusOfTariffs" id="statusOfTariffs" value=1 checked="checked" > {{__('contracts/tariffs.justActiveTariffs')}}
                                                             <span></span>
                                                         </label>
                                                     </div>
 
                                                     <div class="col-xl-2 col-lg-2">
                                                         <label class="m-radio">
-                                                            <input type="radio" name="statusOfTariffs" id="statusOfTariffs" value=0 > {{__('tariffs/index.justDisabledTariffs')}}
+                                                            <input type="radio" name="statusOfTariffs" id="statusOfTariffs" value=0 > {{__('contracts/tariffs.justDisabledTariffs')}}
                                                             <span></span>
                                                         </label>
                                                     </div>
 
                                                     <div class="col-xl-2 col-lg-2">
                                                         <label class="m-radio">
-                                                            <input type="radio" name="statusOfTariffs" id="statusOfTariffs" value=2 > {{__('tariffs/index.all')}}
+                                                            <input type="radio" name="statusOfTariffs" id="statusOfTariffs" value=2 > {{__('contracts/tariffs.all')}}
                                                             <span></span>
                                                         </label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.network')}}:</label>
+                                                    <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('contracts/tariffs.network')}}:</label>
                                                     <div class="col-xl-3 col-lg-3">
                                                         <select class="form-control m-input" name="networkID" id="networkID">
-                                                            <option value=0 >{{__('tariffs/index.allNetworks')}}</option>
+                                                            <option value=0 >{{__('contracts/tariffs.allNetworks')}}</option>
                                                             @foreach(\App\Network::all() as $network)
                                                                 <option value={{$network->id}} >{{$network->name}}</option>
                                                             @endforeach
@@ -240,7 +232,7 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.maxBasePrice')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts/tariffs.maxBasePrice')}}:</label>
                                                     <div class="col-xl-3 col-lg-3">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
@@ -252,7 +244,7 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.minDataVolume')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts/tariffs.minDataVolume')}}:</label>
                                                     <div class="col-xl-3 col-lg-3">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
@@ -264,7 +256,7 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.minBandWidth')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts/tariffs.minBandWidth')}}:</label>
                                                     <div class="col-xl-3 col-lg-3">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
@@ -276,7 +268,7 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.allNetFlatTelephony')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts/tariffs.allNetFlatTelephony')}}:</label>
                                                     <div class="col-xl-3 col-lg-3">
                                                         <span class="m-switch m-switch--sm m-switch--icon">
                                                             <label>
@@ -288,7 +280,7 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.allNetFlatInternet')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts/tariffs.allNetFlatInternet')}}:</label>
                                                     <div class="col-xl-3 col-lg-3">
                                                         <span class="m-switch m-switch--sm m-switch--icon">
                                                             <label>
@@ -300,7 +292,7 @@
                                                 </div>
 
                                                 <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('tariffs/index.allNetFlatSMS')}}:</label>
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts/tariffs.allNetFlatSMS')}}:</label>
                                                     <div class="col-xl-3 col-lg-3">
                                                         <span class="m-switch m-switch--sm m-switch--icon">
                                                             <label>
@@ -322,7 +314,7 @@
                                                         <i class="la la-toggle-left"></i>
                                                     </div>
                                                     <div class="m-demo-icon__class">
-                                                        {{__('tariffs/index.resetFilter')}} </div>
+                                                        {{__('contracts/tariffs.resetFilter')}} </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -337,14 +329,14 @@
                     <table class="table table-striped- table-bordered table-hover table-checkable" >
                         <thead>
                         <tr>
-                            <th> {{__('tariffs/index.network')}}</th>
-                            <th> {{__('tariffs/index.name')}}</th>
-                            <th> {{__('tariffs/index.info')}}</th>
-                            <th> {{__('tariffs/index.basePrice')}}</th>
-                            <th> {{__('tariffs/index.provision')}}</th>
-                            <th> {{__('tariffs/index.onTop')}}</th>
-                            <th>{{__('tariffs/index.status')}}</th>
-                            <th>{{__('tariffs/index.action')}}</th>
+                            <th> {{__('contracts/tariffs.network')}}</th>
+                            <th> {{__('contracts/tariffs.name')}}</th>
+                            <th> {{__('contracts/tariffs.info')}}</th>
+                            <th> {{__('contracts/tariffs.basePrice')}}</th>
+                            <th> {{__('contracts/tariffs.provision')}}</th>
+                            <th> {{__('contracts/tariffs.onTop')}}</th>
+
+                            <th>{{__('contracts/tariffs.action')}}</th>
                         </tr>
                         </thead>
                         <tbody id="tableBody">
@@ -415,29 +407,8 @@
                                         @endif
                                     @endforeach
                                     </td>
-                                    <td>
-                                        @if($tariff->status == 1)
-                                            {{__('tariffs/index.active')}}
-                                        @else
-                                            {{__('tariffs/index.disabled')}}
-                                        @endif
+                                    <td><a href="/contract/shopping-cart/add-tariff/{{$tariff->id}}}}" class="btn btn-primary" ><span>{{__('tariffs/index.order')}}</span>&nbsp;&nbsp;</a></td>
 
-                                        <!-- In order to change status of the tariff
-                                        the button is clicked and "$('#tableBody').click('.btn-danger', function (element)" is activated
-                                        in "public/js/allTariffListWithFilter8.js" -->
-                                        <button type="button" class="btn btn-danger" name="{{$tariff->name}}" id="{{$tariff->id}}">
-                                            {{__('tariffs/index.change')}}
-                                        </button>
-                                    </td>
-                                    <td>
-                                        @if($tariff->provider_id == 1)
-                                            <a href="/tariff/vodafone/edit/{{$tariff->id}}" type="button" class="btn btn-primary"> {{__('tariffs/index.edit')}}</a>
-                                        @elseif($tariff->provider_id == 2)
-                                            <a href="/tariff/ayYildiz/edit/{{$tariff->id}}" type="button" class="btn btn-primary"> {{__('tariffs/index.edit')}}</a>
-                                        @elseif(($tariff->provider_id == 3))
-                                            <a href="/tariff/O2/edit/{{$tariff->id}}" type="button" class="btn btn-primary"> {{__('tariffs/index.edit')}}</a>
-                                        @endif
-                                    </td>
                                 </tr>
                             @endforeach
 

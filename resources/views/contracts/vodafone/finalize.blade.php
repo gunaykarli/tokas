@@ -113,7 +113,7 @@
                     <div class="form-group m-form__group row m--margin-top-5" id="finalizeContractDiv">
                         <div class="m-separator m-separator--dashed m-separator--lg"></div>
                         <div class="col-xl-2 col-lg-2 m--align-right" id="finalizeButtonDiv">
-                            <form method="POST" action="/contract/forward-to-finalize" class="m-form m-form--label-align-left- m-form--state-" >
+                            <form method="POST" action="/contract/vodafone/finalize" class="m-form m-form--label-align-left- m-form--state-" >
                                 @csrf
                                 <input type="hidden" name="contractID" value={{$contractID}}>
                                 <button type="submit" class="btn btn-brand">{{__('contracts/vodafone/finalize.activate')}}</button>

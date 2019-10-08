@@ -35,7 +35,7 @@ class Contract extends Model
      * User defined functions
      */
 
-    /** Execution forwarded from ContractController@forwardToStore */
+    /** Execution forwarded from ContractController@store */
     public static function store($customerID, $request){
 
         $contract = new Contract();

@@ -29,9 +29,7 @@ return [
     'status' => 'Status',
     'active' => 'Aktiv',
     'disabled' => 'Deaktiviert',
-    'change' => 'ändern',
-
-    'contractFinalised' => 'Der Vertrag wurde erfolgreich erstellt'
+    'change' => 'ändern'
 
 
 ];

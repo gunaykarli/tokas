@@ -72,7 +72,7 @@
 
                 <div class="m-portlet__body" id="">
                     <!--begin: Form -->
-                    <form method="POST" action="/contract/vodafone/shopping-cart/SIM-IMEI-services/{{$tariff->id}}/{{$isAdditionalTariff}}" class="m-form m-form--label-align-left- m-form--state-" id="enterSimEmeiServices">
+                    <form method="POST" action="/contract/shopping-cart/vodafone/SIM-IMEI-services/{{$item->id}}" class="m-form m-form--label-align-left- m-form--state-" id="enterSimEmeiServices">
                     @csrf
                         <!--begin: Form Wizard Step 4 - Contract Options - -->
                         <div class="row">
@@ -90,7 +90,8 @@
 
                                     <!--begin: IMEI options -->
                                     <!-- If "IMEI On-Demand Pool Fields" is active -->
-                                    @if(session('providerID') == 1)
+
+                                    @if($item->producer_id == 1)
                                         @if(\App\SystemVariable::where('name', 'isIMEIOnDemandFieldActive')->first()->value == 1)
                                             <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                             <div class="form-group m-form__group row">
@@ -135,7 +136,7 @@
                                     <!--begin: Contract Start Date -->
 
                                     <!--begin: Connection fee -->
-                                    @if($isAdditionalTariff != 1) <!-- additional tariff has NO connection fee -->
+                                    @if($item->additional_tariff != 1) <!-- additional tariff has NO connection fee -->
                                         <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                         <div class="form-group m-form__group row">
                                             <label class="col-sm-4 col-sm-4 col-form-label"><b>{{__('contracts\vodafone\create.connectionFee')}}</b></label>
@@ -298,7 +299,7 @@
 
                                                             <div class="m-form__group form-group">
                                                                 <div class="m-checkbox-list">
-                                                                    @foreach(\App\VodafoneTariff::where('tariff_id', $tariff->id)->first()->services as $service)
+                                                                    @foreach(\App\VodafoneTariff::where('tariff_id', $item->product_id)->first()->services as $service)
                                                                         @if($service->type == 1)
                                                                             <label class="m-checkbox m-checkbox--success">
                                                                                 <input type="checkbox" name="dataServices[]" value="{{$service->code}}" @if($service->pivot->property == 1) checked @endif > {{$service->name}}
@@ -327,7 +328,7 @@
                                                             <div class="m-form__group form-group">
 
                                                                 <div class="m-checkbox-list">
-                                                                    @foreach(\App\VodafoneTariff::where('tariff_id', $tariff->id)->first()->services as $service)
+                                                                    @foreach(\App\VodafoneTariff::where('tariff_id', $item->product_id)->first()->services as $service)
                                                                         @if($service->type == 2)
                                                                             <label class="m-checkbox m-checkbox--success">
                                                                                 <input type="checkbox" name="additionalServices[]" value={{$service->code}} @if($service->pivot->property == 1) checked @endif > {{$service->name}}
@@ -356,7 +357,7 @@
 
                                                             <div class="m-form__group form-group">
                                                                 <div class="m-checkbox-list">
-                                                                    @foreach(\App\VodafoneTariff::where('tariff_id', $tariff->id)->first()->services as $service)
+                                                                    @foreach(\App\VodafoneTariff::where('tariff_id', $item->product_id)->first()->services as $service)
                                                                         @if($service->type == 3)
                                                                             <label class="m-checkbox m-checkbox--success">
                                                                                 <input type="checkbox" name="additionalServices[]" value={{$service->code}} @if($service->pivot->property == 1) checked @endif > {{$service->name}}

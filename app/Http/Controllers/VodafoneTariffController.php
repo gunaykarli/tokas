@@ -31,9 +31,7 @@ class VodafoneTariffController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * called resources/views/tariffs/providers.blade.php
      */
     public function index(Provider $provider, $isAdditionalTariff){
         // providerID session variable is created here.

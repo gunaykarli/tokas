@@ -82,7 +82,7 @@ class ShoppingCartController extends Controller
      * Add a new tariff to shopping cart.
      *
      */
-    public function addTariff(Tariff $tariff, $isAdditionalTariff)
+    public function addTariff(Tariff $tariff)
     {
         $item = new ShoppingCart();
         $item->producer_id = $tariff->provider_id;
@@ -91,7 +91,16 @@ class ShoppingCartController extends Controller
         $item->employee_id = auth()->user()->id;
         $item->office_id = auth()->user()->office_id;
         $item->dealer_id = auth()->user()->dealer_id;
-        $item->additional_tariff = $isAdditionalTariff;
+
+        // set additional_tariff variable.
+        // if shopping cart has "main tariff" which means "shopping_cart" table in the DB has additional_tariff field with 0 value,
+        // then $additionalTariff variable must sent with value 1. It means, a tariff to be selected in contracts.tariffs page will be added to the shopping cart as additional tariff
+        if(ShoppingCart::where('producer_id', $tariff->provider_id)->where('additional_tariff', 0)->first())
+            $item->additional_tariff = 1;
+        else
+            $item->additional_tariff = 0;
+        //$item->additional_tariff = $isAdditionalTariff;
+
         $item->save();
 
         $contents = ShoppingCart
@@ -126,7 +135,8 @@ class ShoppingCartController extends Controller
             ->where('employee_id', auth()->user()->id)
             ->get();
 
-        $provider = Provider::find($tariff->provider_id);
+        //$provider = Provider::find($tariff->provider_id);
+        $provider = Provider::all();
 
         $totalBasePrice = 0;
         $totalProvision = 0;
@@ -138,10 +148,11 @@ class ShoppingCartController extends Controller
         return view('contracts.shoppingCartORJ', compact('contents', 'provider', 'totalBasePrice', 'totalProvision'));
     }
     public function changeTariff(Tariff $tariff){
-        //remove the tariff from the shopping cart
+        //first, remove the tariff from the shopping cart
         $item = ShoppingCart
             ::where('product_type', 1)
             ->where('product_id', $tariff->id)
+            ->where('additional_tariff', 0)
             ->first();
 
         $item->delete();
@@ -158,15 +169,42 @@ class ShoppingCartController extends Controller
         }
         */
 
-        $provider = Provider::find(session('providerID'));
-        $isAdditionalTariff = 0; // since the main tariff is to be changed.
+        // Then, forward the program to tariff list (like tariff@ContractController)
+        // Take all ACTIVE tariffs from the DB.
+        $tariffs = Tariff
+            ::where('status', 1)
+            ->orderBy('provider_id')
+            ->orderBy('group_id')
+            ->get();
+
+        // Determine all tariffs with on-tops for authenticated user's office (dealer) in "on_top" pivot table.
+        $dealer = Dealer::find(auth()
+            ->user()
+            ->dealer_id);
+
+        $tariffsWithOnTopForTheDealer = $dealer->tariffs()
+            ->wherePivot('office_id', auth()
+                ->user()->office_id)
+            ->get();
+
+        // Take all providers from the DB.
+        $providers = Provider::all();
+
+
+
+        return view('contracts.tariffs', compact('tariffs', 'tariffsWithOnTopForTheDealer', 'providers'));
+/**
+        $provider = Provider::find($tariff->provider_id);
+        //dd($provider->id);
+        //$provider = Provider::find(session('providerID')); // since we do not use session...
+        //$isAdditionalTariff = 0; // since the main tariff is to be changed.
 
         // Take tariffs of the provider.
         $tariffs = Tariff
-            ::where('provider_id', session('providerID'))
+            ::where('provider_id', $tariff->provider_id)
             ->get();
         $tariffGroups = TariffsGroup
-            ::where('provider_id', session('providerID'))
+            ::where('provider_id', $tariff->provider_id)
             ->get();
 
         // Determine all tariffs with on-tops for authenticated user's office (dealer) in "on_top" pivot table.
@@ -178,13 +216,25 @@ class ShoppingCartController extends Controller
             ->wherePivot('office_id', auth()->user()->office_id)
             ->get();
 
-        return view('tariffs.vodafone.index', compact('tariffs','tariffGroups', 'tariffsWithOnTopForTheDealer', 'provider', 'isAdditionalTariff'));
+        return view('contracts.tariffs', compact('tariffs','tariffGroups', 'tariffsWithOnTopForTheDealer', 'provider'));
+ */
+    }
+
+    /**
+     * called from  resources/views/contracts/shoppingCartORJ.blade.php
+     *
+     */
+    public function callToSimImeiServicesGUI_V1(Tariff $tariff, $isAdditionalTariff){
+        return view('contracts.vodafone.enterSimImeiServices', compact('tariff', 'isAdditionalTariff'));
+    }
+    public function callToSimImeiServicesGUI(ShoppingCart $item){
+        return view('contracts.vodafone.enterSimImeiServices', compact('item'));
     }
 
     /**
      * called from resources/views/contracts/vodafone/enterSimImeiServices.blade.php
      */
-    public function saveSimImeiServicesToSession(Request $request, Tariff $tariff, $isAdditionalTariff){
+    public function saveSimImeiServicesToSession_V1(Request $request, Tariff $tariff, $isAdditionalTariff){
 
         // Save SIM number, IMEI option and services of the tariff to a Session as an associative array
         // It is used id app/VfGsm.php store()
@@ -274,12 +324,94 @@ class ShoppingCartController extends Controller
         return view('contracts.shoppingCartORJ', compact('contents', 'provider', 'totalBasePrice', 'totalProvision'));
     }
 
-    /**
-     * called from  resources/views/contracts/shoppingCartORJ.blade.php
-     *
-     */
-    public function callToSimImeiServicesGUI(Tariff $tariff, $isAdditionalTariff){
-        return view('contracts.vodafone.enterSimImeiServices', compact('tariff', 'isAdditionalTariff'));
+    public function saveSimImeiServicesToSession(Request $request, ShoppingCart $item){
+
+        // Save SIM number, IMEI option and services of the tariff to a Session as an associative array
+        // It is used id app/VfGsm.php store()
+        if($item->additional_tariff == 1) // No connection fee
+            $simImeiServicesOfTheTariff = [
+                'tariffID' => $item->product_id,
+                'isAdditionalTariff' => $item->additional_tariff,
+                'SIMNumber' => $request->SIMNumber,
+                'IMEIOption' => $request->IMEIOption,
+                'IMEINumber' => $request->IMEINumber,
+                'contractStartDate' => $request->contractStartDate,
+
+                'connectionOverview' => $request->connectionOverview,
+                'destinationNumberRepresentation' => $request->destinationNumberRepresentation,
+                'callBarring' => $request->callBarring,
+                'mailbox' => $request->mailbox,
+                'telephoneNumberTransmission' => $request->telephoneNumberTransmission,
+                'additionalServices' => $request->additionalServices,
+                'dataServices' => $request->dataServices
+            ];
+        else
+            $simImeiServicesOfTheTariff = [
+                'tariffID' => $item->product_id,
+                'isAdditionalTariff' => $item->additional_tariff,
+                'SIMNumber' => $request->SIMNumber,
+                'IMEIOption' => $request->IMEIOption,
+                'IMEINumber' => $request->IMEINumber,
+                'contractStartDate' => $request->contractStartDate,
+                'connectionFee'=> $request->connectionFee,
+                'connectionOverview' => $request->connectionOverview,
+                'destinationNumberRepresentation' => $request->destinationNumberRepresentation,
+                'callBarring' => $request->callBarring,
+                'mailbox' => $request->mailbox,
+                'telephoneNumberTransmission' => $request->telephoneNumberTransmission,
+                'additionalServices' => $request->additionalServices,
+                'dataServices' => $request->dataServices
+            ];
+
+        //Session::put($tariff->id, $request->SIMNumber); ***** Numerical values ($tariff->id) can NOT be a KEY
+
+        if (session()->exists(Tariff::find($item->product_id)->name)) {
+            session()->forget(Tariff::find($item->product_id)->name);
+            Session::put(Tariff::find($item->product_id)->name, $simImeiServicesOfTheTariff);
+        }
+        else{
+            Session::put(Tariff::find($item->product_id)->name, $simImeiServicesOfTheTariff);
+        }
+        /*
+                                     foreach(ShoppingCart::all() as $shoppingCart){
+                                         if($shoppingCart->product_type == 1){// the product is Tariff not handy
+                                             $simImeiServicesFromSession = session($shoppingCart->product_id);
+                                             echo "In For- ID: ".$shoppingCart->product_id;
+                                             echo " \n";
+                                             echo "SIM: ".$simImeiServicesFromSession['SIMNumber'];
+                                             echo " \n";
+
+                                         }
+                                     }
+
+                        $simImeiServicesFromSession = Session::get( 'VF-Tariff-1');
+                        echo "-: ".($simImeiServicesFromSession['IMEIOption']);
+                        echo "\n";
+                        $simImeiServicesFromSession = Session::get('VF-Tariff-4');
+                         echo "-: ".($simImeiServicesFromSession['IMEIOption']);
+                        echo "\n";
+        */
+
+
+        // return to the shopping cart
+
+        $contents = ShoppingCart
+            ::where('product_type', 1)
+            ->where('dealer_id', auth()->user()->dealer_id)
+            ->where('office_id', auth()->user()->office_id)
+            ->where('employee_id', auth()->user()->id)
+            ->get();
+
+        $provider = Provider::all();
+
+        $totalBasePrice = 0;
+        $totalProvision = 0;
+        foreach ($contents as $content){
+            $totalBasePrice += Tariff::where('id', $content->product_id)->first()->base_price;
+            $totalProvision += Tariff::where('id', $content->product_id)->first()->provision;
+        }
+
+        return view('contracts.shoppingCartORJ', compact('contents', 'provider', 'totalBasePrice', 'totalProvision'));
     }
 
     /**

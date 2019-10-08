@@ -42,12 +42,14 @@
 
         <!-- BEGIN: Content -->
         <div class="m-content">
+
+            <!-- Vodafone -->
             <div class="m-portlet m-portlet--mobile">
                 <div class="m-portlet__head">
                     <div class="m-portlet__head-caption">
                         <div class="m-portlet__head-title">
                             <h3 class="m-portlet__head-text">
-                                {{__('contracts/shoppingCart.shoppingCard')}}
+                                Vodafone {{__('contracts/shoppingCart.shoppingCard')}}
                             </h3>
                         </div>
                     </div>
@@ -77,22 +79,22 @@
                             </tr>
                         </thead>
                         <tbody id="">
-                            @foreach($contents->where('additional_tariff', 0) as $content)
+                            @foreach($contents->where('additional_tariff', 0)->where('producer_id', 1) as $content)
                                 <tr>
                                     <td>{{(\App\Provider::where('id', $content->producer_id)->first()->name)}}</td>
                                     @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
                                         <td>{{(\App\Tariff::where('id', $content->product_id))->first()->name}}</td>
                                     @endif
                                     <td>
-                                        <!-- href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/content->product_id/0- 0 means the SIM card is NOT additional tariff-->
-                                        <a href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/{{$content->product_id}}/{{0}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
+                                        <!-- href="/contract/shopping-cart/vodafone/SIM-IMEI-services/content->product_id/0- 0 means the SIM card is NOT additional tariff-->
+                                        <a href="/contract/shopping-cart/vodafone/SIM-IMEI-services/{{$content->id}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
                                             <span>
                                                 <i class="la la-cart-plus"></i>
                                                 <span> {{__('contracts/shoppingCart.services')}}</span>
                                             </span>
                                         </a>
                                     </td>
-                                    <td><a href="/contracts/vodafone/shopping-cart/change-main-tariff/{{$content->product_id}}" class="btn btn-danger" ><span>{{__('contracts/shoppingCart.changeTariff')}}</span>&nbsp;&nbsp;</a></td>
+                                    <td><a href="/contract/shopping-cart/change-main-tariff/{{$content->product_id}}" class="btn btn-danger" ><span>{{__('contracts/shoppingCart.changeTariff')}}</span>&nbsp;&nbsp;</a></td>
                                     @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
                                     <td>{{(\App\Tariff::where('id', $content->product_id))->first()->base_price}}</td>
                                     @endif
@@ -112,7 +114,7 @@
                         <tbody id="">
                         <tr>
                             <td colspan="7" align="left">
-                                <a href="/tariff/index/{{session('providerID')}}/{{1}}" class="btn btn-outline-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                <a href="/contract/tariffs" class="btn btn-outline-primary m-btn m-btn--custom m-btn--icon m-btn--air">
                                     <span>
                                         <i class="la la-cart-plus"></i>
                                         <span> {{__('contracts/shoppingCart.additionalTariffOrder')}}</span>
@@ -124,7 +126,7 @@
                     </table>
                     <!--END: additional tariffs button -->
 
-                    <!--BEGIN: additional tariffs -->
+                    <!--BEGIN: list additional tariffs -->
                     @if($contents->where('additional_tariff', 1)->first())
                         <table class="table table-striped- table-bordered table-hover table-checkable" >
                         <thead>
@@ -140,15 +142,15 @@
                         </tr>
                         </thead>
                         <tbody id="">
-                            @foreach($contents->where('additional_tariff', 1) as $content)
+                            @foreach($contents->where('additional_tariff', 1)->where('producer_id', 1) as $content)
                                 <tr>
                                     <td>{{(\App\Provider::where('id', $content->producer_id)->first()->name)}}</td>
                                     @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
                                         <td>{{(\App\Tariff::where('id', $content->product_id))->first()->name}}</td>
                                     @endif
                                     <td>
-                                        <!-- href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/content->product_id/1- 1 means the SIM card is additional tariff-->
-                                        <a href="/contracts/vodafone/shopping-cart/enter-SIM-IMEI-services/{{$content->product_id}}/{{1}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
+                                        <!-- href="/contract/shopping-cart/vodafone/SIM-IMEI-services/content->product_id/1- 1 means the SIM card is additional tariff-->
+                                        <a href="/contract/shopping-cart/vodafone/SIM-IMEI-services/{{$content->id}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
                                             <span>
                                                 <i class="la la-cart-plus"></i>
                                                 <span> {{__('contracts/shoppingCart.services')}}</span>
@@ -191,31 +193,13 @@
                                 <!-- Set up the link according to the provider of the tariff.
                                 With the link, instead of "$content->producer_id", "$content->id" is sent, since it will be more useful in the "/contracts/.../create". -->
 
-                                <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
-                                @if(session()->get('providerID') == 1)
-                                    <a href="/contracts/vodafone/create" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                    <a href="/contract/vodafone/create/1" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
                                         <span>
                                             <i class="la la-cart-plus"></i>
                                             <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>
                                         </span>
                                     </a>
-                                    <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 2) belongs to Ay Yıldız -->
-                                @elseif(session()->get('providerID') == 2)
-                                    <a href="/contracts/ayYildiz/create" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
-                                        <span>
-                                            <i class="la la-cart-plus"></i>
-                                            <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>
-                                        </span>
-                                    </a>
-                                    <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 3) belongs to O2 -->
-                                @elseif(session()->get('providerID') == 3)
-                                    <a href="/contracts/O2/create" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
-                                        <span>
-                                            <i class="la la-cart-plus"></i>
-                                            <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>
-                                        </span>
-                                    </a>
-                                @endif
+
                             </td>
                         </tr>
 
@@ -225,6 +209,383 @@
 
                 </div>
             </div>
+
+            <!-- Ay Yıldız -->
+            <!-- If there is a tariff for Ay yıldız the cart including ay yıldız tariff will be shown. "'producer_id', 2": id of provider ay yıldız is 2 -->
+            @if($contents->where('producer_id', 2)->first())
+                <div class="m-portlet m-portlet--mobile">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    Ay Yıldız {{__('contracts/shoppingCart.shoppingCard')}}
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="m-portlet__head-tools">
+                            <ul class="m-portlet__nav">
+                                <li class="m-portlet__nav-item">
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="m-portlet__body" id="general">
+
+                        <!--BEGIN: list main tariff -->
+                        <table class="table table-striped- table-bordered table-hover table-checkable" >
+                            <thead>
+                            <tr>
+                                <th> {{__('contracts/shoppingCart.provider')}}</th>
+                                <th> {{__('contracts/shoppingCart.tariff')}}</th>
+                                <th> {{__('contracts/shoppingCart.SIMImeiAndServices')}}</th>
+                                <th> {{__('contracts/shoppingCart.delete')}}</th>
+                                <th> {{__('contracts/shoppingCart.basePrice')}}</th>
+                                @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                    <th> {{__('contracts/shoppingCart.provision')}}</th>
+                                @endcan
+                            </tr>
+                            </thead>
+                            <tbody id="">
+                            @foreach($contents->where('additional_tariff', 0)->where('producer_id', 2) as $content)
+                                <tr>
+                                    <td>{{(\App\Provider::where('id', $content->producer_id)->first()->name)}}</td>
+                                @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                    <td>{{(\App\Tariff::where('id', $content->product_id))->first()->name}}</td>
+                                    @endif
+                                    <td>
+                                        <!-- href="/contract/shopping-cart/vodafone/SIM-IMEI-services/content->product_id/0- 0 means the SIM card is NOT additional tariff-->
+                                        <a href="/contract/shopping-cart/vodafone/SIM-IMEI-services/{{$content->id}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
+                                            <span>
+                                                <i class="la la-cart-plus"></i>
+                                                <span> {{__('contracts/shoppingCart.services')}}</span>
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td><a href="/contract/shopping-cart/change-main-tariff/{{$content->product_id}}" class="btn btn-danger" ><span>{{__('contracts/shoppingCart.changeTariff')}}</span>&nbsp;&nbsp;</a></td>
+                                    @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                    <td>{{(\App\Tariff::where('id', $content->product_id))->first()->base_price}}</td>
+                                    @endif
+                                    @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                        @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                        <td>{{(\App\Tariff::where('id', $content->product_id))->first()->provision}}</td>
+                                        @endif
+                                    @endcan
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        <!--END: list main tariff -->
+
+                        <!--BEGIN: additional tariffs button-->
+                        <table class="table table-striped- table-bordered table-hover table-checkable" >
+                            <tbody id="">
+                            <tr>
+                                <td colspan="7" align="left">
+                                    <a href="/contract/tariffs" class="btn btn-outline-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                    <span>
+                                        <i class="la la-cart-plus"></i>
+                                        <span> {{__('contracts/shoppingCart.additionalTariffOrder')}}</span>
+                                    </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--END: additional tariffs button -->
+
+                        <!--BEGIN: list additional tariffs -->
+                        @if($contents->where('additional_tariff', 1)->first())
+                            <table class="table table-striped- table-bordered table-hover table-checkable" >
+                                <thead>
+                                <tr>
+                                    <th> {{__('contracts/shoppingCart.provider')}}</th>
+                                    <th> {{__('contracts/shoppingCart.tariff')}}</th>
+                                    <th> {{__('contracts/shoppingCart.SIMImeiAndServices')}}</th>
+                                    <th> {{__('contracts/shoppingCart.delete')}}</th>
+                                    <th> {{__('contracts/shoppingCart.basePrice')}}</th>
+                                    @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                        <th> {{__('contracts/shoppingCart.provision')}}</th>
+                                    @endcan
+                                </tr>
+                                </thead>
+                                <tbody id="">
+                                @foreach($contents->where('additional_tariff', 1)->where('producer_id', 2) as $content)
+                                    <tr>
+                                        <td>{{(\App\Provider::where('id', $content->producer_id)->first()->name)}}</td>
+                                    @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                        <td>{{(\App\Tariff::where('id', $content->product_id))->first()->name}}</td>
+                                        @endif
+                                        <td>
+                                            <!-- href="/contract/shopping-cart/vodafone/SIM-IMEI-services/content->product_id/1- 1 means the SIM card is additional tariff-->
+                                            <a href="/contract/shopping-cart/vodafone/SIM-IMEI-services/{{$content->product_id}}/{{1}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
+                                            <span>
+                                                <i class="la la-cart-plus"></i>
+                                                <span> {{__('contracts/shoppingCart.services')}}</span>
+                                            </span>
+                                            </a>
+                                        </td>
+                                        <td><a href="/contract/shopping-cart/delete-tariff/{{$content->product_id}}" class="btn btn-danger" ><span>{{__('contracts/shoppingCart.delete')}}</span>&nbsp;&nbsp;</a></td>
+                                        @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                        <td>{{(\App\Tariff::where('id', $content->product_id))->first()->base_price}}</td>
+                                        @endif
+                                        @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                            @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                            <td>{{(\App\Tariff::where('id', $content->product_id))->first()->provision}}</td>
+                                            @endif
+                                        @endcan
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                    @endif
+                    <!--END: list additional tariffs -->
+
+                        <!--BEGIN: totals -->
+                        <table class="table table-striped- table-bordered table-hover table-checkable" >
+                            <tbody id="">
+                            <tr>
+                                <td colspan="4" align="right">{{__('contracts/shoppingCart.totalBasePrice')}}</td>
+                                <td align="center">{{$totalBasePrice}}</td>
+                                <td align="left"></td>
+                            </tr>
+                            @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                <tr>
+                                    <td colspan="4" align="right">{{__('contracts/shoppingCart.totalProvision')}}</td>
+                                    <td align="left"></td>
+                                    <td align="center">{{$totalProvision}}</td>
+                                </tr>
+                            @endcan
+                            <tr>
+                                <td colspan="6" align="center">
+                                    <!-- Set up the link according to the provider of the tariff.
+                                    With the link, instead of "$content->producer_id", "$content->id" is sent, since it will be more useful in the "/contracts/.../create". -->
+
+                                    <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
+                                    @if(session()->get('providerID') == 1)
+                                        <a href="/contracts/vodafone/create" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                        <span>
+                                            <i class="la la-cart-plus"></i>
+                                            <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>
+                                        </span>
+                                        </a>
+                                        <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 2) belongs to Ay Yıldız -->
+                                    @elseif(session()->get('providerID') == 2)
+                                        <a href="/contracts/ayYildiz/create" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                        <span>
+                                            <i class="la la-cart-plus"></i>
+                                            <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>
+                                        </span>
+                                        </a>
+                                        <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 3) belongs to O2 -->
+                                    @elseif(session()->get('providerID') == 3)
+                                        <a href="/contracts/O2/create" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                        <span>
+                                            <i class="la la-cart-plus"></i>
+                                            <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>
+                                        </span>
+                                        </a>
+                                    @endif
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <!--END: totals -->
+
+                    </div>
+                </div>
+            @endif
+
+            <!-- O2 -->
+            <!-- If there is a tariff for O2 the cart including O2 tariff will be shown. "'producer_id', 3": id of provider O2 is 3 -->
+            @if($contents->where('producer_id', 3)->first())
+                <div class="m-portlet m-portlet--mobile">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    O2 {{__('contracts/shoppingCart.shoppingCard')}}
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="m-portlet__head-tools">
+                            <ul class="m-portlet__nav">
+                                <li class="m-portlet__nav-item">
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="m-portlet__body" id="general">
+
+                        <!--BEGIN: list main tariff -->
+                        <table class="table table-striped- table-bordered table-hover table-checkable" >
+                            <thead>
+                            <tr>
+                                <th> {{__('contracts/shoppingCart.provider')}}</th>
+                                <th> {{__('contracts/shoppingCart.tariff')}}</th>
+                                <th> {{__('contracts/shoppingCart.SIMImeiAndServices')}}</th>
+                                <th> {{__('contracts/shoppingCart.delete')}}</th>
+                                <th> {{__('contracts/shoppingCart.basePrice')}}</th>
+                                @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                    <th> {{__('contracts/shoppingCart.provision')}}</th>
+                                @endcan
+                            </tr>
+                            </thead>
+                            <tbody id="">
+                            @foreach($contents->where('additional_tariff', 0)->where('producer_id', 3) as $content)
+                                <tr>
+                                    <td>{{(\App\Provider::where('id', $content->producer_id)->first()->name)}}</td>
+                                @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                    <td>{{(\App\Tariff::where('id', $content->product_id))->first()->name}}</td>
+                                    @endif
+                                    <td>
+                                        <!-- href="/contract/shopping-cart/vodafone/SIM-IMEI-services/content->product_id/0- 0 means the SIM card is NOT additional tariff-->
+                                        <a href="/contract/shopping-cart/vodafone/SIM-IMEI-services/{{$content->product_id}}/{{0}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
+                                            <span>
+                                                <i class="la la-cart-plus"></i>
+                                                <span> {{__('contracts/shoppingCart.services')}}</span>
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td><a href="/contract/shopping-cart/change-main-tariff/{{$content->product_id}}" class="btn btn-danger" ><span>{{__('contracts/shoppingCart.changeTariff')}}</span>&nbsp;&nbsp;</a></td>
+                                    @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                    <td>{{(\App\Tariff::where('id', $content->product_id))->first()->base_price}}</td>
+                                    @endif
+                                    @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                        @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                        <td>{{(\App\Tariff::where('id', $content->product_id))->first()->provision}}</td>
+                                        @endif
+                                    @endcan
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        <!--END: list main tariff -->
+
+                        <!--BEGIN: additional tariffs button-->
+                        <table class="table table-striped- table-bordered table-hover table-checkable" >
+                            <tbody id="">
+                            <tr>
+                                <td colspan="7" align="left">
+                                    <a href="/contract/tariffs" class="btn btn-outline-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                    <span>
+                                        <i class="la la-cart-plus"></i>
+                                        <span> {{__('contracts/shoppingCart.additionalTariffOrder')}}</span>
+                                    </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--END: additional tariffs button -->
+
+                        <!--BEGIN: list additional tariffs -->
+                        @if($contents->where('additional_tariff', 1)->first())
+                            <table class="table table-striped- table-bordered table-hover table-checkable" >
+                                <thead>
+                                <tr>
+                                    <th> {{__('contracts/shoppingCart.provider')}}</th>
+                                    <th> {{__('contracts/shoppingCart.tariff')}}</th>
+                                    <th> {{__('contracts/shoppingCart.SIMImeiAndServices')}}</th>
+                                    <th> {{__('contracts/shoppingCart.delete')}}</th>
+                                    <th> {{__('contracts/shoppingCart.basePrice')}}</th>
+                                    @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                        <th> {{__('contracts/shoppingCart.provision')}}</th>
+                                    @endcan
+                                </tr>
+                                </thead>
+                                <tbody id="">
+                                @foreach($contents->where('additional_tariff', 1)->where('producer_id', 3) as $content)
+                                    <tr>
+                                        <td>{{(\App\Provider::where('id', $content->producer_id)->first()->name)}}</td>
+                                    @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                        <td>{{(\App\Tariff::where('id', $content->product_id))->first()->name}}</td>
+                                        @endif
+                                        <td>
+                                            <!-- href="/contract/shopping-cart/vodafone/SIM-IMEI-services/content->product_id/1- 1 means the SIM card is additional tariff-->
+                                            <a href="/contract/shopping-cart/vodafone/SIM-IMEI-services/{{$content->product_id}}/{{1}}" class="btn btn-warning m-btn m-btn--custom m-btn--icon m-btn--air">
+                                            <span>
+                                                <i class="la la-cart-plus"></i>
+                                                <span> {{__('contracts/shoppingCart.services')}}</span>
+                                            </span>
+                                            </a>
+                                        </td>
+                                        <td><a href="/contract/shopping-cart/delete-tariff/{{$content->product_id}}" class="btn btn-danger" ><span>{{__('contracts/shoppingCart.delete')}}</span>&nbsp;&nbsp;</a></td>
+                                        @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                        <td>{{(\App\Tariff::where('id', $content->product_id))->first()->base_price}}</td>
+                                        @endif
+                                        @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                            @if($content->product_type == 1) <!-- "1" indicates that the selected product is a tariff not a mobile phone. -->
+                                            <td>{{(\App\Tariff::where('id', $content->product_id))->first()->provision}}</td>
+                                            @endif
+                                        @endcan
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                    @endif
+                    <!--END: list additional tariffs -->
+
+                        <!--BEGIN: totals -->
+                        <table class="table table-striped- table-bordered table-hover table-checkable" >
+                            <tbody id="">
+                            <tr>
+                                <td colspan="4" align="right">{{__('contracts/shoppingCart.totalBasePrice')}}</td>
+                                <td align="center">{{$totalBasePrice}}</td>
+                                <td align="left"></td>
+                            </tr>
+                            @can('viewProvisionColumn', \App\ShoppingCart::class)
+                                <tr>
+                                    <td colspan="4" align="right">{{__('contracts/shoppingCart.totalProvision')}}</td>
+                                    <td align="left"></td>
+                                    <td align="center">{{$totalProvision}}</td>
+                                </tr>
+                            @endcan
+                            <tr>
+                                <td colspan="6" align="center">
+                                    <!-- Set up the link according to the provider of the tariff.
+                                    With the link, instead of "$content->producer_id", "$content->id" is sent, since it will be more useful in the "/contracts/.../create". -->
+
+                                    <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone -->
+                                    @if(session()->get('providerID') == 1)
+                                        <a href="/contracts/vodafone/create" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                        <span>
+                                            <i class="la la-cart-plus"></i>
+                                            <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>
+                                        </span>
+                                        </a>
+                                        <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 2) belongs to Ay Yıldız -->
+                                    @elseif(session()->get('providerID') == 2)
+                                        <a href="/contracts/ayYildiz/create" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                        <span>
+                                            <i class="la la-cart-plus"></i>
+                                            <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>
+                                        </span>
+                                        </a>
+                                        <!-- if product (product_type == 1) is "Tariff" and tariff (producer_id == 3) belongs to O2 -->
+                                    @elseif(session()->get('providerID') == 3)
+                                        <a href="/contracts/O2/create" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
+                                        <span>
+                                            <i class="la la-cart-plus"></i>
+                                            <span>{{__('contracts/shoppingCart.enterTariffRequest')}}</span>
+                                        </span>
+                                        </a>
+                                    @endif
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <!--END: totals -->
+
+                    </div>
+                </div>
+            @endif
+
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>
         <!-- END: Content -->

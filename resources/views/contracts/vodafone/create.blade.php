@@ -110,8 +110,10 @@
 
                 <div class="m-portlet__body" id="">
                     <!--begin: Form -->
-                    <form method="POST" action="/contract/forward-to-store" class="m-form m-form--label-align-left- m-form--state-" id="contractVodafoneCreateForm">
+                    <form method="POST" action="/contract/vodafone/store" class="m-form m-form--label-align-left- m-form--state-" id="contractVodafoneCreateForm">
                     @csrf
+
+                        <input type="hidden" name="providerID" id="providerID" value=1 >
                         <!--begin: Form Step 1 - Main - -->
                         <div class="row">
                             <div class="col-xl-8 offset-xl-2">
@@ -897,7 +899,7 @@
     <!--end::Page Vendors -->
 
     <!--begin::Page Scripts -->
-    <script src="{{ asset('js/validations/contractVodafoneCreate-2.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/validations/contractVodafoneCreate-3.js')}}" type="text/javascript"></script>
     <script src="{{ asset('js/contractsVodafoneCreate-3.js')}}" type="text/javascript"></script>
 
     <script src="{{ asset('metronic/assets/demo/default/custom/crud/forms/widgets/bootstrap-datepicker.js')}}" type="text/javascript"></script>

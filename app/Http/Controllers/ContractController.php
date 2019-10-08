@@ -6,7 +6,9 @@ use App\Contract;
 use App\Customer;
 use App\CustomerContact;
 use App\CustomerPaymentTool;
+use App\Dealer;
 use App\Output;
+use App\Provider;
 use App\Region;
 use App\Service;
 use App\ShoppingCart;
@@ -25,12 +27,61 @@ class ContractController extends Controller
         $this->middleware('auth');
     }
 
+    /** Display a listing of the tariffs of all providers
+     * it can be called
+     * 1. For the first time when the dealer wants to make a contract the list of the tariff should be listed so it is called.
+     * 2. From the shopping chart: in progressing of the making contract dealer visit the list of the tariffs and the shopping cart. So it is called from the shopping cart.
+     *  when it is called from the shopping cart for the VODAFONE tariff, tariff type must be known, main tariff or additional tariff. Because of this "additionalTariff" variable should be used as a parameter
+     */
+    public function tariffs()
+    {
+        // Take all ACTIVE tariffs from the DB.
+        $tariffs = Tariff
+            ::where('status', 1)
+            ->orderBy('provider_id')
+            ->orderBy('group_id')
+            ->get();
+
+        // Determine all tariffs with on-tops for authenticated user's office (dealer) in "on_top" pivot table.
+        $dealer = Dealer::find(auth()
+            ->user()
+            ->dealer_id);
+
+        $tariffsWithOnTopForTheDealer = $dealer->tariffs()
+            ->wherePivot('office_id', auth()
+                ->user()->office_id)
+            ->get();
+
+        // Take all providers from the DB.
+        $providers = Provider::all();
+
+
+
+        return view('contracts.tariffs', compact('tariffs', 'tariffsWithOnTopForTheDealer', 'providers'));
+    }
+
+
     /**
      * Execution forwarded from "resources/views/contracts/shoppingCart.blade.php"
      * Show the GUI for creating a new contract.
      *
      */
-    public function create(){
+    public function create($providerID){
+
+        // Depending on the provider id of the selected item in the shopping cart,
+        // the program will be forwarded to the respective page to fill out the contract.
+        // NOT USED NOW...session('providerID') can be used. It is created in tariffs.providers.
+
+        // if product (product_type == 1) is "Tariff" and tariff (producer_id == 1) belongs to Vodafone.
+        if($providerID == 1)
+            return view('contracts.vodafone.create');
+        // if product (product_type == 1) is "Tariff" and tariff (producer_id == 2) belongs to Ay Yıldız.
+        elseif ($providerID == 2)
+            return view('contracts.ayYildiz.create', compact('shoppingCart'));
+        elseif ($providerID == 3)
+            return view('contracts.O2.create', compact('shoppingCart'));
+    }
+    public function create_1007(){
 
         // Depending on the provider id of the selected item in the shopping cart,
         // the program will be forwarded to the respective page to fill out the contract.
@@ -76,41 +127,12 @@ class ContractController extends Controller
     }
 
     /**
-     * Initialized when entering http://tokasdraft.com/contract/generate-XML
-     *
-     */
-    public function callToGenerateXMLGUI(){
-        return view('contracts.vodafone.generateXMLTRY');
-    }
-
-    /**
-     * Execution forwarded from "resources/views/contracts/vodafone/finalize.blade.php"
-     *
-     * Forward the program execution to the related provider's controller's store function
-     * according to the provider_id which is defined as hidden in the related create page (resources/views/contracts/vodafone/create.blade.php).
-     */
-    public function forwardToFinalize(Request $request){
-
-        // Since "Finalize Vertrag" button has been pushed, "status" attribute of the contract table will be chanced.
-
-        Contract::changeStatusOfContract($request->contractID, 1);
-
-        // And, XML file will be produced.
-        Contract::produceXMLForGsmVodafoneContract($request->contractID);
-
-        // After the XML has been produced, shopping cart must be emptied and related session variables must be deleted.
-        ShoppingCart::emptyShoppingCart(auth()->user()->id);
-        Session::flash('messageContractFinalised', 'contractFinalised');
-        return view('tariffs.providers');
-    }
-
-    /**
      * Execution forwarded from "resources/views/contracts/vodafone/create.blade.php"
      *
      * Forward the program execution to the related provider's controller's store function
      * according to the provider_id which is defined as hidden in the related create page (resources/views/contracts/vodafone/create.blade.php).
      */
-    public function forwardToStore(Request $request)
+    public function storeVodafone(Request $request)
     {
         /** 1 */
         // FIRST, store main info of the customer who is about to buy the tariff.
@@ -147,35 +169,59 @@ class ContractController extends Controller
         // But first, contract_id of the contract which has been stored in previous step is needed and must be retrieved.
         $contractID = DB::table('contracts')->latest()->first()->id;
 
-        if($request->providerID == 1) // Contract for Vodafone
-        {
-            if($request->contractType == 1){ // new activation GSM - if($request->contract_type == 1 and $request->FNIPorting == 0)
-                VfGsm::store($contractID, $request);
-                // To finalize the process, call the below GUI
-                return view('contracts.vodafone.finalize', compact('contractID'));
-            }
-            else if($request->contractType == 1){ // new activation GSM-FNI porting - if($request->contract_type == 1 and $request->FNIPorting == 1)
 
-            }
-            else if($request->contractType == 2){ // porting
-
-            }
-            else if($request->contractType == 3){ // DC change
-
-            }
-            else if($request->contractType == 4){ // DSL
-
-            }
+        if($request->contractType == 1){ // new activation GSM - if($request->contract_type == 1 and $request->FNIPorting == 0)
+            VfGsm::store($contractID, $request);
+            // To finalize the process, call the below GUI
+            return view('contracts.vodafone.finalize', compact('contractID'));
         }
-        else if($request->providerID == 2) // Contract for Ay Yıldız
-        {
+        else if($request->contractType == 1){ // new activation GSM-FNI porting - if($request->contract_type == 1 and $request->FNIPorting == 1)
 
         }
-        else if($request->providerID == 3) // Contract for O2
-        {
+        else if($request->contractType == 2){ // porting
 
         }
+        else if($request->contractType == 3){ // DC change
+
+        }
+        else if($request->contractType == 4){ // DSL
+
+        }
+
     }
+
+
+
+    /**
+     * Initialized when entering http://tokasdraft.com/contract/generate-XML
+     *
+     */
+    public function callToGenerateXMLGUI(){
+        return view('contracts.vodafone.generateXMLTRY');
+    }
+
+    /**
+     * Execution forwarded from "resources/views/contracts/vodafone/finalize.blade.php"
+     *
+     * Forward the program execution to the related provider's controller's store function
+     * according to the provider_id which is defined as hidden in the related create page (resources/views/contracts/vodafone/create.blade.php).
+     */
+    public function finalize(Request $request){
+
+        // Since "Finalize Vertrag" button has been pushed, "status" attribute of the contract table will be chanced.
+
+        Contract::changeStatusOfContract($request->contractID, 1);
+
+        // And, XML file will be produced.
+        Contract::produceXMLForGsmVodafoneContract($request->contractID);
+
+        // After the XML has been produced, shopping cart must be emptied and related session variables must be deleted.
+        ShoppingCart::emptyShoppingCart(auth()->user()->id);
+        Session::flash('messageContractFinalised', 'contractFinalised');
+        return view('tariffs.providers');
+    }
+
+
 
     /**
      * Initialized URL: "/contracts/vodafone/XML/takeXML"

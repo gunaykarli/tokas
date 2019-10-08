@@ -250,9 +250,9 @@ class TariffController extends Controller
 
         // determine the status of the tariffs as a filter parameter which are requested from "resources/views/tariffs/index.blade.php"
         // $statusOfTariffs:
-        //  1 is show only active tariffs
-        //  0 is show only disabled tariffs
-        //  2 is show all tariffs
+        //  1, show only active tariffs
+        //  0, show only disabled tariffs
+        //  2, show all tariffs
 
         if($statusOfTariffs == 1)// only active tariffs will be listed
             $status = 1;
@@ -272,19 +272,27 @@ class TariffController extends Controller
 
         // Take the tariffs from the DB according to the providerID, tariffGroupID and filter parameters sent by the tariff.index via public/js/allTariffListWithFilter2.js .
         // 0 indicates all...then fetch all tariffs of all providers.    //->properties()->where('name', 'max-Bandbreite')->wherePivot('value', '>=', $minBandWidth);
-        if($providerID == 0)
-            if($statusOfTariffs != 2) // 2 means all, tariffs no matter the status of the tariff is.
+        if($providerID == 0){
+            if($statusOfTariffs == 1) // 1, show only active tariffs
                 $tariffs = Tariff
                     ::where('status', $status)
                     ->orderBy('provider_id')
                     ->orderBy('group_id')
                     ->get();
-            else
+            else if($statusOfTariffs == 0) // 0, show only disabled tariffs
+                $tariffs = Tariff
+                    ::where('status', $status)
+                    ->orderBy('updated_at', 'DESC') // last deactivated tariffs will be top of the list...
+                    ->orderBy('provider_id')
+                    ->orderBy('group_id')
+                    ->get();
+            else if($statusOfTariffs == 2) //  2, show all tariffs
                 $tariffs = Tariff
                     ::orderBy('provider_id')
                     ->orderBy('group_id')
                     ->get();
-        else
+        }
+        else{
             // if providerID is not 0 then check if tariffGroupID is 0 or not...tariffGroupID of 0 indicates all groups
             if($tariffGroupID == 0)
                 // fetch all tariffs according to providerID and filter parameters
@@ -327,6 +335,8 @@ class TariffController extends Controller
                         ::where('provider_id', $providerID)
                         ->where('group_id', $tariffGroupID)
                         ->get();
+        }
+
 
 
         // Determine all tariffs with on-tops for authenticated user's office (dealer) in "on_top" pivot table.
@@ -346,7 +356,48 @@ class TariffController extends Controller
                     $out .= "<tr>";
                     $out .= "<td>" . $tariff->network->name . "</td>";
                     $out .= "<td>" . $tariff->name . "</td>";
-                    $out .= "<td><button type=\"button\" class=\"btn btn-danger\" data-toggle=\"m-popover\" title=\"". $tariff->name. "\" data-content=\"". $tariff->network->name . "\">Info</button></td>";
+
+                    $out .= "<td>";
+                    $out .= "<button type=\"button\" class=\"btn btn-danger\" data-toggle=\"m-popover\" title=\"" . $tariff->name . "\"";
+                        $out.= " data-html=\"true\" data-content= \" Lorem \"";
+
+                    /**
+                    if ($tariff->tariffsHighlight){
+                            if($tariff->tariffsHighlight->content['internet1'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['internet1'] ."</li>";
+                            if($tariff->tariffsHighlight->content['internet2'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['internet2'] ."</li>";
+                            if($tariff->tariffsHighlight->content['internet3'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['internet3'] ."</li>";
+                            if($tariff->tariffsHighlight->content['internet4'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['internet4'] ."</li>";
+                            if($tariff->tariffsHighlight->content['SMS1'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['SMS1'] ."</li>";
+                            if($tariff->tariffsHighlight->content['SMS2'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['SMS2'] ."</li>";
+                            if($tariff->tariffsHighlight->content['SMS3'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['SMS3'] ."</li>";
+                            if($tariff->tariffsHighlight->content['SMS4'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['SMS4'] ."</li>";
+                            if($tariff->tariffsHighlight->content['telephony1'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['telephony1'] ."</li>";
+                            if($tariff->tariffsHighlight->content['telephony2'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['telephony2'] ."</li>";
+                            if($tariff->tariffsHighlight->content['telephony3'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['telephony3'] ."</li>";
+                            if($tariff->tariffsHighlight->content['telephony4'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['telephony4'] ."</li>";
+                            if($tariff->tariffsHighlight->content['other1'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['other1'] ."</li>";
+                            if($tariff->tariffsHighlight->content['other2'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['other2'] ."</li>";
+                            if($tariff->tariffsHighlight->content['other3'] != '')
+                                $out .= "<li>". $tariff->tariffsHighlight->content['other3'] ."</li>";
+                    }
+                     */
+                    $out .= ">Info";
+                    $out .= "</button></td>";
+
                     $out .= "<td>" . $tariff->base_price . "</td>";
                     $out .= "<td>" . $tariff->provision . "</td>";
                     $out .= "<td>";
@@ -684,9 +735,9 @@ class TariffController extends Controller
         // then the status of the group must be altered from 0 to 1.
         TariffsGroup::controlAndAlterStatusOfGroup($tariffID);
 
-        $this->fetchTariffsWithFilter($request);
+        //$this->fetchTariffsWithFilter($request);
 
-        /**
+
         $providerID = $request->get('providerID');
         $tariffGroupID = $request->get('tariffGroupID');
         $statusOfTariffs = $request->get('statusOfTariffs');// it is used in listing the tariffs whose statuses are active (1) or disabled (0).
@@ -739,13 +790,20 @@ class TariffController extends Controller
         // Take the tariffs from the DB according to the providerID, tariffGroupID and filter parameters sent by the tariff.index via public/js/allTariffListWithFilter2.js .
         // 0 indicates all...then fetch all tariffs of all providers.    //->properties()->where('name', 'max-Bandbreite')->wherePivot('value', '>=', $minBandWidth);
         if($providerID == 0)
-            if($statusOfTariffs != 2)
+            if($statusOfTariffs == 1) // 1, show only active tariffs
                 $tariffs = Tariff
                     ::where('status', $status)
                     ->orderBy('provider_id')
                     ->orderBy('group_id')
                     ->get();
-            else
+            else if($statusOfTariffs == 0) // 0, show only disabled tariffs
+                $tariffs = Tariff
+                    ::where('status', $status)
+                    ->orderBy('updated_at', 'DESC') // last deactivated tariffs will be top of the list...
+                    ->orderBy('provider_id')
+                    ->orderBy('group_id')
+                    ->get();
+            else if($statusOfTariffs == 2) //  2, show all tariffs
                 $tariffs = Tariff
                     ::orderBy('provider_id')
                     ->orderBy('group_id')
@@ -812,7 +870,42 @@ class TariffController extends Controller
                 $out .= "<tr>";
                 $out .= "<td>" . $tariff->network->name . "</td>";
                 $out .= "<td>" . $tariff->name . "</td>";
-                $out .= "<td><button type=\"button\" class=\"btn btn-danger\" data-toggle=\"m-popover\" title=\"". $tariff->name. "\" data-content=\"". $tariff->network->name . "\">Info</button></td>";
+
+                $out .= "<td><button type=\"button\" class=\"btn btn-danger\" data-toggle=\"m-popover\" title=\"". $tariff->name. "data-html=\"true\"". "\" data-content=\"";
+                if ($tariff->tariffsHighlight){
+                    if($tariff->tariffsHighlight->content['internet1'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['internet1'] ."</li>";
+                    if($tariff->tariffsHighlight->content['internet2'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['internet2'] ."</li>";
+                    if($tariff->tariffsHighlight->content['internet3'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['internet3'] ."</li>";
+                    if($tariff->tariffsHighlight->content['internet4'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['internet4'] ."</li>";
+                    if($tariff->tariffsHighlight->content['SMS1'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['SMS1'] ."</li>";
+                    if($tariff->tariffsHighlight->content['SMS2'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['SMS2'] ."</li>";
+                    if($tariff->tariffsHighlight->content['SMS3'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['SMS3'] ."</li>";
+                    if($tariff->tariffsHighlight->content['SMS4'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['SMS4'] ."</li>";
+                    if($tariff->tariffsHighlight->content['telephony1'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['telephony1'] ."</li>";
+                    if($tariff->tariffsHighlight->content['telephony2'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['telephony2'] ."</li>";
+                    if($tariff->tariffsHighlight->content['telephony3'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['telephony3'] ."</li>";
+                    if($tariff->tariffsHighlight->content['telephony4'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['telephony4'] ."</li>";
+                    if($tariff->tariffsHighlight->content['other1'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['other1'] ."</li>";
+                    if($tariff->tariffsHighlight->content['other2'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['other2'] ."</li>";
+                    if($tariff->tariffsHighlight->content['other3'] != '')
+                        $out .= "<li>". $tariff->tariffsHighlight->content['other3'] ."</li>";
+                }
+                $out .= "\">Info</button></td>";
+
                 $out .= "<td>" . $tariff->base_price . "</td>";
                 $out .= "<td>" . $tariff->provision . "</td>";
                 $out .= "<td>";
@@ -845,7 +938,7 @@ class TariffController extends Controller
 
         // Send the tariffGroups and out to "tariffList-Provider.js" in json format.
         return response()->json(['tariffGroups' => $tariffGroups, 'out' => $out]);
-        */
+
     }
     public function setFilteredOutput($request){
 

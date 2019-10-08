@@ -466,8 +466,8 @@
     <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="Activation" data-placement="left">
         <a href="/contract/shopping-cart"><i class="la la-cart-arrow-down"></i></a>
     </li>
-    <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="Documentation" data-placement="left">
-        <a href="https://keenthemes.com/metronic/documentation.html" target="_blank"><i class="la la-code-fork"></i></a>
+    <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="Tariff List" data-placement="left">
+        <a href="/contract/tariffs"><i class="la la-code-fork"></i></a>
     </li>
     <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="Support" data-placement="left">
         <a href="https://keenthemes.com/forums/forum/support/metronic5/" target="_blank"><i class="la la-life-ring"></i></a>

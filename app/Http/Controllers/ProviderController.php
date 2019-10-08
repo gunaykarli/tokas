@@ -26,7 +26,7 @@ class ProviderController extends Controller
     {
         //$providers = new Provider();
         //$providers -> all()->get();
-        $providers = Provider::get();
+        $providers = Provider::all();
         return view ('providers.index', compact('providers'));
     }
 

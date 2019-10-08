@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    alert('Enteeeerr');
+    alert('Enterr');
     //$('.IBAN').mask('DE99 9999 9999 9999 999 99');
     $('#IBAN').inputmask({"mask": "DE99 9999 9999 9999 9999 99"});
 
@@ -132,7 +132,7 @@ $(document).ready(function()
             // begin: rules for payment method "Bankverbindung" customer section
             IBAN:{
                 required: true,
-                minlength: 28,
+                minlength: 22,
             },
             // end: rules for payment method "Bankverbindung" customer section
 

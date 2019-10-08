@@ -191,10 +191,10 @@ class VfGsm extends Model
 
        $VfGsmContract->save();
     }
-    public static function store($contractID, $request){ // Execution forwarded from ContractController@forwardToStore
+    public static function store($contractID, $request){ // Execution forwarded from ContractController@store
 
         $products = ShoppingCart
-            ::where('product_type', 1)
+            ::where('product_type', 1)->where('producer_id', 1)
             ->where('dealer_id', auth()->user()->dealer_id)
             ->where('office_id', auth()->user()->office_id)
             ->where('employee_id', auth()->user()->id)
@@ -206,6 +206,9 @@ class VfGsm extends Model
 
             // take the variables from the Session created as 'tariff->name' associative array in "ShoppingCartController@saveSimImeiServicesToSession"
             $simImeiServicesFromSession = Session::get(Tariff::where('id', $product->product_id)->first()->name);
+
+            //dd($simImeiServicesFromSession['tariffID']);
+
             $VfGsmContract->additional_tariff = $simImeiServicesFromSession['isAdditionalTariff'];
             $VfGsmContract->tariff_id = $simImeiServicesFromSession['tariffID'];
             $VfGsmContract->contract_start = $simImeiServicesFromSession['contractStartDate'];
