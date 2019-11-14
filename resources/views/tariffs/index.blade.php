@@ -9,7 +9,7 @@
         <div class="m-subheader ">
             <div class="d-flex align-items-center">
                 <div class="mr-auto">
-                    <h3 class="m-subheader__title m-subheader__title--separator">{{__('tariffs/index.tariffs')}}</h3>
+                    <h3 class="m-subheader__title m-subheader__title--separator">{{__('tariffs/index.tariffManagement')}}</h3>
                     <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                         <li class="m-nav__item m-nav__item--home">
                             <a href="#" class="m-nav__link m-nav__link--icon">
@@ -47,7 +47,7 @@
                     <div class="m-portlet__head-caption">
                         <div class="m-portlet__head-title">
                             <h3 class="m-portlet__head-text">
-                                {{__('tariffs/index.tariffs')}}
+                                {{__('tariffs/index.tariffManagement')}}
                             </h3>
                         </div>
                     </div>
@@ -343,6 +343,7 @@
                             <th> {{__('tariffs/index.basePrice')}}</th>
                             <th> {{__('tariffs/index.provision')}}</th>
                             <th> {{__('tariffs/index.onTop')}}</th>
+                            <th> {{__('contracts/tariffs.totalProvision')}}</th>
                             <th>{{__('tariffs/index.status')}}</th>
                             <th>{{__('tariffs/index.action')}}</th>
                         </tr>
@@ -415,6 +416,14 @@
                                         @endif
                                     @endforeach
                                     </td>
+                                    <td>
+                                        @foreach($tariffsWithOnTopForTheDealer as $tariffWithOnTopForTheDealer)
+                                            @if($tariffWithOnTopForTheDealer->id == $tariff->id)
+                                                {{$tariff->provision + $tariffWithOnTopForTheDealer->pivot->ontop}}
+                                            @endif
+                                        @endforeach
+                                    </td>
+
                                     <td>
                                         @if($tariff->status == 1)
                                             {{__('tariffs/index.active')}}

@@ -408,6 +408,15 @@ class TariffController extends Controller
                     }
 
                     $out .= "</td>";
+
+                    $out .= "<td>";
+
+                    foreach ($tariffsWithOnTopForTheDealer as $tariffWithOnTopForTheDealer) {
+                        if ($tariffWithOnTopForTheDealer->id == $tariff->id)
+                            $out .= $tariff->provision + $tariffWithOnTopForTheDealer->pivot->ontop;
+                    }
+                    $out .= "</td>";
+
                     $out .= "<td>";
                     if($tariff->status == 1) $out .= __('tariffs/index.active');  else  $out .= __('tariffs/index.disabled');
                     $out .= "<button type=\"button\" class=\"btn btn-danger\" name=\" ". $tariff->name . " \" id=\" " . $tariff->id . "\">";
@@ -433,6 +442,7 @@ class TariffController extends Controller
     }
 
     // checks if a tariffs's property meets filter parameters
+    // called from fetchTariffWithFilter()
     public function checkFilterParametersForTariff($tariff, $filterParameters){
 
         // network check
@@ -554,7 +564,7 @@ class TariffController extends Controller
 
     }
 
-    public function changeStatusOfTariff_without_enable_disable__gruop_status(Request $request)
+    public function changeStatusOfTariff_without_enable_disable__group_status(Request $request)
     {
         $tariffID = $request->get('tariffID');
 

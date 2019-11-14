@@ -14,7 +14,7 @@
 				<!-- Breadcrumbs -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb">
-						<li><span class="ion-home breadcrumb-home"></span><a href="index.html">Home</a></li>
+						<li><span class="ion-home breadcrumb-home"></span><a href="/home">Home</a></li>
 						<li>Pages</li>
 						<li>Services</li>
 					</ol>

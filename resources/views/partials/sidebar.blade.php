@@ -50,7 +50,7 @@
                     <ul class="m-menu__subnav">
                         <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true"><span class="m-menu__link"></span><span class="m-menu__link-text">***-</span></li>
                         <li class="m-menu__item" aria-haspopup="true"><a href="{{ action('DealerController@create') }}" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">Add</span></a></li>
-                        <li class="m-menu__item" aria-haspopup="true"><a href="{{ action("DealerController@list") }}" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">Index</span></a></li>
+                        <li class="m-menu__item" aria-haspopup="true"><a href="{{ action("DealerController@index") }}" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">Index</span></a></li>
                     </ul>
                 </div>
             </li>

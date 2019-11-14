@@ -35,6 +35,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('raleway/revolution/css/navigation.css')}}">
 
     <!-- Stylesheets -->
+    <link href="{{ asset('raleway/css/bootstrap-toggle.min.css')}}" rel="stylesheet"> <!-- https://www.bootstraptoggle.com/ -->
+    <link href="{{ asset('raleway/css/tokas-specials.css')}}" rel="stylesheet">
     <link href="{{ asset('raleway/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ asset('raleway/css/style.css')}}" rel="stylesheet" title="main-css">
     <link href="{{ asset('raleway/css/bootstrap-social.css')}}" rel="stylesheet">

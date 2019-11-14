@@ -7,7 +7,7 @@
             <div class="row">
                 <!-- Address and Phone -->
                 <div class="col-sm-7 hidden-xs">
-                    <span class="ion-android-system-home home-icon"></span>Bright Passage, Fond du Lac, 63138 USA<span class="ion-ios7-telephone phone-icon"></span>1702983921
+                    <span class="ion-android-system-home home-icon"></span>Voltastraße 2, 70376 Stuttgart<span class="ion-ios7-telephone phone-icon"></span>1741640085
                 </div>
                 <!-- Social Buttons -->
                 <div class="col-sm-5 text-right">

@@ -16,6 +16,10 @@ class DealerRegionVb extends Model
         return $this->belongsTo(PostcodeRegionVb::class);
     }
 
+    public function office(){
+        return $this->belongsTo(Office::class);
+    }
+
     //**This function is called from DealerController.php-store() once a new dealer added to the system
     public function addDealerRegionVB1($dealerID){
         //** Determine postcode of the dealer */

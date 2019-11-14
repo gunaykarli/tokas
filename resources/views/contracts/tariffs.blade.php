@@ -194,30 +194,7 @@
                                         <div class="m-portlet__body">
                                             <div class="m-form__group form-group" id="filterPortlet">
 
-                                                <div class="form-group m-form__group row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">{{__('contracts/tariffs.statusOfTariffs')}}:</label>
 
-                                                    <div class="col-xl-2 col-lg-2">
-                                                        <label class="m-radio">
-                                                            <input type="radio" name="statusOfTariffs" id="statusOfTariffs" value=1 checked="checked" > {{__('contracts/tariffs.justActiveTariffs')}}
-                                                            <span></span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="col-xl-2 col-lg-2">
-                                                        <label class="m-radio">
-                                                            <input type="radio" name="statusOfTariffs" id="statusOfTariffs" value=0 > {{__('contracts/tariffs.justDisabledTariffs')}}
-                                                            <span></span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="col-xl-2 col-lg-2">
-                                                        <label class="m-radio">
-                                                            <input type="radio" name="statusOfTariffs" id="statusOfTariffs" value=2 > {{__('contracts/tariffs.all')}}
-                                                            <span></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
 
                                                 <div class="form-group m-form__group row">
                                                     <label for="exampleSelect1" class="col-xl-3 col-lg-3 col-form-label">{{__('contracts/tariffs.network')}}:</label>
@@ -335,6 +312,7 @@
                             <th> {{__('contracts/tariffs.basePrice')}}</th>
                             <th> {{__('contracts/tariffs.provision')}}</th>
                             <th> {{__('contracts/tariffs.onTop')}}</th>
+                            <th> {{__('contracts/tariffs.totalProvision')}}</th>
 
                             <th>{{__('contracts/tariffs.action')}}</th>
                         </tr>
@@ -407,7 +385,14 @@
                                         @endif
                                     @endforeach
                                     </td>
-                                    <td><a href="/contract/shopping-cart/add-tariff/{{$tariff->id}}}}" class="btn btn-primary" ><span>{{__('tariffs/index.order')}}</span>&nbsp;&nbsp;</a></td>
+                                    <td>
+                                        @foreach($tariffsWithOnTopForTheDealer as $tariffWithOnTopForTheDealer)
+                                            @if($tariffWithOnTopForTheDealer->id == $tariff->id)
+                                                {{$tariff->provision + $tariffWithOnTopForTheDealer->pivot->ontop}}
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                    <td><a href="/contract/shopping-cart/add-tariff/{{$tariff->id}}" class="btn btn-primary" ><span>{{__('tariffs/index.order')}}</span></a></td>
 
                                 </tr>
                             @endforeach
@@ -432,6 +417,6 @@
     <!--end::Page Vendors -->
 
     <!--begin::Page Scripts-->
-    <script src="{{ asset('js/allTariffListWithFilter9.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/contractsTariffs-1.js')}}" type="text/javascript"></script>
     <!--end::Page Scripts-->
 @endsection

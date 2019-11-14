@@ -21,6 +21,10 @@ class Office extends Model
         return $this->hasMany(User::class, 'office_id');
     }
 
+    public function dealerRegionsVBs(){
+        return $this->hasMany(DealerRegionVb::class, 'office_id');
+    }
+
     public function addMainOfficeOfDealer($dealerID, $request){
 
         $office = new Office();
@@ -28,9 +32,9 @@ class Office extends Model
         $office->name = $request->officeName;
         $office->office_type = 1; // 1 indicates the dealer's "Main Office"
 
+
+        /**Since admin user will be contact person of the office, $office->contact_person_id must be stored in addAdminOfDealer() function after creating and storing the admin.*/
         //$office->contact_person_id = $request->contactPersonName;
-        // Since admin user will be contact person of the office, $office->contact_person_id must be stored in addAdminOfDealer() function
-        // after creating and storing the admin.
 
         $office->phone = $request->phone;
         if ($request->status == 'on')
@@ -40,12 +44,8 @@ class Office extends Model
 
         $office->save();
 
-
-        // add address of newly created dealer's office address
-        $name = $request->name;
-        $newOffice = Office::where('name', $name)->first();
         $address = new Address();
-        $address->addOfficeAddressOfDealer($newOffice, request());
+        $address->addOfficeAddressOfDealer($office, $request);
     }
 
     public function updateMainOfficeOfDealer($office, $request){

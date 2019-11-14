@@ -14,5 +14,7 @@ return [
     'address' => 'Adressen',
     'aktionen' => 'Aktionen',
     'update' => 'Aktualisierung',
-    'employees' => 'Mitarbeiter'
+    'employees' => 'Mitarbeiter',
+    'created' => 'Neues Büro wurde erfolgreich erstellt.',
+    'updated' => 'Das Büro wurde erfolgreich aktualisiert.'
 ];

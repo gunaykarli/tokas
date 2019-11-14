@@ -20,7 +20,6 @@ class BankAccount extends Model
         $bankAccount->entity_type = "Dealer";
         $bankAccount->IBAN = $request->IBAN;
         $bankAccount->cash_deposit = $request->cashDeposit;
-        //$bankAccount->cash_deposit = $request->deneme;
 
         $bankAccount->save();
 

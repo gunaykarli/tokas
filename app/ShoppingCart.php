@@ -8,13 +8,14 @@ class ShoppingCart extends Model
 {
     protected $fillable = ['salesperson_id', 'office_id', 'dealer_id', 'product_type', 'product_id', 'additional_tariff'];
 
-    public static function emptyShoppingCart($employeeID){
+    public static function emptyShoppingCart($employeeID, $producerID){
 
 
 
-        // fetch the tariffs belonging to the current employee
+        // fetch the tariffs belonging to the current employee and provider
         $contents = ShoppingCart
-            ::where('product_type', 1)
+            ::where('producer_id', $producerID)
+            ->where('product_type', 1)
             ->where('employee_id', $employeeID)
             ->get();
 

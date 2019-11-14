@@ -17,6 +17,7 @@ return [
     'delete' => 'Löschen',
     'pleaseSelect' => 'bitte wahlen',
     'captureIMEI' => 'IMEI erfassen',
+    'additionalTariff' => 'Mehrkarte',
     'additionalTariffOrder' => 'Mehrkarte hinzufügen',
     'additionalCard' => 'Mehrkarte',
     'withoutDevice' => 'Ohne Gerät',

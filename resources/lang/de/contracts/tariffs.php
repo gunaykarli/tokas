@@ -8,6 +8,7 @@ return [
     'basePrice' => 'Grundpreis',
     'provision' => 'Provision',
     'onTop' => 'on-Top',
+    'totalProvision' => 'Gesamtprovision',
     'action' => 'Aktion',
     'order' => 'Bestellen',
     'edit' => 'Bearbeiten',

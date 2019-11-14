@@ -150,6 +150,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         //Orchestra\Parser\XmlServiceProvider::class,
         Orchestra\Parser\XmlServiceProvider::class,
+        Crabbly\FPDF\FpdfServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -216,6 +218,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         //'XmlParser' => Orchestra\Parser\Xml\Facade::class,
         'XmlParser' => Orchestra\Parser\Xml\Facade::class,
+        'FPDF' => Crabbly\FPDF\FpdfServiceProvider::class,
     ],
 
 ];

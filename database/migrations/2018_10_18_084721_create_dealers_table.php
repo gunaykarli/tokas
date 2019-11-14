@@ -18,6 +18,8 @@ class CreateDealersTable extends Migration
             $table->string('name')->nullable();
             $table->string('type')->nullable();
             $table->string('status')->nullable();
+            $table->boolean('is_limited_sales');
+            $table->integer('remaining_sales_amount')->nullable();
             $table->integer('category_id')->nullable();
             $table->string('owner_surname')->nullable();
             $table->string('owner_name')->nullable();

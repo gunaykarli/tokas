@@ -40,18 +40,22 @@ class User extends Authenticatable
         return $this->belongsTo(Office::class);
     }
 
-    //add address of the Dealer with $dealerID sent from DealerController@store
+    /**
+     * adds address of the Dealer with $dealerID sent from DealerController@store
+     * forwarded from store@DealerController
+     */
     public function addAdminOfDealer ($dealerID, $request){
 
         //$this->register($request);
         //event(new Registered($user = $this->createAdminOfDealer($dealerID, $request->all())));
 
         $user = new User();
-
-        $user->name = $request->accountName;
-        $user->surname = $request->accountSurname;
-        $user->email = $request->accountEmail;
-        $user->mobile = $request->accountMobile;
+        // owner of the dealer is admin of the dealer too.
+        $user->user_name = $request->userName;
+        $user->name = $request->ownerName;
+        $user->surname = $request->ownerSurname;
+        $user->email = $request->ownerEmail;
+        $user->mobile = $request->ownerMobile;
         $user->password = Hash::make($request->password);
         $user->role_id = 4;
         $user->dealer_id = $dealerID;
@@ -65,26 +69,29 @@ class User extends Authenticatable
         $user->save();
 
         // Since admin user will be contact person of the office, $office->contact_person_id must be stored in this function
-        $admin = User::where('email', $request->accountEmail)->where('surname', $request->accountSurname )->first();
-        $office->contact_person_id = $admin->id;
+        //$admin = User::where('email', $request->accountEmail)->where('surname', $request->accountSurname )->first();
+        $office->contact_person_id = $user->id;
         $office->save();
 
-        //ÇALIŞMIYOR...
-        //return redirect()->home();
     }
 
     public function updateAdminOfDealer ($user, $request){
 
         //$this->register($request);
         //event(new Registered($user = $this->createAdminOfDealer($dealerID, $request->all())));
-
+        $user->user_name = $request->userName;
         if ($request->status == 'on')
             $user->status = $request->status;
         else
             $user->status = 'off';
-        $user->name = $request->accountName;
-        $user->surname = $request->accountSurname;
-        $user->email = $request->accountEmail;
+        $user->name = $request->ownerName;
+        $user->surname = $request->ownerSurname;
+        $user->email = $request->ownerEmail;
+        $user->mobile = $request->ownerMobile;
+
+        if ($request->passwordChange == 'on')
+            $user->password = Hash::make($request->password);
+
         //$user->password = Hash::make($request->password);
         //$user->role_id = 4;
         //$user->dealer_id = $dealerID;
@@ -94,7 +101,5 @@ class User extends Authenticatable
 
         event(new Registered($user));
 
-        //ÇALIŞMIYOR...
-        //return redirect()->home();
     }
 }

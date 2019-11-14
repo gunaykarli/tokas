@@ -5,16 +5,13 @@
 
             <!-- About -->
             <div class="col-sm-3">
-                <div class="heading-footer"><h4>About</h4></div>
-                <p>Raleway Bootstrap 3 Template is what you need for your next project or client.</p>
-                <a href="features.html" class="btn btn-primary btn-rw mt10">
-                    Buy now
-                </a>
+                <div class="heading-footer"><h4>Über uns</h4></div>
+                <p>Toker Telokom</p>
             </div>
 
             <!-- Social -->
             <div class="col-sm-3 mg25-xs">
-                <div class="heading-footer"><h4>Social Networks</h4></div>
+                <div class="heading-footer"><h4>Soziale Netzwerke</h4></div>
                 <a class="btn btn-social-icon btn-twitter btn-lg">
                     <i class="fa fa-twitter"></i>
                 </a>
@@ -49,16 +46,16 @@
 
             <!-- Contact -->
             <div class="col-sm-3 mg25-xs">
-                <div class="heading-footer"><h4>Contact us</h4></div>
-                <p><span class="ion-home footer-info-icons"></span><small class="address">228 Park Ave S New York, NY 10003</small></p>
-                <p><span class="ion-email footer-info-icons"></span><small class="address"><a href="mailto:info@raleway.com">info@raleway.com</a></small></p>
-                <p><span class="ion-ios7-telephone footer-info-icons"></span><small class="address">+11192386513</small></p>
+                <div class="heading-footer"><h4>Kontaktiere uns</h4></div>
+                <p><span class="ion-home footer-info-icons"></span><small class="address">Voltastraße 2, 70376 Stuttgart</small></p>
+                <p><span class="ion-email footer-info-icons"></span><small class="address"><a href="mailto:info@toker-telekom.de">toker-telekom.de</a></small></p>
+                <p><span class="ion-ios7-telephone footer-info-icons"></span><small class="address">+1741640085</small></p>
             </div>
 
             <!-- Recent Work -->
 
             <div class="col-sm-3 hidden-xs">
-                <div class="heading-footer"><h4>Recent Work</h4></div>
+                <div class="heading-footer"><h4>Aktuelle Arbeiten</h4></div>
                 <div class="col-xs-4 recent-work-padding">
                     <a href="{{ asset('raleway/images/projects/web2.jpg')}}" class="thumbnail image-zoom-link">
                         <img src="{{ asset('raleway/images/projects/thumbs/web2.jpg')}}" alt="..." class="thumbnail img-responsive">
@@ -81,7 +78,7 @@
         <div class="row">
             <hr>
             <div class="col-sm-11 col-xs-10">
-                <p class="copyright">© 2013 Raleway. All rights reserved. Theme by <b>Denis Samardjiev</b>.</p>
+                <p class="copyright">© 2019 Tokas. All rights reserved.</p>
             </div>
             <div class="col-sm-1 col-xs-2 text-right">
                 <a href="#" class="scroll-top"><div class="footer-scrolltop-holder"><span class="ion-ios7-arrow-up footer-scrolltop"></span></div></a>

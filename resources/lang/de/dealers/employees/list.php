@@ -1,16 +1,20 @@
 <?php
 
 return [
-    'employees' => 'Mitarbeiter',
+    'employees' => 'Mitarbeitern',
     'employeeList' => 'Mitarbeiterliste',
     'newEmployee' => 'Neuer Mitarbeiter',
-    'employeeID' => 'Mitarbeiter-ID',
+    'userName' => 'Nutzername',
     'name' => 'Name',
     'office' => 'Büro',
+    'offices' => 'Büros',
     'email' => 'E-Mail',
     'mobile' => 'Handynummer',
     'roleID' => 'Rollen-ID',
     'status' => 'Status',
     'actions' => 'Aktionen',
-    'update' => 'Aktualisierung'
+    'update' => 'Aktualisierung',
+
+    'created' => 'Neuer Mitarbeiter wurde angelegt.',
+    'updated' => 'Der Mitarbeiter wurde aktualisiert.'
 ];

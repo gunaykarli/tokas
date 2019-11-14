@@ -138,14 +138,20 @@ class RegisterController extends Controller
 
         Mail::to($request->email)->send(new SendMailable($request->name, $userNameOfEmployee,"123.qaz"));
 
-        return back();
+        return redirect('/employee/office/list/'.$office->id)->with('newEmployee', 'created');
     }
-    public function listEmployee($dealerID){
+    public function listEmployeesOfDealer(Dealer $dealer){
         // retrieve all employees belonging to the dealer whose ID is equal to the dealerID sent from dealers.index and offices.index
-        $employees = User::where('dealer_id', $dealerID)->get();
+        $employees = User::where('dealer_id', $dealer->id)->get();
 
-        return view('dealers.employees.list', compact('employees', 'dealerID'));
+        return view('dealers.employees.list', compact('employees', 'dealer'));
+    }
+    public function listEmployeesOfOffice(Office $office){
+        // retrieve all employees belonging to the office whose ID is equal to the office sent from offices.index
+        $employees = User::where('dealer_id', $office->dealer_id)->where('office_id', $office->id)->get();
 
+        $dealer = Dealer::find($office->dealer_id);
+        return view('dealers.employees.list', compact('employees', 'dealer', 'office'));
     }
 
     public function editEmployee(User $employee){
@@ -178,8 +184,8 @@ class RegisterController extends Controller
         //$employee->role_id = 5; //description: role_id 5, Tokas user in dealers
         $employee->office_id = $request->officeID;
         //$user->password = Hash::make("123.qaz");
-        $employee->save();
+        $employee->update();
 
-        return back();
+        return redirect('/employee/office/list/'.$employee->office_id)->with('updateEmployee', 'updated');
     }
 }

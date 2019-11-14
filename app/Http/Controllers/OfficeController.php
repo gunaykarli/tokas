@@ -61,10 +61,13 @@ class OfficeController extends Controller
 
         // add address of newly created dealer's office address
         $name = $request->officeName;
-        $newOffice = Office::where('name', $name)->first();
+        //$newOffice = Office::where('name', $name)->first();
 
         $address = new Address();
-        $address->addOfficeAddressOfDealer($newOffice, $request);
+        $address->addOfficeAddressOfDealer($office, $request);
+
+        return redirect('/office/list/' . $request->dealerID)->with('newOffice', 'created');
+
     }
 
     /**
@@ -147,6 +150,8 @@ class OfficeController extends Controller
 
         $address = $office->address()->where('entity_type', '=', 'Dealer' )->first();
         $address->updateOfficeAddressOfDealer($address, request());
+
+        return redirect('/office/list/' . $request->dealerID)->with('updateOffice', 'updated');
     }
 
     /**

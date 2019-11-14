@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dealer extends Model
 {
-    protected $fillable = ['name', 'type', 'status', 'category_id', 'owner_surname', 'owner_name', 'owner_mobile', 'owner_email'];
+    protected $fillable = ['name', 'type', 'status', 'is_limited_sales', 'remaining_sales_amount', 'category_id', 'owner_surname', 'owner_name', 'owner_mobile', 'owner_email'];
 
     public function offices(){
         return $this->hasMany(Office::class);

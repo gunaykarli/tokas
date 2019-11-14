@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-alert('group');
+alert('grouup');
     $('#radioInLineProviders').change(function(){
         var providerID = $("input[name='providerID']:checked").val();
         var tariffGroupID = $("input[name='tariffGroup']:checked").val();
@@ -194,7 +194,7 @@ alert('group');
     });
 
     $('#tableBody').click('.btn-danger', function (element) {
-         $(element.target).css('background-color', 'green');
+         //$(element.target).css('background-color', 'green');
          //alert(element.target.id);
          // tariff id of the tariff whose status is going to be changed is taken
          var tariffID = element.target.id;

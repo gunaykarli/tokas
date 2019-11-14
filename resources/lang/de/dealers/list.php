@@ -14,5 +14,12 @@ return [
     'view' => 'Ansicht',
     'update' => 'Aktualisierung',
     'offices' => 'Büros',
-    'employees' => 'Mitarbeiter'
+    'employees' => 'Mitarbeiter',
+    'regionVF' => 'VF Region',
+    'regionToker' => 'Toker Region',
+    'VFVodafone' => 'VFVodafone',
+    'VFToker' => 'VFToker',
+
+    'created' => 'Neuer Händler wurde erfolgreich angelegt.',
+    'updated' => 'Die Händlerinfos wurden erfolgreich aktualisiert.'
 ];

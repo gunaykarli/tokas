@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'tariffManagement' => 'Tarifverwaltung',
     'tariffs' => 'Tarife',
     'network' => 'Netz',
     'name' => 'Name',

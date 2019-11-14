@@ -25,23 +25,56 @@ class DealerController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Display a listing of the dealers.
+     * Forwarded from "resources/views/dealers/index.blade.php"
      */
-    public function list()
+    public function index()
     {
 
         if (auth()->check()){
             if (auth()->user()->role_id == 1) {
                 $dealers = Dealer::get();
-                return view('dealers.list', compact('dealers'));
+                return view('dealers.index', compact('dealers'));
             }
             else{
                 $dealers = Dealer::where('id', auth()->user()->dealer_id)->get();
-                return view('dealers.list', compact('dealers'));
+                return view('dealers.index', compact('dealers'));
             }
         }
+    }
+
+    /**
+     * Display the specified dealer.
+     * Forwarded from "resources/views/dealers/index.blade.php"
+     * @param  \App\Dealer  $dealer
+     * @return \Illuminate\Http\Response
+     */
+    public function view(Dealer $dealer)
+    {
+        // Dealer's main office address, member codes, bank account and admin info have to be sent to dealers.view
+
+        // The row in addresses table of the database which belongs to the dealer's mail office  is determined.
+        $mainOffice = new Office();
+        $mainOffice = $dealer->offices()->where('office_type', '=', '1')->first();
+
+        // The row in addresses table of the database which belongs to the dealer's mail office  is determined.
+        $mainOfficeAddress = new Address();
+        $mainOfficeAddress = $dealer->address()->where('entity_type', '=', 'Dealer')->where('address_type', '=', '1')->first();
+
+        // The row in dealers_member_codes table of the database which belongs to the dealer  is determined.
+        $memberCodes = new DealersMemberCode();
+        $memberCodes = $dealer->dealersMemberCode()->first();
+
+        // The row in bank_accounts table of the database which belongs to the dealer  is determined.
+        $bankAccount = new BankAccount();
+        $bankAccount = $dealer->bankAccount()->where('entity_type', '=', 'Dealer')->first();
+
+        // The row in users table of the database which belongs to the dealer's admin  is determined.
+        $adminAccount = new User();
+        $adminAccount = $dealer->user()->where('role_id', '=', 4)->first();
+
+
+        return view('dealers.view', compact('dealer', 'mainOffice', 'mainOfficeAddress', 'memberCodes', 'bankAccount', 'adminAccount'));
     }
 
     /**
@@ -76,6 +109,13 @@ class DealerController extends Controller
         else
             $dealer->status = 'off';
 
+        if ($request->limitedSales == 'on'){
+            $dealer->is_limited_sales = 1;
+            $dealer->remaining_sales_amount = $request->salesLimit;
+        }
+        else
+            $dealer->is_limited_sales = 0;
+
         $dealer->save();
 
 
@@ -83,7 +123,7 @@ class DealerController extends Controller
        //** To add address, member code, bank account, admin and dealerRegionVB info of  the dealer which has been just added to the database in previous step,
        // take ID of the dealer and transfer it to addAddressDealer(), addMemberCodeOfDealer(), addBankAccountOfDealer() and addAdminOfDealer() */
        $name = $request->name;
-       $dealer->where('name', $name)->get();
+       $dealer->where('name', $request->name)->get();
        //$address = new Address();
        //$address->addAddressOfDealer($dealer->id, request());
 
@@ -104,43 +144,10 @@ class DealerController extends Controller
        $dealerRegionVB->addDealerRegionVB($dealer->id);
        */
 
-
-       return back();
+       return redirect('/dealer/index')->with('newDealer', 'created');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Dealer  $dealer
-     * @return \Illuminate\Http\Response
-     */
-    public function view(Dealer $dealer)
-    {
-        // Dealer's main office address, member codes, bank account and admin info have to be sent to dealers.view
 
-        // The row in addresses table of the database which belongs to the dealer's mail office  is determined.
-        $mainOffice = new Office();
-        $mainOffice = $dealer->offices()->where('office_type', '=', '1')->first();
-
-        // The row in addresses table of the database which belongs to the dealer's mail office  is determined.
-        $mainOfficeAddress = new Address();
-        $mainOfficeAddress = $dealer->address()->where('entity_type', '=', 'Dealer')->where('address_type', '=', '1')->first();
-
-        // The row in dealers_member_codes table of the database which belongs to the dealer  is determined.
-        $memberCodes = new DealersMemberCode();
-        $memberCodes = $dealer->dealersMemberCode()->first();
-
-        // The row in bank_accounts table of the database which belongs to the dealer  is determined.
-        $bankAccount = new BankAccount();
-        $bankAccount = $dealer->bankAccount()->where('entity_type', '=', 'Dealer')->first();
-
-        // The row in users table of the database which belongs to the dealer's admin  is determined.
-        $adminAccount = new User();
-        $adminAccount = $dealer->user()->where('role_id', '=', 4)->first();
-
-
-        return view('dealers.view', compact('dealer', 'mainOffice', 'mainOfficeAddress', 'memberCodes', 'bankAccount', 'adminAccount'));
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -177,7 +184,7 @@ class DealerController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the dealer in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Dealer  $dealer
@@ -197,6 +204,14 @@ class DealerController extends Controller
             $dealer->status = 'on';
         else
             $dealer->status = 'off';
+
+        if ($request->limitedSales == 'on'){
+            $dealer->is_limited_sales = 1;
+            $dealer->remaining_sales_amount = $request->salesLimit;
+        }
+        else
+            $dealer->is_limited_sales = 0;
+
         $dealer->save();
 
 
@@ -219,8 +234,7 @@ class DealerController extends Controller
         $user = $dealer->user()->where('role_id', '=', 4)->first();
         $user->updateAdminOfDealer($user, request());
 
-        return back();
-
+        return redirect('/dealer/index')->with('updateDealer', 'updated');
     }
 
     /**

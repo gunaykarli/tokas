@@ -1,115 +1,105 @@
-@extends ('partials.master')
+@extends('ralewayLayouts.master')
+
+<!-- Page Header is yielded in the header.blade.php-->
+@section('pageHeader')
+    <!-- Begin Page Header -->
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <!-- Page Title -->
+                <div class="col-sm-6 col-xs-12">
+                    <h1> {{__('dealers/employees/create.employees')}} -  {{$offices[0]->dealer->name}}</h1>
+                </div>
+
+                <!-- Breadcrumbs -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb">
+                        <li><span class="ion-home breadcrumb-home"></span><a href="/home">{{__('home.homePage')}}</a></li>
+                        <li><a href="/office/list/{{$offices[0]->dealer->id}}">{{__('dealers/employees/create.offices')}}</a></li>
+                    </ol>
+                </div><!-- /column -->
+            </div><!-- /row -->
+        </div><!-- /container -->
+    </div><!-- /page header -->
+    <!-- End Page Header -->
+@endsection
 
 @section ('content')
+    <!--begin: Form -->
+    <form method="POST" action="/employee/store" class="form-horizontal" role="form">
+        @csrf
 
-    <!-- BEGIN: Main Content "stays right before 'Subheader' section and rigth after 'END: Left Aside' section of the original html files'"-->
-    <div class="m-grid m-grid--hor m-grid--root m-page">
-        <div class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signup m-login--2 m-login-2--skin-2" id="m_login" style="background-image: url({{ asset('assets/app/media/img/bg/bg-3.jpg')}});">
-            <div class="m-grid__item m-grid__item--fluid	m-login__wrapper">
-                <div class="m-login__container">
-                    <div class="m-login__signin">
 
-                        <div class="m-login__head">
-                            <h3 class="m-login__title">Sign In To Admin</h3>
-                        </div>
-                        <form class="m-login__form m-form" action="">
-                            <div class="form-group m-form__group">
-                                <input class="form-control m-input" type="text" placeholder="Email" name="email" autocomplete="off">
-                            </div>
-                            <div class="form-group m-form__group">
-                                <input class="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password">
-                            </div>
-                            <div class="row m-login__form-sub">
-                                <div class="col m--align-left m-login__form-left">
-                                    <label class="m-checkbox  m-checkbox--focus">
-                                        <input type="checkbox" name="remember"> Remember me
-                                        <span></span>
-                                    </label>
-                                </div>
-                                <div class="col m--align-right m-login__form-right">
-                                    <a href="javascript:;" id="m_login_forget_password" class="m-link">Forget Password ?</a>
-                                </div>
-                            </div>
-                            <div class="m-login__form-action">
-                                <button id="m_login_signin_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">Sign In</button>
-                            </div>
-                        </form>
+        <!--begin: Form Body -->
+        <!-- Begin: General info - 1 -->
+        <section class="pt30 mb20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="lead text-center flipInY-animated">{{__('dealers/employees/create.newEmployee')}}</p>
+                        <hr style="width:600px">
                     </div>
-                    <div class="m-log__signup">
-                        <!--begin::Form-->
-                        <form method="post" action="/employee/store" class="m-form m-form--fit m-form--label-align-right">
-                            @csrf
-                            <div class="m-portlet m-portlet--tab">
-                                <div class="m-portlet__head">
-                                    <div class="m-portlet__head-caption">
-                                        <div class="m-portlet__head-title">
-                                            <span class="m-portlet__head-icon m--hide"><i class="la la-gear"></i></span>
-                                            <h3 class="m-portlet__head-text">
-                                                Employee Registration
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="m-portlet__body">
+                </div>
 
-                                    <div class="form-group m-form__group">
-                                        <input type="text" name="name" class="form-control m-input m-input--air m-input--pill" placeholder="Name" >
-                                    </div>
-                                    <div class="form-group m-form__group">
-                                        <input type="text" name="surname" class="form-control m-input m-input--air m-input--pill" placeholder="Surname" >
-                                    </div>
-                                    <div class="form-group m-form__group">
-                                        <input type="email" name="email" class="form-control m-input m-input--air m-input--pill" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
-                                    </div>
-                                    <div class="form-group m-form__group">
-                                        <input type="text" name="mobile" class="form-control m-input m-input--air m-input--pill"  placeholder="Mobile">
-                                    </div>
-                                    <div class="form-group m-form__group">
-                                        @if (auth()->check())
-                                            <select name="officeID" class="form-control m-input m-input--air m-input--pill"  >
-                                                <option >Select office</option>
-                                                @foreach($offices as $office)
-                                                    <option value={{$office->id}}>{{$office->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        @endif
-                                    </div>
-                                    <div class="form-group m-form__group">
-                                        <button type="submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn">Register</button>&nbsp;&nbsp;
-                                    </div>
-                                    <div class="form-group m-form__group">
-                                        <button id="m_login_signup_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn">Sign Up</button>&nbsp;&nbsp;
-                                    </div>
+                <div class="heading mb30 text-left"><h4>{{__('dealers/employees/create.employeeInfo')}}</h4></div>
 
-                                </div>
-
-
-                            </div>
-                        </form>
-
-                        <!--end::Form-->
+                <div class="form-group row">
+                    <label class="col-md-4 control-label text-right">{{__('dealers/employees/create.name')}}</label>
+                    <div class="col-md-4">
+                        <input type="text" name="name" class="form-control">
                     </div>
-                    <div class="m-login__account">
-							<span class="m-login__account-msg">
-								Don't have an account yet ?
-							</span>&nbsp;&nbsp;
-                        <a href="javascript:;" id="m_login_signup" class="m-link m-link--light m-login__account-link">Sign Up</a>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-4 control-label text-right">{{__('dealers/employees/create.surname')}}</label>
+                    <div class="col-md-4">
+                        <input type="text" name="surname" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-4 control-label text-right">{{__('dealers/employees/create.email')}}</label>
+                    <div class="col-md-4">
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-4 control-label text-right">{{__('dealers/employees/create.mobile')}}</label>
+                    <div class="col-md-4">
+                        <input type="text" name="mobile" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-4 control-label text-right">{{__('dealers/employees/create.office')}}</label>
+                    <div class="col-md-4">
+                        @if (auth()->check())
+                            <select name="officeID" class="form-control">
+                                <option>{{__('dealers/employees/create.selectEmployee')}} </option>
+                                @foreach($offices as $office)
+                                    <option value={{$office->id}}>{{$office->name}}</option>
+                                @endforeach
+                            </select>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-rw btn-primary">{{__('dealers\create.save')}}</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- END: Main Content -->
+        </section>
+        <!-- End: General info -->
 
+
+
+    </form>
+    <!--end: Form -->
 @endsection
 
 @section ('pageVendorsAndScripts')
-    <!--begin::Page Vendors -->
-    <script src="{{ asset('metronic/assets/vendors/custom/fullcalendar/fullcalendar.bundle.js')}}" type="text/javascript"></script>
-    <!--end::Page Vendors -->
-
-    <!--begin::Page Scripts -->
-    <script src="{{ asset('metronic/assets/app/js/dashboard.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('metronic/assets/snippets/custom/pages/user/login2.js')}}" type="text/javascript"></script>
-    <!--end::Page Scripts -->
+    <script src="{{ asset('js/dataTable.js')}}" type="text/javascript"></script>
 @endsection

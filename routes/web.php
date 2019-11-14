@@ -37,9 +37,9 @@ Route::get('/provider/edit/{provider}', 'ProviderController@edit');
 Route::post('/provider/update/{provider}', 'ProviderController@update');
 Route::get('/provider/delete/{provider}', 'ProviderController@destroy');
 
+Route::get('/dealer/index', 'DealerController@index')->name('indexDealer');
 Route::get('/dealer/create', 'DealerController@create');
 Route::post('/dealer/store', 'DealerController@store');
-Route::get('/dealer/list', 'DealerController@list')->name('indexDealer');
 Route::get('/dealer/edit/{dealer}', 'DealerController@edit');
 Route::post('/dealer/update/{dealer}', 'DealerController@update');
 Route::get('/dealer/view/{dealer}', 'DealerController@view');
@@ -48,7 +48,8 @@ Route::get('/dealer/view/{dealer}', 'DealerController@view');
  //Route::get('register-employee', 'Auth\RegisterController@sendOfficeList')->name('registerEmployeeOfDealer');
  Route::get('/employee/create/{dealerID}', 'Auth\RegisterController@createEmployee')->name('createEmployee');
  Route::post('/employee/store', 'Auth\RegisterController@storeEmployee')->name('storeEmployee');
- Route::get('/employee/list/{dealerID}', 'Auth\RegisterController@listEmployee')->name('indexEmployee');
+ Route::get('/employee/dealer/list/{dealer}', 'Auth\RegisterController@listEmployeesOfDealer')->name('indexEmployee');
+ Route::get('/employee/office/list/{office}', 'Auth\RegisterController@listEmployeesOfOffice')->name('indexEmployee');
  Route::get('/employee/edit/{employee}', 'Auth\RegisterController@editEmployee')->name('editEmployee');
  Route::post('/employee/update/{employee}', 'Auth\RegisterController@updateEmployee')->name('updateEmployee');
 
@@ -149,6 +150,7 @@ Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiPoolController@forwardToChang
 
 //** Contracts */
  Route::get('/contract/tariffs', 'ContractController@tariffs');
+ Route::post('/contract/tariffs/tariffs-with-filter', 'ContractController@filterTariffs');
 
  Route::get('/contract/shopping-cart', 'ShoppingCartController@index');
  Route::get('/contract/shopping-cart/add-tariff/{tariff}', 'ShoppingCartController@addTariff'); // main or additional tariff depending on the "additionalTariff" value in DB
@@ -161,7 +163,8 @@ Route::post('/IMEIs/IMEI-pool-status-change', 'ImeiPoolController@forwardToChang
  //** Contracts Vodafone*/
  Route::get('/contract/vodafone/create/{providerID}', 'ContractController@create');
  Route::post('/contract/vodafone/store', 'ContractController@storeVodafone');
- Route::post('/contract/vodafone/finalize', 'ContractController@finalize');
+ Route::get('/contract/vodafone/print/{contractID}', 'ContractController@printVodafone_v4');
+ Route::post('/contract/vodafone/finalizeGSM', 'ContractController@finalizeGSMVodafone');// called from storeVodafone@ContractController
 
  Route::get('/contracts/vodafone/XML/takeXML', 'ContractController@viewTakeXML');
  Route::post('/contracts/vodafone/XML/readXML', 'ContractController@forwardToReadXML');
