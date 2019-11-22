@@ -284,7 +284,7 @@
                                     <ul class="fadeInUp-animated dropdown-menu dropdown-menu-user cart">
                                         <li id="dropdownForm">
                                             <div class="dropdown-form">
-                                                <table class="table table-hover no-margin">
+                                                 <table class="table table-hover no-margin">
                                                     <thead>
                                                     <tr>
                                                         <th class="quantity">QTY</th>
