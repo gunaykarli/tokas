@@ -8,10 +8,28 @@
 return [
     'phones' => 'Handys',
     'tariffs' => 'Tarife',
+    'tariffManagement' => 'Tarifverwaltung',
     'mobileInternet' => 'Mobile Internet',
-    'infoCenter' => 'Info Center',
+
+    'infoCenter' => 'Infocenter',
+    'imprint' => 'Impressum',
+    'newsletter' => 'Newsletter',
+    'downloads' => 'Downloads',
+    'FAQ' => 'FAQ',
+    'termsAndConditions' => 'AGB\'s',
+
     'account' => 'Konto',
-    'admin' => 'Admin',
+    'companyInfo' => 'Firmeninfo',
+    'offices' => 'Büros',
+    'employees' => 'Mitarbeiter',
+
+    'evaluations' => 'Auswertungen',
+
+    'admin' => 'Administration',
+    'dealerManagement' => 'Händlerverwaltung',
+
+    'management' => 'Verwaltung',
+    'contracts' => 'Aufträge',
     'providers' => 'Anbieter',
     'dealers' => 'Händler',
     'authorization' => 'Genehmigungen',
