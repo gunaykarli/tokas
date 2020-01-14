@@ -57,7 +57,6 @@ class Address extends Model
         $address->save();
 
 
-        //ÇALIŞMIYOR...
         //return redirect()->home();
     }
 
